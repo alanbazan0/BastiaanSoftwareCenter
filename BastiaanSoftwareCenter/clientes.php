@@ -48,8 +48,9 @@
 
 	<!--Estilo-->
     <link href="css/estilo.css" media="handheld, screen" rel="stylesheet" type="text/css" />
-    <link rel="shortcut icon" href="estilo/imagenes/faviSIO.png">
+    <link rel="shortcut icon" href="css/imagenes/faviSIO.png">
     
+    <script language="JavaScript" type="text/JavaScript" src="js/clases/objeto_base.js"></script>
     <script language="JavaScript" type="text/JavaScript" src="js/repositorios/clientes_repositorio.js"></script>
     <script language="JavaScript" type="text/JavaScript" src="js/presentadores/clientes_presentador.js"></script>
 	<script language="JavaScript" type="text/JavaScript" src="js/clientes.js"></script>

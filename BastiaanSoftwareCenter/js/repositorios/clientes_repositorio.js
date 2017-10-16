@@ -1,4 +1,4 @@
-class ClientesRepositorio
+class ClientesRepositorio extends ObjetoBase
 {	
 	constructor(origen)
 	{
