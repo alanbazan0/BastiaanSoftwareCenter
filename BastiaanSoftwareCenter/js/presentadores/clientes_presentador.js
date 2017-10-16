@@ -8,13 +8,14 @@ class ClientesPresentador
 	 consultar()
 	 {
 		 var repositorio = new ClientesRepositorio(this);		
-		 repositorio.consultar(this.consultarResultado,this.vista.getNombreCompleto());
+		 repositorio.consultar(this,this.consultarResultado,this.vista.getNombreCompleto());
 	 }
 	 
 	 consultarResultado(resultado)
 	 {
-		 this.origen.vista.setDatos(resultado);
+		 this.vista.setDatos(resultado);
 	 }
 	 
+	
 	 
 }

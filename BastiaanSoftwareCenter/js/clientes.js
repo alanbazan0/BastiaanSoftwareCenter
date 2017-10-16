@@ -1,4 +1,16 @@
+class Clientes
+{	
+	constructor(window)
+	{
+		this.window = window
+	}
+	
+	
+}
+
 var presentador;
+
+
 
 function onLoad()
 {	
@@ -30,8 +42,11 @@ function crearGrid()
 
 function grid_eventGridRowDoubleClick()
 {
-	document.getElementById("principal").style.display ="none";	
-	document.getElementById("altaCambioDiv").style.display  = "block";
+	//document.getElementById("principal").style.display ="none";	
+	//document.getElementById("altaCambioDiv").style.display  = "block";
+	
+	$('#principal').hide()	
+	$('#altaCambioDiv').show();
 }
 
 function btnAlta_onClick()
