@@ -1,0 +1,3 @@
+/*
+* constantes del sistema
+*/
