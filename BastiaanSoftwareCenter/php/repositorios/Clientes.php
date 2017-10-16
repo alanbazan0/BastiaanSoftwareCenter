@@ -41,6 +41,12 @@ try
                 if($clientes!=null)
                     echo json_encode($clientes);
             break;
+            case 'consultar':
+                $nombreCompleto = REQUEST('nombreCompleto');
+                $clientes = $repositorio->consultar($nombreCompleto);
+                if($clientes!=null)
+                    echo json_encode($clientes);
+            break;
            
         }
     }

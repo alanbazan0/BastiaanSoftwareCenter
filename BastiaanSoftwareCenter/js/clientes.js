@@ -59,3 +59,14 @@ function btnSalir_onClick()
 {
 
 }
+
+function getNombreCompleto()
+{
+	return $('#nombreInput').val();
+}
+
+function setDatos(datos)
+{
+	this.grid._dataProvider = datos;	
+	this.grid.render();
+}

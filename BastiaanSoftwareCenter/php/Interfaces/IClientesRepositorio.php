@@ -11,7 +11,7 @@ interface IClientesRepositorio
     
     public function consultarPorId($id);
     public function consultarPorNombre($nombre);
-    public function consultar($id,$nombre,$apellidoPaterno);
+    public function consultar($nombreCompleto);
     
 }
 

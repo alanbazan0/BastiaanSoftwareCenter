@@ -31,9 +31,36 @@ class ClientesRepositorio implements IClientesRepositorio
     {
         
     }
-    public function consultar($id, $nombre, $apellidoPaterno)
+    public function consultar($nombreCompleto)
     {
-        
+        $clientes = array();
+        $consulta = "SELECT BTCLIENTENUMERO id, BTCLIENTEPNOMBRE nombre, BTCLIENTEAPATERNO apellidoPaterno " .
+            "FROM BTCLIENTE " .
+            "WHERE BTCLIENTENCOMPLETO  LIKE  CONCAT('%',?,'%')";
+        if($sentencia = $this->conexion->prepare($consulta))
+        {
+            $sentencia->bind_param("s",$nombreCompleto);
+            if($sentencia->execute())
+            {
+                
+                if ($sentencia->bind_result($id, $nombre, $apellidoPaterno))
+                {
+                    
+                    while($row = $sentencia->fetch())
+                    {
+                        $cliente = (object) [
+                            'id' =>  utf8_encode($id),
+                            'nombre' => utf8_encode($nombre),
+                            'apellidoPaterno' => utf8_encode($apellidoPaterno)
+                        ];                       
+                        array_push($clientes,$cliente);
+                    }
+                }
+                
+            }
+            
+        }
+        return $clientes;
     }
 
     public function consultarPorNombre($nombre)
