@@ -50,7 +50,9 @@
     <link href="css/estilo.css" media="handheld, screen" rel="stylesheet" type="text/css" />
     <link rel="shortcut icon" href="estilo/imagenes/faviSIO.png">
     
-	<script language="JavaScript" type="text/JavaScript" src="js/vistas/clientesVista.js"></script>
+    <script language="JavaScript" type="text/JavaScript" src="js/repositorios/clientes_repositorio.js"></script>
+    <script language="JavaScript" type="text/JavaScript" src="js/presentadores/clientes_presentador.js"></script>
+	<script language="JavaScript" type="text/JavaScript" src="js/clientes.js"></script>
 
     
 </head>
@@ -79,11 +81,11 @@
 						<div id="botones" style="width:auto;overflow:auto;">
 							<table class="tablaBotonesIEC">
 								<tr>
-									<td><img id="btnAlta" class="botonMenuIEC" title="Alta" src="assets/botones/imgAlta.png" onClick="insertar();"></td>
-									<td><img id="btnBaja" class="botonMenuIEC" title="Baja" src="assets/botones/imgBaja.png" onClick="eliminar();"></td>
-									<td><img id="btnCambio" class="botonMenuIEC" title="Cambio" src="assets/botones/imgCambio.png" onClick="actualizar();"></td>
-									<td><img id="btnConsulta" class="botonMenuIEC" title="Consulta" src="assets/botones/imgConsulta.png" onClick="consultar();"></td>
-									<td><img id="btnSalir" class="botonMenuIEC" title="Salir"  src="assets/botones/btnSalir.png" onClick="salir();" ></td>
+									<td><img id="btnAlta" class="botonMenuIEC" title="Alta" src="assets/botones/imgAlta.png" onClick="btnAlta_onClick();"></td>
+									<td><img id="btnBaja" class="botonMenuIEC" title="Baja" src="assets/botones/imgBaja.png" onClick="btnBaja_onClick();"></td>
+									<td><img id="btnCambio" class="botonMenuIEC" title="Cambio" src="assets/botones/imgCambio.png" onClick="btnCambio_onClick();"></td>
+									<td><img id="btnConsulta" class="botonMenuIEC" title="Consulta" src="assets/botones/imgConsulta.png" onClick="btnConsulta_onClick();"></td>
+									<td><img id="btnSalir" class="botonMenuIEC" title="Salir"  src="assets/botones/btnSalir.png" onClick="btnSalir_onClick();" ></td>
 								</tr>
                              </table>   
 						</div>
@@ -140,7 +142,7 @@
     
     
 
-<div id="altaDiv" style="display:none ;height: 90%;">
+<div id="altaCambioDiv" style="display:none ;height: 90%;">
 		<div>
 			
 <!--  barra de menú para botones de la pantalla
