@@ -1,35 +1,37 @@
-class Clientes
+class ClientesVista
 {		
-	constructor(html)
+	constructor()
 	{
-		this.html = html
+	
 		this.presentador = new ClientesPresentador(this);
+		this.grid = new GridReg("grid");	
 	}
 	onLoad()
 	{			
-		this.crearGrid();
+		this.crearColumnasGrid();
 	}
 	
-	crearGrid()
+	crearColumnasGrid()
 	{
-		this.html.grid = new GridReg("grid");	
-		this.html.grid._columnas = [
+		//var div = $('#grid');
+		//this.html.grid = new GridReg("grid");	
+		this.grid._columnas = [
 		{longitud:100, 	titulo:"Id",   	alias:"id", alineacion:"I" }, 
 		{longitud:200, 	titulo:"Nombre",   alias:"nombre", alineacion:"I" }, 
 		{longitud:200, 	titulo:"Apellido Paterno",   alias:"apellidoPaterno", alineacion:"I" }	
 		]
 
-		this.html.grid._ajustarAltura = true;
-		this.html.grid._colorRenglon1 = "#FFFFFF";	
-		this.html.grid._colorRenglon2 = "#f8f2de";
-		this.html.grid._colorEncabezado1 = "#FF6600";
-		this.html.grid._colorEncabezado2 = "#FF6600";
-		this.html.grid._colorLetraEncabezado = "#ffffff";
-		this.html.grid._colorLetraCuerpo = "#000000";
-		this.html.grid._regExtra=20;
-		this.html.grid._presentacionGranTotal = "SI";
-		this.html.grid.subscribirAEvento(this, "eventGridRowDoubleClick", this.grid_eventGridRowDoubleClick);
-		this.html.grid.render();		
+		this.grid._ajustarAltura = true;
+		this.grid._colorRenglon1 = "#FFFFFF";	
+		this.grid._colorRenglon2 = "#f8f2de";
+		this.grid._colorEncabezado1 = "#FF6600";
+		this.grid._colorEncabezado2 = "#FF6600";
+		this.grid._colorLetraEncabezado = "#ffffff";
+		this.grid._colorLetraCuerpo = "#000000";
+		this.grid._regExtra=20;
+		this.grid._presentacionGranTotal = "SI";
+		this.grid.subscribirAEvento(this, "eventGridRowDoubleClick", this.grid_eventGridRowDoubleClick);
+		this.grid.render();		
 	}
 	
 	btnConsulta_onClick()
@@ -44,8 +46,8 @@ class Clientes
 
 	set datos(valor)
 	{
-		this.html.grid._dataProvider = valor;	
-		this.html.grid.render();
+		this.grid._dataProvider = valor;	
+		this.grid.render();
 	}
 	
 	grid_eventGridRowDoubleClick()
@@ -55,7 +57,7 @@ class Clientes
 	}
 	
 }
-var vista = new Clientes(this);
+var vista = new ClientesVista();
 
 //var presentador;
 
