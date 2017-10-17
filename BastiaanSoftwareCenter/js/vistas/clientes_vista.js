@@ -45,9 +45,29 @@ class ClientesVista
 		this.presentador.consultar();
 	}
 	
+	get primerNombreDetalle()
+	{
+		return return $('#primerNomInput').val();
+	}
+	
+	set primerNombreDetalle(valor)
+	{
+		$('#primerNomInput').val(valor);
+	}
+	
 	get nombreCompleto()
 	{
 		return $('#nombreInput').val();
+	}
+	
+	get rfc()
+	{		
+		return $('#rfcInput').val();
+	}
+	
+	get curp()
+	{
+		return $('#curpInput').val();
 	}
 
 	set datos(valor)

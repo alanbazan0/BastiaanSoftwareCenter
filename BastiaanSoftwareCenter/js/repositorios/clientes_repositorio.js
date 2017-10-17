@@ -5,14 +5,16 @@ class ClientesRepositorio
 		
 	}
 	
-	consultar(contexto,functionRetorno, nombreCompleto)
+	consultar(contexto,functionRetorno, nombreCompleto, rfc, curp)
 	{		
 		this.contexto = contexto;
 		this.functionRetorno = functionRetorno;
 		
 		var parametros;
 		parametros = "accion=consultar";
-		parametros+= "&nombreCompleto=" + nombreCompleto;
+		parametros += "&nombreCompleto=" + nombreCompleto;
+		parametros += "&rfc=" + rfc;
+		parametros += "&curp=" + curp;
 		
 		
 		var contextHandler = new AjaxContextHandler();
