@@ -58,7 +58,7 @@
     
 </head>
 
-<body  bgcolor="#e8e8e8" onLoad="onLoad()" style="overflow: auto;height: 89%;">
+<body  bgcolor="#e8e8e8" onLoad="vista.onLoad()" style="overflow: auto;height: 89%;">
 <div id="dialogo" title="Diálogo" style="display:none;">
 </div>
 <form id="form">
@@ -85,7 +85,7 @@
 									<td><img id="btnAlta" class="botonMenuIEC" title="Alta" src="assets/botones/imgAlta.png" onClick="btnAlta_onClick();"></td>
 									<td><img id="btnBaja" class="botonMenuIEC" title="Baja" src="assets/botones/imgBaja.png" onClick="btnBaja_onClick();"></td>
 									<td><img id="btnCambio" class="botonMenuIEC" title="Cambio" src="assets/botones/imgCambio.png" onClick="btnCambio_onClick();"></td>
-									<td><img id="btnConsulta" class="botonMenuIEC" title="Consulta" src="assets/botones/imgConsulta.png" onClick="btnConsulta_onClick();"></td>
+									<td><img id="btnConsulta" class="botonMenuIEC" title="Consulta" src="assets/botones/imgConsulta.png" onClick="vista.btnConsulta_onClick();"></td>
 									<td><img id="btnSalir" class="botonMenuIEC" title="Salir"  src="assets/botones/btnSalir.png" onClick="btnSalir_onClick();" ></td>
 								</tr>
                              </table>   

@@ -1,17 +1,67 @@
 class Clientes
-{	
-	constructor(window)
+{		
+	constructor(html)
 	{
-		this.window = window
+		this.html = html
+		this.presentador = new ClientesPresentador(this);
+	}
+	onLoad()
+	{			
+		this.crearGrid();
 	}
 	
+	crearGrid()
+	{
+		this.html.grid = new GridReg("grid");	
+		this.html.grid._columnas = [
+		{longitud:100, 	titulo:"Id",   	alias:"id", alineacion:"I" }, 
+		{longitud:200, 	titulo:"Nombre",   alias:"nombre", alineacion:"I" }, 
+		{longitud:200, 	titulo:"Apellido Paterno",   alias:"apellidoPaterno", alineacion:"I" }	
+		]
+
+		this.html.grid._ajustarAltura = true;
+		this.html.grid._colorRenglon1 = "#FFFFFF";	
+		this.html.grid._colorRenglon2 = "#f8f2de";
+		this.html.grid._colorEncabezado1 = "#FF6600";
+		this.html.grid._colorEncabezado2 = "#FF6600";
+		this.html.grid._colorLetraEncabezado = "#ffffff";
+		this.html.grid._colorLetraCuerpo = "#000000";
+		this.html.grid._regExtra=20;
+		this.html.grid._presentacionGranTotal = "SI";
+		this.html.grid.subscribirAEvento(this, "eventGridRowDoubleClick", this.grid_eventGridRowDoubleClick);
+		this.html.grid.render();		
+	}
+	
+	btnConsulta_onClick()
+	{
+		this.presentador.consultar();
+	}
+	
+	get nombreCompleto()
+	{
+		return $('#nombreInput').val();
+	}
+
+	set datos(valor)
+	{
+		this.html.grid._dataProvider = valor;	
+		this.html.grid.render();
+	}
+	
+	grid_eventGridRowDoubleClick()
+	{
+		$('#principal').hide()	
+		$('#altaCambioDiv').show();
+	}
 	
 }
+var vista = new Clientes(this);
 
-var presentador;
+//var presentador;
 
 
 
+/*
 function onLoad()
 {	
 	presentador = new ClientesPresentador(this);
@@ -85,3 +135,5 @@ function setDatos(datos)
 	this.grid._dataProvider = datos;	
 	this.grid.render();
 }
+
+*/

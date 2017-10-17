@@ -18,7 +18,7 @@ class ClientesRepositorio
 		var contextHandler = new AjaxContextHandler();
 		var host = window.location.origin + "/BastiaanSoftwareCenter";
 		//var ai = new Ajaxv2("http://127.0.0.1:7000/BastiaanSoftwareCenter/php/repositorios/clientes.php", this, this.consultarResultado, "POST", parametros, contextHandler);		
-		var ai = new Ajaxv2(host +"/php/repositorios/clientes.php", this, this.consultarResultado, "POST", parametros, contextHandler);		
+		var ai = new Ajaxv2(host +"/php/repositorios/Clientes.php", this, this.consultarResultado, "POST", parametros, contextHandler);		
 		contextHandler.AddAjaxv2Object(ai); 		
 		ai.GetPost(true);
 	}
