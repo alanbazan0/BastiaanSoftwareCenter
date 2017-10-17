@@ -1,5 +1,5 @@
 <?php
-namespace php\Interfaces;
+namespace php\interfaces;
 
 use php\modelos\Cliente;
 
@@ -11,7 +11,7 @@ interface IClientesRepositorio
     
     public function consultarPorId($id);
     public function consultarPorNombre($nombre);
-    public function consultar($nombreCompleto);
+    public function consultar($nombreCompleto, $rfc, $curp);
     
 }
 
