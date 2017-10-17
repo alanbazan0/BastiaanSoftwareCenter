@@ -82,9 +82,9 @@
 						<div id="botones" style="width:auto;overflow:auto;">
 							<table class="tablaBotonesIEC">
 								<tr>
-									<td><img id="btnAlta" class="botonMenuIEC" title="Alta" src="assets/botones/imgAlta.png" onClick="btnAlta_onClick();"></td>
-									<td><img id="btnBaja" class="botonMenuIEC" title="Baja" src="assets/botones/imgBaja.png" onClick="btnBaja_onClick();"></td>
-									<td><img id="btnCambio" class="botonMenuIEC" title="Cambio" src="assets/botones/imgCambio.png" onClick="btnCambio_onClick();"></td>
+									<td><img id="btnAlta" class="botonMenuIEC" title="Alta" src="assets/botones/imgAlta.png" onClick="vista.btnAlta_onClick();"></td>
+									<td><img id="btnBaja" class="botonMenuIEC" title="Baja" src="assets/botones/imgBaja.png" onClick="vista.btnAlta_onClick();"></td>
+									<td><img id="btnCambio" class="botonMenuIEC" title="Cambio" src="assets/botones/imgCambio.png" onClick="vista.btnCambio_onClick();"></td>
 									<td><img id="btnConsulta" class="botonMenuIEC" title="Consulta" src="assets/botones/imgConsulta.png" onClick="vista.btnConsulta_onClick();"></td>
 									<td><img id="btnSalir" class="botonMenuIEC" title="Salir"  src="assets/botones/btnSalir.png" onClick="btnSalir_onClick();" ></td>
 								</tr>
@@ -102,12 +102,12 @@
 						<div>
 							<table style="position:relative;left:40px; text-align:left; margin-top:10px; margin-bottom:10px;">
 								<tr>
-									<td style="padding:6px 0px 4px 10px;">		<label  style="font-family: Verdana; font-size: 10px;">  Id </label></td>									
-									<td style="padding:6px 0px 4px 10px;">		<input  id='idInput' type='text' style='height: 20px; width:200px;'/></input></td>
-									<td style="padding:6px 0px 4px 10px;">		<label  style="font-family: Verdana; font-size: 10px;">Nombre</label></td>
+									<td style="padding:6px 0px 4px 10px;">		<label  style="font-family: Verdana; font-size: 10px;"> Nombre </label></td>									
 									<td style="padding:6px 0px 4px 10px;">		<input  id='nombreInput' type='text' style='height: 20px; width:200px;'/></input></td>
-									<td style="padding:6px 0px 4px 10px;">		<label  style="font-family: Verdana; font-size: 10px;">Apellido paterno</label></td>
-									<td style="padding:6px 0px 4px 10px;">		<input  id='apellidoPaternoInput' type='text' style='height: 20px; width:200px;'/></input></td>			
+									<td style="padding:6px 0px 4px 10px;">		<label  style="font-family: Verdana; font-size: 10px;">Rfc</label></td>
+									<td style="padding:6px 0px 4px 10px;">		<input  id='rfcInput' type='text' style='height: 20px; width:200px;'/></input></td>	
+									<td style="padding:6px 0px 4px 10px;">		<label  style="font-family: Verdana; font-size: 10px;">Curp</label></td>
+									<td style="padding:6px 0px 4px 10px;">		<input  id='curpInput' type='text' style='height: 20px; width:200px;'/></input></td>		
 								</tr>
 								
 							</table>
@@ -164,105 +164,37 @@
 						<div class="contenidoNormalUS">
 					 		<div class="explicacionFRM" >
 								<div id="filtros " class="contenedorIEC" style="overflow: auto; position: relative; width: 100%; display: block;">
-								 <div style="width: 80%; display: block; height: 133px;  padding-top: 10px; padding-left: 34px;">
-									<table style="margin-left: 5px; position:relative;left:0px; text-align:left;">
-										<tr>
-										 <td><label style="position: relative; left: 3px">No. Solicitud</label>
-	                        				<span style="position: relative; left: 2px">
-	                        					<input class="input" id="noSolicitud" type="text" maxlength="20" value="" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;" disabled />
-	                            			</span></td>
-	                                   		 <td><label style="position: relative; left: 6px; padding-left: 35px;">Tipo de movimiento</label>
-	                        				<span style="position: relative; left: 2px">
-	                        					<input class="input" id="tipoMovimientoAltaSol" type="text" value="" maxlength="180"  style="width:100px; font-family:Verdana; font-size:9px; margin-left: 8px; text-align:left; color:#006699;" disabled/>
-	                            			</span>
-	                            			<span style="position: relative; left: 2px">
-	                        						<input class="input" id="desMovimientoAltaSol" type="text" value="" maxlength="180" style="width:180px; font-family:Verdana; font-size:9px; margin-left: 11px; text-align:left; color:#006699;" disabled/>
-	                            			</span>
-	                            			</td>	                               									
-											<td>
-												
-	                            			</td>
-										</tr>
-										<tr>
-													 <td> <p></p><p></p><p></p></td> 
-										</tr>
-										<tr>
-										 <td><label style="position: relative; left: 3px; ">Solicitante</label>
-	                        				<span style="position: relative; left: 11px">
-	                        					<input class="input" id="noCliente" type="text" maxlength="20" value='<%= usuario %>' style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;" disabled/>
-	                            			</span>
-	                            		 </td>
-	                                   	 <td>
-	                                   		 <label style="position: relative; left: 3px; padding-left: 35px;">Nombre</label>
-	                        				<span style="position: relative; left: 60px">
-	                        					<input class="input" id="desTrabajador" type="text" value='<%= nomTrabajador %>' maxlength="180" style="width:250px; font-family:Verdana; font-size:9px; margin-left: 8px; text-align:left; color:#006699;" disabled/>
-	                            			</span>
-	                            			
-	                            			</td>	                               									
-											<td>
-											    <label style="position: relative; left: 3px; padding-left: 0px">Estatus</label>
-												<span style="position: relative; left: 55px">
-	                        						<input class="input" id="tipEstatus" type="text" value="SOLICITADO" maxlength="180" style="width:100px; font-family:Verdana; font-size:9px; margin-left: 11px; text-align:left; color:#006699;" disabled/>
-	                            				</span>
-	                            			</td>
-										</tr>
-										<tr>
-													 <td> <p></p><p></p><p></p></td> 
-										</tr>
-										<tr>
-										 <td><label style="position: relative; left: 6px;">Fecha inicio</label>
-	                        				<span style="position: relative; left: 5px">
-	                        					<input class="input" id="fechaInicioAltaSol" type="text" maxlength="20" value="" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;"/>
-	                            			</span></td>
-	                                   		 <td><label style="position: relative; left: 3px; padding-left: 35px">Fecha final</label>
-	                        				<span style="position: relative; left: 44px">
-	                        					<input class="input" id="fechafinAltaSol" type="text" value="" maxlength="180" style="width:130px; font-family:Verdana; font-size:9px; margin-left: 8px; text-align:left; color:#006699;"/>
-	                            			</span>
-	                            				
-	                            			
-	                            			</td>	                               									
-											<td>
-											   <label style="position: relative; left: 3px; padding-left: 0px">Fecha transaccion</label>
-												<span style="position: relative; left: 2px">
-	                        						<input class="input" id="fechaTransaccionAltaSol" type="text" value="" maxlength="180" style="width:130px; font-family:Verdana; font-size:9px; margin-left: 11px; text-align:left; color:#006699;" disabled/>
-	                            				</span>
-	                            			</td>
-										</tr>
-										<tr>
-													 <td> <p></p><p></p><p></p></td> 
-										</tr>
-										<tr>
-										 <td>
-										   <label style="position: relative; left: 3px; ">Origen</label>
-	                        				<span style="position: relative; left: 30px">
-	                        					<select class="input" id="ciudadOrigenAltaSol" type="text" maxlength="20" value="" style="width:180px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;"/>
-	                            			</span>
-	                            		 </td>
-	                                   		                                									
-										<td><label style="position: relative; left: 3px; margin-left: 35px;">Destino</label>
-												<span style="position: relative; left: 58px">
-	                        						<select class="input" id="ciudadDestinoAltaSol" type="text" value="" maxlength="180" style="width:180px; font-family:Verdana; font-size:9px; margin-left: 11px; text-align:left; color:#006699;"/>
-	                            				</span>      				
-	                            				                        				
-	                            		</td>
-	                            			<td>
-	                            			    <label style="position: relative; left: 3px; padding-left: 0px;">Verificador</label>
-												<span style="position: relative; left: 38px">
-													<input class="input" id="txtVerificador" type="text" value='<%= usuario %>'maxlength="180" style="width:130px; font-family:Verdana; font-size:9px; margin-left: 11px; text-align:left; color:#006699;" disabled/>
-	                        					</span>  
-	                        					<span style="position: relative; left: 37px">
-	                        						<input class="input" id="txtVerificadorDsc" type="text" value='<%= nomTrabajador %>' maxlength="180" style="width:150px; font-family:Verdana; font-size:9px; margin-left: 11px; text-align:left; color:#006699;" disabled/>
-	                        						
-	                            				</span> 
-	                            			</td>
-										</tr>
-									</table>
+								 <div style="width: 80%; display: block; height: 100%;  padding-top: 10px; padding-left: 34px;">
+									<div><label style=" width:130px; position: relative; left: 3px; ">Id de cliente</label><input class="input" id="idClienteInput" type="text" maxlength="20" value="" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px;" disabled /></div>	
+								    <div style="height: 10px;"></div>
+								 	<div><label style="position: relative; left: 3px; ">Primer nombre   </label><input class="input" id="primerNomInput" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>	
+										 <label style="position: relative; left: 3px; ">Segundo nombre  </label><input class="input" id="segundoNomInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
+	                                   	 <label style="position: relative; left: 3px; ">Primer apellido </label><input class="input" id="primerApellInput" style="width:130px; font-family:Verdana; font-size:9px; text-align:left; color:#006699;position: relative; left: 6px"/>                             									
+										 <label style="position: relative; left: 3px; ">Segundo apellido</label><input class="input" id="segundoApellInput" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
+                                    </div>
+                                    <div style="height: 10px;"></div>
+								 	<div><label style="position: relative;">RFC</label><input class="input" id="RFCDetInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>	
+										 <label style="position: relative;">NSS</label><input class="input" id="NSSDetInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
+	                                   	 <label style="position: relative;">CURP</label><input class="input" id="CURPDetInput" style=";width:130px; font-family:Verdana; font-size:9px; text-align:left; color:#006699;position: relative; left: 6px"/>                             									
+										 <label style="position: relative;">Codigo Postal</label><input class="input" id="CPInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
+										 <label style="position: relative;">Numero exterior</label><input class="input" id="NoextInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
+                                    </div>
+                                    <div style="height: 10px;"></div>
+								 	<div>	
+										 <label style="position: relative; left: 3px; ">Numero interior </label><input class="input" id="NoIntDetInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
+	                                   	 <label style="position: relative; left: 3px; ">Calle           </label><input class="input" id="calleInput" style="width:130px; font-family:Verdana; font-size:9px; text-align:left; color:#006699;position: relative; left: 6px"/>                             									
+										 <label style="position: relative; left: 3px; ">Colonia         </label><input class="input" id="coloniaInput" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
+										 <label style="position: relative; left: 3px; ">Estado          </label><input class="input" id="EstadoInput" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
+										 <label style="position: relative; left: 3px; ">Pais            </label><input class="input" id="PaisInput" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
+                                    </div>
+                                    <div style="height: 10px;"></div>
+								 	<div>	
+										 <label style="position: relative; left: 3px; ">Correo electronico</label><input class="input" id="CorreoInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
+                                    </div>
+								 </div>
 									
 								 </div>
-								</div>
-								<div id="panelGridAltaSolicitud" class=" PMenuAsistente" style="padding-top: 17px; margin-top: 12px; position: relative;  width:100%;display: block; float: left; height:78%; ">
-										<div id="panelGridAltaSolicitud" style="float:left; overflow: auto; position:static; height:53%; width:100%; display: block; top:10px;left:3px;"></div>
-								 </div>					  	
+								</div>				  	
 							</div>
 						</div>
 				</div>

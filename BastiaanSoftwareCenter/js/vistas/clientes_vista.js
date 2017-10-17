@@ -16,9 +16,15 @@ class ClientesVista
 		//var div = $('#grid');
 		//this.html.grid = new GridReg("grid");	
 		this.grid._columnas = [
-		{longitud:100, 	titulo:"Id",   	alias:"id", alineacion:"I" }, 
-		{longitud:200, 	titulo:"Nombre",   alias:"nombre", alineacion:"I" }, 
-		{longitud:200, 	titulo:"Apellido Paterno",   alias:"apellidoPaterno", alineacion:"I" }	
+			{longitud:100, 	titulo:"Id",   	alias:"id", alineacion:"I" }, 
+			{longitud:200, 	titulo:"Primer Nombre",   alias:"primerNombre", alineacion:"I" }, 
+			{longitud:200, 	titulo:"Segundo Nombre",   alias:"SegundoNombre", alineacion:"I" }, 
+			{longitud:200, 	titulo:"Apellido Paterno",   alias:"apellidoPaterno", alineacion:"I" },	
+			{longitud:200, 	titulo:"Materno Paterno",   alias:"MaternoPaterno", alineacion:"I" },	
+			{longitud:200, 	titulo:"Rfc",   alias:"rfc", alineacion:"I" },	
+			{longitud:200, 	titulo:"Nss",   alias:"nss", alineacion:"I" },	
+			{longitud:200, 	titulo:"Curp",   alias:"curp", alineacion:"I" },	
+			{longitud:200, 	titulo:"Correo electronico",   alias:"CorreoElec", alineacion:"I" },	
 		]
 
 		this.grid._ajustarAltura = true;
@@ -51,6 +57,12 @@ class ClientesVista
 	}
 	
 	grid_eventGridRowDoubleClick()
+	{
+		$('#principal').hide()	
+		$('#altaCambioDiv').show();
+	}
+	
+	btnAlta_onClick()
 	{
 		$('#principal').hide()	
 		$('#altaCambioDiv').show();
