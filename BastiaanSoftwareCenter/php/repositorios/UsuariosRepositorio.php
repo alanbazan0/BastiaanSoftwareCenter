@@ -32,26 +32,25 @@ class UsuariosRepositorio implements IUsuariosRepositorio
         
     }
 
-    public function consultar($nombreUsuario, $contrasena)
+    public function consultarPorIdContrasena($id, $contrasena)
     {
         $usuario = null;
-        $consulta = "SELECT IBDAGENTECNUSERID nombreUsuario, IBDAGENTEPASS contrasena, IBDAGENTENOM nombre " .
-                    "FROM IBDAGENTE " .
-                    "WHERE IBDAGENTECNUSERID = ? AND IBDAGENTEPASS = ?";
+        $consulta = "SELECT BTUSUARIOID id, BTUSUARIONOMBRE nombre " .
+                    "FROM BTUSUARIO " .
+                    "WHERE BTUSUARIOID = ? AND BTUSUARIOPSW = ?";
         if($sentencia = $this->conexion->prepare($consulta))
         {
-            $sentencia->bind_param("ss",$nombreUsuario,$contrasena);
+            $sentencia->bind_param("ss",$id,$contrasena);
             if($sentencia->execute())
             {
                 
-                if ($sentencia->bind_result($nombreUsuario, $contrasena, $nombre))
+                if ($sentencia->bind_result($id, $nombre))
                 {           
                     
                     if ($row = $sentencia->fetch())
                     {
                         $usuario = new Usuario();
-                        $usuario->nombreUsuario = utf8_encode($nombreUsuario);
-                        $usuario->contrasena = utf8_encode($contrasena);
+                        $usuario->id = utf8_encode($nombreUsuario);                      
                         $usuario->nombre = utf8_encode($nombre);                  
                     }
                 }
@@ -59,6 +58,8 @@ class UsuariosRepositorio implements IUsuariosRepositorio
             }
            
         }       
+        else
+            echo "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
         return $usuario;
     }    
     

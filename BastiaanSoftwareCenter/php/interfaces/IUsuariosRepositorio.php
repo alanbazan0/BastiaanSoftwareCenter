@@ -4,9 +4,12 @@ use php\modelos\Usuario;
 
 interface IUsuariosRepositorio
 {   
-    public function consultar($nombreUsuario, $contrasena);
+    //data mapper
     public function insertar(Usuario $usuario);
     public function actualizar(Usuario $usuario);
     public function eliminar(Usuario $usuario);
+    
+    //query object
+    public function consultarPorIdContrasena($id, $contrasena);
 }
 

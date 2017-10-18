@@ -27,10 +27,10 @@ try
         $repositorio = new UsuariosRepositorio($conexion);
         switch ($accion)
         {        
-            case 'consultar':
-                $nombreUsuario = REQUEST('nombreUsuario');
+            case 'consultarPorIdContrasena':
+                $id = REQUEST('id');
                 $contrasena = REQUEST('contrasena');
-                $usuario = $repositorio->consultar($nombreUsuario, $contrasena) ;     
+                $usuario = $repositorio->consultarPorIdContrasena($id, $contrasena) ;     
                 if($usuario!=null)
                     echo json_encode($usuario);
             break;
