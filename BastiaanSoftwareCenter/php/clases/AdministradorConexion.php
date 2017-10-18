@@ -5,10 +5,10 @@ use mysqli;
 
 class AdministradorConexion
 {
-    private $servidor = "localhost";
-    private	$basedatos = "bstntrn";
-    private	$usuario = "root";
-    private	$contrasena ="root";
+    private $servidor = "alanbazan.com.mx";
+    private	$basedatos = "BSTNTRN";
+    private	$usuario = "bastiaan";
+    private	$contrasena ="WJi_4}Jr~0$$";
     public function abrir()
     {
         return new mysqli($this->servidor,$this->usuario,$this->contrasena,$this->basedatos);
