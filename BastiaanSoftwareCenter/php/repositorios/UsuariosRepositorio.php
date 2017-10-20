@@ -33,13 +33,13 @@ class UsuariosRepositorio implements IUsuariosRepositorio
     }
 
     public function consultarPorIdContrasena($id, $contrasena)
-    {
+    {       
         $usuario = null;
-        $consulta = "SELECT BTUSUARIOID id, BTUSUARIONOMBRE nombre " .
+        $consulta = "SELECT BTUSUARIOID id, BTUSUARIONCOMPLETO nombre " .
                     "FROM BTUSUARIO " .
                     "WHERE BTUSUARIOID = ? AND BTUSUARIOPSW = ?";
         if($sentencia = $this->conexion->prepare($consulta))
-        {
+        {   
             $sentencia->bind_param("ss",$id,$contrasena);
             if($sentencia->execute())
             {
@@ -49,9 +49,11 @@ class UsuariosRepositorio implements IUsuariosRepositorio
                     
                     if ($row = $sentencia->fetch())
                     {
-                        $usuario = new Usuario();
-                        $usuario->id = utf8_encode($nombreUsuario);                      
-                        $usuario->nombre = utf8_encode($nombre);                  
+                        $usuario = (object) [
+                            'id' =>  utf8_encode($id),
+                            'nombre' => utf8_encode($nombre)                           
+                        ];  
+                                     
                     }
                 }
               

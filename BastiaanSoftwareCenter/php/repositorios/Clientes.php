@@ -1,5 +1,6 @@
 <?php
 use php\clases\AdministradorConexion;
+use php\clases\JsonMapper;
 use php\modelos\Cliente;
 use php\repositorios\ClientesRepositorio;
 
@@ -9,6 +10,7 @@ ini_set('display_errors', 1);
 
 include '../clases/Utilidades.php';
 include '../clases/AdministradorConexion.php';
+include '../clases/JsonMapper.php';
 include '../repositorios/ClientesRepositorio.php';
 
 
@@ -43,6 +45,11 @@ try
                     echo json_encode($clientes);
                     break;
             case 'insertar':
+                 
+                $json = json_decode(REQUEST('cliente'));
+                $mapper = new JsonMapper();
+                $cliente = $mapper->map($json, new Cliente());
+                /*
                 $cliente = new Cliente();
                 $cliente->nombre = utf8_encode(REQUEST('nombre'));
                 $cliente->nombreSegundo = utf8_encode(REQUEST('nombreSegundo'));
@@ -60,10 +67,11 @@ try
                 $cliente->estado = utf8_encode(REQUEST('estado'));
                 $cliente->pais = utf8_encode(REQUEST('pais'));
                 $cliente->direccion = utf8_encode(REQUEST('direccion'));
-                $cliente->correoElectronico = utf8_encode(REQUEST('correoElectronico'));
-                $clientes = $repositorio->insertar($cliente) ;
-                if($clientes!=null)
-                    echo json_encode($clientes);
+                $cliente->correoElectronico = utf8_encode(REQUEST('correoElectronico'));*/
+                
+                $resultado = $repositorio->insertar($cliente) ;
+                if($resultado!=null)
+                    echo json_encode($resultado);
                     break;
             case 'eliminar':
                 $cliente = new Cliente();

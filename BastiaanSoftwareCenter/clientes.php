@@ -12,7 +12,7 @@
 
 ?>
 <html> 
-<title>Catálogo de clientes</title>
+<title>Catï¿½logo de clientes</title>
 <head>	
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<script language="JavaScript" type="text/javascript" src="js/librerias/jquery-1.6.2.min.js"></script>
@@ -59,7 +59,7 @@
 </head>
 
 <body  bgcolor="#e8e8e8" onLoad="vista.onLoad()" style="overflow: auto;height: 89%;">
-<div id="dialogo" title="Diálogo" style="display:none;">
+<div id="dialogo" title="Diï¿½logo" style="display:none;">
 </div>
 <form id="form">
 	<div id="principal">
@@ -90,7 +90,7 @@
 								</tr>
                              </table>   
 						</div>
-						<div id="titulo" style="margin-left:280px;" class="tituloIEC">Catálogo de clientes</div>
+						<div id="titulo" style="margin-left:280px;" class="tituloIEC">Catï¿½logo de clientes</div>
 					</div>
 				</div>
             </div>        
@@ -146,16 +146,16 @@
 <div id="altaCambioDiv" style="display:none ;height: 90%;">
 		<div>
 			
-<!--  barra de menú para botones de la pantalla
+<!--  barra de menï¿½ para botones de la pantalla
  -->
 			<div id="menuPrincipal"  align="right" class="contieneCriteriosAribaBtn" style="background-color: #6b6b6b;    height: 56px; " > 
 				<img class='logoBAS' style='float: left;' id='logoFRM' src='assets/pantalla/imgCabecero.png'  />
 				<span id="txtTitulo" style="float:left;margin-top: 20px;margin-left: 15px;color: #FFFFFF;float: left;font-family: Verdana;font-size: 11px;font-weight: bold;">VERIFICADOR</span>
-				<img style="padding: 2px;" class='imgTipoBoton' id='btnGuardarAltaSol' src='assets/botones/imgGuardar.png' onclick='guardarViaticosVerificar();' title='Guardar y aprobar' />
-				<img style="padding: 2px;" class='imgTipoBoton' id='btnSalirAltaSol' src='assets/botones/btnSalir.png' onClick="salirSolicitante();" title='Salir'  />
+				<img style="padding: 2px;" class='imgTipoBoton' id='btnGuardarDetalle' src='assets/botones/imgGuardar.png' onclick='vista.btnGuardarDetalle_onClick()' title='Guardar' />
+				<img style="padding: 2px;" class='imgTipoBoton' id='btnSalirDetalle' src='assets/botones/btnSalir.png' onClick="vista.btnSalirDetalle_onClick()" title='Salir'  />
 			</div>
 <!--
-  barra de menú...fin
+  barra de menï¿½...fin
  -->
 			
 <!--barra principal -->

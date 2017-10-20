@@ -40,19 +40,39 @@ class ClientesVista
 		this.grid.render();		
 	}
 	
+	btnGuardarDetalle_onClick()
+	{
+		this.presentador.insertar();
+	}
+	
+	btnSalirDetalle_onClick()
+	{
+		this.salirDetalle();
+	}
+	
 	btnConsulta_onClick()
 	{
 		this.presentador.consultar();
 	}
 	
-	get primerNombreDetalle()
+	get nombreDetalle()
 	{
-		return return $('#primerNomInput').val();
+		return $('#primerNomInput').val();
 	}
 	
-	set primerNombreDetalle(valor)
+	set nombreDetalle(valor)
 	{
 		$('#primerNomInput').val(valor);
+	}
+	
+	get idDetalle()
+	{
+		return $('#idClienteInput').val();
+	}
+	
+	set idDetalle(valor)
+	{
+		$('#idClienteInput').val(valor);
 	}
 	
 	get nombreCompleto()
@@ -78,16 +98,30 @@ class ClientesVista
 	
 	grid_eventGridRowDoubleClick()
 	{
-		$('#principal').hide()	
-		$('#altaCambioDiv').show();
+		this.abrirDetalle();
 	}
 	
 	btnAlta_onClick()
+	{
+		this.abrirDetalle();
+	}
+	
+	abrirDetalle()
 	{
 		$('#principal').hide()	
 		$('#altaCambioDiv').show();
 	}
 	
+	salirDetalle()
+	{
+		$('#principal').show()	
+		$('#altaCambioDiv').hide();
+	}
+	
+	mostrarMensaje(mensaje)
+	{
+		
+	}
 }
 var vista = new ClientesVista();
 
