@@ -4,6 +4,7 @@ class ClientesVista
 	{
 	
 		this.presentador = new ClientesPresentador(this);
+		this.manejadorEventos = new ManejadorEventos();
 		this.grid = new GridReg("grid");	
 	}
 	onLoad()
@@ -17,16 +18,25 @@ class ClientesVista
 		//this.html.grid = new GridReg("grid");	
 		this.grid._columnas = [
 			{longitud:100, 	titulo:"Id",   	alias:"id", alineacion:"I" }, 
-			{longitud:200, 	titulo:"Primer Nombre",   alias:"primerNombre", alineacion:"I" }, 
-			{longitud:200, 	titulo:"Segundo Nombre",   alias:"SegundoNombre", alineacion:"I" }, 
-			{longitud:200, 	titulo:"Apellido Paterno",   alias:"apellidoPaterno", alineacion:"I" },	
-			{longitud:200, 	titulo:"Materno Paterno",   alias:"MaternoPaterno", alineacion:"I" },	
-			{longitud:200, 	titulo:"Rfc",   alias:"rfc", alineacion:"I" },	
-			{longitud:200, 	titulo:"Nss",   alias:"nss", alineacion:"I" },	
-			{longitud:200, 	titulo:"Curp",   alias:"curp", alineacion:"I" },	
-			{longitud:200, 	titulo:"Correo electronico",   alias:"CorreoElec", alineacion:"I" },	
+			{longitud:200, 	titulo:"Primer nombre",   alias:"nombre", alineacion:"I" }, 
+			{longitud:200, 	titulo:"Segundo nombre",   alias:"nombreSegundo", alineacion:"I" }, 
+			{longitud:200, 	titulo:"Apellido paterno",   alias:"apellidoPaterno", alineacion:"I" },	
+			{longitud:200, 	titulo:"Materno materno",   alias:"apellidoMaterno", alineacion:"I" },	
+			{longitud:100, 	titulo:"Rfc",   alias:"rfc", alineacion:"I" },	
+			{longitud:100, 	titulo:"Nss",   alias:"nss", alineacion:"I" },	
+			{longitud:150, 	titulo:"Curp",   alias:"curp", alineacion:"I" },	
+			{longitud:200, 	titulo:"Correo electronico",   alias:"correoElectronico", alineacion:"I" },	
+			{longitud:100, 	titulo:"Codigo postal",   alias:"cpId", alineacion:"I" }, 
+			{longitud:100, 	titulo:"Numero exterior",   alias:"numExt", alineacion:"I" },	
+			{longitud:100, 	titulo:"Numero interior",   alias:"numInt", alineacion:"I" },	
+			{longitud:200, 	titulo:"Calle",   alias:"calle", alineacion:"I" },	
+			{longitud:200, 	titulo:"Colonia",   alias:"colonia", alineacion:"I" },	
+			{longitud:200, 	titulo:"Estado",   alias:"estado", alineacion:"I" },	
+			{longitud:200, 	titulo:"Pais",   alias:"pais", alineacion:"I" },	
 		]
-
+		
+		this.grid._origen="vista";
+		this.grid.manejadorEventos=this.manejadorEventos;
 		this.grid._ajustarAltura = true;
 		this.grid._colorRenglon1 = "#FFFFFF";	
 		this.grid._colorRenglon2 = "#f8f2de";
@@ -36,43 +46,24 @@ class ClientesVista
 		this.grid._colorLetraCuerpo = "#000000";
 		this.grid._regExtra=20;
 		this.grid._presentacionGranTotal = "SI";
-		this.grid.subscribirAEvento(this, "eventGridRowDoubleClick", this.grid_eventGridRowDoubleClick);
+		//this.grid.subscribirAEvento(this, "eventGridRowClick", this.recuperaDatosCliente);
+		//this.grid.subscribirAEvento(this, "eventGridRowDoubleClick", this.grid_eventGridRowDoubleClick);
 		this.grid.render();		
 	}
 	
-	btnGuardarDetalle_onClick()
-	{
-		this.presentador.insertar();
-	}
-	
-	btnSalirDetalle_onClick()
-	{
-		this.salirDetalle();
-	}
 	
 	btnConsulta_onClick()
 	{
 		this.presentador.consultar();
 	}
 	
-	get nombreDetalle()
-	{
-		return $('#primerNomInput').val();
-	}
-	
-	set nombreDetalle(valor)
-	{
-		$('#primerNomInput').val(valor);
-	}
-	
-	get idDetalle()
-	{
-		return $('#idClienteInput').val();
-	}
-	
-	set idDetalle(valor)
-	{
-		$('#idClienteInput').val(valor);
+	btnBaja_onClick()
+	{ 
+		 var answer = confirm("¿Deseas eliminar este cliente?")
+		    if (answer){
+		    	$('#idClienteInput').val(this.grid._selectedItem.id)
+		    	this.presentador.eliminar();
+		    }	
 	}
 	
 	get nombreCompleto()
@@ -90,6 +81,7 @@ class ClientesVista
 		return $('#curpInput').val();
 	}
 
+	
 	set datos(valor)
 	{
 		this.grid._dataProvider = valor;	
@@ -98,110 +90,248 @@ class ClientesVista
 	
 	grid_eventGridRowDoubleClick()
 	{
-		this.abrirDetalle();
+		alert(" ");
+		//$('#principal').hide()	
+		//$('#altaCambioDiv').show();
 	}
 	
 	btnAlta_onClick()
-	{
-		this.abrirDetalle();
-	}
-	
-	abrirDetalle()
 	{
 		$('#principal').hide()	
 		$('#altaCambioDiv').show();
 	}
 	
-	salirDetalle()
+	btnCambio_onClick()
 	{
-		$('#principal').show()	
-		$('#altaCambioDiv').hide();
+		if( this.grid._selectedItem!=null){
+			$('#principal').hide()	
+			$('#altaCambioDiv').show();
+			$('#idClienteInput').val(this.grid._selectedItem.id)
+			this.presentador.consultarPorId();
+		}else{
+			alert("Selecciona un cliente para actualizar");
+		}		
 	}
 	
-	mostrarMensaje(mensaje)
-	{
+	btnGuardar_onClick()
+	{		
+		if(this.validar()!= 0){
+			if( $('#idClienteInput').val()==""){
+				this.presentador.insertar();
+			}else{
+				this.presentador.actualizar();
+			}
+		}
 		
 	}
+	
+	//campos del formulario
+	
+	get idCliente()
+	{
+		return $('#idClienteInput').val();
+	}
+	
+	get primerNombre()
+	{
+		return $('#primerNombreInput').val();
+	}
+	
+	get segundoNombre()
+	{
+		return $('#segundoNombreInput').val();
+	}
+	
+	get primerApellido()
+	{
+		return $('#primerApellidoInput').val();
+	}
+	
+	get segundoApellido()
+	{
+		return $('#segundoApellidoInput').val();
+	}
+	
+	get rfcDetalle()
+	{
+		return $('#rfcDetalleInput').val();
+	}
+	
+	get nssDetalle()
+	{
+		return $('#nssDetalleInput').val();
+	}
+	
+	get curpDetalle()
+	{
+		return $('#curpDetalleInput').val();
+	}
+	
+	get codigoPostal()
+	{
+		return $('#codigoPostalInput').val();
+	}
+	
+	get numeroExterior()
+	{
+		return $('#numeroExteriorInput').val();
+	}
+	
+	get numeroInterior()
+	{
+		return $('#numeroInteriorInput').val();
+	}
+	
+	
+	get calle()
+	{
+		return $('#calleInput').val();
+	}
+	
+	
+	get colonia()
+	{
+		return $('#coloniaInput').val();
+	}
+	
+	
+	get estado()
+	{
+		return $('#estadoInput').val();
+	}
+	
+	get pais()
+	{
+		return $('#paisInput').val();
+	}
+	
+	get correo()
+	{
+		return $('#correoInput').val();
+	}
+	
+	set resultado(valor)
+	{
+		alert(valor);
+		this.limpiar();	
+	}
+	
+	validar()
+	{
+		if($('#primerNombreInput').val()==""){
+			alert("Tiene que llenar el campo primer nombre");
+			$('#primerNombreInput').focus();
+			return 0;
+		}
+		
+		if($('#primerApellidoInput').val()==""){
+			alert("Tiene que llenar el campo primer apellido");
+			$('#primerApellidoInput').focus();
+			return 0;
+		}
+		
+		if($('#rfcDetalleInput').val()==""){
+			alert("Tiene que llenar el campo RFC");
+			$('#rfcDetalleInput').focus();
+			return 0;
+		}
+		
+				
+		if($('#rfcDetalleInput').val()==""){
+			alert("Tiene que llenar el campo RFC");
+			$('#rfcDetalleInput').focus();
+			return 0;
+		}
+		
+		if($('#curpDetalleInput').val()==""){
+			alert("Tiene que llenar el campo CURP");
+			$('#curpDetalleInput').focus();
+			return 0;
+		}
+		
+		if($('#calleInput').val()==""){
+			alert("Tiene que llenar el campo Calle");
+			$('#calleInput').focus();
+			return 0;
+		}
+		
+		if($('#codigoPostalInput').val()==""){
+			alert("Tiene que llenar el campo Codigo postal");
+			$('#codigoPostalInput').focus();
+			return 0;
+		}
+		
+		if($('#coloniaInput').val()==""){
+			alert("Tiene que llenar el campo Colonia");
+			$('#coloniaInput').focus();
+			return 0;
+		}
+		
+		if($('#numeroExteriorInput').val()==""){
+			alert("Tiene que llenar el campo Numero exterior");
+			$('#numeroExteriorInput').focus();
+			return 0;
+		}
+		
+		if($('#numeroExteriorInput').val()==""){
+			alert("Tiene que llenar el campo Estado");
+			$('#numeroExteriorInput').focus();
+			return 0;
+		}
+		
+		if($('#paisInput').val()==""){
+			alert("Tiene que llenar el campo Pais");
+			$('#paisInput').focus();
+			return 0;
+		}
+		
+	}
+	
+	btnSalir_onClick(){		
+		$('#altaCambioDiv').hide();
+		$('#principal').show();
+		this.limpiar();
+	}
+	
+	limpiar(){
+			$('#idClienteInput').val("");
+			$('#primerNombreInput').val("");
+			$('#segundoNombreInput').val("");
+			$('#primerApellidoInput').val("");
+			$('#segundoApellidoInput').val("");
+			$('#rfcDetalleInput').val("");
+			$('#nssDetalleInput').val("");
+			$('#curpDetalleInput').val("");
+			$('#codigoPostalInput').val("");
+			$('#numeroExteriorInput').val("");
+			$('#numeroInteriorInput').val("");
+			$('#calleInput').val("");
+			$('#coloniaInput').val("");
+			$('#estadoInput').val("");
+			$('#paisInput').val("");
+			$('#correoInput').val("");
+	}
+	
+	set resultadoActualizar(valor)
+	{				
+		$('#primerNombreInput').val(valor[0].nombre);
+		$('#segundoNombreInput').val(valor[0].nombreSegundo);
+		$('#primerApellidoInput').val(valor[0].apellidoPaterno);
+		$('#segundoApellidoInput').val(valor[0].apellidoMaterno);
+		$('#rfcDetalleInput').val(valor[0].rfc);
+		$('#nssDetalleInput').val(valor[0].nss);
+		$('#curpDetalleInput').val(valor[0].curp);
+		$('#codigoPostalInput').val(valor[0].cpId);
+		$('#numeroExteriorInput').val(valor[0].numExt);
+		$('#numeroInteriorInput').val(valor[0].numInt);
+		$('#calleInput').val(valor[0].calle);
+		$('#coloniaInput').val(valor[0].colonia);
+		$('#estadoInput').val(valor[0].estado);
+		$('#paisInput').val(valor[0].pais);
+		$('#correoInput').val(valor[0].correoElectronico);
+	
+	}
+	
 }
 var vista = new ClientesVista();
 
-//var presentador;
-
-
-
-/*
-function onLoad()
-{	
-	presentador = new ClientesPresentador(this);
-	crearGrid();
-}
-
-function crearGrid()
-{
-	grid = new GridReg("grid");	
-	grid._columnas = [
-	{longitud:100, 	titulo:"Id",   	alias:"id", alineacion:"I" }, 
-	{longitud:200, 	titulo:"Nombre",   alias:"nombre", alineacion:"I" }, 
-	{longitud:200, 	titulo:"Apellido Paterno",   alias:"apellidoPaterno", alineacion:"I" }	
-	]
-
-	grid._ajustarAltura = true;
-	grid._colorRenglon1 = "#FFFFFF";	
-	grid._colorRenglon2 = "#f8f2de";
-	grid._colorEncabezado1 = "#FF6600";
-	grid._colorEncabezado2 = "#FF6600";
-	grid._colorLetraEncabezado = "#ffffff";
-	grid._colorLetraCuerpo = "#000000";
-	grid._regExtra=20;
-	grid._presentacionGranTotal = "SI";
-	grid.subscribirAEvento(this, "eventGridRowDoubleClick", grid_eventGridRowDoubleClick);
-	grid.render();		
-}
-
-function grid_eventGridRowDoubleClick()
-{
-	//document.getElementById("principal").style.display ="none";	
-	//document.getElementById("altaCambioDiv").style.display  = "block";
-	
-	$('#principal').hide()	
-	$('#altaCambioDiv').show();
-}
-
-function btnAlta_onClick()
-{
-	document.getElementById("principal").style.display ="none";	
-	document.getElementById("altaCambioDiv").style.display  = "block";
-}
-
-function btnBaja_onClick()
-{
-	
-}
-
-function btnCambio_onClick()
-{
-	
-}
-
-function btnConsulta_onClick()
-{
-	presentador.consultar();
-}
-
-function btnSalir_onClick()
-{
-
-}
-
-function getNombreCompleto()
-{
-	return $('#nombreInput').val();
-}
-
-function setDatos(datos)
-{
-	this.grid._dataProvider = datos;	
-	this.grid.render();
-}
-
-*/

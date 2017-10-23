@@ -27,7 +27,8 @@ GridReg = function(id) {
 	this._newId = 0;
 	this.datosEventX = new Object();
 	this._presentacionGranTotal = "NO";
-	
+	this._origen = "";
+	this.manejadorEventos="";
 	/*
 	* variables para el drop 
 	*/
@@ -236,8 +237,8 @@ GridReg = function(id) {
 					output[output.length] = " ontouchstart='"+this._id+".touchRow(event," + this._id + "._dataProvider[" + i + " ]," + i+ ")'";
 					output[output.length] = " ontouchend='"+this._id+".untouchRow(event," + this._id + "._dataProvider[" + i + " ]," + i+ ")'";
 					output[output.length] = " ontouchmove='"+this._id+".movetouch(event," + this._id + "._dataProvider[" + i + " ]," + i+ ")'";
-					output[output.length] = " onclick='"+this._id+".clickRow(event," + this._id + "._dataProvider[" + i + " ]," + i+ ")'";
-					output[output.length] = " ondblclick='"+this._id+".dblclickRow(event," + this._id + "._dataProvider[" + i + " ]," + i+ ")'";
+					output[output.length] = " onclick='"+this._origen+"."+this._id+".clickRow(event," +this._origen+"."+ this._id + "._dataProvider[" + i + " ]," + i+ ")'";
+					output[output.length] = " ondblclick='"+this._origen+"."+this._id+".dblclickRow(event,"+this._origen+"." + this._id + "._dataProvider[" + i + " ]," + i+ ")'";
 					output[output.length] = ">";
 					if( this._seleccionMultiple == true ){
 						output[output.length] = "<td class='grid' style='width:" + anchoCheckbox + "px;"+separacionVertical;
@@ -695,7 +696,7 @@ GridReg = function(id) {
 					this._selectedRow.childNodes[i].style.backgroundColor='#B2E1FF'; 
 				}
 				this._selectedIndex = this._selectedRowId = rowNo;
-				this._selectedItem = datos;
+				this._selectedItem = datos; 
 			}
 			if(this._selectedRowId == null){
 				datosEvent.seleccionado = false;
@@ -709,7 +710,7 @@ GridReg = function(id) {
 		datosEvent.renglon = rowNo;
 		datosEvent.grid = this;
 		var evento = new Evento("eventGridRowClick", datosEvent);
-		manejadorEventos.disparaEvento(evento);
+		this.manejadorEventos.disparaEvento(evento);
 		this.disparaEvento(evento);
 	}
 
@@ -725,7 +726,7 @@ GridReg = function(id) {
 		datosEvent.renglon = row;
 		datosEvent.grid = this;
 		var evento = new Evento("eventGridRowDoubleClick", datosEvent);
-		manejadorEventos.disparaEvento(evento);
+		this.manejadorEventos.disparaEvento(evento);
 		this.disparaEvento(evento);
 	}
 
@@ -778,7 +779,7 @@ GridReg = function(id) {
 			datosEvent.y = y;
 			datosEvent.grid = this;
 			var evento = new Evento("eventGridRowTouchSostenido", datosEvent);
-			manejadorEventos.disparaEvento(evento);
+			this.manejadorEventos.disparaEvento(evento);
 		}
 	}
 		
@@ -854,7 +855,7 @@ this.drag = function(ev, datos, rowNo){
 		this.datosEventX.grid = this;
 		
 		var evento = new Evento("drag", this.datosEventX);
-		manejadorEventos.disparaEvento(evento);
+		this.manejadorEventos.disparaEvento(evento);
 		this.disparaEvento(evento);
 }
 this.drop = function(ev){
@@ -874,7 +875,7 @@ this.drop = function(ev){
 	   //}
 	   
 		var evento = new Evento("drop", this.datosEventX);
-		manejadorEventos.disparaEvento(evento);
+		this.manejadorEventos.disparaEvento(evento);
 		this.disparaEvento(evento);
  	   
 	   
@@ -906,7 +907,7 @@ this.dropD = function(ev) {
 	        ev.target.appendChild(document.getElementById(data));
 	        ev.target.removeChild(document.getElementById(data));
 		    var evento = new Evento("dropD", this.datosEventX);
-			manejadorEventos.disparaEvento(evento);
+		    this.manejadorEventos.disparaEvento(evento);
 			this.disparaEvento(evento);
        }
      }
@@ -919,7 +920,7 @@ this.dropDR = function(ev) {
     var arreglo  = ev.currentTarget.children;
     var data = ev.dataTransfer.getData("text");
 	var evento = new Evento("dropDR", this.datosEventX);
-	manejadorEventos.disparaEvento(evento);
+	this.manejadorEventos.disparaEvento(evento);
 	this.disparaEvento(evento);
     ev.preventDefault();   
  }

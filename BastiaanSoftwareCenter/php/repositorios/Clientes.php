@@ -1,6 +1,5 @@
 <?php
 use php\clases\AdministradorConexion;
-use php\clases\JsonMapper;
 use php\modelos\Cliente;
 use php\repositorios\ClientesRepositorio;
 
@@ -10,7 +9,6 @@ ini_set('display_errors', 1);
 
 include '../clases/Utilidades.php';
 include '../clases/AdministradorConexion.php';
-include '../clases/JsonMapper.php';
 include '../repositorios/ClientesRepositorio.php';
 
 
@@ -35,27 +33,21 @@ try
                 
                 $clientes = $repositorio->consultarPorNombre($nombre) ;
                 if($clientes!=null)
-                    echo json_encode($clientes);
+                    echo json_encode($clientes, JSON_UNESCAPED_UNICODE);
                     break;
             case 'consultarPorId':
                 $id = REQUEST('id');
                 
                 $clientes = $repositorio->consultarPorId($id) ;
                 if($clientes!=null)
-                    echo json_encode($clientes);
+                    echo json_encode($clientes, JSON_UNESCAPED_UNICODE);
                     break;
             case 'insertar':
-                 
-                $json = json_decode(REQUEST('cliente'));
-                $mapper = new JsonMapper();
-                $cliente = $mapper->map($json, new Cliente());
-                /*
                 $cliente = new Cliente();
                 $cliente->nombre = utf8_encode(REQUEST('nombre'));
                 $cliente->nombreSegundo = utf8_encode(REQUEST('nombreSegundo'));
                 $cliente->apellidoPaterno = utf8_encode(REQUEST('apellidoPaterno'));
                 $cliente->apellidoMaterno = utf8_encode(REQUEST('apellidoMaterno'));
-                $cliente->nombreCompleto = utf8_encode(REQUEST('nombreCompleto'));
                 $cliente->rfc = utf8_encode(REQUEST('rfc'));
                 $cliente->nss = utf8_encode(REQUEST('nss'));
                 $cliente->curp = utf8_encode(REQUEST('curp'));
@@ -66,19 +58,17 @@ try
                 $cliente->colonia = utf8_encode(REQUEST('colonia'));
                 $cliente->estado = utf8_encode(REQUEST('estado'));
                 $cliente->pais = utf8_encode(REQUEST('pais'));
-                $cliente->direccion = utf8_encode(REQUEST('direccion'));
-                $cliente->correoElectronico = utf8_encode(REQUEST('correoElectronico'));*/
-                
-                $resultado = $repositorio->insertar($cliente) ;
-                if($resultado!=null)
-                    echo json_encode($resultado);
+                $cliente->correoElectronico = utf8_encode(REQUEST('correoElectronico'));
+                $clientes = $repositorio->insertar($cliente) ;
+                if($clientes!=null)
+                    echo json_encode($clientes, JSON_UNESCAPED_UNICODE);
                     break;
             case 'eliminar':
                 $cliente = new Cliente();
                 $cliente->id = utf8_encode(REQUEST('id'));
                 $clientes = $repositorio->eliminar($cliente) ;
                 if($clientes!=null)
-                    echo json_encode($clientes);
+                    echo json_encode($clientes, JSON_UNESCAPED_UNICODE);
                     break;
             case 'actualizar':
                 $cliente = new Cliente();
@@ -86,7 +76,6 @@ try
                 $cliente->nombreSegundo = utf8_encode(REQUEST('nombreSegundo'));
                 $cliente->apellidoPaterno = utf8_encode(REQUEST('apellidoPaterno'));
                 $cliente->apellidoMaterno = utf8_encode(REQUEST('apellidoMaterno'));
-                $cliente->nombreCompleto = utf8_encode(REQUEST('nombreCompleto'));
                 $cliente->rfc = utf8_encode(REQUEST('rfc'));
                 $cliente->nss = utf8_encode(REQUEST('nss'));
                 $cliente->curp = utf8_encode(REQUEST('curp'));
@@ -97,20 +86,19 @@ try
                 $cliente->colonia = utf8_encode(REQUEST('colonia'));
                 $cliente->estado = utf8_encode(REQUEST('estado'));
                 $cliente->pais = utf8_encode(REQUEST('pais'));
-                $cliente->direccion = utf8_encode(REQUEST('direccion'));
                 $cliente->correoElectronico = utf8_encode(REQUEST('correoElectronico'));
                 $cliente->id = utf8_encode(REQUEST('id'));
                 $clientes = $repositorio->actualizar($cliente) ;
                 if($clientes!=null)
-                    echo json_encode($clientes);
+                    echo json_encode($clientes, JSON_UNESCAPED_UNICODE);
                     break;
-            case 'consultar':        
+            case 'consultar':
                 $nombreCompleto=REQUEST('nombreCompleto');
                 $rfc=REQUEST('rfc');
                 $curp=REQUEST('curp');
                 $clientes = $repositorio->consultar($nombreCompleto,$rfc,$curp ) ;
                 if($clientes!=null)
-                    echo json_encode($clientes);
+                    echo json_encode($clientes, JSON_UNESCAPED_UNICODE);
                     break;
         }
     }

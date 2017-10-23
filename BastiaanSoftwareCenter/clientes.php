@@ -1,18 +1,18 @@
-<?php 
-    include 'php/clases/Utilidades.php';
-    
-	$modulo = REQUEST('CNMDLSID');
-	$opcionTerminal = REQUEST('CNOTRMID');
-	$version = REQUEST('CNOTRMVER');
-	$usuario = REQUEST('CNUSERID');
-	$nomTrabajador = REQUEST('CNUSERDESC');
-	$usuarioDsc = REQUEST('CNUSERDESC');
-	$CNUSERDESC = REQUEST('CNUSERDESC');	
-	
+<?php
+include 'php/clases/Utilidades.php';
+
+$modulo = REQUEST('CNMDLSID');
+$opcionTerminal = REQUEST('CNOTRMID');
+$version = REQUEST('CNOTRMVER');
+$usuario = REQUEST('CNUSERID');
+$nomTrabajador = REQUEST('CNUSERDESC');
+$usuarioDsc = REQUEST('CNUSERDESC');
+$CNUSERDESC = REQUEST('CNUSERDESC');
+
 
 ?>
 <html> 
-<title>Cat�logo de clientes</title>
+<title>Catalogo de clientes</title>
 <head>	
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<script language="JavaScript" type="text/javascript" src="js/librerias/jquery-1.6.2.min.js"></script>
@@ -90,7 +90,7 @@
 								</tr>
                              </table>   
 						</div>
-						<div id="titulo" style="margin-left:280px;" class="tituloIEC">Cat�logo de clientes</div>
+						<div id="titulo" style="margin-left:280px;" class="tituloIEC">Catálogo de clientes</div>
 					</div>
 				</div>
             </div>        
@@ -150,9 +150,9 @@
  -->
 			<div id="menuPrincipal"  align="right" class="contieneCriteriosAribaBtn" style="background-color: #6b6b6b;    height: 56px; " > 
 				<img class='logoBAS' style='float: left;' id='logoFRM' src='assets/pantalla/imgCabecero.png'  />
-				<span id="txtTitulo" style="float:left;margin-top: 20px;margin-left: 15px;color: #FFFFFF;float: left;font-family: Verdana;font-size: 11px;font-weight: bold;">VERIFICADOR</span>
-				<img style="padding: 2px;" class='imgTipoBoton' id='btnGuardarDetalle' src='assets/botones/imgGuardar.png' onclick='vista.btnGuardarDetalle_onClick()' title='Guardar' />
-				<img style="padding: 2px;" class='imgTipoBoton' id='btnSalirDetalle' src='assets/botones/btnSalir.png' onClick="vista.btnSalirDetalle_onClick()" title='Salir'  />
+				<span id="txtTitulo" style="float:left;margin-top: 20px;margin-left: 15px;color: #FFFFFF;float: left;font-family: Verdana;font-size: 11px;font-weight: bold;">Catálogo de clientes</span>
+				<img style="padding: 2px;" class='imgTipoBoton' id='btnGuardarAltaSol' src='assets/botones/imgGuardar.png' onclick='vista.btnGuardar_onClick();' title='Guardar y aprobar' />
+				<img style="padding: 2px;" class='imgTipoBoton' id='btnSalirAltaSol' src='assets/botones/btnSalir.png' onClick="vista.btnSalir_onClick();" title='Salir'  />
 			</div>
 <!--
   barra de men�...fin
@@ -164,34 +164,126 @@
 						<div class="contenidoNormalUS">
 					 		<div class="explicacionFRM" >
 								<div id="filtros " class="contenedorIEC" style="overflow: auto; position: relative; width: 100%; display: block;">
-								 <div style="width: 80%; display: block; height: 100%;  padding-top: 10px; padding-left: 34px;">
-									<div><label style=" width:130px; position: relative; left: 3px; ">Id de cliente</label><input class="input" id="idClienteInput" type="text" maxlength="20" value="" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px;" disabled /></div>	
-								    <div style="height: 10px;"></div>
-								 	<div><label style="position: relative; left: 3px; ">Primer nombre   </label><input class="input" id="primerNomInput" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>	
-										 <label style="position: relative; left: 3px; ">Segundo nombre  </label><input class="input" id="segundoNomInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
-	                                   	 <label style="position: relative; left: 3px; ">Primer apellido </label><input class="input" id="primerApellInput" style="width:130px; font-family:Verdana; font-size:9px; text-align:left; color:#006699;position: relative; left: 6px"/>                             									
-										 <label style="position: relative; left: 3px; ">Segundo apellido</label><input class="input" id="segundoApellInput" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
-                                    </div>
-                                    <div style="height: 10px;"></div>
-								 	<div><label style="position: relative;">RFC</label><input class="input" id="RFCDetInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>	
-										 <label style="position: relative;">NSS</label><input class="input" id="NSSDetInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
-	                                   	 <label style="position: relative;">CURP</label><input class="input" id="CURPDetInput" style=";width:130px; font-family:Verdana; font-size:9px; text-align:left; color:#006699;position: relative; left: 6px"/>                             									
-										 <label style="position: relative;">Codigo Postal</label><input class="input" id="CPInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
-										 <label style="position: relative;">Numero exterior</label><input class="input" id="NoextInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
-                                    </div>
-                                    <div style="height: 10px;"></div>
-								 	<div>	
-										 <label style="position: relative; left: 3px; ">Numero interior </label><input class="input" id="NoIntDetInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
-	                                   	 <label style="position: relative; left: 3px; ">Calle           </label><input class="input" id="calleInput" style="width:130px; font-family:Verdana; font-size:9px; text-align:left; color:#006699;position: relative; left: 6px"/>                             									
-										 <label style="position: relative; left: 3px; ">Colonia         </label><input class="input" id="coloniaInput" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
-										 <label style="position: relative; left: 3px; ">Estado          </label><input class="input" id="EstadoInput" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
-										 <label style="position: relative; left: 3px; ">Pais            </label><input class="input" id="PaisInput" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
-                                    </div>
-                                    <div style="height: 10px;"></div>
-								 	<div>	
-										 <label style="position: relative; left: 3px; ">Correo electronico</label><input class="input" id="CorreoInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
-                                    </div>
-								 </div>
+								 <div style="width: 80%; display: block; height: 100%;  padding-top: 10px; padding-left: 34px;">								 	
+								   <table WIDHT=25%; HEIGHT=25%;  CELLPADDING=0; cellspacing="10" style="padding-top: 12px; padding-left: 1%; position:relative;  ">
+								   <tr>
+								    	<td >
+								     		 <label style=" width:130px; position: relative; left: 3px; ">Id de cliente</label>
+								   		</td>
+								   		<td >
+								     		<input class="input" id="idClienteInput" type="text" maxlength="20" value="" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px;" disabled />
+								   		</td>
+								   		
+								    </tr>
+								   	 <tr>
+								    	<td >
+								     		<label style="position: relative; left: 3px; ">Primer nombre</label>
+								   		</td>
+								   		<td >
+								     		<input class="input" id="primerNombreInput" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px "/>
+								   		</td>
+								   		<td>						    
+								    		<label style="position: relative; left: 3px; ">Segundo nombre</label>
+								   		</td>
+								   		<td>						    
+								    		<input class="input" id="segundoNombreInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
+								   		</td>
+								    </tr>
+								   	<tr>
+								  		<td>	
+								    		<label style="position: relative; left: 3px; ">Primer apellido</label>
+								   		</td>
+								   		<td>	
+								    		<input class="input" id="primerApellidoInput" style="width:130px; font-family:Verdana; font-size:9px; text-align:left; color:#006699;position: relative; left: 6px"/>
+								   		</td>
+								   		<td>	
+								    		<label style="position: relative; left: 3px; ">Segundo apellido</label>
+								   		</td>
+								   		<td>	
+								    		<input class="input" id="segundoApellidoInput" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
+								   		</td>
+								    </tr>
+								    
+								    <tr>
+								  		<td>	
+								    		<label style="position: relative; left: 3px;">RFC</label>
+								   		</td>
+								   		<td>	
+								    		<input class="input" id="rfcDetalleInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
+								   		</td>
+								   		
+								   		<td>	
+								    		<label style="position: relative; left: 3px;">NSS</label>
+								   		</td>
+								   		<td>	
+								    		<input class="input" id="nssDetalleInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
+								   		</td>
+								   		<td>	
+								    		<label style="position: relative; left: 3px;">CURP</label>
+								   		</td>
+								   		<td>	
+								    		<input class="input" id="curpDetalleInput" style=";width:130px; font-family:Verdana; font-size:9px; text-align:left; color:#006699;position: relative; left: 6px"/>
+								   		</td>
+								   	</tr>
+								   	<tr>
+								   		<td>
+								   			<label style="position: relative; left: 3px; ">Calle</label>
+								   		</td>
+								   		<td>
+								   			<input class="input" id="calleInput" style="width:130px; font-family:Verdana; font-size:9px; text-align:left; color:#006699;position: relative; left: 6px"/>
+								   		</td>								   		
+								   		<td>	
+								    		<label style="position: relative; left: 3px;">Codigo Postal</label>
+								   		</td>
+								   		<td>	
+								    		<input class="input" id="codigoPostalInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
+								   		</td>
+								   		<td>
+								   			<label style="position: relative; left: 3px; ">Colonia</label>
+								   		</td>
+								   		<td>
+								   			<input class="input" id="coloniaInput" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
+								   		</td>
+								   		
+								    </tr>
+								    <tr>
+    								    <td>	
+								    		<label style="position: relative; left: 3px;">Numero exterior</label>
+								   		</td>
+								   		<td>	
+								    		<input class="input" id="numeroExteriorInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
+								   		</td>
+								   		<td>
+								   			 <label style="position: relative; left: 3px; ">Numero interior</label>
+								   		</td>
+								   		<td>
+								   			 <input class="input" id="numeroInteriorInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
+								   		</td>
+								    </tr>
+								    <tr>
+    								    <td>
+    								    	<label style="position: relative; left: 3px; ">Estado</label>
+    								    </td>
+    								    <td>
+    								    	<input class="input" id="estadoInput" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
+    								    </td>
+    								    <td>
+    								    	<label style="position: relative; left: 3px; ">Pais</label>
+    								    </td>
+    								    <td>
+    								    	<input class="input" id="paisInput" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
+    								    </td>
+    								    <td>
+    								    	<label style="position: relative; left: 3px; ">Correo electronico</label>
+    								    </td>
+    								     <td>
+    								    	<input class="input" id="correoInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
+    								    </td>
+								    </tr>
+								   </table>
+								    	    
+								    	
+									</div>
 									
 								 </div>
 								</div>				  	
@@ -199,45 +291,8 @@
 						</div>
 				</div>
 		</div>
-		<div class='ventana' id='PromptConcepto' style='display: none;'>
-			<div class='panelAsistenteFRM' style=' width:650px;   height: 500px;  margin-left: 325px; left: 50%; top: 50%;'> 
-				<div style='display: block; margin-top: 8px; width: 100%;'> 
-							<img id='btnSalirConceptos' onClick='salirConceptos();' src='assets/botones/btnSalir.png'> 
-						</div> 
-						<div id='panelCarArchivo' class='' style='position: relative; width: 100%; display: block;  height: 94%; margin-top: 9px;'> 
-							<div id='panelCarArchivoLD' style=' overflow: auto; position:static;height:94%; width:100%; display: block; top:10px;left:3px;'> 
-								<div class='PMenuAsistente' style='width: 99%;  margin-top: 0px; text-align: center; height: 99%;'> 
-									<span style='font-size: 14px;'>Conceptos</span> 
-										<div class='fondoPlata' style='overflow: auto; width: 99%; display: block ;margin-top:1px;margin-left:5px;'> 
-											<div id='areaConcepto' style='    display: block;'> 
-												<div id="dgConceptosAltaSolicitud" style="float:left; overflow: auto; position:static; height:53%; width:100%; display: block; top:10px;left:3px;"></div>
-											</div> 
-										</div> 
-								</div> 
-							</div> 
-						</div> 
-				</div>  
-		</div>
-		<div class='ventana' id='PromptSubConcepto' style='display: none;'>
-			<div class='panelAsistenteFRM' style=' width:650px;   height: 500px;  margin-left: 325px; left: 50%; top: 50%;'> 
-				<div style='display: block; margin-top: 8px; width: 100%;'> 
-							<img id='btnSalirSubConceptos' onClick='salirSubConceptos();' src='assets/botones/btnSalir.png'> 
-						</div> 
-						<div id='panelCarArchivoSbCon' class='' style='position: relative; width: 100%; display: block;  height: 94%; margin-top: 9px;'> 
-							<div id='panelCarArchivoLDSbCon' style=' overflow: auto; position:static;height:94%; width:100%; display: block; top:10px;left:3px;'> 
-								<div class='PMenuAsistente' style='width: 99%;  margin-top: 0px; text-align: center; height: 99%;'> 
-									<span style='font-size: 14px;'>Sub Conceptos</span> 
-										<div class='fondoPlata' style='overflow: auto; width: 99%; display: block ;margin-top:1px;margin-left:5px;'> 
-											<div id='areaSubConcepto' style='    display: block;'> 
-												<div id="dgSbConceptosAltaSolicitud" style="float:left; overflow: auto; position:static; height:53%; width:100%; display: block; top:10px;left:3px;"></div>
-											</div> 
-										</div> 
-								</div> 
-							</div> 
-						</div> 
-				</div> 
 		
-		</div>
+		
 		<div class='ventana' id='PromptListaDistribucion' style='display: none; z-index:9001;'></div>
 		<div class='ventana' id='_promptRelacionReporte' style='display: none;'></div>
 		<div class='ventana' id='PromptCalendario' style='display: none; z-index:9001;'></div>  
