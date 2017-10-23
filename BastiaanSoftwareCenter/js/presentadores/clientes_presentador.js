@@ -19,8 +19,11 @@ class ClientesPresentador
 	 
 	 insertar()
 	 {
-		 var repositorio = new ClientesRepositorio(this);		
-		 repositorio.insertar(this,this.insertarResultado,this.vista.primerNombre, this.vista.segundoNombre, this.vista.primerApellido,this.vista.segundoApellido,this.vista.rfcDetalle,this.vista.nssDetalle,this.vista.curpDetalle,this.vista.codigoPostal,this.vista.numeroExterior, this.vista.numeroInterior,this.vista.calle,this.vista.colonia,this.vista.estado,this.vista.pais,this.vista.correo);
+		 var repositorio = new ClientesRepositorio(this);	
+		 
+		 
+		 repositorio.insertar(this,this.insertarResultado,this.vista.cliente);
+		// repositorio.insertar(this,this.insertarResultado,this.vista.primerNombre, this.vista.segundoNombre, this.vista.primerApellido,this.vista.segundoApellido,this.vista.rfcDetalle,this.vista.nssDetalle,this.vista.curpDetalle,this.vista.codigoPostal,this.vista.numeroExterior, this.vista.numeroInterior,this.vista.calle,this.vista.colonia,this.vista.estado,this.vista.pais,this.vista.correo);
 	 }
 	 
 	 insertarResultado(resultado)
@@ -32,10 +35,14 @@ class ClientesPresentador
 			}
 	 }
 	 
+	
+	 
 	 actualizar()
 	 {
-		 var repositorio = new ClientesRepositorio(this);		
-		 repositorio.actualizar(this,this.actualizarResultado,this.vista.idCliente,this.vista.primerNombre, this.vista.segundoNombre, this.vista.primerApellido,this.vista.segundoApellido,this.vista.rfcDetalle,this.vista.nssDetalle,this.vista.curpDetalle,this.vista.codigoPostal,this.vista.numeroExterior, this.vista.numeroInterior,this.vista.calle,this.vista.colonia,this.vista.estado,this.vista.pais,this.vista.correo);
+		 var repositorio = new ClientesRepositorio(this);	
+		
+		 repositorio.insertar(this,this.actualizarResultado,this.vista.cliente);
+		// repositorio.actualizar(this,this.actualizarResultado,this.vista.idCliente,this.vista.primerNombre, this.vista.segundoNombre, this.vista.primerApellido,this.vista.segundoApellido,this.vista.rfcDetalle,this.vista.nssDetalle,this.vista.curpDetalle,this.vista.codigoPostal,this.vista.numeroExterior, this.vista.numeroInterior,this.vista.calle,this.vista.colonia,this.vista.estado,this.vista.pais,this.vista.correo);
 	 }
 	 
 	 actualizarResultado(resultado)
@@ -55,7 +62,7 @@ class ClientesPresentador
 	 
 	 consultarPorIdResultado(resultado)
 	 {		
-		 this.vista.resultadoActualizar = resultado;
+		 this.vista.cliente = resultado;
 	 }
 	 
 	 eliminar()

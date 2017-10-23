@@ -1,5 +1,6 @@
 <?php
 use php\clases\AdministradorConexion;
+use php\clases\JsonMapper;
 use php\modelos\Cliente;
 use php\repositorios\ClientesRepositorio;
 
@@ -43,7 +44,10 @@ try
                     echo json_encode($clientes, JSON_UNESCAPED_UNICODE);
                     break;
             case 'insertar':
-                $cliente = new Cliente();
+                $json = json_decode(REQUEST('cliente'));
+                $mapper = new JsonMapper();
+                $cliente = $mapper->map($json, new Cliente());
+              /*  $cliente = new Cliente();
                 $cliente->nombre = utf8_encode(REQUEST('nombre'));
                 $cliente->nombreSegundo = utf8_encode(REQUEST('nombreSegundo'));
                 $cliente->apellidoPaterno = utf8_encode(REQUEST('apellidoPaterno'));
@@ -62,6 +66,7 @@ try
                 $clientes = $repositorio->insertar($cliente) ;
                 if($clientes!=null)
                     echo json_encode($clientes, JSON_UNESCAPED_UNICODE);
+                    */
                     break;
             case 'eliminar':
                 $cliente = new Cliente();

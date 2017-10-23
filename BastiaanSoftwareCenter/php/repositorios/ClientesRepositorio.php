@@ -62,7 +62,7 @@ class ClientesRepositorio implements IClientesRepositorio
                                                         $cliente->correoElectronico);                
              $resultado = $sentencia->execute();           
          }else{
-             echo "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
+             echo "Fallï¿½ la preparaciï¿½n: (" . $this->conexion->errno . ") " . $this->conexion->error;
          }
         return $resultado;
     }
@@ -77,7 +77,7 @@ class ClientesRepositorio implements IClientesRepositorio
              $sentencia->bind_param("i",$cliente->id);
              $resultado = $sentencia->execute();           
          }else{
-             echo "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
+             echo "Fallï¿½ la preparaciï¿½n: (" . $this->conexion->errno . ") " . $this->conexion->error;
          }
         return $resultado;
     }
@@ -126,7 +126,7 @@ class ClientesRepositorio implements IClientesRepositorio
                                                         $cliente->id);                
              $resultado = $sentencia->execute();           
          }else{
-             echo "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
+             echo "Fallï¿½ la preparaciï¿½n: (" . $this->conexion->errno . ") " . $this->conexion->error;
          }
         return $resultado;        
     }
@@ -188,7 +188,7 @@ class ClientesRepositorio implements IClientesRepositorio
                 }                
             }            
         }else{
-            echo "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
+            echo "Fallï¿½ la preparaciï¿½n: (" . $this->conexion->errno . ") " . $this->conexion->error;
         }
         return  $clientes;
     }
@@ -255,14 +255,14 @@ class ClientesRepositorio implements IClientesRepositorio
             }
             
         }else{
-            echo "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
+            echo "Fallï¿½ la preparaciï¿½n: (" . $this->conexion->errno . ") " . $this->conexion->error;
         }
         return $clientes;
     }
 
     public function consultarPorId($id)
     {
-        $clientes = array();
+        $cliente = null;
         $consulta =   " SELECT "
                     . " BTCLIENTENUMERO id, "
                     . " BTCLIENTEPNOMBRE nombre, "
@@ -314,16 +314,16 @@ class ClientesRepositorio implements IClientesRepositorio
                         $cliente->pais = utf8_encode($pais);
                         $cliente->direccion = utf8_encode($direccion);
                         $cliente->correoElectronico = utf8_encode($correoElectronico);                        
-                        array_push($clientes,$cliente);
+                       
                     }
                 }
                 
             }
             
         }else{
-            echo "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
+            echo "Fallï¿½ la preparaciï¿½n: (" . $this->conexion->errno . ") " . $this->conexion->error;
         }
-        return $clientes;
+        return $cliente;
     }
 
 

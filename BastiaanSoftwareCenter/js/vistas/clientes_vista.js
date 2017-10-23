@@ -107,6 +107,8 @@ class ClientesVista
 			$('#principal').hide()	
 			$('#altaCambioDiv').show();
 			$('#idClienteInput').val(this.grid._selectedItem.id)
+			
+			
 			this.presentador.consultarPorId();
 		}else{
 			alert("Selecciona un cliente para actualizar");
@@ -124,6 +126,52 @@ class ClientesVista
 		}
 		
 	}
+	
+	set cliente(valor)
+	{
+		//TODO: poner id de cliente aqui
+		$('#primerNombreInput').val(valor.nombre);
+		$('#segundoNombreInput').val(valor.nombreSegundo);
+		$('#primerApellidoInput').val(valor.apellidoPaterno);
+		$('#segundoApellidoInput').val(valor.apellidoMaterno);
+		$('#rfcDetalleInput').val(valor.rfc);
+		$('#nssDetalleInput').val(valor.nss);
+		$('#curpDetalleInput').val(valor.curp);
+		$('#codigoPostalInput').val(valor.cpId);
+		$('#numeroExteriorInput').val(valor.numExt);
+		$('#numeroInteriorInput').val(valor.numInt);
+		$('#calleInput').val(valor.calle);
+		$('#coloniaInput').val(valor.colonia);
+		$('#estadoInput').val(valor.estado);
+		$('#paisInput').val(valor.pais);
+		$('#correoInput').val(valor.correoElectronico);
+	}
+	
+	 get cliente()
+	 {
+		 var cliente = 
+		 {				    
+			 id:this.idDetalle,
+			 nombre:this.primerNombre,
+			 nombreSegundo: this.segundoNombre,
+			 apellidoPaterno:this.primerApellido,
+			 apellidoMaterno:,this.segundoApellido,
+			 nombreCompleto:"",
+			 rfc:"",
+			 nss:"",
+			 curp:"",
+			 cpId:"",
+			 numExt:"",
+			 numInt:"",
+			 calle:"",
+			 colonia:"",
+			 estado:"",
+			 pais:"",
+			 direccion:"",
+			 correoElectronico:""
+		 };
+		 return cliente;
+	 }
 	
 	//campos del formulario
 	
@@ -312,7 +360,7 @@ class ClientesVista
 			$('#correoInput').val("");
 	}
 	
-	set resultadoActualizar(valor)
+	/*set resultadoActualizar(valor)
 	{				
 		$('#primerNombreInput').val(valor[0].nombre);
 		$('#segundoNombreInput').val(valor[0].nombreSegundo);
@@ -330,7 +378,7 @@ class ClientesVista
 		$('#paisInput').val(valor[0].pais);
 		$('#correoInput').val(valor[0].correoElectronico);
 	
-	}
+	}*/
 	
 }
 var vista = new ClientesVista();
