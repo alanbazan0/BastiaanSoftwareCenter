@@ -10,6 +10,7 @@ class ClientesVista
 	onLoad()
 	{			
 		this.crearColumnasGrid();
+		this.presentador.consultar();
 	}
 	
 	crearColumnasGrid()
@@ -258,10 +259,16 @@ class ClientesVista
 		return $('#correoInput').val();
 	}
 	
-	set resultado(valor)
+	mostrarMensaje(titulo,mensaje)
 	{
-		alert(valor);
-		this.limpiar();	
+		alert(mensaje);
+	
+	}
+	
+	salirDetalle()
+	{
+		$('#principal').show()	
+		$('#altaCambioDiv').hide();
 	}
 	
 	validar()

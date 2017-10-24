@@ -8,6 +8,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 
+include '../clases/JsonMapper.php';
 include '../clases/Utilidades.php';
 include '../clases/AdministradorConexion.php';
 include '../repositorios/ClientesRepositorio.php';
@@ -63,10 +64,12 @@ try
                 $cliente->estado = utf8_encode(REQUEST('estado'));
                 $cliente->pais = utf8_encode(REQUEST('pais'));
                 $cliente->correoElectronico = utf8_encode(REQUEST('correoElectronico'));
-                $clientes = $repositorio->insertar($cliente) ;
-                if($clientes!=null)
-                    echo json_encode($clientes, JSON_UNESCAPED_UNICODE);
+               
+              
                     */
+                $id = $repositorio->insertar($cliente) ;
+                if($id!=null)
+                    echo json_encode($id, JSON_UNESCAPED_UNICODE);
                     break;
             case 'eliminar':
                 $cliente = new Cliente();

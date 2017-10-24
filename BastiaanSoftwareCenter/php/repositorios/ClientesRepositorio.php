@@ -16,9 +16,38 @@ class ClientesRepositorio implements IClientesRepositorio
         $this->conexion = $conexion;
     }
     
+    public function calcularId()
+    {
+       
+        $consulta =  "SELECT MAX(IFNULL(BTCLIENTENUMERO,0))+1 AS id FROM BSTNTRN.BTCLIENTE";
+        if($sentencia = $this->conexion->prepare($consulta))
+        {
+        
+            if($sentencia->execute())
+            {
+                if ($sentencia->bind_result($id))
+                {
+                    if($row = $sentencia->fetch())
+                    {
+                        return $id;
+                    }
+                }
+            }
+        }
+        else
+        {
+            echo "Fall� la preparaci�n: (" . $this->conexion->errno . ") " . $this->conexion->error;
+        }
+       
+        return '0';
+    }
+    
     public function insertar(Cliente $cliente)
     {     
+       
         $resultado = "";
+        $id = $this->calcularId();
+       
         $consulta = " INSERT INTO BSTNTRN.BTCLIENTE "
                     . " (BTCLIENTENUMERO, "
                     . " BTCLIENTEPNOMBRE, "
@@ -38,12 +67,11 @@ class ClientesRepositorio implements IClientesRepositorio
                     . " BTCLIENTEPAIS, "
                     . " BTCLIENTEDCOMPLETA, "
                     . " BTCLIENTECORRELEC) "
-                    . " VALUE( "
-                    . " (SELECT MAX(IFNULL(BTCLIENTENUMERO,0))+1 AS 'ID' FROM BSTNTRN.BTCLIENTE ID),  "
-                    . " ?,  ?,?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
+                    . " VALUE(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
          if($sentencia = $this->conexion->prepare($consulta))
          {
-             $sentencia->bind_param("sssssssssssssssss",$cliente->nombre,
+             $sentencia->bind_param("isssssssssssssssss",$id,
+                                                        $cliente->nombre,
                                                         $cliente->nombreSegundo, 
                                                         $cliente->apellidoPaterno,
                                                         $cliente->apellidoMaterno,
@@ -61,10 +89,12 @@ class ClientesRepositorio implements IClientesRepositorio
                                                         $cliente->direccion,
                                                         $cliente->correoElectronico);                
              $resultado = $sentencia->execute();           
-         }else{
-             echo "Fall� la preparaci�n: (" . $this->conexion->errno . ") " . $this->conexion->error;
          }
-        return $resultado;
+         else
+         {
+             echo "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
+         }
+        return $id;
     }
     
     public function eliminar(Cliente $cliente)

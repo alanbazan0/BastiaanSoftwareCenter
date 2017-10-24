@@ -28,11 +28,17 @@ class ClientesPresentador
 	 
 	 insertarResultado(resultado)
 	 {
-		if( resultado == "error" || resultado == false || resultado == "NO_OK"){
-			this.vista.resultado ="Error al agregar cliente.";
-			}else{
-				this.vista.resultado = "Cliente guardado exitosamente. ";
-			}
+		if( resultado == "0")		
+			this.vista.mostrarMensaje("Error","Error al agregar cliente.");
+		else	
+		{
+			this.vista.mostrarMensaje("Aviso","Cliente guardado exitosamente. Id: " + resultado);
+			this.vista.salirDetalle();
+			this.consultar();
+		}
+			
+			
+			
 	 }
 	 
 	
