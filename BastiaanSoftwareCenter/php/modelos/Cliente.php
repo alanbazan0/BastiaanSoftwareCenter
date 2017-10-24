@@ -20,6 +20,6 @@ class Cliente
     public $estado;
     public $pais;
     public $direccion;
-    public $correoElectronico;
+    public $correoElectronico; 
 }
 
