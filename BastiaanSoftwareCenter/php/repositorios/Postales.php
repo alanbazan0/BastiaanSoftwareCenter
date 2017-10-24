@@ -29,9 +29,9 @@ try
         switch ($accion)
         {
             case 'consultarPorId':
-                $id = REQUEST('id');
+                $id = REQUEST('nopostal');
                 
-                $postales = $repositorio->consultarPorNombre($nombre) ;
+                $postales = $repositorio->consultarPorNombre($nopostal) ;
                 if($postales!=null)
                     echo json_encode($postales, JSON_UNESCAPED_UNICODE);
                     break;
@@ -49,7 +49,6 @@ try
                 $postales->municipio = utf8_encode(REQUEST('municipio'));
                 $postales->ciudad = utf8_encode(REQUEST('ciudad'));
                 $postales->nopostal = utf8_encode(REQUEST('nopostal'));
-                $postales->id = utf8_encode(REQUEST('id'));
                 $postales = $repositorio->insertar($postales) ;
                 if($postales!=null)
                     echo json_encode($postales, JSON_UNESCAPED_UNICODE);

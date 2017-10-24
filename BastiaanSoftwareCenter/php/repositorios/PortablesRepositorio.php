@@ -20,8 +20,7 @@ class PortablesRepositorio implements IPortablesRepositorio
     public function insertar(Portables $portables)
     {
         $resultado = "";
-        $consulta = " INSERT INTO BSTNTRN.BTCPORTABILIDAD"              
-             . " BTCPORTABILIDADNIRID, "
+        $consulta = " INSERT INTO BSTNTRN.BTCPORTABILIDAD"    
              . " BTCPORTABILIDADSERIEID, "
              . " BTCPORTABILIDADNUM, "
              . " BTCPORTABILIDADMPIO, "
@@ -30,13 +29,12 @@ class PortablesRepositorio implements IPortablesRepositorio
              . " BTCPORTABILIDADEDO) "            
             . " VALUES( "
             . " (SELECT MAX(IFNULL(BTCPORTABILIDADNIRID,0))+1 AS 'ID' FROM BSTNTRN.BTCPORTABILIDAD ID),  "
-            . " '', ?, ?, ?, ?, ?, ?) ";
-                  $portables =$portables->id .' '. $portables->consecutivo.' '. $portables->numero.' '. $portables->descripcion;
+            . "?, ?, ?, ?, ?) ";
+                  $portables->consecutivo.' '. $portables->numero.' '. $portables->descripcion;
                                             $portables =$portables->poblacion.' '. $portables->municicipio.' '.$portables->estado;
                                             if($sentencia = $this->conexion->prepare($consulta))
                                             {
-                                                $sentencia->bind_param("sssssss",$portables->id,
-                                                    $portables->id,
+                                                $sentencia->bind_param("sssss",
                                                     $portables->consecutivo,
                                                     $portables->numero,
                                                     $portables->descripcion,
@@ -71,16 +69,19 @@ class PortablesRepositorio implements IPortablesRepositorio
         
         $resultado = "";
         $consulta = " UPDATE BSTNTRN.BTCPORTABILIDAD SET"
-                . " BTCPORTABILIDADSERIEID= ? , "
+                . " BTCPORTABILIDADSERIEID= ?, "
                 . " BTCPORTABILIDADNUM= ? , "
                 . " BTCPORTABILIDADMPIO= ? , "
                 . " BTCPORTABILIDADCIA= ? , "
                 . " BTCPORTABILIDADPOB= ? , "
                 . " BTCPORTABILIDADEDO) "       
                 . "  WHERE BTCPORTABILIDADNIRID = ? ";
+                $portables->consecutivo.' '.$portables->numero.' '. $portables->descripcion;
+                $portables =$portables->poblacion.' '. $portables->municicipio.' '.$portables->estado;
+               
                 if($sentencia = $this->conexion->prepare($consulta))
                    {
-                    $sentencia->bind_param("ssssss",$portables->id,
+                    $sentencia->bind_param("ssssss",
                         $portables->consecutivo,
                         $portables->numero,
                         $portables->descripcion,
