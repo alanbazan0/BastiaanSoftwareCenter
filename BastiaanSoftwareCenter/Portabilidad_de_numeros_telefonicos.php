@@ -12,7 +12,7 @@
 
 ?>
 <html> 
-<title>Catalogo Portabilidad</title>
+<title>Portabilidad de numeros telefonicos</title>
 <head>	
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<script language="JavaScript" type="text/javascript" src="js/librerias/jquery-1.6.2.min.js"></script>
@@ -93,7 +93,7 @@
 								</tr>
                              </table>   
 						</div>
-						<div id="titulo" style="margin-left:280px;" class="tituloIEC">Catalogo Portabilidad</div>
+						<div id="titulo" style="margin-left:280px;" class="tituloIEC">Portabilidad de numeros telefonicos</div>
 					</div>
 				</div>
             </div>        
@@ -106,7 +106,7 @@
 							<table style="position:relative;left:40px; text-align:left; margin-top:10px; margin-bottom:10px;">
 								<tr>
 								 
-									<td style="padding:6px 0px 4px 10px;">		<label  style="font-family: Verdana; font-size: 10px;"> ID </label></td>									
+									<td style="padding:6px 0px 4px 10px;">		<label  style="font-family: Verdana; font-size: 10px;"> NIR </label></td>									
 									<td style="padding:6px 0px 4px 10px;">		<input  id='idInput' type='text' style='height: 20px; width:200px;'/></input></td>
 									<td style="padding:6px 0px 4px 10px;">		<label  style="font-family: Verdana; font-size: 10px;">Numero Serie</label></td>
 									<td style="padding:6px 0px 4px 10px;">		<input  id='municicpioInput' type='text' style='height: 20px; width:200px;'/></input></td>	

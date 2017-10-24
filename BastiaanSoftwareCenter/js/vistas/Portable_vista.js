@@ -16,7 +16,7 @@ class PortableVista
 		//var div = $('#grid');
 		//this.html.grid = new gridReg("grid");	
 		this.grid._columnas = [
-			{longitud:100, 	titulo:"ID",   	alias:"id", alineacion:"I" }, 
+			{longitud:100, 	titulo:"NIR",   	alias:"id", alineacion:"I" }, 
 			{longitud:100, 	titulo:"No Serie",   alias:"consecutivo", alineacion:"I" }, 
 			{longitud:200, 	titulo:"Numero",   alias:"numero", alineacion:"I" }, 
 			{longitud:400, 	titulo:"Empresa",   alias:"descripcion", alineacion:"I" },	
