@@ -155,7 +155,7 @@ class ClientesVista
 			 nombre:this.primerNombre,
 			 nombreSegundo: this.segundoNombre,
 			 apellidoPaterno:this.primerApellido,
-			 apellidoMaterno:,this.segundoApellido,
+			 apellidoMaterno:this.segundoApellido,
 			 nombreCompleto:"",
 			 rfc:"",
 			 nss:"",

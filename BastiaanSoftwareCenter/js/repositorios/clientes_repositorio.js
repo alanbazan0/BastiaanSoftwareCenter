@@ -55,7 +55,7 @@ class ClientesRepositorio
 		this.functionRetorno.call(this.contexto,JSON.parse(resultado));
 	}
 	
-	
+	/*
 	insertar(contexto,functionRetorno,primerNombre, segundoNombre, primerApellido,segundoApellido,rfcDetalle,nssDetalle,curpDetalle,codigoPostal,numeroExterior, numeroInterior,calle,colonia,estado,pais,correo)
 	{				
 		this.contexto = contexto;
@@ -83,13 +83,13 @@ class ClientesRepositorio
 		var ai = new Ajaxv2(host +"/php/repositorios/Clientes.php", this, this.insertarResultado, "POST", parametros, contextHandler);		
 		contextHandler.AddAjaxv2Object(ai); 		
 		ai.GetPost(true);
-	}
-	
+	}*/
+	/*
 	insertarResultado(resultado)
 	{
 		var datos = JSON.parse(resultado);
 		this.functionRetorno.call(this.contexto,JSON.parse(resultado));
-	}
+	}*/
 	
 	consultarPorId(contexto,functionRetorno, idCliente)
 	{		

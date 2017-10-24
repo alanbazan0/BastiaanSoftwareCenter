@@ -26,10 +26,10 @@ class GenerosPresentador
 	 
 	 actualizar()
  	 {
--		 var repositorio = new GenerosRepositorio(this);	
-+		
-+		 repositorio.insertar(this,this.actualizarResultado,this.vista.id);
-+		// repositorio.actualizar(this,this.actualizarResultado,this.vista.idCliente,this.vista.primerNombre, this.vista.segundoNombre, this.vista.primerApellido,this.vista.segundoApellido,this.vista.rfcDetalle,this.vista.nssDetalle,this.vista.curpDetalle,this.vista.codigoPostal,this.vista.numeroExterior, this.vista.numeroInterior,this.vista.calle,this.vista.colonia,this.vista.estado,this.vista.pais,this.vista.correo);
+		 var repositorio = new GenerosRepositorio(this);	
+		
+		 repositorio.insertar(this,this.actualizarResultado,this.vista.id);
+		// repositorio.actualizar(this,this.actualizarResultado,this.vista.idCliente,this.vista.primerNombre, this.vista.segundoNombre, this.vista.primerApellido,this.vista.segundoApellido,this.vista.rfcDetalle,this.vista.nssDetalle,this.vista.curpDetalle,this.vista.codigoPostal,this.vista.numeroExterior, this.vista.numeroInterior,this.vista.calle,this.vista.colonia,this.vista.estado,this.vista.pais,this.vista.correo);
  	 }
 	 
 	 insertarResultado(resultado)

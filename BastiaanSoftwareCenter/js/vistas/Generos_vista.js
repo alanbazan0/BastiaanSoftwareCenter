@@ -32,7 +32,7 @@
 		this.grid._colorEncabezado2 = "#FF6600";
 		this.grid._colorLetraEncabezado = "#ffffff";
 		this.grid._colorLetraCuerpo = "#000000";
-		this.grid._regExtra=2;
+		this.grid._regExtra=20;
 		this.grid._presentacionGranTotal = "SI";
 		this.grid.subscribirAEvento(this, "eventgridRowDoubleClick", this.grid_eventgridRowDoubleClick);
 		this.grid.render();		
@@ -53,20 +53,20 @@
 		 }	
 	}
 
-		get id()
-		{
-			return $('#idInput').val();
-		}
-		
-		get gcorto()
-		{
-			return $('#gcortoInput').val();
-		}
+	get id()
+	{
+		return $('#idInput').val();
+	}
+	
+	get gcorto()
+	{
+		return $('#gcortoInput').val();
+	}
 
-		get glargo()
-		{
-			return $('#glargoInput').val();
-		}
+	get glargo()
+	{
+		return $('#glargoInput').val();
+	}
 		
 	set datos(valor)
 	{
@@ -115,12 +115,7 @@
      }
 	//campos del formulario
 	
-	{
-		//TODO: poner id de cliente aqui
-		$('#idInput').val(valor.id);
-		$('#gcortoInput').val(valor.gcorto);
-		$('#glargoInput').val(valor.glargo);
-	}
+
 
 	
 	 get genero()
@@ -135,7 +130,7 @@
 			 glargo:"",
 		 };
 		 return genero;
-}
+	 }
 	
 	
 
@@ -159,4 +154,4 @@
 		alert(valor);
 	}
 }
-var vistas = new GenerosVista();
+var vista = new GenerosVista();

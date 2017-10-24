@@ -50,15 +50,14 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
     <link href="css/estilo.css" media="handheld, screen" rel="stylesheet" type="text/css" />
     <link rel="shortcut icon" href="css/imagenes/faviSIO.png">
     
-    <script language="JavaScript" type="text/JavaScript" src="js/repositorios/Generos_repositorio.js"></script>
-    <script language="JavaScript" type="text/JavaScript" src="js/presentadores/generos_presentador.js"></script>
+    <script language="JavaScript" type="text/JavaScript" src="js/repositorios/generos_repositorio.js"></script>
+    <script language="JavaScript" type="text/JavaScript" src="js/presentadores/generos_presentador.js"></script>  
     
-    
-	<script language="JavaScript" type="text/JavaScript" src="js/vistas/Generos_vista.js"></script>
+	<script language="JavaScript" type="text/JavaScript" src="js/vistas/generos_vista.js"></script>
 
 </head>
 
-<body  bgcolor="#e8e8e8" onLoad="vistas.onLoad()" style="overflow: auto;height: 89%;">
+<body  bgcolor="#e8e8e8" onLoad="vista.onLoad()" style="overflow: auto;height: 89%;">
 <div id="dialogo" title="Di�logo" style="display:none;">
 </div>
 <form id="form">
@@ -83,10 +82,10 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 						<div id="botones" style="width:auto;overflow:auto;">
 							<table class="tablaBotonesIEC">
 								<tr>
-									<td><img id="btnAlta" class="botonMenuIEC" title="Alta" src="assets/botones/imgAlta.png" onClick="vistas.btnAlta4_onClick();"></td>
-									<td><img id="btnBaja" class="botonMenuIEC" title="Baja" src="assets/botones/imgBaja.png" onClick="vistas.btnBaja4_onClick();"></td>
-									<td><img id="btnCambio" class="botonMenuIEC" title="Cambio" src="assets/botones/imgCambio.png" onClick="vistas.btnCambio4_onClick();"></td>
-									<td><img id="btnConsulta" class="botonMenuIEC" title="Consulta" src="assets/botones/imgConsulta.png" onClick="vistas.btnConsulta4_onClick();"></td>
+									<td><img id="btnAlta" class="botonMenuIEC" title="Alta" src="assets/botones/imgAlta.png" onClick="vista.btnAlta4_onClick();"></td>
+									<td><img id="btnBaja" class="botonMenuIEC" title="Baja" src="assets/botones/imgBaja.png" onClick="vista.btnBaja4_onClick();"></td>
+									<td><img id="btnCambio" class="botonMenuIEC" title="Cambio" src="assets/botones/imgCambio.png" onClick="vista.btnCambio4_onClick();"></td>
+									<td><img id="btnConsulta" class="botonMenuIEC" title="Consulta" src="assets/botones/imgConsulta.png" onClick="vista.btnConsulta4_onClick();"></td>
 									<td><img id="btnSalir" class="botonMenuIEC" title="Salir"  src="assets/botones/btnSalir.png" onClick="btnSalir_onClick();" ></td>
 								</tr>
                              </table>   
