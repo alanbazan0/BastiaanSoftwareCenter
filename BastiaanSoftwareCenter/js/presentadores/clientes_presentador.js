@@ -8,22 +8,21 @@ class ClientesPresentador
 	 consultar()
 	 {
 		 var repositorio = new ClientesRepositorio(this);		
-		 repositorio.consultar(this,this.consultarResultado,this.vista.nombreCompleto,this.vista.rfc,this.vista.curp);
+		 repositorio.consultar(this,this.consultarResultado,this.vista.criteriosSeleccion);
 	 }
 	 
 	 consultarResultado(resultado)
 	 {
-		// this.vista.setDatos(resultado);
-		 this.vista.datos = resultado;
+		if(resultado.mensajeError=="")
+			this.vista.datos = resultado.valor;
+		else
+			this.vista.mostrarMensaje("Error",resultado.mensajeError);
 	 }
 	 
 	 insertar()
 	 {
-		 var repositorio = new ClientesRepositorio(this);	
-		 
-		 
-		 repositorio.insertar(this,this.insertarResultado,this.vista.cliente);
-		// repositorio.insertar(this,this.insertarResultado,this.vista.primerNombre, this.vista.segundoNombre, this.vista.primerApellido,this.vista.segundoApellido,this.vista.rfcDetalle,this.vista.nssDetalle,this.vista.curpDetalle,this.vista.codigoPostal,this.vista.numeroExterior, this.vista.numeroInterior,this.vista.calle,this.vista.colonia,this.vista.estado,this.vista.pais,this.vista.correo);
+		 var repositorio = new ClientesRepositorio(this);			 
+		 repositorio.insertar(this,this.insertarResultado,this.vista.cliente);	
 	 }
 	 
 	 insertarResultado(resultado)

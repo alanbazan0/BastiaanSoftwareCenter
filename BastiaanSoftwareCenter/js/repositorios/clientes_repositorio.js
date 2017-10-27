@@ -30,16 +30,14 @@ class ClientesRepositorio
 	}
 	
 	
-	consultar(contexto,functionRetorno, nombreCompleto, rfc, curp)
+	consultar(contexto,functionRetorno, criteriosSeleccion)
 	{		
 		this.contexto = contexto;
 		this.functionRetorno = functionRetorno;
 		
 		var parametros;
 		parametros = "accion=consultar";
-		parametros += "&nombreCompleto=" + nombreCompleto;
-		parametros += "&rfc=" + rfc;
-		parametros += "&curp=" + curp;
+		parametros += "&criteriosSeleccion=" + encodeURIComponent(JSON.stringify(criteriosSeleccion));
 		
 		
 		var contextHandler = new AjaxContextHandler();

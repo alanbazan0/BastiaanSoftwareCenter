@@ -161,8 +161,9 @@ class ClientesRepositorio implements IClientesRepositorio
         return $resultado;        
     }
     
-    public function consultar($nombreCompleto,$rfc,$curp)
-    {
+    public function consultar($criteriosSeleccion)
+    {    
+     
         $resultado = new Resultado();
         $clientes = array();     
        
@@ -190,7 +191,7 @@ class ClientesRepositorio implements IClientesRepositorio
 
         if($sentencia = $this->conexion->prepare($consulta))
         {
-            if($sentencia->bind_param("sss",$nombreCompleto,$rfc,$curp))
+            if($sentencia->bind_param("sss",$criteriosSeleccion->nombreCompleto,$criteriosSeleccion->rfc,$criteriosSeleccion->curp))
             {
                 if($sentencia->execute())
                 {                

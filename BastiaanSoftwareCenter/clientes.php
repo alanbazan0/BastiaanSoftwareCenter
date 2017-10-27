@@ -102,12 +102,12 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 						<div>
 							<table style="position:relative;left:40px; text-align:left; margin-top:10px; margin-bottom:10px;">
 								<tr>
-									<td style="padding:6px 0px 4px 10px;">		<label  style="font-family: Verdana; font-size: 10px;"> Nombre </label></td>									
-									<td style="padding:6px 0px 4px 10px;">		<input  id='nombreInput' type='text' style='height: 20px; width:200px;'/></input></td>
-									<td style="padding:6px 0px 4px 10px;">		<label  style="font-family: Verdana; font-size: 10px;">Rfc</label></td>
-									<td style="padding:6px 0px 4px 10px;">		<input  id='rfcInput' type='text' style='height: 20px; width:200px;'/></input></td>	
-									<td style="padding:6px 0px 4px 10px;">		<label  style="font-family: Verdana; font-size: 10px;">Curp</label></td>
-									<td style="padding:6px 0px 4px 10px;">		<input  id='curpInput' type='text' style='height: 20px; width:200px;'/></input></td>		
+									<td style="padding:6px 0px 4px 10px;">		<label  style="font-family: Verdana; font-size: 10px;"> Nombre completo</label></td>									
+									<td style="padding:6px 0px 4px 10px;">		<input  id='nombreCompletoCriterioInput' type='text' style='height: 20px; width:200px;'/></input></td>
+									<td style="padding:6px 0px 4px 10px;">		<label  style="font-family: Verdana; font-size: 10px;">RFC</label></td>
+									<td style="padding:6px 0px 4px 10px;">		<input  id='rfcCriterioInput' type='text' style='height: 20px; width:200px;'/></input></td>	
+									<td style="padding:6px 0px 4px 10px;">		<label  style="font-family: Verdana; font-size: 10px;">CURP</label></td>
+									<td style="padding:6px 0px 4px 10px;">		<input  id='curpCriterioInput' type='text' style='height: 20px; width:200px;'/></input></td>		
 								</tr>
 								
 							</table>
@@ -143,7 +143,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
     
     
 
-<div id="altaCambioDiv" style="display:none ;height: 90%;">
+<div id="formularioDiv" style="display:none ;height: 90%;">
 		<div>
 			
 <!--  barra de men� para botones de la pantalla
@@ -171,7 +171,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								     		 <label style=" width:130px; position: relative; left: 3px; ">Id de cliente</label>
 								   		</td>
 								   		<td >
-								     		<input class="input" id="idClienteInput" type="text" maxlength="20" value="" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px;" disabled />
+								     		<input class="input" id="idFormularioInput" type="text" maxlength="20" value="" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px;" disabled />
 								   		</td>
 								   		
 								    </tr>
@@ -180,13 +180,13 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								     		<label style="position: relative; left: 3px; ">Primer nombre</label>
 								   		</td>
 								   		<td >
-								     		<input class="input" id="primerNombreInput" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px "/>
+								     		<input class="input" id="primerNombreFormularioInput" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px "/>
 								   		</td>
 								   		<td>						    
 								    		<label style="position: relative; left: 3px; ">Segundo nombre</label>
 								   		</td>
 								   		<td>						    
-								    		<input class="input" id="segundoNombreInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
+								    		<input class="input" id="segundoNombreFormularioInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
 								   		</td>
 								    </tr>
 								   	<tr>
@@ -194,13 +194,13 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								    		<label style="position: relative; left: 3px; ">Primer apellido</label>
 								   		</td>
 								   		<td>	
-								    		<input class="input" id="primerApellidoInput" style="width:130px; font-family:Verdana; font-size:9px; text-align:left; color:#006699;position: relative; left: 6px"/>
+								    		<input class="input" id="apellidoPaternoFormularioInput" style="width:130px; font-family:Verdana; font-size:9px; text-align:left; color:#006699;position: relative; left: 6px"/>
 								   		</td>
 								   		<td>	
 								    		<label style="position: relative; left: 3px; ">Segundo apellido</label>
 								   		</td>
 								   		<td>	
-								    		<input class="input" id="segundoApellidoInput" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
+								    		<input class="input" id="apellidoMaternoFormularioInput" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
 								   		</td>
 								    </tr>
 								    
@@ -209,20 +209,20 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								    		<label style="position: relative; left: 3px;">RFC</label>
 								   		</td>
 								   		<td>	
-								    		<input class="input" id="rfcDetalleInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
+								    		<input class="input" id="rfcFormularioInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
 								   		</td>
 								   		
 								   		<td>	
 								    		<label style="position: relative; left: 3px;">NSS</label>
 								   		</td>
 								   		<td>	
-								    		<input class="input" id="nssDetalleInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
+								    		<input class="input" id="nssFormularioInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
 								   		</td>
 								   		<td>	
 								    		<label style="position: relative; left: 3px;">CURP</label>
 								   		</td>
 								   		<td>	
-								    		<input class="input" id="curpDetalleInput" style=";width:130px; font-family:Verdana; font-size:9px; text-align:left; color:#006699;position: relative; left: 6px"/>
+								    		<input class="input" id="curpFormularioInput" style=";width:130px; font-family:Verdana; font-size:9px; text-align:left; color:#006699;position: relative; left: 6px"/>
 								   		</td>
 								   	</tr>
 								   	<tr>
@@ -230,19 +230,19 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								   			<label style="position: relative; left: 3px; ">Calle</label>
 								   		</td>
 								   		<td>
-								   			<input class="input" id="calleInput" style="width:130px; font-family:Verdana; font-size:9px; text-align:left; color:#006699;position: relative; left: 6px"/>
+								   			<input class="input" id="calleFormularioInput" style="width:130px; font-family:Verdana; font-size:9px; text-align:left; color:#006699;position: relative; left: 6px"/>
 								   		</td>								   		
 								   		<td>	
 								    		<label style="position: relative; left: 3px;">Codigo Postal</label>
 								   		</td>
 								   		<td>	
-								    		<input class="input" id="codigoPostalInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
+								    		<input class="input" id="codigoPostalFormularioInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
 								   		</td>
 								   		<td>
 								   			<label style="position: relative; left: 3px; ">Colonia</label>
 								   		</td>
 								   		<td>
-								   			<input class="input" id="coloniaInput" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
+								   			<input class="input" id="coloniaFormularioInput" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
 								   		</td>
 								   		
 								    </tr>
@@ -251,13 +251,13 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								    		<label style="position: relative; left: 3px;">Numero exterior</label>
 								   		</td>
 								   		<td>	
-								    		<input class="input" id="numeroExteriorInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
+								    		<input class="input" id="numeroExteriorFormularioInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
 								   		</td>
 								   		<td>
 								   			 <label style="position: relative; left: 3px; ">Numero interior</label>
 								   		</td>
 								   		<td>
-								   			 <input class="input" id="numeroInteriorInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
+								   			 <input class="input" id="numeroInteriorFormularioInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
 								   		</td>
 								    </tr>
 								    <tr>
@@ -265,19 +265,19 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
     								    	<label style="position: relative; left: 3px; ">Estado</label>
     								    </td>
     								    <td>
-    								    	<input class="input" id="estadoInput" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
+    								    	<input class="input" id="estadoFormularioInput" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
     								    </td>
     								    <td>
     								    	<label style="position: relative; left: 3px; ">Pais</label>
     								    </td>
     								    <td>
-    								    	<input class="input" id="paisInput" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
+    								    	<input class="input" id="paisFormularioInput" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
     								    </td>
     								    <td>
     								    	<label style="position: relative; left: 3px; ">Correo electronico</label>
     								    </td>
     								     <td>
-    								    	<input class="input" id="correoInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
+    								    	<input class="input" id="correoElectronicoFormularioInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
     								    </td>
 								    </tr>
 								   </table>

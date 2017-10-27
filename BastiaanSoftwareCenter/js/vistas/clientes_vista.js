@@ -1,12 +1,12 @@
 class ClientesVista
 {		
 	constructor()
-	{
-	
+	{	
 		this.presentador = new ClientesPresentador(this);
 		this.manejadorEventos = new ManejadorEventos();
 		this.grid = new GridReg("grid");	
 	}
+	
 	onLoad()
 	{			
 		this.crearColumnasGrid();
@@ -15,25 +15,23 @@ class ClientesVista
 	
 	crearColumnasGrid()
 	{
-		//var div = $('#grid');
-		//this.html.grid = new GridReg("grid");	
 		this.grid._columnas = [
 			{longitud:100, 	titulo:"Id",   	alias:"id", alineacion:"I" }, 
 			{longitud:200, 	titulo:"Primer nombre",   alias:"nombre", alineacion:"I" }, 
-			{longitud:200, 	titulo:"Segundo nombre",   alias:"nombreSegundo", alineacion:"I" }, 
+			{longitud:200, 	titulo:"Segundo nombre",   alias:"segundoNombre", alineacion:"I" }, 
 			{longitud:200, 	titulo:"Apellido paterno",   alias:"apellidoPaterno", alineacion:"I" },	
-			{longitud:200, 	titulo:"Materno materno",   alias:"apellidoMaterno", alineacion:"I" },	
-			{longitud:100, 	titulo:"Rfc",   alias:"rfc", alineacion:"I" },	
-			{longitud:100, 	titulo:"Nss",   alias:"nss", alineacion:"I" },	
-			{longitud:150, 	titulo:"Curp",   alias:"curp", alineacion:"I" },	
+			{longitud:200, 	titulo:"Apellido materno",   alias:"apellidoMaterno", alineacion:"I" },	
+			{longitud:100, 	titulo:"RFC",   alias:"rfc", alineacion:"I" },	
+			{longitud:100, 	titulo:"NSS",   alias:"nss", alineacion:"I" },	
+			{longitud:150, 	titulo:"CURP",   alias:"curp", alineacion:"I" },	
 			{longitud:200, 	titulo:"Correo electronico",   alias:"correoElectronico", alineacion:"I" },	
-			{longitud:100, 	titulo:"Codigo postal",   alias:"cpId", alineacion:"I" }, 
-			{longitud:100, 	titulo:"Numero exterior",   alias:"numExt", alineacion:"I" },	
-			{longitud:100, 	titulo:"Numero interior",   alias:"numInt", alineacion:"I" },	
+			{longitud:100, 	titulo:"Código postal",   alias:"codigoPostal", alineacion:"I" }, 
+			{longitud:100, 	titulo:"Número exterior",   alias:"numeroExterior", alineacion:"I" },	
+			{longitud:100, 	titulo:"Número interior",   alias:"numeroInterior", alineacion:"I" },	
 			{longitud:200, 	titulo:"Calle",   alias:"calle", alineacion:"I" },	
 			{longitud:200, 	titulo:"Colonia",   alias:"colonia", alineacion:"I" },	
 			{longitud:200, 	titulo:"Estado",   alias:"estado", alineacion:"I" },	
-			{longitud:200, 	titulo:"Pais",   alias:"pais", alineacion:"I" },	
+			{longitud:200, 	titulo:"País",   alias:"pais", alineacion:"I" },	
 		]
 		
 		this.grid._origen="vista";
@@ -52,10 +50,13 @@ class ClientesVista
 		this.grid.render();		
 	}
 	
+	/*
+	 * Eventos en botones y grid
+	*/
 	
-	btnConsulta_onClick()
+	btnAlta_onClick()
 	{
-		this.presentador.consultar();
+		
 	}
 	
 	btnBaja_onClick()
@@ -65,41 +66,6 @@ class ClientesVista
 		    	$('#idClienteInput').val(this.grid._selectedItem.id)
 		    	this.presentador.eliminar();
 		    }	
-	}
-	
-	get nombreCompleto()
-	{
-		return $('#nombreInput').val();
-	}
-	
-	get rfc()
-	{		
-		return $('#rfcInput').val();
-	}
-	
-	get curp()
-	{
-		return $('#curpInput').val();
-	}
-
-	
-	set datos(valor)
-	{
-		this.grid._dataProvider = valor;	
-		this.grid.render();
-	}
-	
-	grid_eventGridRowDoubleClick()
-	{
-		alert(" ");
-		//$('#principal').hide()	
-		//$('#altaCambioDiv').show();
-	}
-	
-	btnAlta_onClick()
-	{
-		$('#principal').hide()	
-		$('#altaCambioDiv').show();
 	}
 	
 	btnCambio_onClick()
@@ -116,6 +82,12 @@ class ClientesVista
 		}		
 	}
 	
+	btnConsulta_onClick()
+	{
+		this.presentador.consultar();
+	}	
+	
+	
 	btnGuardar_onClick()
 	{		
 		if(this.validar()!= 0){
@@ -128,136 +100,110 @@ class ClientesVista
 		
 	}
 	
-	set cliente(valor)
+	btnSalir_onClick()
+	{		
+		$('#altaCambioDiv').hide();
+		$('#principal').show();
+		this.limpiar();
+	}
+	
+	grid_eventGridRowDoubleClick()
 	{
-		//TODO: poner id de cliente aqui
-		$('#primerNombreInput').val(valor.nombre);
-		$('#segundoNombreInput').val(valor.nombreSegundo);
-		$('#primerApellidoInput').val(valor.apellidoPaterno);
-		$('#segundoApellidoInput').val(valor.apellidoMaterno);
-		$('#rfcDetalleInput').val(valor.rfc);
-		$('#nssDetalleInput').val(valor.nss);
-		$('#curpDetalleInput').val(valor.curp);
-		$('#codigoPostalInput').val(valor.cpId);
-		$('#numeroExteriorInput').val(valor.numExt);
-		$('#numeroInteriorInput').val(valor.numInt);
-		$('#calleInput').val(valor.calle);
-		$('#coloniaInput').val(valor.colonia);
-		$('#estadoInput').val(valor.estado);
-		$('#paisInput').val(valor.pais);
-		$('#correoInput').val(valor.correoElectronico);
+		alert(" ");
+	}
+	
+	/*
+	 * Valores de los criterios de selección
+	 */
+	
+	get criteriosSeleccion()
+	{
+		 var criteriosSeleccion = 
+		 {				    
+			nombreCompleto:$('#nombreCompletoCriterioInput').val(),
+			rfc:$('#rfcCriterioInput').val(),
+			curp:$('#curpCriterioInput').val()
+		 }
+		 return criteriosSeleccion;
+	}	
+	
+	
+	/*
+	 * Asignar registros al grid
+	 */
+	
+	set datos(valor)
+	{
+		this.grid._dataProvider = valor;	
+		this.grid.render();
+	}
+	
+	/*
+	 * Mapeo de datos del formulario con el modelo
+	 */
+	
+	set cliente(valor)
+	{		
+		$('#idFormularioInput').val(valor.nombre);
+		$('#primerNombreFormularioInput').val(valor.primerNombre);
+		$('#segundoNombreFormularioInput').val(valor.segundoNombre);
+		$('#apellidoPaternoFormularioInput').val(valor.apellidoPaterno);
+		$('#apellidoMaternoFormularioInput').val(valor.apellidoMaterno);
+		$('#rfcFormularioInput').val(valor.rfc);
+		$('#nssFormularioInput').val(valor.nss);
+		$('#curpFormularioInput').val(valor.curp);
+		$('#codigoPostalFormularioInput').val(valor.codigoPostal);
+		$('#numeroExteriorFormularioInput').val(valor.numeroExterior);
+		$('#numeroInteriorFormularioInput').val(valor.numeroInterior);
+		$('#calleFormularioInput').val(valor.calle);
+		$('#coloniaFormularioInput').val(valor.colonia);
+		$('#estadoFormularioInput').val(valor.estado);
+		$('#paisFormularioInput').val(valor.pais);
+		$('#direccionFormularioInput').val(valor.direccion);
+		$('#correoElectronicoFormularioInput').val(valor.correoElectronico);
 	}
 	
 	 get cliente()
 	 {
 		 var cliente = 
 		 {				    
-			 id:this.idDetalle,
-			 nombre:this.primerNombre,
-			 nombreSegundo: this.segundoNombre,
-			 apellidoPaterno:this.primerApellido,
-			 apellidoMaterno:this.segundoApellido,
-			 nombreCompleto:"",
-			 rfc:"",
-			 nss:"",
-			 curp:"",
-			 cpId:"",
-			 numExt:"",
-			 numInt:"",
-			 calle:"",
-			 colonia:"",
-			 estado:"",
-			 pais:"",
-			 direccion:"",
-			 correoElectronico:""
+			 id:$('#idFormularioInput').val(),
+			 primerNombre:$('#primerNombreFormularioInput').val(),
+			 segundoNombre:$('#segundoNombreFormularioInput').val(),
+			 apellidoPaterno:$('#apellidoPaternoFormularioInput').val(),
+			 apellidoMaterno:$('#apellidoMaternoFormularioInput').val(),
+			 nombreCompleto:this.nombreCompletoFormulario,
+			 rfc:$('#rfcFormularioInput').val(),
+			 nss:$('#nssFormularioInput').val(),
+			 curp:$('#curpFormularioInput').val(),
+			 codigoPostal:$('#codigoPostalFormularioInput').val(),
+			 numeroExterior:$('#numeroExteriorFormularioInput').val(),
+			 numeroInterior:$('#numeroInteriorFormularioInput').val(),
+			 calle:$('#calleFormularioInput').val(),
+			 colonia:$('#coloniaFormularioInput').val(),
+			 estado:$('#estadoFormularioInput').val(),
+			 pais:$('#paisFormularioInput').val(),
+			 direccion:$('#idInput').val(),			 
+			 correoElectronico:$('#correoElectronicoFormularioInput').val()
 		 };
 		 return cliente;
 	 }
+	 
+	 /*
+	  * Propiedades especiales o calculas
+	  */
+	 
+	 
+	 get nombreCompletoFormulario()
+	 {
+		return $('#primerNombreFormularioInput').val() + " " + 
+			   $('#segundoNombreFormularioInput').val() +" " + 
+			   $('#apellidoPaternoFormularioInput').val() + " " +
+			   $('#apellidoMaternoFormularioInput').val();
+	 }
 	
-	//campos del formulario
+	 
 	
-	get idCliente()
-	{
-		return $('#idClienteInput').val();
-	}
-	
-	get primerNombre()
-	{
-		return $('#primerNombreInput').val();
-	}
-	
-	get segundoNombre()
-	{
-		return $('#segundoNombreInput').val();
-	}
-	
-	get primerApellido()
-	{
-		return $('#primerApellidoInput').val();
-	}
-	
-	get segundoApellido()
-	{
-		return $('#segundoApellidoInput').val();
-	}
-	
-	get rfcDetalle()
-	{
-		return $('#rfcDetalleInput').val();
-	}
-	
-	get nssDetalle()
-	{
-		return $('#nssDetalleInput').val();
-	}
-	
-	get curpDetalle()
-	{
-		return $('#curpDetalleInput').val();
-	}
-	
-	get codigoPostal()
-	{
-		return $('#codigoPostalInput').val();
-	}
-	
-	get numeroExterior()
-	{
-		return $('#numeroExteriorInput').val();
-	}
-	
-	get numeroInterior()
-	{
-		return $('#numeroInteriorInput').val();
-	}
-	
-	
-	get calle()
-	{
-		return $('#calleInput').val();
-	}
-	
-	
-	get colonia()
-	{
-		return $('#coloniaInput').val();
-	}
-	
-	
-	get estado()
-	{
-		return $('#estadoInput').val();
-	}
-	
-	get pais()
-	{
-		return $('#paisInput').val();
-	}
-	
-	get correo()
-	{
-		return $('#correoInput').val();
-	}
 	
 	mostrarMensaje(titulo,mensaje)
 	{
@@ -265,127 +211,113 @@ class ClientesVista
 	
 	}
 	
-	salirDetalle()
+	mostrarFormulario()
 	{
-		$('#principal').show()	
-		$('#altaCambioDiv').hide();
+		$('#principal').hide()	
+		$('#formularioDiv').show();
 	}
 	
+	salirFormulario()
+	{
+		$('#principal').show()	
+		$('#formularioDiv').hide();
+	}
+	
+	/*
+	 *Validación de los datos obligatorios del formulario 
+	 */
+	/*
 	validar()
 	{
-		if($('#primerNombreInput').val()==""){
+		if($('#primerNombreFormularioInput').val()==""){
 			alert("Tiene que llenar el campo primer nombre");
 			$('#primerNombreInput').focus();
 			return 0;
 		}
 		
-		if($('#primerApellidoInput').val()==""){
+		if($('#apellidoPaternoFormularioInput').val()==""){
 			alert("Tiene que llenar el campo primer apellido");
 			$('#primerApellidoInput').focus();
 			return 0;
 		}
 		
-		if($('#rfcDetalleInput').val()==""){
+		if($('#rfcFormularioInput').val()==""){
 			alert("Tiene que llenar el campo RFC");
-			$('#rfcDetalleInput').focus();
+			$('#rfcInput').focus();
 			return 0;
 		}
 		
 				
-		if($('#rfcDetalleInput').val()==""){
-			alert("Tiene que llenar el campo RFC");
-			$('#rfcDetalleInput').focus();
-			return 0;
-		}
 		
-		if($('#curpDetalleInput').val()==""){
+		if($('#curpFormularioInput').val()==""){
 			alert("Tiene que llenar el campo CURP");
-			$('#curpDetalleInput').focus();
+			$('#curpFormularioInput').focus();
 			return 0;
 		}
 		
-		if($('#calleInput').val()==""){
+		if($('#calleFormularioInput').val()==""){
 			alert("Tiene que llenar el campo Calle");
-			$('#calleInput').focus();
+			$('#calleFormularioInput').focus();
 			return 0;
 		}
 		
-		if($('#codigoPostalInput').val()==""){
-			alert("Tiene que llenar el campo Codigo postal");
-			$('#codigoPostalInput').focus();
+		if($('#codigoPostalFormularioInput').val()==""){
+			alert("Tiene que llenar el campo Código postal");
+			$('#codigoPostalFormularioInput').focus();
 			return 0;
 		}
 		
-		if($('#coloniaInput').val()==""){
+		if($('#coloniaFormularioInput').val()==""){
 			alert("Tiene que llenar el campo Colonia");
-			$('#coloniaInput').focus();
+			$('#coloniaFormularioInput').focus();
 			return 0;
 		}
 		
-		if($('#numeroExteriorInput').val()==""){
-			alert("Tiene que llenar el campo Numero exterior");
-			$('#numeroExteriorInput').focus();
+		if($('#numeroExteriorFormularioInput').val()==""){
+			alert("Tiene que llenar el campo Número exterior");
+			$('#numeroExteriorFormularioInput').focus();
 			return 0;
 		}
 		
-		if($('#numeroExteriorInput').val()==""){
+		if($('#estadoFormularioInput').val()==""){
 			alert("Tiene que llenar el campo Estado");
-			$('#numeroExteriorInput').focus();
+			$('#estadoFormularioInput').focus();
 			return 0;
 		}
 		
-		if($('#paisInput').val()==""){
-			alert("Tiene que llenar el campo Pais");
-			$('#paisInput').focus();
+		if($('#paisFormularioInput').val()==""){
+			alert("Tiene que llenar el campo País");
+			$('#paisFormularioInput').focus();
 			return 0;
 		}
 		
-	}
-	
-	btnSalir_onClick(){		
-		$('#altaCambioDiv').hide();
-		$('#principal').show();
-		this.limpiar();
-	}
-	
-	limpiar(){
-			$('#idClienteInput').val("");
-			$('#primerNombreInput').val("");
-			$('#segundoNombreInput').val("");
-			$('#primerApellidoInput').val("");
-			$('#segundoApellidoInput').val("");
-			$('#rfcDetalleInput').val("");
-			$('#nssDetalleInput').val("");
-			$('#curpDetalleInput').val("");
-			$('#codigoPostalInput').val("");
-			$('#numeroExteriorInput').val("");
-			$('#numeroInteriorInput').val("");
-			$('#calleInput').val("");
-			$('#coloniaInput').val("");
-			$('#estadoInput').val("");
-			$('#paisInput').val("");
+	}	
+	*/
+	/*
+	 * Limpiar formulario
+	 */
+	limpiar()
+	{
+			$('#idFormularioInput').val("");
+			$('#primerNombreFormularioInput').val("");
+			$('#segundoNombreFormularioInput').val("");
+			$('#apellidoPaternoFormularioInput').val("");
+			$('#apellidoMaternoFormularioInput').val("");
+			$('#rfcFormularioInput').val("");
+			$('#nssFormularioInput').val("");
+			$('#curpFormularioInput').val("");
+			$('#codigoPostalFormularioInput').val("");
+			$('#numeroExteriorFormularioInput').val("");
+			$('#numeroInteriorFormularioInput').val("");
+			$('#calleFormularioInput').val("");
+			$('#coloniaFormularioInput').val("");
+			$('#estadoFormularioInput').val("");
+			$('#paisFormularioInput').val("");
+			$('#direccionFormularioInput').val("");
 			$('#correoInput').val("");
 	}
 	
-	/*set resultadoActualizar(valor)
-	{				
-		$('#primerNombreInput').val(valor[0].nombre);
-		$('#segundoNombreInput').val(valor[0].nombreSegundo);
-		$('#primerApellidoInput').val(valor[0].apellidoPaterno);
-		$('#segundoApellidoInput').val(valor[0].apellidoMaterno);
-		$('#rfcDetalleInput').val(valor[0].rfc);
-		$('#nssDetalleInput').val(valor[0].nss);
-		$('#curpDetalleInput').val(valor[0].curp);
-		$('#codigoPostalInput').val(valor[0].cpId);
-		$('#numeroExteriorInput').val(valor[0].numExt);
-		$('#numeroInteriorInput').val(valor[0].numInt);
-		$('#calleInput').val(valor[0].calle);
-		$('#coloniaInput').val(valor[0].colonia);
-		$('#estadoInput').val(valor[0].estado);
-		$('#paisInput').val(valor[0].pais);
-		$('#correoInput').val(valor[0].correoElectronico);
-	
-	}*/
+
 	
 }
 var vista = new ClientesVista();

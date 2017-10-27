@@ -10,6 +10,6 @@ interface IClientesRepositorio
     public function eliminar(Cliente $cliente);
     
     public function consultarPorId($id); 
-    public function consultar($nombreCompleto, $rfc, $curp);    
+    public function consultar($criteriosSeleccion);    
 }
 

@@ -4,8 +4,8 @@ use php\clases\JsonMapper;
 use php\modelos\Cliente;
 use php\repositorios\ClientesRepositorio;
 
-//error_reporting(E_ALL);
-ini_set('display_errors', 0);
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 
 include '../clases/JsonMapper.php';
@@ -61,10 +61,8 @@ try
                     echo json_encode($clientes, JSON_UNESCAPED_UNICODE);
             break;
             case 'consultar':
-                $nombreCompleto=REQUEST('nombreCompleto');
-                $rfc=REQUEST('rfc');
-                $curp=REQUEST('curp');
-                $resultado = $repositorio->consultar($nombreCompleto,$rfc,$curp ) ;
+                $criteriosSeleccion = json_decode(REQUEST('criteriosSeleccion'));
+                $resultado = $repositorio->consultar($criteriosSeleccion);
                 if($resultado!=null)
                     echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
            break;
