@@ -4,17 +4,17 @@ namespace php\modelos;
 class Cliente
 {
     public $id;
-    public $nombre;
-    public $nombreSegundo;
+    public $primerNombre;
+    public $segundoNombre;
     public $apellidoPaterno;
     public $apellidoMaterno;
     public $nombreCompleto;
     public $rfc;
     public $nss;
     public $curp;
-    public $cpId;
-    public $numExt;
-    public $numInt;
+    public $codigoPostal;
+    public $numeroExterior;
+    public $numeroInterior;
     public $calle;
     public $colonia;
     public $estado;

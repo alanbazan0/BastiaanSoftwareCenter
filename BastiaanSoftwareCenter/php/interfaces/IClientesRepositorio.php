@@ -9,9 +9,7 @@ interface IClientesRepositorio
     public function actualizar(Cliente $cliente);
     public function eliminar(Cliente $cliente);
     
-    public function consultarPorId($id);
-    public function consultarPorNombre($nombre);
-    public function consultar($nombreCompleto, $rfc, $curp);
-    
+    public function consultarPorId($id); 
+    public function consultar($nombreCompleto, $rfc, $curp);    
 }
 
