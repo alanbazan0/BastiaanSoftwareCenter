@@ -45,41 +45,44 @@ class ClientesVista
 		this.grid._colorLetraCuerpo = "#000000";
 		this.grid._regExtra=20;
 		this.grid._presentacionGranTotal = "SI";
-		//this.grid.subscribirAEvento(this, "eventGridRowClick", this.recuperaDatosCliente);
-		//this.grid.subscribirAEvento(this, "eventGridRowDoubleClick", this.grid_eventGridRowDoubleClick);
 		this.grid.render();		
 	}
 	
 	/*
-	 * Eventos en botones y grid
+	 * Eventos en botones
 	*/
 	
 	btnAlta_onClick()
 	{
-		
+		this.modo = "INS";
+		this.mostrarFormulario();
+		this.limpiarFormulario();	
 	}
 	
 	btnBaja_onClick()
 	{ 
-		 var answer = confirm("¿Deseas eliminar este cliente?")
-		    if (answer){
-		    	$('#idClienteInput').val(this.grid._selectedItem.id)
+		if(this.idSeleccionado != -1)
+		{
+			var confirmacion = confirm("¿Esta seguro que desea eliminar el registro ?")
+		    if (confirmacion)
+		    {
 		    	this.presentador.eliminar();
 		    }	
+		}
 	}
 	
 	btnCambio_onClick()
 	{
-		if( this.grid._selectedItem!=null){
+		if( this.grid._selectedItem!=null)
+		{
 			$('#principal').hide()	
 			$('#altaCambioDiv').show();
-			$('#idClienteInput').val(this.grid._selectedItem.id)
-			
-			
+			$('#idClienteInput').val(this.grid._selectedItem.id);			
 			this.presentador.consultarPorId();
-		}else{
-			alert("Selecciona un cliente para actualizar");
-		}		
+		}
+		else
+			this.mostrarMensaje("Selecciona un cliente para actualizar");
+				
 	}
 	
 	btnConsulta_onClick()
@@ -87,30 +90,26 @@ class ClientesVista
 		this.presentador.consultar();
 	}	
 	
-	
-	btnGuardar_onClick()
+	btnGuardarFormulario_onClick()
 	{		
-		if(this.validar()!= 0){
-			if( $('#idClienteInput').val()==""){
+		 var campoObligatorioVacio = this.campoObligatorioVacio();
+		 if(campoObligatorioVacio==null)
+		 {
+			if(this.modo=='INS')
 				this.presentador.insertar();
-			}else{
+			else
 				this.presentador.actualizar();
-			}
-		}
-		
+		 }		
+		 else
+		 {
+			this.mostrarMensaje('Error','El campo "' + campoObligatorioVacio.attr("descripcion") + '" es obligatorio.');
+		 }	
 	}
 	
-	btnSalir_onClick()
+	btnSalirFormulario_onClick()
 	{		
-		$('#altaCambioDiv').hide();
-		$('#principal').show();
-		this.limpiar();
-	}
-	
-	grid_eventGridRowDoubleClick()
-	{
-		alert(" ");
-	}
+		this.salirFormulario();
+	}	
 	
 	/*
 	 * Valores de los criterios de selección
@@ -127,6 +126,14 @@ class ClientesVista
 		 return criteriosSeleccion;
 	}	
 	
+	
+	get idSeleccionado()
+	{
+		if(this.grid._selectedItem!=null)
+			return this.grid._selectedItem.id;
+		else
+			return -1;
+	}
 	
 	/*
 	 * Asignar registros al grid
@@ -163,8 +170,8 @@ class ClientesVista
 		$('#correoElectronicoFormularioInput').val(valor.correoElectronico);
 	}
 	
-	 get cliente()
-	 {
+	get cliente()
+	{
 		 var cliente = 
 		 {				    
 			 id:$('#idFormularioInput').val(),
@@ -196,19 +203,16 @@ class ClientesVista
 	 
 	 get nombreCompletoFormulario()
 	 {
-		return $('#primerNombreFormularioInput').val() + " " + 
-			   $('#segundoNombreFormularioInput').val() +" " + 
-			   $('#apellidoPaternoFormularioInput').val() + " " +
+		return $('#primerNombreFormularioInput').val() + ' ' + 
+			   $('#segundoNombreFormularioInput').val() +' ' + 
+			   $('#apellidoPaternoFormularioInput').val() + ' ' +
 			   $('#apellidoMaternoFormularioInput').val();
-	 }
-	
-	 
+	 } 
 	
 	
 	mostrarMensaje(titulo,mensaje)
 	{
-		alert(mensaje);
-	
+		alert(mensaje);	
 	}
 	
 	mostrarFormulario()
@@ -226,73 +230,16 @@ class ClientesVista
 	/*
 	 *Validación de los datos obligatorios del formulario 
 	 */
-	/*
-	validar()
+	
+	campoObligatorioVacio()
 	{
-		if($('#primerNombreFormularioInput').val()==""){
-			alert("Tiene que llenar el campo primer nombre");
-			$('#primerNombreInput').focus();
-			return 0;
-		}
+		if($('#primerNombreFormularioInput').val()=='')					
+			return $('#primerNombreFormularioInput');
 		
-		if($('#apellidoPaternoFormularioInput').val()==""){
-			alert("Tiene que llenar el campo primer apellido");
-			$('#primerApellidoInput').focus();
-			return 0;
-		}
 		
-		if($('#rfcFormularioInput').val()==""){
-			alert("Tiene que llenar el campo RFC");
-			$('#rfcInput').focus();
-			return 0;
-		}
-		
-				
-		
-		if($('#curpFormularioInput').val()==""){
-			alert("Tiene que llenar el campo CURP");
-			$('#curpFormularioInput').focus();
-			return 0;
-		}
-		
-		if($('#calleFormularioInput').val()==""){
-			alert("Tiene que llenar el campo Calle");
-			$('#calleFormularioInput').focus();
-			return 0;
-		}
-		
-		if($('#codigoPostalFormularioInput').val()==""){
-			alert("Tiene que llenar el campo Código postal");
-			$('#codigoPostalFormularioInput').focus();
-			return 0;
-		}
-		
-		if($('#coloniaFormularioInput').val()==""){
-			alert("Tiene que llenar el campo Colonia");
-			$('#coloniaFormularioInput').focus();
-			return 0;
-		}
-		
-		if($('#numeroExteriorFormularioInput').val()==""){
-			alert("Tiene que llenar el campo Número exterior");
-			$('#numeroExteriorFormularioInput').focus();
-			return 0;
-		}
-		
-		if($('#estadoFormularioInput').val()==""){
-			alert("Tiene que llenar el campo Estado");
-			$('#estadoFormularioInput').focus();
-			return 0;
-		}
-		
-		if($('#paisFormularioInput').val()==""){
-			alert("Tiene que llenar el campo País");
-			$('#paisFormularioInput').focus();
-			return 0;
-		}
-		
+		return null;
 	}	
-	*/
+	
 	/*
 	 * Limpiar formulario
 	 */

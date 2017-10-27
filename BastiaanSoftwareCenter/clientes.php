@@ -151,8 +151,8 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 			<div id="menuPrincipal"  align="right" class="contieneCriteriosAribaBtn" style="background-color: #6b6b6b;    height: 56px; " > 
 				<img class='logoBAS' style='float: left;' id='logoFRM' src='assets/pantalla/imgCabecero.png'  />
 				<span id="txtTitulo" style="float:left;margin-top: 20px;margin-left: 15px;color: #FFFFFF;float: left;font-family: Verdana;font-size: 11px;font-weight: bold;">Catálogo de clientes</span>
-				<img style="padding: 2px;" class='imgTipoBoton' id='btnGuardarAltaSol' src='assets/botones/imgGuardar.png' onclick='vista.btnGuardar_onClick();' title='Guardar y aprobar' />
-				<img style="padding: 2px;" class='imgTipoBoton' id='btnSalirAltaSol' src='assets/botones/btnSalir.png' onClick="vista.btnSalir_onClick();" title='Salir'  />
+				<img style="padding: 2px;" class='imgTipoBoton' id='btnGuardarFormulario' src='assets/botones/imgGuardar.png' onclick='vista.btnGuardarFormulario_onClick();' title='Guardar' />
+				<img style="padding: 2px;" class='imgTipoBoton' id='btnSalirFormulario' src='assets/botones/btnSalir.png' onClick="vista.btnSalirFormulario_onClick();" title='Salir'  />
 			</div>
 <!--
   barra de men�...fin
@@ -180,7 +180,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								     		<label style="position: relative; left: 3px; ">Primer nombre</label>
 								   		</td>
 								   		<td >
-								     		<input class="input" id="primerNombreFormularioInput" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px "/>
+								     		<input class="input" id="primerNombreFormularioInput" descripcion="Primer nombre" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px "/>
 								   		</td>
 								   		<td>						    
 								    		<label style="position: relative; left: 3px; ">Segundo nombre</label>

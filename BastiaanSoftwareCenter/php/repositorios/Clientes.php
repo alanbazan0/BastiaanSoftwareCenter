@@ -47,12 +47,11 @@ try
                 if($clientes!=null)
                     echo json_encode($clientes, JSON_UNESCAPED_UNICODE);
             break;
-            case 'eliminar':
-                $cliente = new Cliente();
-                $cliente->id = utf8_encode(REQUEST('id'));
-                $clientes = $repositorio->eliminar($cliente) ;
-                if($clientes!=null)
-                    echo json_encode($clientes, JSON_UNESCAPED_UNICODE);
+            case 'eliminar':               
+               $id = utf8_encode(REQUEST('id'));
+               $resultado = $repositorio->eliminar($id) ;           
+               if($resultado!=null)
+                   echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
             break;           
             case 'consultarPorId':
                 $id = REQUEST('id');

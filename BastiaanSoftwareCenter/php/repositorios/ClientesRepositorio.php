@@ -97,18 +97,28 @@ class ClientesRepositorio implements IClientesRepositorio
         return $id;
     }
     
-    public function eliminar(Cliente $cliente)
+    public function eliminar($id)
     {
-        $resultado = "";
+        $resultado = new Resultado();
         $consulta = " DELETE FROM BSTNTRN.BTCLIENTE "
                     . "  WHERE BTCLIENTENUMERO  = ? ";
          if($sentencia = $this->conexion->prepare($consulta))
          {
-             $sentencia->bind_param("i",$cliente->id);
-             $resultado = $sentencia->execute();           
-         }else{
-             echo "Fall� la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
+             if($sentencia->bind_param("i",$id))
+             {
+                if($sentencia->execute())     
+                {
+                    $resultado->valor = $id;    
+                }
+                else
+                    $resultado->mensajeError = "Falló la ejecución";    
+             }
+             else
+                 $resultado->mensajeError = "Falló el enlace de parámetros";    
          }
+         else
+             $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;     
+         
         return $resultado;
     }
 

@@ -19,6 +19,7 @@ class ClientesPresentador
 			this.vista.mostrarMensaje("Error",resultado.mensajeError);
 	 }
 	 
+	
 	 insertar()
 	 {
 		 var repositorio = new ClientesRepositorio(this);			 
@@ -32,10 +33,9 @@ class ClientesPresentador
 		else	
 		{
 			this.vista.mostrarMensaje("Aviso","Cliente guardado exitosamente. Id: " + resultado);
-			this.vista.salirDetalle();
+			this.vista.salirFormulario();
 			this.consultar();
-		}
-			
+		}	
 			
 			
 	 }
@@ -73,16 +73,18 @@ class ClientesPresentador
 	 eliminar()
 	 {
 		 var repositorio = new ClientesRepositorio(this);		
-		 repositorio.eliminar(this,this.eliminarResultado,this.vista.idCliente);
+		 repositorio.eliminar(this,this.eliminarResultado,this.vista.idSeleccionado);		
 	 }
 	 
 	 eliminarResultado(resultado)
 	 {
-		if( resultado == "error" || resultado == false || resultado == "NO_OK"){
-			this.vista.resultado ="Error al eliminar cliente.";
-			}else{
-				this.vista.resultado = "Cliente eliminado exitosamente. ";
-			}
+		if(resultado.mensajeError=="")
+		{
+			this.vista.mostrarMensaje("Aviso", "El registro ha sido eliminado correctamente.");
+			this.consultar();
+		}
+		else
+			this.vista.mostrarMensaje("Error","Ocurrió un error al eliminar el registro." + resultado.mensajeError);		
 	 }
 	 
 }
