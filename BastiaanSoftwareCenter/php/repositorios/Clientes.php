@@ -35,29 +35,29 @@ try
                 $json = json_decode(REQUEST('cliente'));
                 $mapper = new JsonMapper();
                 $cliente = $mapper->map($json, new Cliente());            
-                $id = $repositorio->insertar($cliente);
-                if($id!=null)
-                    echo json_encode($id, JSON_UNESCAPED_UNICODE);
+                $resultado = $repositorio->insertar($cliente);
+                if($resultado!=null)
+                    echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
             break;
             case 'actualizar':
                 $json = json_decode(REQUEST('cliente'));
                 $mapper = new JsonMapper();
                 $cliente = $mapper->map($json, new Cliente());
-                $clientes = $repositorio->actualizar($cliente) ;
-                if($clientes!=null)
-                    echo json_encode($clientes, JSON_UNESCAPED_UNICODE);
+                $resultado = $repositorio->actualizar($cliente) ;
+                if($resultado!=null)
+                    echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
             break;
             case 'eliminar':               
-               $id = utf8_encode(REQUEST('id'));
-               $resultado = $repositorio->eliminar($id) ;           
+               $llaves = json_decode(REQUEST('llaves'));
+               $resultado = $repositorio->eliminar($llaves);           
                if($resultado!=null)
                    echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
             break;           
-            case 'consultarPorId':
-                $id = REQUEST('id');
-                $clientes = $repositorio->consultarPorId($id) ;
-                if($clientes!=null)
-                    echo json_encode($clientes, JSON_UNESCAPED_UNICODE);
+            case 'consultarPorLlaves':
+                $llaves = json_decode(REQUEST('llaves'));
+                $resultado = $repositorio->consultarPorLlaves($llaves);
+                if($resultado!=null)
+                    echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
             break;
             case 'consultar':
                 $criteriosSeleccion = json_decode(REQUEST('criteriosSeleccion'));

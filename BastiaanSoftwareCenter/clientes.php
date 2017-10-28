@@ -62,7 +62,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 <div id="dialogo" title="Di�logo" style="display:none;">
 </div>
 <form id="form">
-	<div id="principal">
+	<div id="principalDiv">
 		
 		<div id="debug" width="100%" style="display:none">
 				<input type="hidden" id="RPFREPFINCNMDLSID"  name="RPFREPFINCNMDLSID"   value ='<?php echo $modulo; ?>'/>

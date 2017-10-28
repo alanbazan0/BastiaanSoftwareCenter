@@ -54,34 +54,36 @@ class ClientesVista
 	
 	btnAlta_onClick()
 	{
-		this.modo = "INS";
-		this.mostrarFormulario();
+		this.modo = "ALTA";
 		this.limpiarFormulario();	
+		this.mostrarFormulario();		
 	}
 	
 	btnBaja_onClick()
 	{ 
-		if(this.idSeleccionado != -1)
+		if(this.grid._selectedItem!=null)
 		{
-			var confirmacion = confirm("¿Esta seguro que desea eliminar el registro ?")
+			var confirmacion = confirm("¿Esta seguro que desea eliminar el registro?")
 		    if (confirmacion)
 		    {
 		    	this.presentador.eliminar();
 		    }	
 		}
+		else
+			this.mostrarMensaje("Selecciona un registro para eliminar.");
 	}
 	
 	btnCambio_onClick()
 	{
-		if( this.grid._selectedItem!=null)
-		{
-			$('#principal').hide()	
-			$('#altaCambioDiv').show();
-			$('#idClienteInput').val(this.grid._selectedItem.id);			
-			this.presentador.consultarPorId();
+		if(this.grid._selectedItem!=null)
+		{			
+			this.modo = "CAMBIO";
+			this.limpiarFormulario();	
+			this.mostrarFormulario();		
+			this.presentador.consultarPorLlaves();
 		}
 		else
-			this.mostrarMensaje("Selecciona un cliente para actualizar");
+			this.mostrarMensaje("Selecciona un registro para modificar.");
 				
 	}
 	
@@ -95,7 +97,7 @@ class ClientesVista
 		 var campoObligatorioVacio = this.campoObligatorioVacio();
 		 if(campoObligatorioVacio==null)
 		 {
-			if(this.modo=='INS')
+			if(this.modo=='ALTA')
 				this.presentador.insertar();
 			else
 				this.presentador.actualizar();
@@ -112,6 +114,19 @@ class ClientesVista
 	}	
 	
 	/*
+	 * Valores de las llaves
+	 */
+	
+	get llaves()
+	{
+		var llaves =
+		{
+			id:this.grid._selectedItem.id	
+		}
+		return llaves;
+	}
+	
+	/*
 	 * Valores de los criterios de selección
 	 */
 	
@@ -124,16 +139,8 @@ class ClientesVista
 			curp:$('#curpCriterioInput').val()
 		 }
 		 return criteriosSeleccion;
-	}	
+	}		
 	
-	
-	get idSeleccionado()
-	{
-		if(this.grid._selectedItem!=null)
-			return this.grid._selectedItem.id;
-		else
-			return -1;
-	}
 	
 	/*
 	 * Asignar registros al grid
@@ -151,7 +158,7 @@ class ClientesVista
 	
 	set cliente(valor)
 	{		
-		$('#idFormularioInput').val(valor.nombre);
+		$('#idFormularioInput').val(valor.id);
 		$('#primerNombreFormularioInput').val(valor.primerNombre);
 		$('#segundoNombreFormularioInput').val(valor.segundoNombre);
 		$('#apellidoPaternoFormularioInput').val(valor.apellidoPaterno);
@@ -165,8 +172,7 @@ class ClientesVista
 		$('#calleFormularioInput').val(valor.calle);
 		$('#coloniaFormularioInput').val(valor.colonia);
 		$('#estadoFormularioInput').val(valor.estado);
-		$('#paisFormularioInput').val(valor.pais);
-		$('#direccionFormularioInput').val(valor.direccion);
+		$('#paisFormularioInput').val(valor.pais);		
 		$('#correoElectronicoFormularioInput').val(valor.correoElectronico);
 	}
 	
@@ -190,7 +196,7 @@ class ClientesVista
 			 colonia:$('#coloniaFormularioInput').val(),
 			 estado:$('#estadoFormularioInput').val(),
 			 pais:$('#paisFormularioInput').val(),
-			 direccion:$('#idInput').val(),			 
+			 direccion:this.direccionFormulario,			 
 			 correoElectronico:$('#correoElectronicoFormularioInput').val()
 		 };
 		 return cliente;
@@ -208,6 +214,15 @@ class ClientesVista
 			   $('#apellidoPaternoFormularioInput').val() + ' ' +
 			   $('#apellidoMaternoFormularioInput').val();
 	 } 
+	 
+	 get direccionFormulario()
+	 {
+		 return $('#calleFormularioInput').val() + ' ' + 
+		   $('#numeroExteriorFormularioInput').val() +' ' + 
+		   $('#coloniaFormularioInput').val() + ' ' +
+		   $('#estadoFormularioInput').val();
+		 
+	 }
 	
 	
 	mostrarMensaje(titulo,mensaje)
@@ -217,13 +232,13 @@ class ClientesVista
 	
 	mostrarFormulario()
 	{
-		$('#principal').hide()	
+		$('#principalDiv').hide()	
 		$('#formularioDiv').show();
 	}
 	
 	salirFormulario()
 	{
-		$('#principal').show()	
+		$('#principalDiv').show()	
 		$('#formularioDiv').hide();
 	}
 	
@@ -236,6 +251,8 @@ class ClientesVista
 		if($('#primerNombreFormularioInput').val()=='')					
 			return $('#primerNombreFormularioInput');
 		
+		if($('#apellidoPaternoFormularioInput').val()=='')					
+			return $('#apellidoPaternoFormularioInput');
 		
 		return null;
 	}	
@@ -243,25 +260,25 @@ class ClientesVista
 	/*
 	 * Limpiar formulario
 	 */
-	limpiar()
+	limpiarFormulario()
 	{
-			$('#idFormularioInput').val("");
-			$('#primerNombreFormularioInput').val("");
-			$('#segundoNombreFormularioInput').val("");
-			$('#apellidoPaternoFormularioInput').val("");
-			$('#apellidoMaternoFormularioInput').val("");
-			$('#rfcFormularioInput').val("");
-			$('#nssFormularioInput').val("");
-			$('#curpFormularioInput').val("");
-			$('#codigoPostalFormularioInput').val("");
-			$('#numeroExteriorFormularioInput').val("");
-			$('#numeroInteriorFormularioInput').val("");
-			$('#calleFormularioInput').val("");
-			$('#coloniaFormularioInput').val("");
-			$('#estadoFormularioInput').val("");
-			$('#paisFormularioInput').val("");
-			$('#direccionFormularioInput').val("");
-			$('#correoInput').val("");
+		$('#idFormularioInput').val("");
+		$('#primerNombreFormularioInput').val("");
+		$('#segundoNombreFormularioInput').val("");
+		$('#apellidoPaternoFormularioInput').val("");
+		$('#apellidoMaternoFormularioInput').val("");
+		$('#rfcFormularioInput').val("");
+		$('#nssFormularioInput').val("");
+		$('#curpFormularioInput').val("");
+		$('#codigoPostalFormularioInput').val("");
+		$('#numeroExteriorFormularioInput').val("");
+		$('#numeroInteriorFormularioInput').val("");
+		$('#calleFormularioInput').val("");
+		$('#coloniaFormularioInput').val("");
+		$('#estadoFormularioInput').val("");
+		$('#paisFormularioInput').val("");
+		$('#direccionFormularioInput').val("");
+		$('#correoInput').val("");
 	}
 	
 

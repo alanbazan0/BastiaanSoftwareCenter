@@ -9,7 +9,7 @@ interface IClientesRepositorio
     public function actualizar(Cliente $cliente);
     public function eliminar($id);
     
-    public function consultarPorId($id); 
+    public function consultarPorLlaves($id); 
     public function consultar($criteriosSeleccion);    
 }
 

@@ -20,7 +20,8 @@ class ClientesRepositorio implements IClientesRepositorio
     }
     
     public function calcularId()
-    {       
+    {   
+        $resultado = new Resultado();
         $consulta =  "SELECT MAX(IFNULL(BTCLIENTENUMERO,0))+1 AS id FROM BSTNTRN.BTCLIENTE";
         if($sentencia = $this->conexion->prepare($consulta))
         {        
@@ -28,90 +29,97 @@ class ClientesRepositorio implements IClientesRepositorio
             {
                 if ($sentencia->bind_result($id))
                 {
-                    if($row = $sentencia->fetch())
+                    if($sentencia->fetch())
                     {
-                        return $id;
-                    }
+                        $resultado->valor = $id;
+                    }                   
+                    else
+                        $resultado->mensajeError = "No se encontró ningún resultado";
                 }
+                else
+                    $resultado->mensajeError = "Falló el enlace del resultado";
             }
+            else
+                $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;                       
         }
         else
-        {
-            echo "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
-        }       
-        return '0';
+            $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error; 
+        return $resultado;
     }
     
     public function insertar(Cliente $cliente)
-    {     
-       
-        $resultado = "";
-        $id = $this->calcularId();
-       
-        $consulta = " INSERT INTO BSTNTRN.BTCLIENTE "
-                    . " (BTCLIENTENUMERO, "
-                    . " BTCLIENTEPNOMBRE, "
-                    . " BTCLIENTESNOMBRE, "
-                    . " BTCLIENTEAPATERNO, "
-                    . " BTCLIENTEAMATERNO, "
-                    . " BTCLIENTENCOMPLETO, "
-                    . " BTCLIENTERFC, "
-                    . " BTCLIENTENSS, "
-                    . " BTCLIENTECURP, "
-                    . " BTCLIENTECPID, "
-                    . " BTCLIENTENEXTERIOR, "
-                    . " BTCLIENTENINTERIOR, "
-                    . " BTCLIENTECALLE, "
-                    . " BTCLIENTECOLONIA, "
-                    . " BTCLIENTEESTADO, "
-                    . " BTCLIENTEPAIS, "
-                    . " BTCLIENTEDCOMPLETA, "
-                    . " BTCLIENTECORRELEC) "
-                    . " VALUE(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
-         if($sentencia = $this->conexion->prepare($consulta))
-         {
-             $sentencia->bind_param("isssssssssssssssss",$id,
-                                                        $cliente->primerNombre,
-                                                        $cliente->segundoNombre, 
-                                                        $cliente->apellidoPaterno,
-                                                        $cliente->apellidoMaterno,
-                                                        $cliente->nombreCompleto,
-                                                        $cliente->rfc,
-                                                        $cliente->nss,
-                                                        $cliente->curp,
-                                                        $cliente->codigoPostal,
-                                                        $cliente->numeroExterior,
-                                                        $cliente->numeroInterior,
-                                                        $cliente->calle,
-                                                        $cliente->colonia,
-                                                        $cliente->estado,
-                                                        $cliente->pais,
-                                                        $cliente->direccion,
-                                                        $cliente->correoElectronico);                
-             $resultado = $sentencia->execute();           
-         }
-         else
-         {
-             echo "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
-         }
-        return $id;
+    {            
+        $resultado =  $this->calcularId();
+        if($resultado->mensajeError=="")
+        {
+            $id = $resultado->valor;
+            $consulta = " INSERT INTO BSTNTRN.BTCLIENTE "
+                        . " (BTCLIENTENUMERO, "
+                        . " BTCLIENTEPNOMBRE, "
+                        . " BTCLIENTESNOMBRE, "
+                        . " BTCLIENTEAPATERNO, "
+                        . " BTCLIENTEAMATERNO, "
+                        . " BTCLIENTENCOMPLETO, "
+                        . " BTCLIENTERFC, "
+                        . " BTCLIENTENSS, "
+                        . " BTCLIENTECURP, "
+                        . " BTCLIENTECPID, "
+                        . " BTCLIENTENEXTERIOR, "
+                        . " BTCLIENTENINTERIOR, "
+                        . " BTCLIENTECALLE, "
+                        . " BTCLIENTECOLONIA, "
+                        . " BTCLIENTEESTADO, "
+                        . " BTCLIENTEPAIS, "
+                        . " BTCLIENTEDCOMPLETA, "
+                        . " BTCLIENTECORRELEC) "
+                        . " VALUE(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
+            if($sentencia = $this->conexion->prepare($consulta))
+            {
+                if( $sentencia->bind_param("isssssssssssssssss",$id, $cliente->primerNombre,
+                    $cliente->segundoNombre,
+                    $cliente->apellidoPaterno,
+                    $cliente->apellidoMaterno,
+                    $cliente->nombreCompleto,
+                    $cliente->rfc,
+                    $cliente->nss,
+                    $cliente->curp,
+                    $cliente->codigoPostal,
+                    $cliente->numeroExterior,
+                    $cliente->numeroInterior,
+                    $cliente->calle,
+                    $cliente->colonia,
+                    $cliente->estado,
+                    $cliente->pais,
+                    $cliente->direccion,
+                    $cliente->correoElectronico))
+                {
+                    if(!$sentencia->execute())                
+                        $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;                       
+                }
+                else
+                    $resultado->mensajeError = "Falló el enlace de parámetros";   
+            }
+            else
+                $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;   
+        }   
+        return $resultado;
     }
     
-    public function eliminar($id)
+    public function eliminar($llaves)
     {
         $resultado = new Resultado();
         $consulta = " DELETE FROM BSTNTRN.BTCLIENTE "
                     . "  WHERE BTCLIENTENUMERO  = ? ";
          if($sentencia = $this->conexion->prepare($consulta))
          {
-             if($sentencia->bind_param("i",$id))
+             if($sentencia->bind_param("i",$llaves->id))
              {
                 if($sentencia->execute())     
                 {
-                    $resultado->valor = $id;    
+                    $resultado->valor = $llaves->id;    
                 }
                 else
-                    $resultado->mensajeError = "Falló la ejecución";    
+                    $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;                       
              }
              else
                  $resultado->mensajeError = "Falló el enlace de parámetros";    
@@ -124,7 +132,7 @@ class ClientesRepositorio implements IClientesRepositorio
 
     public function actualizar(Cliente $cliente)
     {     
-        $resultado = "";
+        $resultado = new Resultado();
         $consulta = " UPDATE BSTNTRN.BTCLIENTE SET"
                     . " BTCLIENTEPNOMBRE = ?, "
                     . " BTCLIENTESNOMBRE = ?, "
@@ -146,7 +154,7 @@ class ClientesRepositorio implements IClientesRepositorio
                     . " WHERE BTCLIENTENUMERO = ? ";
         if($sentencia = $this->conexion->prepare($consulta))
         {
-            $sentencia->bind_param("ssssssssssssssssss",$cliente->primerNombre,
+            if($sentencia->bind_param("ssssssssssssssssss",$cliente->primerNombre,
                                                     $cliente->segundoNombre, 
                                                     $cliente->apellidoPaterno,
                                                     $cliente->apellidoMaterno,
@@ -155,25 +163,32 @@ class ClientesRepositorio implements IClientesRepositorio
                                                     $cliente->nss,
                                                     $cliente->curp,
                                                     $cliente->codigoPostal,
-                                                    $cliente->numExt,
-                                                    $cliente->numInt,
+                                                    $cliente->numeroExterior,
+                                                    $cliente->numeroInterior,
                                                     $cliente->calle,
                                                     $cliente->colonia,
                                                     $cliente->estado,
                                                     $cliente->pais,
                                                     $cliente->direccion,
                                                     $cliente->correoElectronico,
-                                                    $cliente->id);                
-            $resultado = $sentencia->execute();           
+                                                    $cliente->id))
+            {
+               if($sentencia->execute())
+               {
+                   $resultado->valor=true;
+               }
+               else
+                   $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;  
+            }
+            else  $resultado->mensajeError = "Falló el enlace de parámetros";  
         }
         else
-            echo "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;         
+            $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;   
         return $resultado;        
     }
     
     public function consultar($criteriosSeleccion)
-    {    
-     
+    {     
         $resultado = new Resultado();
         $clientes = array();     
        
@@ -232,10 +247,10 @@ class ClientesRepositorio implements IClientesRepositorio
                         $resultado->valor = $clientes; 
                     }           
                     else
-                        $resultado->mensajeError = "Falló el enlace del resultado";       
+                        $resultado->mensajeError = "Falló el enlace del resultado.";       
                 }       
                 else 
-                    $resultado->mensajeError = "Falló la ejecución";    
+                    $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;                       
             }
             else
                 $resultado->mensajeError = "Falló el enlace de parámetros";    
@@ -247,9 +262,9 @@ class ClientesRepositorio implements IClientesRepositorio
         return $resultado;     
     }    
 
-    public function consultarPorId($id)
+    public function consultarPorLlaves($llaves)
     {
-        $cliente = null;
+        $resultado = new Resultado();       
         $consulta =   " SELECT "
                     . " BTCLIENTENUMERO id, "
                     . " BTCLIENTEPNOMBRE primerNombre, "
@@ -273,44 +288,50 @@ class ClientesRepositorio implements IClientesRepositorio
                     . " WHERE BTCLIENTENUMERO  = ?";
         if($sentencia = $this->conexion->prepare($consulta))
         {
-            $sentencia->bind_param("i",$id);
-            if($sentencia->execute())
+            if($sentencia->bind_param("i",$llaves->id))
             {
-                
-                if ($sentencia->bind_result($id, $primerNombre, $segundoNombre, $apellidoPaterno, $apellidoMaterno, $nombreCompleto, $rfc, $nss, $curp, $codigoPostal, $numeroExterior, $numeroInterior, $calle, $colonia, $estado, $pais, $direccion , $correoElectronico ))
-                {
-                    
-                    while($row = $sentencia->fetch())
-                    {
-                        $cliente = new Cliente();
-                        $cliente->id = utf8_encode($id);
-                        $cliente->primerNombre = utf8_encode($primerNombre);
-                        $cliente->segundoNombre = utf8_encode($segundoNombre);
-                        $cliente->apellidoPaterno = utf8_encode($apellidoPaterno);
-                        $cliente->apellidoMaterno = utf8_encode($apellidoMaterno);
-                        $cliente->nombreCompleto = utf8_encode($nombreCompleto);
-                        $cliente->rfc = utf8_encode($rfc);
-                        $cliente->nss = utf8_encode($nss);
-                        $cliente->curp = utf8_encode($curp);
-                        $cliente->cpId = utf8_encode($codigoPostal);
-                        $cliente->numExt = utf8_encode($numeroExterior);
-                        $cliente->numInt = utf8_encode($numeroInterior);
-                        $cliente->calle = utf8_encode($calle);
-                        $cliente->colonia = utf8_encode($colonia);
-                        $cliente->estado = utf8_encode($estado);
-                        $cliente->pais = utf8_encode($pais);
-                        $cliente->direccion = utf8_encode($direccion);
-                        $cliente->correoElectronico = utf8_encode($correoElectronico);                        
-                       
+                if($sentencia->execute())
+                {                    
+                    if ($sentencia->bind_result($id, $primerNombre, $segundoNombre, $apellidoPaterno, $apellidoMaterno, $nombreCompleto, $rfc, $nss, $curp, $codigoPostal, $numeroExterior, $numeroInterior, $calle, $colonia, $estado, $pais, $direccion , $correoElectronico ))
+                    {                        
+                        if($sentencia->fetch())
+                        {
+                            $cliente = new Cliente();
+                            $cliente->id = utf8_encode($id);
+                            $cliente->primerNombre = utf8_encode($primerNombre);
+                            $cliente->segundoNombre = utf8_encode($segundoNombre);
+                            $cliente->apellidoPaterno = utf8_encode($apellidoPaterno);
+                            $cliente->apellidoMaterno = utf8_encode($apellidoMaterno);
+                            $cliente->nombreCompleto = utf8_encode($nombreCompleto);
+                            $cliente->rfc = utf8_encode($rfc);
+                            $cliente->nss = utf8_encode($nss);
+                            $cliente->curp = utf8_encode($curp);
+                            $cliente->codigoPostal = utf8_encode($codigoPostal);
+                            $cliente->numeroExterior = utf8_encode($numeroExterior);
+                            $cliente->numeroInterior = utf8_encode($numeroInterior);
+                            $cliente->calle = utf8_encode($calle);
+                            $cliente->colonia = utf8_encode($colonia);
+                            $cliente->estado = utf8_encode($estado);
+                            $cliente->pais = utf8_encode($pais);
+                            $cliente->direccion = utf8_encode($direccion);
+                            $cliente->correoElectronico = utf8_encode($correoElectronico);
+                            $resultado->valor = $cliente;
+                        }
+                        else
+                            $resultado->mensajeError = "No se encontró ningún resultado.";
                     }
+                    else
+                        $resultado->mensajeError = "Falló el enlace del resultado";
                 }
-                
+                else
+                    $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;  
             }
-            
-        }else{
-            echo "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
-        }
-        return $cliente;
+            else
+                $resultado->mensajeError = "Falló el enlace de parámetros";    
+        } 
+        else
+            $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;     
+       return $resultado;
     }
 
 
