@@ -113,7 +113,9 @@ class ClientesVista
 	{
 		var confirmacion = confirm("¿Esta seguro que desea salir?")
 	    if (confirmacion)
+	    	{
 	    	//TODO: Cerrar ventana aqui
+	    	}
 	}
 	
 	btnSalirFormulario_onClick()
