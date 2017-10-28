@@ -1,7 +1,8 @@
 class ClientesVista
 {		
-	constructor()
+	constructor(ventana)
 	{	
+		this.ventana = ventana;
 		this.presentador = new ClientesPresentador(this);
 		this.manejadorEventos = new ManejadorEventos();
 		this.grid = new GridReg("grid");	
@@ -106,6 +107,13 @@ class ClientesVista
 		 {
 			this.mostrarMensaje('Error','El campo "' + campoObligatorioVacio.attr("descripcion") + '" es obligatorio.');
 		 }	
+	}
+	
+	btnSalir_onClick()
+	{
+		var confirmacion = confirm("¿Esta seguro que desea salir?")
+	    if (confirmacion)
+	    	//TODO: Cerrar ventana aqui
 	}
 	
 	btnSalirFormulario_onClick()
@@ -284,5 +292,5 @@ class ClientesVista
 
 	
 }
-var vista = new ClientesVista();
+var vista = new ClientesVista(this);
 
