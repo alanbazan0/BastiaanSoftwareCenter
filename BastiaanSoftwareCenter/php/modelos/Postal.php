@@ -1,14 +1,14 @@
 <?php
 namespace php\modelos;
 
-class Postales
+class Postal
 {
     public $id;
-    public $ciudad;
+    public $nir;
+    public $asentamiento;
     public $municipio;
     public $estado;
-    public $asentamiento;
-    public $nopostal;
-
+    public $ciudad;
+    
    }
 

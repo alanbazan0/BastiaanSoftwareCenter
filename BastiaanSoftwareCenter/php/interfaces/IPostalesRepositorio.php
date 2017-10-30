@@ -1,16 +1,15 @@
 <?php
 namespace php\interfaces;
 
-use php\modelos\Postales;
+use php\modelos\Postal;
 
 interface IPostalesRepositorio
 {
-    public function insertar(Postales $postales);
-    public function actualizar(Postales $postales);
-    public function eliminar(Postales $postales);
+    public function insertar(Postal $postal);
+    public function actualizar(Postal $postal);
+    public function eliminar($id);
     
-    public function consultarPorId($id);
-    public function consultarNoPostal($noPostal);
-    public function consultar($id, $estado, $municipio);
+    public function consultarPorLlaves($id);
+    public function consultar($criteriosSeleccion);
     
 }

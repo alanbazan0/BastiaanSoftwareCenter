@@ -1,14 +1,13 @@
 <?php
 use php\clases\AdministradorConexion;
-use php\repositorios\GenerosRepositorio;
 use php\clases\JsonMapper;
-use php\modelos\Generos;
-
+use php\modelos\Genero;
+use php\repositorios\GenerosRepositorio;
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-
+include '../clases/JsonMapper.php';
 include '../clases/Utilidades.php';
 include '../clases/AdministradorConexion.php';
 include '../repositorios/GenerosRepositorio.php';
@@ -28,54 +27,89 @@ try
         $repositorio = new GenerosRepositorio($conexion);
         switch ($accion)
         {
-            case 'consultarPorId':
-                $id = REQUEST('id');
+            case 'consultarPorNombre':
+                $nombre = REQUEST('nombre');
                 
                 $generos = $repositorio->consultarPorNombre($nombre) ;
                 if($generos!=null)
                     echo json_encode($generos, JSON_UNESCAPED_UNICODE);
                     break;
             case 'consultarPorId':
-                $id = REQUEST('id');
-                $generos = $repositorio->consultarPorId($id) ;
+                $nombreSegundo = REQUEST('nombre');
+                
+                $generos = $repositorio->consultarPorId($nombreSegundo) ;
                 if($generos!=null)
                     echo json_encode($generos, JSON_UNESCAPED_UNICODE);
                     break;
             case 'insertar':
-                $json = json_decode(REQUEST('id'));
+                $json = json_decode(REQUEST('genero'));
                 $mapper = new JsonMapper();
-                $id = $mapper->map($json, new id());
-             
-               /*$generos = new Generos();
-                $generos->gcorto = utf8_encode(REQUEST('gcorto'));
-                $generos->glargo = utf8_encode(REQUEST('glargo'));
-                $generos->id = utf8_encode(REQUEST('id'));
-                $generos = $repositorio->insertar($generos) ;
-                if($generos!=null)
-                    echo json_encode($generos, JSON_UNESCAPED_UNICODE);
-                    
-                    */break;
+                $genero = $mapper->map($json, new Genero());
+              /*  $cliente = new Cliente();
+                $cliente->nombre = utf8_encode(REQUEST('nombre'));
+                $cliente->nombreSegundo = utf8_encode(REQUEST('nombreSegundo'));
+                $cliente->apellidoPaterno = utf8_encode(REQUEST('apellidoPaterno'));
+                $cliente->apellidoMaterno = utf8_encode(REQUEST('apellidoMaterno'));
+                $cliente->rfc = utf8_encode(REQUEST('rfc'));
+                $cliente->nss = utf8_encode(REQUEST('nss'));
+                $cliente->curp = utf8_encode(REQUEST('curp'));
+                $cliente->cpId = utf8_encode(REQUEST('cpId'));
+                $cliente->numExt = utf8_encode(REQUEST('numExt'));
+                $cliente->numInt = utf8_encode(REQUEST('numInt'));
+                $cliente->calle = utf8_encode(REQUEST('calle'));
+                $cliente->colonia = utf8_encode(REQUEST('colonia'));
+                $cliente->estado = utf8_encode(REQUEST('estado'));
+                $cliente->pais = utf8_encode(REQUEST('pais'));
+                $cliente->correoElectronico = utf8_encode(REQUEST('correoElectronico'));
+               
+              
+                    */
+                $nombre = $repositorio->insertar($genero) ;
+                if($nombre!=null)
+                    echo json_encode($nombre, JSON_UNESCAPED_UNICODE);
+                    break;
             case 'eliminar':
-                $generos = new Generos();
-                $generos->id = utf8_decode(REQUEST('id'));
-                $generos = $repositorio->eliminar($generos) ;
+                $genero = new Genero();
+                $genero->id = utf8_encode(REQUEST('id'));
+                $generos = $repositorio->eliminar($genero) ;
                 if($generos!=null)
                     echo json_encode($generos, JSON_UNESCAPED_UNICODE);
                     break;
             case 'actualizar':
-                $generos = new Generos();
-                $generos->gcorto = utf8_encode(REQUEST('gcorto'));
-                $generos->glargo = utf8_encode(REQUEST('glargo'));
-                $generos->id = utf8_encode(REQUEST('id'));
-                $generos = $repositorio->actualizar($generos) ;
-                if($generos!=null)
-                    echo json_encode($generos, JSON_UNESCAPED_UNICODE);
-                    break;
-            case 'consultar':        
-                $id=REQUEST('id');
-                $gcorto=REQUEST('gcorto');
-                $glargo=REQUEST('glargo');
-                $generos = $repositorio->consultar($id,$gcorto,$glargo ) ;
+                $json = json_decode(REQUEST('genero'));
+                $mapper = new JsonMapper();
+                $genero = $mapper->map($json, new Genero());
+              
+                /*$cliente = new Cliente();
+                $cliente->nombre = utf8_encode(REQUEST('nombre'));
+                $cliente->nombreSegundo = utf8_encode(REQUEST('nombreSegundo'));
+                $cliente->apellidoPaterno = utf8_encode(REQUEST('apellidoPaterno'));
+                $cliente->apellidoMaterno = utf8_encode(REQUEST('apellidoMaterno'));
+                $cliente->rfc = utf8_encode(REQUEST('rfc'));
+                $cliente->nss = utf8_encode(REQUEST('nss'));
+                $cliente->curp = utf8_encode(REQUEST('curp'));
+                $cliente->cpId = utf8_encode(REQUEST('cpId'));
+                $cliente->numExt = utf8_encode(REQUEST('numExt'));
+                $cliente->numInt = utf8_encode(REQUEST('numInt'));
+                $cliente->calle = utf8_encode(REQUEST('calle'));
+                $cliente->colonia = utf8_encode(REQUEST('colonia'));
+                $cliente->estado = utf8_encode(REQUEST('estado'));
+                $cliente->pais = utf8_encode(REQUEST('pais'));
+                $cliente->correoElectronico = utf8_encode(REQUEST('correoElectronico'));
+                $cliente->id = utf8_encode(REQUEST('id'));
+                $clientes = $repositorio->actualizar($cliente) ;
+                if($clientes!=null)
+                    echo json_encode($clientes, JSON_UNESCAPED_UNICODE);
+                   */ 
+                $nombre = $repositorio->actualizar($genero) ;
+                if($nombre!=null)
+                    echo json_encode($nombre, JSON_UNESCAPED_UNICODE);
+                break;
+            case 'consultar':
+                $nombre=REQUEST('nombre');
+                $nombreSegundo=REQUEST('nombreSegundo');
+                $apellidoPaterno=REQUEST('apellidoPaterno');
+                $generos = $repositorio->consultar($nombre,$nombreSegundo,$apellidoPaterno ) ;
                 if($generos!=null)
                     echo json_encode($generos, JSON_UNESCAPED_UNICODE);
                     break;

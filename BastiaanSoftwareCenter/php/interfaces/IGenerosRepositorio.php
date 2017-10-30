@@ -1,16 +1,17 @@
 <?php
 namespace php\interfaces;
 
-use php\modelos\Generos;
+use php\modelos\Genero;
 
 interface IGenerosRepositorio
 {
-    public function insertar(Generos $generos);
-    public function actualizar(Generos $generos);
-    public function eliminar(Generos $generos);
+
+    public function insertar(Genero $genero);
+    public function actualizar(Genero $genero);
+    public function eliminar(Genero $genero);
     
-    public function consultarPorId($id);
-    public function consultargcorto($gcorto);
-    public function consultar($id, $gcorto, $glargo);   
-    
+    public function consultarPorId($nombre);
+    public function consultarPorNombre($nombre);
+    public function consultar($nombre, $nombreSegundo, $apellidoPaterno);    
 }
+

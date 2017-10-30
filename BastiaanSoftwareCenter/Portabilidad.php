@@ -12,7 +12,7 @@
 
 ?>
 <html> 
-<title>Catalogo Postales</title>
+<title>Portabilidad de numeros telefonicos</title>
 <head>	
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<script language="JavaScript" type="text/javascript" src="js/librerias/jquery-1.6.2.min.js"></script>
@@ -50,16 +50,14 @@
     <link href="css/estilo.css" media="handheld, screen" rel="stylesheet" type="text/css" />
     <link rel="shortcut icon" href="css/imagenes/faviSIO.png">
     
-    <script language="JavaScript" type="text/JavaScript" src="js/repositorios/Postales_repositorio.js"></script>
-    <script language="JavaScript" type="text/JavaScript" src="js/presentadores/postal_presentador.js"></script>
+    <script language="JavaScript" type="text/JavaScript" src="js/repositorios/Portables_repositorio.js"></script>
+    <script language="JavaScript" type="text/JavaScript" src="js/presentadores/portable_presentador.js"></script>
     
     
     
     
-	<script language="JavaScript" type="text/JavaScript" src="js/vistas/Postal_vista.js"></script>
+	<script language="JavaScript" type="text/JavaScript" src="js/vistas/Portable_vista.js"></script>
 
-
-    
 </head>
 
 <body  bgcolor="#e8e8e8" onLoad="vistas.onLoad()" style="overflow: auto;height: 89%;">
@@ -79,7 +77,7 @@
 		
 		<div id="estiloBotonesPeque" class="estiloBotonesPeque">
 			<div id="contieneTuberiaIzq" class="contieneTuberiaIzq">
-				<img src='assets/pantalla/imgCabecero.png' style="position:absolute; "/>
+			<img src='assets/pantalla/logoTipo.png' style="position:absolute; "/>
 			</div>
 			<div id="contieneCriteriosAriba" class="contieneCriteriosAriba">
 				<div id="contieneCriteriosAribaBtn" class="contieneCriteriosAribaBtn">
@@ -87,15 +85,15 @@
 						<div id="botones" style="width:auto;overflow:auto;">
 							<table class="tablaBotonesIEC">
 								<tr>
-									<td><img id="btnAlta" class="botonMenuIEC" title="Alta" src="assets/botones/imgAlta.png" onClick="vistas.btnAlta2_onClick();"></td>
-									<td><img id="btnBaja" class="botonMenuIEC" title="Baja" src="assets/botones/imgBaja.png" onClick="vistas.btnBaja2_onClick();"></td>
-									<td><img id="btnCambio" class="botonMenuIEC" title="Cambio" src="assets/botones/imgCambio.png" onClick="vistas.btnCambio2_onClick();"></td>
-									<td><img id="btnConsulta" class="botonMenuIEC" title="Consulta" src="assets/botones/imgConsulta.png" onClick="vistas.btnConsulta2_onClick();"></td>
+									<td><img id="btnAlta" class="botonMenuIEC" title="Alta" src="assets/botones/imgAlta.png" onClick="vistas.btnAlta3_onClick();"></td>
+									<td><img id="btnBaja" class="botonMenuIEC" title="Baja" src="assets/botones/imgBaja.png" onClick="vistas.btnBaja3_onClick();"></td>
+									<td><img id="btnCambio" class="botonMenuIEC" title="Cambio" src="assets/botones/imgCambio.png" onClick="vistas.btnCambio3_onClick();"></td>
+									<td><img id="btnConsulta" class="botonMenuIEC" title="Consulta" src="assets/botones/imgConsulta.png" onClick="vistas.btnConsulta3_onClick();"></td>
 									<td><img id="btnSalir" class="botonMenuIEC" title="Salir"  src="assets/botones/btnSalir.png" onClick="btnSalir_onClick();" ></td>
 								</tr>
                              </table>   
 						</div>
-						<div id="titulo" style="margin-left:280px;" class="tituloIEC">Catalogo Postales</div>
+						<div id="titulo" style="margin-left:280px;" class="tituloIEC">Portabilidad de numeros telefonicos</div>
 					</div>
 				</div>
             </div>        
@@ -108,9 +106,9 @@
 							<table style="position:relative;left:40px; text-align:left; margin-top:10px; margin-bottom:10px;">
 								<tr>
 								 
-									<td style="padding:6px 0px 4px 10px;">		<label  style="font-family: Verdana; font-size: 10px;"> ID </label></td>									
+									<td style="padding:6px 0px 4px 10px;">		<label  style="font-family: Verdana; font-size: 10px;"> NIR </label></td>									
 									<td style="padding:6px 0px 4px 10px;">		<input  id='idInput' type='text' style='height: 20px; width:200px;'/></input></td>
-									<td style="padding:6px 0px 4px 10px;">		<label  style="font-family: Verdana; font-size: 10px;">Municipio</label></td>
+									<td style="padding:6px 0px 4px 10px;">		<label  style="font-family: Verdana; font-size: 10px;">Numero Serie</label></td>
 									<td style="padding:6px 0px 4px 10px;">		<input  id='municicpioInput' type='text' style='height: 20px; width:200px;'/></input></td>	
 									<td style="padding:6px 0px 4px 10px;">		<label  style="font-family: Verdana; font-size: 10px;">Estado</label></td>
 									<td style="padding:6px 0px 4px 10px;">		<input  id='estadoInput' type='text' style='height: 20px; width:200px;'/></input></td>		
@@ -172,23 +170,21 @@
 					 		<div class="explicacionFRM" >
 								<div id="filtros " class="contenedorIEC" style="overflow: auto; position: relative; width: 100%; display: block;">
 								 <div style="width: 80%; display: block; height: 100%;  padding-top: 10px; padding-left: 34px;">
-								       	 <label style=" width:130px; position: relative; left: 3px; ">No postal</label><input class="input" id="noPostalInput" type="text" maxlength="20" value="" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px;" disabled />	
-									     <label style="position: relative; left: 3px; ">ID</label><input class="input" id="idInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
-								 	     <label style="position: relative; left: 3px; ">Asentamiento </label><input class="input" id="asentamientoInput" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>	
-										 <label style="position: relative; left: 3px; ">Municipio</label><input class="input" id="municipioInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
-	                                   	 <label style="position: relative; left: 3px; ">Estado</label><input class="input" id="estadoInput" style="width:130px; font-family:Verdana; font-size:9px; text-align:left; color:#006699;position: relative; left: 6px"/>                             									
-										 <label style="position: relative; left: 3px; ">Ciudad</label><input class="input" id="ciudadInput" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
+								       	 <label style=" width:130px; position: relative; left: 3px; ">ID</label><input class="input" id="idInput" type="text" maxlength="20" value="" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px;" disabled />	
+									     <label style="position: relative; left: 3px; ">Consecutivo</label><input class="input" id="consecutivoInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
+								 	     <label style="position: relative; left: 3px; ">Numero </label><input class="input" id="numeroInput" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>	
+										 <label style="position: relative; left: 3px; ">Descripción</label><input class="input" id="descripcionInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
+										 <label style="position: relative; left: 3px; ">Poblacion</label><input class="input" id="poblacionInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
+	                                   	 <label style="position: relative; left: 3px; ">Municipio</label><input class="input" id="municipioInput" style="width:130px; font-family:Verdana; font-size:9px; text-align:left; color:#006699;position: relative; left: 6px"/>                             									
+										 <label style="position: relative; left: 3px; ">Estado</label><input class="input" id="estadoInput" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
                                     </div>
-                                    <div style="height: 10px;"></div>
-                                	
+                                    <div style="height: 10px;"></div>                             	
 								 </div>
 								</div>				  	
 							</div>
 						</div>
 				</div>
 		</div>
-		
-		
 		<div class='ventana' id='PromptListaDistribucion' style='display: none; z-index:9001;'></div>
 		<div class='ventana' id='_promptRelacionReporte' style='display: none;'></div>
 		<div class='ventana' id='PromptCalendario' style='display: none; z-index:9001;'></div>  
@@ -198,12 +194,6 @@
 		<div class='ventana' id='PromptSentencia' style='display:none; z-index:9001;'></div>
 		<div class='ventana' id='PromptCriterioSeleccion' style='display:none; z-index:9001;'></div>    
 </div>
-
-    
-    
-    
-    
-    
      
 </form>
 </body>

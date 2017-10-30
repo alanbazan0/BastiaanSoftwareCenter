@@ -17,6 +17,33 @@ class PortablesRepositorio implements IPortablesRepositorio
     }
     
     
+    public function calcularId()
+    {
+        
+        $consulta =  "SELECT MAX(IFNULL(BTCLIENTENUMERO,0))+1 AS id FROM BSTNTRN.BTCLIENTE";
+        if($sentencia = $this->conexion->prepare($consulta))
+        {
+            
+            if($sentencia->execute())
+            {
+                if ($sentencia->bind_result($id))
+                {
+                    if($row = $sentencia->fetch())
+                    {
+                        return $id;
+                    }
+                }
+            }
+        }
+        else
+        {
+            echo "Fall� la preparaci�n: (" . $this->conexion->errno . ") " . $this->conexion->error;
+        }
+        
+        return '0';
+    }
+    
+    
     public function insertar(Portables $portables)
     {
         $resultado = "";

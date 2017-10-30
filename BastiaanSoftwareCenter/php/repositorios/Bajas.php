@@ -1,8 +1,8 @@
 <?php
 use php\clases\AdministradorConexion;
 use php\clases\JsonMapper;
-use php\modelos\Postal;
-use php\repositorios\PostalesRepositorio;
+use php\modelos\Baja;
+use php\repositorios\BajasRepositorio;
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -11,7 +11,7 @@ ini_set('display_errors', 1);
 include '../clases/JsonMapper.php';
 include '../clases/Utilidades.php';
 include '../clases/AdministradorConexion.php';
-include '../repositorios/PostalesRepositorio.php';
+include '../repositorios/BajasRepositorio.php';
 
 
 
@@ -27,23 +27,23 @@ try
     if($conexion)
     {
         $accion = REQUEST('accion');
-        $repositorio = new PostalesRepositorio($conexion);
+        $repositorio = new BajasRepositorio($conexion);
         switch ($accion)
         {
            
             case 'insertar':
-                $json = json_decode(REQUEST('postal'));
+                $json = json_decode(REQUEST('baja'));
                 $mapper = new JsonMapper();
-                $postal = $mapper->map($json, new Postal());            
-                $resultado = $repositorio->insertar($postal);
+                $baja = $mapper->map($json, new Baja());            
+                $resultado = $repositorio->insertar($baja);
                 if($resultado!=null)
                     echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
             break;
             case 'actualizar':
-                $json = json_decode(REQUEST('postal'));
+                $json = json_decode(REQUEST('baja'));
                 $mapper = new JsonMapper();
-                $postal = $mapper->map($json, new Postal());
-                $resultado = $repositorio->actualizar($postal) ;
+                $baja = $mapper->map($json, new Baja());
+                $resultado = $repositorio->actualizar($baja) ;
                 if($resultado!=null)
                     echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
             break;

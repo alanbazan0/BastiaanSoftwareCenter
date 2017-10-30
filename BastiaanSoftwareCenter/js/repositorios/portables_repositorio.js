@@ -31,7 +31,7 @@ class PortablesRepositorio
 	}
 	
 	
-	insertar(contexto,functionRetorno,nopostal,id,asentamiento,municipio,estado,ciudad)
+	insertar(contexto,functionRetorno,noPostal,id,asentamiento,municipio,estado,ciudad)
 	{				
 		this.contexto = contexto;
 		this.functionRetorno = functionRetorno;

@@ -2,16 +2,16 @@
 namespace php\repositorios;
 
 use Exception;
-use php\interfaces\IPostalesRepositorio;
-use php\modelos\Postal;
+use php\interfaces\ITelefonosRepositorio;
+use php\modelos\Telefono;
 use php\modelos\Resultado;
 
 
-include "../interfaces/IPostalesRepositorio.php";
-include "../modelos/Postal.php";
+include "../interfaces/ITelefonosRepositorio.php";
+include "../modelos/Telefono.php";
 include "../clases/Resultado.php";
 
-class PostalesRepositorio implements IPostalesRepositorio
+class TelefonosRepositorio implements ITelefonosRepositorio
 {
     protected $conexion;
     public function __construct($conexion)
@@ -23,7 +23,7 @@ class PostalesRepositorio implements IPostalesRepositorio
     {   
        
         $resultado = new Resultado();
-        $consulta =  "SELECT MAX(IFNULL(BTCPOSTALIDN,0))+1 AS id FROM BSTNTRN.BTCPOSTAL";
+        $consulta =  "SELECT MAX(IFNULL(BTTTELEFONOID,0))+1 AS id FROM BSTNTRN.BTTTELEFONO";
         if($sentencia = $this->conexion->prepare($consulta))
         {        
             if($sentencia->execute())
@@ -48,27 +48,19 @@ class PostalesRepositorio implements IPostalesRepositorio
         return $resultado;
     }
     
-    public function insertar(Postal $postal)
+    public function insertar(Telefono $telefono)
     {            
         $resultado =  $this->calcularId();
         if($resultado->mensajeError=="")
         {
             $id = $resultado->valor;
-            $consulta = " INSERT INTO BSTNTRN.BTCPOSTAL "
-                        . " (BTCPOSTALIDN, "
-                        . " BTCPOSTALID, "
-                        . " BTCPOSTALASENT, "
-                        . " BTCPOSTALMPIO, "
-                        . " BTCPOSTALESTADO, "
-                        . " BTCPOSTALCIUDAD) "
-                        . " VALUE(?,?,?,?,?,?) ";
+            $consulta = " INSERT INTO BSTNTRN.BTTTELEFONO "
+                        . " (BTTTELEFONOID, "
+                        . " BTTTELEFONODESC) "
+                        . " VALUE(?,?) ";
             if($sentencia = $this->conexion->prepare($consulta))
             {
-                if( $sentencia->bind_param("isssss", $id,$postal->nir,                       
-                                                 $postal->asentamiento,
-                                                 $postal->municipio,
-                                                 $postal->estado,
-                                                 $postal->ciudad))
+                if( $sentencia->bind_param("is",$id, $telefono->detalle))
                 {
                     if(!$sentencia->execute())                
                         $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;                       
@@ -85,8 +77,8 @@ class PostalesRepositorio implements IPostalesRepositorio
     public function eliminar($llaves)
     {
         $resultado = new Resultado();
-        $consulta = " DELETE FROM BSTNTRN.BTCPOSTAL "
-                    . "  WHERE BTCPOSTALIDN = ? ";
+        $consulta = " DELETE FROM BSTNTRN.BTTTELEFONO "
+                    . "  WHERE BTTTELEFONOID = ? ";
          if($sentencia = $this->conexion->prepare($consulta))
          {
              if($sentencia->bind_param("i",$llaves->id))
@@ -107,24 +99,16 @@ class PostalesRepositorio implements IPostalesRepositorio
         return $resultado;
     }
 
-    public function actualizar(Postal $postal)
+    public function actualizar(Telefono $telefono)
     {     
         $resultado = new Resultado();
-        $consulta = " UPDATE BSTNTRN.BTCPOSTAL SET"
-                    . " BTCPOSTALID = ?, "
-                    . " BTCPOSTALASENT= ?, "
-                    . " BTCPOSTALMPIO= ?, "
-                    . " BTCPOSTALESTADO= ?, "
-                    . " BTCPOSTALCIUDAD= ? "
-                    . " WHERE BTCPOSTALIDN = ? ";
+        $consulta = " UPDATE BSTNTRN.BTTTELEFONO SET"
+                    . " BTTTELEFONODESC = ? "
+                    . " WHERE BTTTELEFONOID = ? ";
         if($sentencia = $this->conexion->prepare($consulta))
         {
-            if($sentencia->bind_param("ssssss",$postal->nir,
-                                               $postal->asentamiento,
-                                               $postal->municipio,
-                                               $postal->estado,
-                                               $postal->ciudad,
-                                               $postal->id))
+            if($sentencia->bind_param("ss",$telefono->detalle,
+                                            $telefono->id))
             {
                if($sentencia->execute())
                {
@@ -143,38 +127,32 @@ class PostalesRepositorio implements IPostalesRepositorio
     public function consultar($criteriosSeleccion)
     {     
         $resultado = new Resultado();
-        $postales = array();     
+        $telefonos = array();     
        
         $consulta =   " SELECT "
-                     . " BTCPOSTALIDN id, "
-                     . " BTCPOSTALID nir, "
-                     . " BTCPOSTALASENT asentamiento, "
-                     . " BTCPOSTALMPIO municipio, "    
-                     . " BTCPOSTALESTADO estado, "
-                     . " BTCPOSTALCIUDAD ciudad "
-                     . " FROM BSTNTRN.BTCPOSTAL  "
-                     . " WHERE BTCPOSTALID like  CONCAT('%',?,'%') ";
+                    . " BTTTELEFONOID id, "
+                    . " BTTTELEFONODESC detalle "
+                    . " FROM BSTNTRN.BTTTELEFONO  "
+                    . " WHERE BTTTELEFONOID like  CONCAT('%',?,'%') ";
+             
+                    
         if($sentencia = $this->conexion->prepare($consulta))
         {
-            if($sentencia->bind_param("s",$criteriosSeleccion->nir))
+            if($sentencia->bind_param("s",$criteriosSeleccion->detalle))
             {
                 if($sentencia->execute())
                 {                
-                    if ($sentencia->bind_result($id, $nir, $asentamiento, $municipio, $estado, $ciudad)  )
+                    if ($sentencia->bind_result($id, $detalle )  )
                     {                    
                         while($row = $sentencia->fetch())
                         {
-                            $postal = (object) [
-                                'id' => utf8_encode($id),
-                                'nir' =>  utf8_encode($nir),
-                                'asentamiento' => utf8_encode($asentamiento),
-                                'municipio' => utf8_encode($municipio),
-                                'estado' => utf8_encode($estado),
-                                'ciudad' => utf8_encode($ciudad)
+                            $telefono = (object) [
+                                'id' =>  utf8_encode($id),
+                                'detalle' => utf8_encode($detalle)
                             ];  
-                            array_push($postales,$postal);
+                            array_push($telefonos,$telefono);
                         }
-                        $resultado->valor = $postales; 
+                        $resultado->valor = $telefonos; 
                     }           
                     else
                         $resultado->mensajeError = "Falló el enlace del resultado.";       
@@ -197,33 +175,24 @@ class PostalesRepositorio implements IPostalesRepositorio
         
         $resultado = new Resultado();       
         $consulta =   " SELECT "
-                     . " BTCPOSTALIDN id, "
-                     . " BTCPOSTALID nir, "
-                     . " BTCPOSTALASENT asentamiento, "
-                     . " BTCPOSTALESTADO estado, "
-                     . " BTCPOSTALMPIO municipio, "
-                     . " BTCPOSTALCIUDAD ciudad "
-                     . " FROM BTCPOSTAL "
-                     . " WHERE BTCPOSTALIDN = ?";
-                    
+                    . " BTTTELEFONOID id, "
+                    . " BTTTELEFONODESC detalle "
+                    . " FROM BTTTELEFONO " 
+                    . " WHERE BTTTELEFONOID  = ?";
         if($sentencia = $this->conexion->prepare($consulta))
         {
             if($sentencia->bind_param("i",$llaves->id))
             {
                 if($sentencia->execute())
                 {                    
-                    if ($sentencia->bind_result($id, $nir, $asentamiento, $estado, $municipio,  $ciudad))
+                    if ($sentencia->bind_result($id, $detalle ))
                     {                        
                         if($sentencia->fetch())
                         {
-                            $postal = new Postal();
-                            $postal->id =  utf8_encode($id);
-                            $postal->nir =  utf8_encode($nir);
-                            $postal->asentamiento =  utf8_encode($asentamiento);
-                            $postal->estado =  utf8_encode($estado);
-                            $postal->municipio =  utf8_encode($municipio);
-                            $postal->ciudad =  utf8_encode($ciudad);
-                            $resultado->valor = $postal;                           
+                            $telefono = new Telefono();
+                            $telefono->id = utf8_encode($id);
+                            $telefono->detalle = utf8_encode($detalle);
+                            $resultado->valor = $telefono;
                         }
                         else
                             $resultado->mensajeError = "No se encontró ningún resultado.";
