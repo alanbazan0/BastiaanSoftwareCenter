@@ -1,9 +1,9 @@
-class PostalesVista
+class ClientesTelefonosVista
 {		
 	constructor(ventana)
 	{	
 		this.ventana = ventana;
-		this.presentador = new PostalesPresentador(this);
+		this.presentador = new ClientesTelefonosPresentador(this);
 		this.manejadorEventos = new ManejadorEventos();
 		this.grid = new GridReg("grid");	
 	}
@@ -18,12 +18,15 @@ class PostalesVista
 	{
 		this.grid._columnas = [
 			
-			{longitud:100, 	titulo:"Id",   	alias:"id", alineacion:"I" },
-			{longitud:200, 	titulo:"Codigo Postal",   alias:"nir", alineacion:"I" },
-			{longitud:200, 	titulo:"Asentamiento",   alias:"asentamiento", alineacion:"I" },
-			{longitud:200, 	titulo:"Municipio",   alias:"municipio", alineacion:"I" },
-			{longitud:200, 	titulo:"Estado",   alias:"estado", alineacion:"I" },
-			{longitud:200, 	titulo:"Ciudad",   alias:"ciudad", alineacion:"I" },
+			{longitud:100, 	titulo:"Numero Cliente",   	alias:"id", alineacion:"I" }, 
+			{longitud:200, 	titulo:"consecutivo",   alias:"consecutivo", alineacion:"I" },
+			{longitud:200, 	titulo:"Telefono Cliente",   alias:"telefonoCliente", alineacion:"I" },
+			{longitud:200, 	titulo:"Nir",   alias:"nir", alineacion:"I" },
+			{longitud:100, 	titulo:"Serie",   	alias:"serie", alineacion:"I" }, 
+			{longitud:200, 	titulo:"Numeracion",   alias:"numeracion", alineacion:"I" },
+			{longitud:200, 	titulo:"Campañia",   alias:"compania", alineacion:"I" },
+			{longitud:200, 	titulo:"Tipo telefono",   alias:"tipoTelefono", alineacion:"I" },
+			
 			
         ]
 		
@@ -136,7 +139,7 @@ class PostalesVista
 	{
 		 var criteriosSeleccion = 
 		 {				    
-			nir:$('#nirCriterioInput').val()
+			consecutivo:$('#consecutivoCriterioInput').val()
 		 }
 		 return criteriosSeleccion;
 	}		
@@ -156,29 +159,38 @@ class PostalesVista
 	 * Mapeo de datos del formulario con el modelo
 	 */
 	
-	set postal(valor)
+	set Clientetelefono(valor)
 	{		
 		$('#idFormularioInput').val(valor.id);
+		$('#consecutivoFormularioInput').val(valor.consecutivo);
+		$('#telefonoClienteFormularioInput').val(valor.telefonoCliente);
 		$('#nirFormularioInput').val(valor.nir);
-		$('#asentamientoFormularioInput').val(valor.asentamiento);
-		$('#municipioFormularioInput').val(valor.municipio);
-		$('#estadoFormularioInput').val(valor.estado);
-		$('#ciudadFormularioInput').val(valor.ciudad);
+		$('#serieFormularioInput').val(valor.serie);
+		$('#numeracionFormularioInput').val(valor.numeracion);
+		$('#companiaFormularioInput').val(valor.compania);
+		$('#tipoTelefonoFormularioInput').val(valor.tipoTelefono);
+		
+
 	}
 	
-	get postal()
+	get Clientetelefono()
 	{
-		 var postal = 
-		 {				    
-			 id:$('#idFormularioInput').val(),
-			 nir:$('#nirFormularioInput').val(),
-			 asentamiento:$('#asentamientoFormularioInput').val(),
-			 municipio:$('#municipioFormularioInput').val(),
-			 estado:$('#estadoFormularioInput').val(),
-			 ciudad:$('#ciudadFormularioInput').val()
+		 var Clientetelefono = 
+		 {	
+		    id:$('#idFormularoInput').val(),
+			consecutivo:$('#consecutivoFormularioInput').val(),
+			telefonoCliente:$('#telefonoClienteFormularioInput').val(),
+			nir:$('#nirFormularioInput').val(v),
+			serie:$('#serieFormularioInput').val(),
+			numeracion:$('#numeracionFormularioInput').val(),
+			compania:$('#companiaFormularioInput').val(),
+			tipoTelefono:$('#tipoTelefonoFormularioInput').val()
+			 
+			 
 		 };
-		 return postal;
+		 return Clientetelefono;
 	 }
+	 
 	 /*
 	  * Propiedades especiales o calculas
 	  */
@@ -207,8 +219,8 @@ class PostalesVista
 	
 	campoObligatorioVacio()
 	{
-		if($('#estadoFormularioInput').val()=='')					
-			return $('#estadoFormularioInput');
+		if($('#serieFormularioInput').val()=='')					
+			return $('#serieFormularioInput');
 		
 		return null;
 	}	
@@ -218,15 +230,18 @@ class PostalesVista
 	 */
 	limpiarFormulario()
 	{
-		$('#idFormularioInput').val("");
+		$('#idFormularioInput').val("");		
+		$('#consecutivoFormularioInput').val("");
+		$('#telefonoClienteFormularioInput').val("");
 		$('#nirFormularioInput').val("");
-		$('#asentamientoFormularioInput').val("");
-		$('#municipioFormularioInput').val("");
-		$('#estadoFormularioInput').val("");
-		$('#ciudadFormularioInput').val("");
-	
+		$('#serieFormularioInput').val("");
+		$('#numeracionFormularioInput').val("");
+		$('#companiaFormularioInput').val("");
+		$('#tipoTelefonoFormularioInput').val("");
 	}
+	
 
+	
 }
-var vista = new PostalesVista(this);
+var vista = new ClientesTelefonosVista(this);
 

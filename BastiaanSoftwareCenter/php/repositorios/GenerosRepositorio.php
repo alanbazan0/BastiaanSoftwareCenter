@@ -1,191 +1,198 @@
 <?php
 namespace php\repositorios;
 
-use php\interfaces\IGenerosRepositorio;
+use Exception;
+use php\Interfaces\IGenerosRepositorio;
 use php\modelos\Genero;
+use php\modelos\Resultado;
 
-
-include "../interfaces/IGenerosRepositorio.php";
+include "../interfaces/IGenerosRepositorio.php";    
 include "../modelos/Genero.php";
+include "../clases/Resultado.php";
 
 class GenerosRepositorio implements IGenerosRepositorio
 {
-
     protected $conexion;
-     public function __construct($conexion)
-     {
+    public function __construct($conexion)
+    {
         $this->conexion = $conexion;
-      }
-    
-   
-    
-    public function insertar(Genero $genero)
-       {     
-       
-         $resultado = "";
-          $consulta = " INSERT INTO BSTNTRN.BTGENERO "
-                    . " (BTGENEROID, "
-                    . " BTGENERONOMC, "
-                    . " BTGENERONOML) "
-                    . " VALUES(?,?,?) ";
-         if($sentencia = $this->conexion->prepare($consulta))
-         {
-             $sentencia->bind_param("sss",$genero->nombre,
-                                          $genero->nombreSegundo,
-                                          $genero->apellidoPaterno);                
-             $resultado = $sentencia->execute();           
-         }
-         else
-         {
-             echo "FallÃ³ la preparaciÃ³n: (" . $this->conexion->errno . ") " . $this->conexion->error;
-         }
-        return $genero;
     }
     
-    public function eliminar(Genero $genero)
+    
+    public function insertar(Genero $genero)
+    {
+        $resultado = "";
+    
+        $consulta = " INSERT INTO BSTNTRN.BTGENERO" 
+             . " (BTGENEROID, "
+             . " BTGENERONOMC, "
+             . " BTGENERONOML) "                   
+             . " VALUE(?, ?, ?) ";
+               if($sentencia = $this->conexion->prepare($consulta))
+                 {
+                 if( $sentencia->bind_param("sss",$genero->id,
+                  $genero->gCorto,
+                  $genero->gLargo))
+                  {
+                      if(!$sentencia->execute())
+                          $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;
+                  }
+                  else
+                      $resultado->mensajeError = "Falló el enlace de parámetros";
+                 }
+                 else
+                     $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
+    
+    return $resultado;
+}
+
+    
+    public function eliminar($llaves)
     {
         $resultado = "";
         $consulta = " DELETE FROM BSTNTRN.BTGENERO "
-                    . "  WHERE BTGENEROID  = ? ";
-         if($sentencia = $this->conexion->prepare($consulta))
-         {
-             $sentencia->bind_param("s",$genero->nombre);
-             $resultado = $sentencia->execute();           
-         }else{
-             echo "Fallï¿½ la preparaciï¿½n: (" . $this->conexion->errno . ") " . $this->conexion->error;
-         }
-        return $resultado;
-    }
-
-    public function actualizar(Genero $genero)
-    {     
-        $resultado = "";
-        $consulta = " UPDATE BSTNTRN.BTGENERO SET"
-                    . " BTGENERONOMC=  ? , "
-                    . " BTGENERONOML=?  "
-                    . " WHERE BTGENEROID  = ? ";
-         if($sentencia = $this->conexion->prepare($consulta))
-         {
-             $sentencia->bind_param("ss",$genero->nombreSegundo,
-                                         $genero->apellidoPaterno);                
-             $resultado = $sentencia->execute();           
-         }else{
-             echo "Fallï¿½ la preparaciï¿½n: (" . $this->conexion->errno . ") " . $this->conexion->error;
-         }
-        return $resultado;        
+            . "  WHERE BTGENEROID = ? ";
+            if($sentencia = $this->conexion->prepare($consulta))
+            {
+                if($sentencia->bind_param("s",$llaves->id))
+                {
+                    if($sentencia->execute())
+                    {
+                        $resultado->valor = $llaves->id;
+                    }
+                    else
+                        $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;
+                }
+                else
+                    $resultado->mensajeError = "Falló el enlace de parámetros";
+            }
+            else
+                $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
+                
+                return $resultado;
     }
     
-  
-    public function consultar($nombre,$nombreSegundo,$apellidoPaterno)
+    public function actualizar(Genero $genero)
     {
+        $resultado = new Resultado();
+        $consulta = " UPDATE BSTNTRN.BTGENERO SET"
+                    . " BTGENERONOMC = ?, "
+                    . " BTGENERONOML = ? "
+                    . " WHERE BTGENEROID  = ?";
+                if($sentencia = $this->conexion->prepare($consulta))
+                {
+                    if($sentencia->bind_param("sss",
+                        $genero->gCorto,
+                        $genero->gLargo,
+                        $genero->id))
+                    {
+                        if($sentencia->execute())
+                        {
+                            $resultado->valor=true;
+                        }
+                        else
+                            $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;
+                    }
+                    else  $resultado->mensajeError = "Falló el enlace de parámetros";
+                }
+                else
+                    $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
+                    return $resultado;
+    }
+    
+   
+    public function consultar($criteriosSeleccion)
+    {
+        $resultado = new Resultado();
         $generos = array();
         $consulta =   " SELECT "
-                    . " BTGENEROID nombre, "
-                    . " BTGENERONOMC nombreSegundo, "
-                    . " BTGENERONOML apellidoPaterno "
+                    . " BTGENEROID id, "
+                    . " BTGENERONOMC gCorto, "
+                    . " BTGENERONOML gLargo "        
                     . " FROM BSTNTRN.BTGENERO "
                     . " WHERE BTGENEROID like  CONCAT('%',?,'%') "
                     . " AND BTGENERONOMC like  CONCAT('%',?,'%') "
                     . " AND BTGENERONOML like  CONCAT('%',?,'%') ";
-        if($sentencia = $this->conexion->prepare($consulta))
-        {
-            $sentencia->bind_param("sss",$nombre,$nombreSegundo,$apellidoPaterno);
-            if($sentencia->execute())
-            {                
-                if ($sentencia->bind_result($nombre, $nombreSegundo, $apellidoPaterno)  )
-                {                    
-                    while($row = $sentencia->fetch())
+        
+                    if($sentencia = $this->conexion->prepare($consulta))
+                    {
+                        if($sentencia->bind_param("sss",$criteriosSeleccion->id,$criteriosSeleccion->gCorto,$criteriosSeleccion->gLargo))
+                        {
+                            if($sentencia->execute())
+                            {
+                                if ($sentencia->bind_result($id, $gCorto, $gLargo )  )
+                                {
+                                    while($row = $sentencia->fetch())
                     {
                         $genero = (object) [
-                            'nombre' => utf8_encode($nombre),
-                            'nombreSegundo' => utf8_encode($nombreSegundo),
-                            'apellidoPaterno' => utf8_encode($apellidoPaterno)
+                            'id' =>  utf8_encode($id),
+                            'gCorto' =>  utf8_encode($gCorto),
+                            'gLargo' =>  utf8_encode($gLargo)                            
                         ];  
                         array_push($generos,$genero);
                     }
-                }                
-            }            
-        }else{
-            echo "Fallï¿½ la preparaciï¿½n: (" . $this->conexion->errno . ") " . $this->conexion->error;
-        }
-        return  $generos;
-    }
+                    $resultado->valor = $generos;
+                                }
+                                else
+                                    $resultado->mensajeError = "Falló el enlace del resultado.";
+                            }
+                            else
+                                $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;
+                        }
+                        else
+                            $resultado->mensajeError = "Falló el enlace de parámetros";
+                    }
+                    else
+                        $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
+                        
+                        
+                        return $resultado;
+    } 
 
-    public function consultarPorNombre($nombre)
+
+    public function consultarPorLlaves($llaves)
     {
-        $generos = array();
-        $consulta =   " SELECT "
-                          . " BTGENEROID nombre, "
-                          . " BTGENERONOMC nombreSegundo, "
-                          . " BTGENERONOML apellidoPaterno "
-                          . " FROM BSTNTRN.BTGENERO "
-                          . " WHERE BTGENEROID like  CONCAT('%',?,'%') ";
-        
+        $resultado = new Resultado(); 
+        $consulta = " SELECT "
+                   . " BTGENEROID id, "
+                   . " BTGENERONOMC gCorto, "
+                   . " BTGENERONOML gLargo "
+                   . " FROM BSTNTRN.BTGENERO "
+                   . " WHERE BTGENEROID  = ?";
         if($sentencia = $this->conexion->prepare($consulta))
         {
-            $sentencia->bind_param("s",$nombre);
-            if($sentencia->execute())
+            if($sentencia->bind_param("s",$llaves->id))
             {
-                
-                if ($sentencia->bind_result($nombre, $nombreSegundo, $apellidoPaterno )  )
+              if($sentencia->execute())
+                {
+                  
+                if ($sentencia->bind_result($id, $gCorto, $gLargo))
                 {
                     
-                    while($row = $sentencia->fetch())
+                    if ($sentencia->fetch())
                     {
                         $genero = new Genero();
-                        $genero->nombre = utf8_encode($nombre);
-                        $genero->nombreSegundo = utf8_encode($nombreSegundo);
-                        $genero->apellidoPaterno = utf8_encode($apellidoPaterno);  
-                        array_push($generos,$genero);
+                        $genero->id = utf8_encode($id);
+                        $genero->gCorto = utf8_encode($gCorto);
+                        $genero->gLargo = utf8_encode($gLargo);
+                        $resultado->valor = $genero;
                     }
+                    else
+                        $resultado->mensajeError = "No se encontró ningún resultado.";
                 }
-                
+                else
+                    $resultado->mensajeError = "Falló el enlace del resultado";
+                }
+                else
+                    $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;
             }
-            
-        }else{
-            echo "Fallï¿½ la preparaciï¿½n: (" . $this->conexion->errno . ") " . $this->conexion->error;
+            else
+                $resultado->mensajeError = "Falló el enlace de parámetros";
         }
-        return $generos;
+        else
+            $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
+            return $resultado;
     }
-
-    public function consultarPorId($nombre)
-    {
-        $generos = array();
-        $consulta =   " SELECT "
-            . " BTGENEROID nombre, "
-                . " BTGENERONOMC nombreSegundo, "
-                    . " BTGENERONOML apellidoPaterno "
-                        . " FROM BSTNTRN.BTGENERO "
-                            . " WHERE BTGENEROID like  CONCAT('%',?,'%') ";
-                            
-                            if($sentencia = $this->conexion->prepare($consulta))
-                            {
-                                $sentencia->bind_param("s",$nombre);
-                                if($sentencia->execute())
-                                {
-                                    
-                                    if ($sentencia->bind_result($nombre, $nombreSegundo, $apellidoPaterno )  )
-                                    {
-                                        
-                                        while($row = $sentencia->fetch())
-                                        {
-                                            $genero = new Genero();
-                                            $genero->nombre = utf8_encode($nombre);
-                                            $genero->nombreSegundo = utf8_encode($nombreSegundo);
-                                            $genero->apellidoPaterno = utf8_encode($apellidoPaterno);
-                                            array_push($generos,$genero);
-                                        }
-                                    }
-                                    
-                                }
-                                
-                            }else{
-                                echo "Fallï¿½ la preparaciï¿½n: (" . $this->conexion->errno . ") " . $this->conexion->error;
-                            }
-                            return $generos;
-    }
-
-
-    
+     
 }
 

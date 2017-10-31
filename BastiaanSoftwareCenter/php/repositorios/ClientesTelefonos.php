@@ -1,8 +1,9 @@
 <?php
 use php\clases\AdministradorConexion;
 use php\clases\JsonMapper;
-use php\modelos\Genero;
-use php\repositorios\GenerosRepositorio;
+use php\modelos\ClienteTelefono;
+use php\repositorios\ClientesTelefonosRepositorio;
+
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -11,12 +12,14 @@ ini_set('display_errors', 1);
 include '../clases/JsonMapper.php';
 include '../clases/Utilidades.php';
 include '../clases/AdministradorConexion.php';
-include '../repositorios/GenerosRepositorio.php';
+include '../repositorios/ClientesTelefonosRepositorio.php';
 
 
 
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json; charset=UTF-8');
+
+
 
 $administrador_conexion = new AdministradorConexion();
 
@@ -27,23 +30,24 @@ try
     if($conexion)
     {
         $accion = REQUEST('accion');
-        $repositorio = new GenerosRepositorio($conexion);
+        $repositorio = new ClientesTelefonosRepositorio($conexion);
         switch ($accion)
         {
             
             case 'insertar':
-                $json = json_decode(REQUEST('genero'));
+                $json = json_decode(REQUEST('clientetelefono'));
                 $mapper = new JsonMapper();
-                $genero = $mapper->map($json, new Genero());
-                $resultado = $repositorio->insertar($genero);
+                $clientetelefono = $mapper->map($json, new ClienteTelefono());
+                $resultado = $repositorio->insertar($clientetelefono);
                 if($resultado!=null)
                     echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
                     break;
             case 'actualizar':
-                $json = json_decode(REQUEST('genero'));
+                $json = json_decode(REQUEST('clientetelefono'));
                 $mapper = new JsonMapper();
-                $genero = $mapper->map($json, new Genero());
-                $resultado = $repositorio->actualizar($genero) ;
+                $clientetelefono = $mapper->map($json, new ClienteTelefono());
+                
+                $resultado = $repositorio->actualizar($telefono) ;
                 if($resultado!=null)
                     echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
                     break;
@@ -77,5 +81,6 @@ finally
 {
     $administrador_conexion->cerrar($conexion);
 }
+
 
 

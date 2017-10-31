@@ -12,7 +12,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 
 ?>
 <html> 
-<title>Catalogo de telefonos</title>
+<title>Catalogo Genero</title>
 <head>	
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<script language="JavaScript" type="text/javascript" src="js/librerias/jquery-1.6.2.min.js"></script>
@@ -50,12 +50,11 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
     <link href="css/estilo.css" media="handheld, screen" rel="stylesheet" type="text/css" />
     <link rel="shortcut icon" href="css/imagenes/faviSIO.png">
     
-   
-    <script language="JavaScript" type="text/JavaScript" src="js/repositorios/telefonos_repositorio.js"></script>
-    <script language="JavaScript" type="text/JavaScript" src="js/presentadores/telefonos_presentador.js"></script>
-	<script language="JavaScript" type="text/JavaScript" src="js/vistas/telefonos_vista.js"></script>
-
+    <script language="JavaScript" type="text/JavaScript" src="js/repositorios/generos_repositorio.js"></script>
+    <script language="JavaScript" type="text/JavaScript" src="js/presentadores/generos_presentador.js"></script>  
     
+	<script language="JavaScript" type="text/JavaScript" src="js/vistas/Generos_vista.js"></script>
+
 </head>
 
 <body  bgcolor="#e8e8e8" onLoad="vista.onLoad()" style="overflow: auto;height: 89%;">
@@ -71,6 +70,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 				<input type="hidden" id="CNUSERID"           name="CNUSERID"            value ='<?php  echo $usuario; ?>>'/> 
 				<input type="hidden" id="CNUSERDESC"           name="CNUSERDESC"            value ='<?php  echo $CNUSERDESC; ?>'/>    
 		</div>
+	
 		
 		<div id="estiloBotonesPeque" class="estiloBotonesPeque">
 			<div id="contieneTuberiaIzq" class="contieneTuberiaIzq">
@@ -90,7 +90,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								</tr>
                              </table>   
 						</div>
-						<div id="titulo" style="margin-left:280px;" class="tituloIEC">Catálogo de Telefonos</div>
+						<div id="titulo" style="margin-left:280px;" class="tituloIEC">Catalogo Genero</div>
 					</div>
 				</div>
             </div>        
@@ -102,10 +102,14 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 						<div>
 							<table style="position:relative;left:40px; text-align:left; margin-top:10px; margin-bottom:10px;">
 								<tr>
-									<td style="padding:6px 0px 4px 10px;">		<label  style="font-family: Verdana; font-size: 10px;">ID</label></td>									
-									<td style="padding:6px 0px 4px 10px;">		<input  id='idCriterioInput' type='text' style='height: 20px; width:200px;'/></input></td>
-									<td style="padding:6px 0px 4px 10px;">		<label  style="font-family: Verdana; font-size: 10px;">Tipo de Telefono</label></td>
-									<td style="padding:6px 0px 4px 10px;">		<input  id='detalleCriterioInput' type='text' style='height: 20px; width:200px;'/></input></td>	
+								 
+									<td style="padding:6px 0px 4px 10px;">		<label  style="font-family: Verdana; font-size: 10px;">Id Genero </label></td>									
+									<td style="padding:6px 0px 4px 10px;">		<input  id='idGeneroCriterioInput' type='text' style='height: 20px; width:200px;'/></input></td>
+									<td style="padding:6px 0px 4px 10px;">		<label  style="font-family: Verdana; font-size: 10px;">Genero Corto</label></td>
+									<td style="padding:6px 0px 4px 10px;">		<input  id='gCortoCriterioInput' type='text' style='height: 20px; width:200px;'/></input></td>	
+									<td style="padding:6px 0px 4px 10px;">		<label  style="font-family: Verdana; font-size: 10px;">Genero Largo</label></td>
+									<td style="padding:6px 0px 4px 10px;">		<input  id='gLargoCriterioInput' type='text' style='height: 20px; width:200px;'/></input></td>		
+						
 								</tr>
 								
 							</table>
@@ -148,7 +152,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
  -->
 			<div id="menuPrincipal"  align="right" class="contieneCriteriosAribaBtn" style="background-color: #6b6b6b;    height: 56px; " > 
 				<img class='logoBAS' style='float: left;' id='logoFRM' src='assets/pantalla/logoTipo.png'  />
-				<span id="txtTitulo" style="float:left;margin-top: 20px;margin-left: 15px;color: #FFFFFF;float: left;font-family: Verdana;font-size: 11px;font-weight: bold;">Telefonos</span>
+				<span id="txtTitulo" style="float:left;margin-top: 20px;margin-left: 15px;color: #FFFFFF;float: left;font-family: Verdana;font-size: 11px;font-weight: bold;">Catalogo de Genero</span>
 				<img style="padding: 2px;" class='imgTipoBoton' id='btnGuardarFormulario' src='assets/botones/imgGuardar.png' onclick='vista.btnGuardarFormulario_onClick();' title='Guardar' />
 				<img style="padding: 2px;" class='imgTipoBoton' id='btnSalirFormulario' src='assets/botones/btnSalir.png' onClick="vista.btnSalirFormulario_onClick();" title='Salir'  />
 			</div>
@@ -162,34 +166,38 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 						<div class="contenidoNormalUS">
 					 		<div class="explicacionFRM" >
 								<div id="filtros " class="contenedorIEC" style="overflow: auto; position: relative; width: 100%; display: block;">
-								 <div style="width: 80%; display: block; height: 100%;  padding-top: 10px; padding-left: 34px;">								 	
-								   <table WIDHT=25%; HEIGHT=25%;  CELLPADDING=0; cellspacing="10" style="padding-top: 12px; padding-left: 1%; position:relative;  ">
-								   <tr>
+								 <div style="width: 80%; display: block; height: 100%;  padding-top: 10px; padding-left: 34px;">
+								       	 <tr>
 								    	<td >
-								     		 <label style=" width:130px; position: relative; left: 3px; ">Id Telefono</label>
+								     		<label style="position: relative; left: 3px; ">ID</label>
 								   		</td>
 								   		<td >
-								     		<input class="input" id="idFormularioInput" descripcion="id" type="text" maxlength="20" value="" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px;" disabled />
+								     		<input class="input" id="idFormularioInput" descripcion="id" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px "/>
 								   		</td>
-								   	
+								   		<tr>
 								    	<td >
-								     		<label style="position: relative; left: 3px; ">Tipo de Telefono</label>
+								     		<label style="position: relative; left: 3px; ">Genero Corto</label>
 								   		</td>
 								   		<td >
-								     		<input class="input" id="detalleFormularioInput" descripcion="detalle" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px "/>
+								     		<input class="input" id="gCortoFormularioInput" descripcion="Genero corto" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px "/>
 								   		</td>
-								   		</table>	    
-								    	
-									</div>
-									
+								        </tr>
+								        <tr>
+								    	<td >
+								     		<label style="position: relative; left: 3px; ">Genero Largo</label>
+								   		</td>
+								   		<td >
+								     		<input class="input" id="gLargoFormularioInput" descripcion="Genero Largo" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px "/>
+								   		</td>
+								        </tr>
+								        </div>
+                                    <div style="height: 10px;"></div>                             	
 								 </div>
 								</div>				  	
 							</div>
 						</div>
 				</div>
 		</div>
-		
-		
 		<div class='ventana' id='PromptListaDistribucion' style='display: none; z-index:9001;'></div>
 		<div class='ventana' id='_promptRelacionReporte' style='display: none;'></div>
 		<div class='ventana' id='PromptCalendario' style='display: none; z-index:9001;'></div>  
@@ -199,7 +207,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 		<div class='ventana' id='PromptSentencia' style='display:none; z-index:9001;'></div>
 		<div class='ventana' id='PromptCriterioSeleccion' style='display:none; z-index:9001;'></div>    
 </div>
-
+     
 </form>
 </body>
 </html>

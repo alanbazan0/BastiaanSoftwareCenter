@@ -5,13 +5,11 @@ use php\modelos\Genero;
 
 interface IGenerosRepositorio
 {
-
     public function insertar(Genero $genero);
     public function actualizar(Genero $genero);
-    public function eliminar(Genero $genero);
+    public function eliminar($id);
     
-    public function consultarPorId($nombre);
-    public function consultarPorNombre($nombre);
-    public function consultar($nombre, $nombreSegundo, $apellidoPaterno);    
+    public function consultarPorLlaves($id);
+    public function consultar($criteriosSeleccion);   
+    
 }
-

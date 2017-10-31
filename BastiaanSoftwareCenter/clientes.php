@@ -74,7 +74,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 		
 		<div id="estiloBotonesPeque" class="estiloBotonesPeque">
 			<div id="contieneTuberiaIzq" class="contieneTuberiaIzq">
-				<img src='assets/pantalla/imgCabecero.png' style="position:absolute; "/>
+				<img src='assets/pantalla/logoTipo.png' style="position:absolute; "/>
 			</div>
 			<div id="contieneCriteriosAriba" class="contieneCriteriosAriba">
 				<div id="contieneCriteriosAribaBtn" class="contieneCriteriosAribaBtn">
@@ -149,7 +149,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 <!--  barra de men� para botones de la pantalla
  -->
 			<div id="menuPrincipal"  align="right" class="contieneCriteriosAribaBtn" style="background-color: #6b6b6b;    height: 56px; " > 
-				<img class='logoBAS' style='float: left;' id='logoFRM' src='assets/pantalla/imgCabecero.png'  />
+				<img class='logoBAS' style='float: left;' id='logoFRM' src='assets/pantalla/logoTipo.png'  />
 				<span id="txtTitulo" style="float:left;margin-top: 20px;margin-left: 15px;color: #FFFFFF;float: left;font-family: Verdana;font-size: 11px;font-weight: bold;">Catálogo de clientes</span>
 				<img style="padding: 2px;" class='imgTipoBoton' id='btnGuardarAltaSol' src='assets/botones/imgGuardar.png' onclick='vista.btnGuardar_onClick();' title='Guardar y aprobar' />
 				<img style="padding: 2px;" class='imgTipoBoton' id='btnSalirAltaSol' src='assets/botones/btnSalir.png' onClick="vista.btnSalir_onClick();" title='Salir'  />

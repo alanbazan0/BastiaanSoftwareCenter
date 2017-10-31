@@ -89,7 +89,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								</tr>
                              </table>   
 						</div>
-						<div id="titulo" style="margin-left:280px;" class="tituloIEC">Bajas</div>
+						<div id="titulo" style="margin-left:280px;" class="tituloIEC">Catálogo de Bajas</div>
 					</div>
 				</div>
             </div>        

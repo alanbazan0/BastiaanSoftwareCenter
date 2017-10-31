@@ -1,34 +1,29 @@
-class PostalesVista
+ class 	GenerosVista
 {		
-	constructor(ventana)
-	{	
-		this.ventana = ventana;
-		this.presentador = new PostalesPresentador(this);
-		this.manejadorEventos = new ManejadorEventos();
-		this.grid = new GridReg("grid");	
-	}
-	
+	 constructor(ventana)
+		{	
+			this.ventana = ventana;
+			this.presentador = new GenerosPresentador(this);
+			this.manejadorEventos = new ManejadorEventos();
+			this.grid = new GridReg("grid");	
+		}
 	onLoad()
 	{			
-		this.crearColumnasGrid();
+		this.crearColumnasgrid();
 		this.presentador.consultar();
 	}
 	
-	crearColumnasGrid()
+	crearColumnasgrid()
 	{
 		this.grid._columnas = [
-			
-			{longitud:100, 	titulo:"Id",   	alias:"id", alineacion:"I" },
-			{longitud:200, 	titulo:"Codigo Postal",   alias:"nir", alineacion:"I" },
-			{longitud:200, 	titulo:"Asentamiento",   alias:"asentamiento", alineacion:"I" },
-			{longitud:200, 	titulo:"Municipio",   alias:"municipio", alineacion:"I" },
-			{longitud:200, 	titulo:"Estado",   alias:"estado", alineacion:"I" },
-			{longitud:200, 	titulo:"Ciudad",   alias:"ciudad", alineacion:"I" },
-			
-        ]
-		
+			{longitud:200, 	titulo:"Id",   	alias:"id", alineacion:"I" }, 
+			{longitud:300, 	titulo:"Genero Corto",   alias:"gCorto", alineacion:"I" }, 
+			{longitud:400, 	titulo:"Genero Largo",   alias:"gLargo", alineacion:"I" }, 
+		]
+
+
 		this.grid._origen="vista";
-		this.grid.manejadorEventos=this.manejadorEventos;
+        this.grid.manejadorEventos=this.manejadorEventos;
 		this.grid._ajustarAltura = true;
 		this.grid._colorRenglon1 = "#FFFFFF";	
 		this.grid._colorRenglon2 = "#f8f2de";
@@ -49,7 +44,8 @@ class PostalesVista
 	{
 		this.modo = "ALTA";
 		this.limpiarFormulario();	
-		this.mostrarFormulario();		
+		this.mostrarFormulario();
+		
 	}
 	
 	btnBaja_onClick()
@@ -60,6 +56,7 @@ class PostalesVista
 		    if (confirmacion)
 		    {
 		    	this.presentador.eliminar();
+		    	this.presentador.actualizar();
 		    }	
 		}
 		else
@@ -92,7 +89,7 @@ class PostalesVista
 		 {
 			if(this.modo=='ALTA')
 				this.presentador.insertar();
-			else
+		
 				this.presentador.actualizar();
 		 }		
 		 else
@@ -110,14 +107,12 @@ class PostalesVista
 	    	}
 	}
 	
+
 	btnSalirFormulario_onClick()
 	{		
 		this.salirFormulario();
+		this.presentador.actualizar();
 	}	
-	
-	/*
-	 * Valores de las llaves
-	 */
 	
 	get llaves()
 	{
@@ -136,11 +131,12 @@ class PostalesVista
 	{
 		 var criteriosSeleccion = 
 		 {				    
-			nir:$('#nirCriterioInput').val()
+			id:$('#idGeneroCriterioInput').val(),
+			gCorto:$('#gCortoCriterioInput').val(),
+			gLargo:$('#gLargoCriterioInput').val()
 		 }
 		 return criteriosSeleccion;
-	}		
-	
+	}	
 	
 	/*
 	 * Asignar registros al grid
@@ -156,34 +152,23 @@ class PostalesVista
 	 * Mapeo de datos del formulario con el modelo
 	 */
 	
-	set postal(valor)
+	set genero(valor)
 	{		
 		$('#idFormularioInput').val(valor.id);
-		$('#nirFormularioInput').val(valor.nir);
-		$('#asentamientoFormularioInput').val(valor.asentamiento);
-		$('#municipioFormularioInput').val(valor.municipio);
-		$('#estadoFormularioInput').val(valor.estado);
-		$('#ciudadFormularioInput').val(valor.ciudad);
+		$('#gCortoFormularioInput').val(valor.gCorto);
+		$('#gLargoFormularioInput').val(valor.gLargo);
 	}
 	
-	get postal()
+	get genero()
 	{
-		 var postal = 
+		 var genero = 
 		 {				    
-			 id:$('#idFormularioInput').val(),
-			 nir:$('#nirFormularioInput').val(),
-			 asentamiento:$('#asentamientoFormularioInput').val(),
-			 municipio:$('#municipioFormularioInput').val(),
-			 estado:$('#estadoFormularioInput').val(),
-			 ciudad:$('#ciudadFormularioInput').val()
+				 id:$('#idFormularioInput').val(),
+				 gCorto:$('#gCortoFormularioInput').val(),
+				 gLargo:$('#gLargoFormularioInput').val()
 		 };
-		 return postal;
+		 return genero;
 	 }
-	 /*
-	  * Propiedades especiales o calculas
-	  */
-	 
-	
 	mostrarMensaje(titulo,mensaje)
 	{
 		alert(mensaje);	
@@ -201,14 +186,13 @@ class PostalesVista
 		$('#formularioDiv').hide();
 	}
 	
-	/*
-	 *Validación de los datos obligatorios del formulario 
-	 */
-	
 	campoObligatorioVacio()
 	{
-		if($('#estadoFormularioInput').val()=='')					
-			return $('#estadoFormularioInput');
+		if($('#gCortoFormularioInput').val()=='')					
+			return $('#gCortoFormularioInput');
+		
+		if($('#gLargoFormularioInput').val()=='')					
+			return $('#gLargoFormularioInput');
 		
 		return null;
 	}	
@@ -219,14 +203,10 @@ class PostalesVista
 	limpiarFormulario()
 	{
 		$('#idFormularioInput').val("");
-		$('#nirFormularioInput').val("");
-		$('#asentamientoFormularioInput').val("");
-		$('#municipioFormularioInput').val("");
-		$('#estadoFormularioInput').val("");
-		$('#ciudadFormularioInput').val("");
-	
+		$('#gCortoFormularioInput').val("");
+		$('#gLargoFormularioInput').val("");
 	}
+	
 
 }
-var vista = new PostalesVista(this);
-
+var vista = new GenerosVista();

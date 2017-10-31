@@ -18,7 +18,7 @@ class TelefonosVista
 	{
 		this.grid._columnas = [
 			{longitud:100, 	titulo:"Id",   	alias:"id", alineacion:"I" }, 
-			{longitud:200, 	titulo:"Detalle",   alias:"detalle", alineacion:"I" },
+			{longitud:200, 	titulo:"Tipo de telefono",   alias:"detalle", alineacion:"I" },
         ]
 		
 		this.grid._origen="vista";

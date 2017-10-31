@@ -90,7 +90,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								</tr>
                              </table>   
 						</div>
-						<div id="titulo" style="margin-left:280px;" class="tituloIEC">Catálogo de Postales</div>
+						<div id="titulo" style="margin-left:280px;" class="tituloIEC">Catálogo de Codigos Postales</div>
 					</div>
 				</div>
             </div>        
@@ -102,7 +102,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 						<div>
 							<table style="position:relative;left:40px; text-align:left; margin-top:10px; margin-bottom:10px;">
 								<tr>
-									<td style="padding:6px 0px 4px 10px;">		<label  style="font-family: Verdana; font-size: 10px;">NIR</label></td>
+									<td style="padding:6px 0px 4px 10px;">		<label  style="font-family: Verdana; font-size: 10px;">Codigo Postal</label></td>
 									<td style="padding:6px 0px 4px 10px;">		<input  id='nirCriterioInput' type='text' style='height: 20px; width:200px;'/></input></td>	
 								</tr>
 								
@@ -171,7 +171,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								   		</td>
 								   	
 								    	<td >
-								     		<label style="position: relative; left: 3px; ">NIR</label>
+								     		<label style="position: relative; left: 3px; ">Codigo Postal</label>
 								   		</td>
 								   		<td >
 								     		<input class="input" id="nirFormularioInput" descripcion="nir" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px "/>

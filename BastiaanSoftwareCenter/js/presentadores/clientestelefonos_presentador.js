@@ -1,17 +1,16 @@
-class GenerosPresentador
+class ClientesTelefonosPresentador
 {
 	 constructor(vista)
 	 {
 		this.vista = vista; 
 	 }
 	 
-	 
 	 consultar()
 	 {
-		 var repositorio = new GenerosRepositorio(this);		
+		 var repositorio = new ClientesTelefonosRepositorio(this);		
 		 repositorio.consultar(this,this.consultarResultado,this.vista.criteriosSeleccion);
-		  }
-
+	 }
+	 
 	 consultarResultado(resultado)
 	 {
 		if(resultado.mensajeError=="")
@@ -20,11 +19,11 @@ class GenerosPresentador
 			this.vista.mostrarMensaje("Error",resultado.mensajeError);
 	 }
 	 
+	
 	 insertar()
 	 {
-		 var repositorio = new GenerosRepositorio(this);		
-		 repositorio.insertar(this,this.insertarResultado,this.vista.genero);
-			
+		 var repositorio = new ClientesTelefonosRepositorio(this);			 
+		 repositorio.insertar(this,this.insertarResultado,this.vista.clientetelefono);	
 	 }
 	 
 	 insertarResultado(resultado)
@@ -39,11 +38,12 @@ class GenerosPresentador
 			this.vista.mostrarMensaje("Error","Ocurrió un error al guardar el registro. " + resultado.mensajeError);			
 			
 	 }	
+	 
 	 actualizar()
- 	 {
-		 var repositorio = new GenerosRepositorio(this);	
-		 repositorio.actualizar(this,this.actualizarResultado,this.vista.genero);
- 	 }
+	 {
+		 var repositorio = new ClientesTelefonosRepositorio(this);		
+		 repositorio.actualizar(this,this.actualizarResultado,this.vista.clientetelefono);
+	 }
 	 
 	 actualizarResultado(resultado)
 	 {
@@ -59,7 +59,7 @@ class GenerosPresentador
 	   
 	 consultarPorLlaves()
 	 {
-		 var repositorio = new GenerosRepositorio(this);		
+		 var repositorio = new ClientesTelefonosRepositorio(this);		
 		 repositorio.consultarPorLlaves(this,this.consultarPorLlavesResultado,this.vista.llaves);
 	 }
 	 
@@ -67,7 +67,7 @@ class GenerosPresentador
 	 {		
 		 if(resultado.mensajeError=="")
 		 {
-			 this.vista.genero = resultado.valor;
+			 this.vista.clientetelefono = resultado.valor;
 		 }
 		 else
 			 this.vista.mostrarMensaje("Error","Ocurrió un error al consultar el registro. " + resultado.mensajeError);
@@ -75,7 +75,7 @@ class GenerosPresentador
 	 
 	 eliminar()
 	 {
-		 var repositorio = new GenerosRepositorio(this);		
+		 var repositorio = new ClientesTelefonosRepositorio(this);		
 		 repositorio.eliminar(this,this.eliminarResultado,this.vista.llaves);		
 	 }
 	 
@@ -89,4 +89,5 @@ class GenerosPresentador
 		else
 			this.vista.mostrarMensaje("Error","Ocurrió un error al eliminar el registro. " + resultado.mensajeError);		
 	 }
-}	 
+	 
+}
