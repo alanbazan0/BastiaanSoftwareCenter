@@ -226,7 +226,7 @@ class ClientesRepositorio implements IClientesRepositorio
                         {
                             $cliente = (object) [
                                 'id' =>  utf8_encode($id),
-                                'nombre' => utf8_encode($primerNombre),
+                                'primerNombre' => utf8_encode($primerNombre),
                                 'segundoNombre' => utf8_encode($segundoNombre),
                                 'apellidoPaterno' => utf8_encode($apellidoPaterno),
                                 'apellidoMaterno' => utf8_encode($apellidoMaterno),

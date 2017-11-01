@@ -18,7 +18,7 @@ class ClientesVista
 	{
 		this.grid._columnas = [
 			{longitud:100, 	titulo:"Id",   	alias:"id", alineacion:"I" }, 
-			{longitud:200, 	titulo:"Primer nombre",   alias:"nombre", alineacion:"I" }, 
+			{longitud:200, 	titulo:"Primer nombre",   alias:"primerNombre", alineacion:"I" }, 
 			{longitud:200, 	titulo:"Segundo nombre",   alias:"segundoNombre", alineacion:"I" }, 
 			{longitud:200, 	titulo:"Apellido paterno",   alias:"apellidoPaterno", alineacion:"I" },	
 			{longitud:200, 	titulo:"Apellido materno",   alias:"apellidoMaterno", alineacion:"I" },	
@@ -114,7 +114,7 @@ class ClientesVista
 		var confirmacion = confirm("¿Esta seguro que desea salir?")
 	    if (confirmacion)
 	    	{
-	    	//TODO: Cerrar ventana aqui
+		    	
 	    	}
 	}
 	
