@@ -1,22 +1,22 @@
-class PortablesRepositorio 
+class VersionesRepositorio 
 {	
 	constructor()
 	{
 		
 	}
 	
-	insertar(contexto,functionRetorno, portable)
+	insertar(contexto,functionRetorno, version)
 	{		
 		this.contexto = contexto;
 		this.functionRetorno = functionRetorno;
 		
 		var parametros;
 		parametros = "accion=insertar";
-		parametros += "&portable=" + encodeURIComponent(JSON.stringify(portable));	
+		parametros += "&version=" + encodeURIComponent(JSON.stringify(version));	
 		
 		var contextHandler = new AjaxContextHandler();
 		var host = window.location.origin + "/BastiaanSoftwareCenter";	
-		var ai = new Ajaxv2(host +"/php/repositorios/Portables.php", this, this.insertarResultado, "POST", parametros, contextHandler);		
+		var ai = new Ajaxv2(host +"/php/repositorios/Versiones.php", this, this.insertarResultado, "POST", parametros, contextHandler);		
 		contextHandler.AddAjaxv2Object(ai); 		
 		ai.GetPost(true);
 	}
@@ -27,18 +27,18 @@ class PortablesRepositorio
 		this.functionRetorno.call(this.contexto,JSON.parse(resultado));
 	}
 	
-	actualizar(contexto,functionRetorno, portable)
+	actualizar(contexto,functionRetorno, version)
 	{		
 		this.contexto = contexto;
 		this.functionRetorno = functionRetorno;
 		
 		var parametros;
 		parametros = "accion=actualizar";
-		parametros += "&portable=" + encodeURIComponent(JSON.stringify(portable));	
+		parametros += "&version=" + encodeURIComponent(JSON.stringify(version));	
 		
 		var contextHandler = new AjaxContextHandler();
 		var host = window.location.origin + "/BastiaanSoftwareCenter";	
-		var ai = new Ajaxv2(host +"/php/repositorios/Portables.php", this, this.actualizarResultado, "POST", parametros, contextHandler);		
+		var ai = new Ajaxv2(host +"/php/repositorios/Versiones.php", this, this.actualizarResultado, "POST", parametros, contextHandler);		
 		contextHandler.AddAjaxv2Object(ai); 		
 		ai.GetPost(true);
 	}
@@ -62,7 +62,7 @@ class PortablesRepositorio
 		
 		var contextHandler = new AjaxContextHandler();
 		var host = window.location.origin + "/BastiaanSoftwareCenter";	
-		var ai = new Ajaxv2(host +"/php/repositorios/Portables.php", this, this.consultarResultado, "POST", parametros, contextHandler);		
+		var ai = new Ajaxv2(host +"/php/repositorios/Versiones.php", this, this.consultarResultado, "POST", parametros, contextHandler);		
 		contextHandler.AddAjaxv2Object(ai); 		
 		ai.GetPost(true);
 	}
@@ -83,7 +83,7 @@ class PortablesRepositorio
 		parametros += "&llaves=" + encodeURIComponent(JSON.stringify(llaves));
 		var contextHandler = new AjaxContextHandler();
 		var host = window.location.origin + "/BastiaanSoftwareCenter";	
-		var ai = new Ajaxv2(host +"/php/repositorios/Portables.php", this, this.consultarPorLlavesResultado, "POST", parametros, contextHandler);		
+		var ai = new Ajaxv2(host +"/php/repositorios/Versiones.php", this, this.consultarPorLlavesResultado, "POST", parametros, contextHandler);		
 		contextHandler.AddAjaxv2Object(ai); 		
 		ai.GetPost(true);
 	}
@@ -105,7 +105,7 @@ class PortablesRepositorio
 		parametros += "&llaves=" + encodeURIComponent(JSON.stringify(llaves));
 		var contextHandler = new AjaxContextHandler();
 		var host = window.location.origin + "/BastiaanSoftwareCenter";	
-		var ai = new Ajaxv2(host +"/php/repositorios/Portables.php", this, this.eliminarResultado, "POST", parametros, contextHandler);		
+		var ai = new Ajaxv2(host +"/php/repositorios/Versiones.php", this, this.eliminarResultado, "POST", parametros, contextHandler);		
 		contextHandler.AddAjaxv2Object(ai); 		
 		ai.GetPost(true);
 	}
@@ -116,5 +116,4 @@ class PortablesRepositorio
 		this.functionRetorno.call(this.contexto,JSON.parse(resultado));
 	}
 	
-
 }

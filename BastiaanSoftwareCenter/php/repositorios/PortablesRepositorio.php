@@ -1,12 +1,15 @@
 <?php
 namespace php\repositorios;
 
+use Exception;
 use php\interfaces\IPortablesRepositorio;
-use php\modelos\Portables;
+use php\modelos\Portable;
+use php\modelos\Resultado;
 
-include "../interfaces/IPortablesRepositorio.php";    
-include "../modelos/Portables.php";
 
+include "../interfaces/IPortablesRepositorio.php";
+include "../modelos/Portable.php";
+include "../clases/Resultado.php";
 
 class PortablesRepositorio implements IPortablesRepositorio
 {
@@ -16,202 +19,238 @@ class PortablesRepositorio implements IPortablesRepositorio
         $this->conexion = $conexion;
     }
     
-    
     public function calcularId()
     {
-        
-        $consulta =  "SELECT MAX(IFNULL(BTCLIENTENUMERO,0))+1 AS id FROM BSTNTRN.BTCLIENTE";
+        $resultado = new Resultado();
+        $consulta =  "SELECT MAX(IFNULL(BTCPORTABILIDADSERIEID,0))+1 AS idConsecutivo FROM BSTNTRN.BTCPORTABILIDAD";
         if($sentencia = $this->conexion->prepare($consulta))
         {
-            
             if($sentencia->execute())
             {
-                if ($sentencia->bind_result($id))
+                if ($sentencia->bind_result($idConsecutivo))
                 {
-                    if($row = $sentencia->fetch())
+                    if($sentencia->fetch())
                     {
-                        return $id;
+                        $resultado->valor = $idConsecutivo;
                     }
+                    else
+                        $resultado->mensajeError = "No se encontró ningún resultado";
                 }
+                else
+                    $resultado->mensajeError = "Falló el enlace del resultado";
             }
+            else
+                $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;
         }
         else
-        {
-            echo "Fallï¿½ la preparaciï¿½n: (" . $this->conexion->errno . ") " . $this->conexion->error;
-        }
-        
-        return '0';
-    }
-    
-    
-    public function insertar(Portables $portables)
-    {
-        $resultado = "";
-        $consulta = " INSERT INTO BSTNTRN.BTCPORTABILIDAD"    
-             . " BTCPORTABILIDADSERIEID, "
-             . " BTCPORTABILIDADNUM, "
-             . " BTCPORTABILIDADMPIO, "
-             . " BTCPORTABILIDADCIA, "
-             . " BTCPORTABILIDADPOB, "
-             . " BTCPORTABILIDADEDO) "            
-            . " VALUES( "
-            . " (SELECT MAX(IFNULL(BTCPORTABILIDADNIRID,0))+1 AS 'ID' FROM BSTNTRN.BTCPORTABILIDAD ID),  "
-            . "?, ?, ?, ?, ?) ";
-                  $portables->consecutivo.' '. $portables->numero.' '. $portables->descripcion;
-                                            $portables =$portables->poblacion.' '. $portables->municicipio.' '.$portables->estado;
-                                            if($sentencia = $this->conexion->prepare($consulta))
-                                            {
-                                                $sentencia->bind_param("sssss",
-                                                    $portables->consecutivo,
-                                                    $portables->numero,
-                                                    $portables->descripcion,
-                                                    $portables->poblacion,
-                                                    $portables->municipio,
-                                                    $portables->estado);
-                                                $resultado = $sentencia->execute();
-                                            }else{
-                                                echo "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
-                                            }
-                                            
-                                            return $resultado;
-    }
-    
-    public function eliminar(portables $portables)
-    {
-        $resultado = "";
-        $consulta = " DELETE FROM BSTNTRN.BTCPORTABILIDAD "
-            . "  WHERE BTCPORTABILIDADNIRID  = ? ";
-            if($sentencia = $this->conexion->prepare($consulta))
-            {
-                $sentencia->bind_param("i",$portables->id);
-                $resultado = $sentencia->execute();
-            }else{
-                echo "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
-            }
+            $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
             return $resultado;
     }
     
-    public function actualizar(portables $portables)
+    public function insertar(Portable $portable)
     {
-        
-        $resultado = "";
+        $resultado =  $this->calcularId();
+        if($resultado->mensajeError=="")
+        {
+            $idConsecutivo = $resultado->valor;
+            $consulta = " INSERT INTO BSTNTRN.BTCPORTABILIDAD "
+                    . " (BTCPORTABILIDADNIRID, "
+                    . " BTCPORTABILIDADSERIEID, "
+                    . " BTCPORTABILIDADNUM, "
+                    . " BTCPORTABILIDADCIA, "
+                    . " BTCPORTABILIDADPOB, "
+                    . " BTCPORTABILIDADMPIO, "
+                        . " BTCPORTABILIDADEDO) "
+                            . " VALUE(?,?,?,?,?,?,?) ";
+                            if($sentencia = $this->conexion->prepare($consulta))
+                            {
+                                if( $sentencia->bind_param("sisssss",$portable->idMunicipio,
+                                    $idConsecutivo,
+                                    $portable->numeroPortabilidad,
+                                    $portable->descripcionPortabilidad,
+                                    $portable->ciudadPortabilidad,
+                                    $portable->municipioPortabilidad,
+                                    $portable->estadoPortabilidad))
+                                {
+                                    if(!$sentencia->execute())
+                                        $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;
+                                }
+                                else
+                                    $resultado->mensajeError = "Falló el enlace de parÃ¡metros";
+                            }
+                            else
+                                $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
+        }
+        return $resultado;
+    }
+    
+    public function eliminar($llaves)
+    {
+        $resultado = new Resultado();
+        $consulta = " DELETE FROM BSTNTRN.BTCPORTABILIDAD "
+            . "  WHERE BTCPORTABILIDADSERIEID  = ? ";
+            if($sentencia = $this->conexion->prepare($consulta))
+            {
+                if($sentencia->bind_param("i",$llaves->idConsecutivo))
+                {
+                    if($sentencia->execute())
+                    {
+                        $resultado->valor = $llaves->idConsecutivo;
+                    }
+                    else
+                        $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;
+                }
+                else
+                    $resultado->mensajeError = "Falló el enlace de parÃ¡metros";
+            }
+            else
+                $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
+                
+                return $resultado;
+    }
+    
+    public function actualizar(Portable $portable)
+    {
+        $resultado = new Resultado();
         $consulta = " UPDATE BSTNTRN.BTCPORTABILIDAD SET"
-                . " BTCPORTABILIDADSERIEID= ?, "
-                . " BTCPORTABILIDADNUM= ? , "
-                . " BTCPORTABILIDADMPIO= ? , "
-                . " BTCPORTABILIDADCIA= ? , "
-                . " BTCPORTABILIDADPOB= ? , "
-                . " BTCPORTABILIDADEDO) "       
-                . "  WHERE BTCPORTABILIDADNIRID = ? ";
-                $portables->consecutivo.' '.$portables->numero.' '. $portables->descripcion;
-                $portables =$portables->poblacion.' '. $portables->municicipio.' '.$portables->estado;
-               
-                if($sentencia = $this->conexion->prepare($consulta))
-                   {
-                    $sentencia->bind_param("ssssss",
-                        $portables->consecutivo,
-                        $portables->numero,
-                        $portables->descripcion,
-                        $portables->poblacion,
-                        $portables->municipio,
-                        $portables->estado);
-                                        $resultado = $sentencia->execute();
-                                    }else{
-                                        echo "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
+        . " BTCPORTABILIDADNIRID = ?, "
+                . " BTCPORTABILIDADNUM = ?, "
+                    . " BTCPORTABILIDADCIA = ?, "
+                        . " BTCPORTABILIDADPOB = ?, "
+                            . " BTCPORTABILIDADMPIO = ?, "
+                                . " BTCPORTABILIDADEDO = ? "
+                    . " WHERE BTCPORTABILIDADSERIEID = ? ";
+                    if($sentencia = $this->conexion->prepare($consulta))
+                    {
+                        if( $sentencia->bind_param("sssssss",$portable->idMunicipio,
+                            $portable->numeroPortabilidad,
+                            $portable->descripcionPortabilidad,
+                            $portable->ciudadPortabilidad,
+                            $portable->municipioPortabilidad,
+                            $portable->estadoPortabilidad,
+                            $portable->idConsecutivo))
+                        {
+                            if($sentencia->execute())
+                            {
+                                $resultado->valor=true;
+                            }
+                            else
+                                $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;
+                        }
+                        else  $resultado->mensajeError = "Falló el enlace de parámetros";
+                    }
+                    else
+                        $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
+                        return $resultado;
+    }
+    
+    public function consultar($criteriosSeleccion)
+    {
+        $resultado = new Resultado();
+        $portables = array();
+        
+        $consulta =   " SELECT "
+            . " BTCPORTABILIDADNIRID idMunicipio, "
+            . " BTCPORTABILIDADSERIEID idConsecutivo, "
+            . " BTCPORTABILIDADNUM numeroPortabilidad, "
+            . " BTCPORTABILIDADCIA descripcionPortabilidad, "
+            . " BTCPORTABILIDADPOB ciudadPortabilidad, "
+            . " BTCPORTABILIDADMPIO municipioPortabilidad, "
+            . " BTCPORTABILIDADEDO estadoPortabilidad "
+            . " FROM BSTNTRN.BTCPORTABILIDAD  "
+            . " WHERE BTCPORTABILIDADNIRID like  CONCAT('%',?,'%') "
+            . " AND BTCPORTABILIDADSERIEID like  CONCAT('%',?,'%') ";
+       if($sentencia = $this->conexion->prepare($consulta))
+ {
+ if($sentencia->bind_param("ss",$criteriosSeleccion->idMunicipio,$criteriosSeleccion->idConsecutivo))
+    {
+                                        if($sentencia->execute())
+                                        {
+                                            if ($sentencia->bind_result($idMunicipio, $idConsecutivo, $numeroPortabilidad, $descripcionPortabilidad, $ciudadPortabilidad, $municipioPortabilidad, $estadoPortabilidad )  )
+                                            {
+                                                while($row = $sentencia->fetch())
+                                                {
+                                                    $portable = (object) [
+                                                        'idMunicipio' =>  utf8_encode($idMunicipio),
+                                                        'idConsecutivo' =>  utf8_encode($idConsecutivo),
+                                                        'numeroPortabilidad' => utf8_encode($numeroPortabilidad),
+                                                        'descripcionPortabilidad' =>  utf8_encode($descripcionPortabilidad),
+                                                        'ciudadPortabilidad' =>  utf8_encode($ciudadPortabilidad),
+                                                        'municipioPortabilidad' => utf8_encode($municipioPortabilidad),
+                                                        'estadoPortabilidad' => utf8_encode($estadoPortabilidad)
+                                                    ];
+                                                    array_push($portables,$portable);
+                                                }
+                                                $resultado->valor = $portables;
+                                            }
+                                            else
+                                                $resultado->mensajeError = "Falló el enlace del resultado.";
+                                        }
+                                        else
+                                            $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;
                                     }
+                                    else
+                                        $resultado->mensajeError = "Falló el enlace de parámetros";
+                                }
+                                else
+                                    $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
+                                    
+                                    
                                     return $resultado;
     }
-  
-    public function consultar($id,$estado,$municipio)
+    
+    public function consultarPorLlaves($llaves)
     {
-        
-        $portables = array();
+        $resultado = new Resultado();
         $consulta =   " SELECT "
-                    . " BTCPORTABILIDADNIRID id, "
-                    . " BTCPORTABILIDADSERIEID consecutivo, "
-                    . " BTCPORTABILIDADNUM numero, "
-                    . " BTCPORTABILIDADMPIO municipio, "
-                    . " BTCPORTABILIDADCIA descripcion, "
-                    . " BTCPORTABILIDADPOB poblacion, "
-                    . " BTCPORTABILIDADEDO estado "                                   
-                    . " FROM BSTNTRN.BTCPORTABILIDAD "
-                    . " WHERE BTCPORTABILIDADNIRID like  CONCAT('%',?,'%') "
-                    . " AND BTCPORTABILIDADEDO like  CONCAT('%',?,'%') "
-                    . " AND BTCPORTABILIDADMPIO like  CONCAT('%',?,'%') ";
-        
-        if($sentencia = $this->conexion->prepare($consulta))
-        {
-            $sentencia->bind_param("sss",$id,$estado,$municipio);
-            if($sentencia->execute())
-            {                
-                if ($sentencia->bind_result($id, $consecutivo, $numero, $municipio, $descripcion, $poblacion, $estado)  )
-                {                    
-                    while($row = $sentencia->fetch())
-                    {
-                        $porta = (object) [
-                            'id' =>  utf8_encode($id),
-                            'consecutivo' => utf8_encode($consecutivo),
-                            'numero' => utf8_encode($numero),
-                            'municipio' => utf8_encode($municipio),
-                            'descripcion' => utf8_encode($descripcion),
-                            'poblacion' => utf8_encode($poblacion),
-                            'estado' => utf8_encode($estado)
-                        ];  
-                        array_push($portables,$porta);
-                    }
-                }                
-            }            
-        }else{
-            echo "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
-        }
-        return  $portables;
+        . " BTCPORTABILIDADNIRID idMunicipio, "
+            . " BTCPORTABILIDADSERIEID idConsecutivo, "
+                . " BTCPORTABILIDADNUM numeroPortabilidad, "
+                    . " BTCPORTABILIDADCIA descripcionPortabilidad, "
+                        . " BTCPORTABILIDADPOB ciudadPortabilidad, "
+                            . " BTCPORTABILIDADMPIO municipioPortabilidad, "
+                                . " BTCPORTABILIDADEDO estadoPortabilidad "
+                                    . " FROM BSTNTRN.BTCPORTABILIDAD  "
+                            . " WHERE BTCPORTABILIDADSERIEID  = ?";
+                            if($sentencia = $this->conexion->prepare($consulta))
+                            {
+                                if($sentencia->bind_param("i",$llaves->idConsecutivo))
+                                {
+                                    if($sentencia->execute())
+                                    {
+                                        if ($sentencia->bind_result($idMunicipio, $idConsecutivo, $numeroPortabilidad, $descripcionPortabilidad, $ciudadPortabilidad, $municipioPortabilidad, $estadoPortabilidad )  )
+                                        {
+                                            if($sentencia->fetch())
+                                            {
+                                                $portable = new Portable();
+                                                $portable->idMunicipio = utf8_encode($idMunicipio);
+                                                $portable->idConsecutivo = utf8_encode($idConsecutivo);
+                                                $portable->numeroPortabilidad = utf8_encode($numeroPortabilidad);
+                                                $portable->descripcionPortabilidad = utf8_encode($descripcionPortabilidad);
+                                                $portable->ciudadPortabilidad = utf8_encode($ciudadPortabilidad);
+                                                $portable->municipioPortabilidad = utf8_encode($municipioPortabilidad);
+                                                $portable->estadoPortabilidad = utf8_encode($estadoPortabilidad);
+                                                $resultado->valor = $portable;
+                                            }
+                                            else
+                                                $resultado->mensajeError = "No se encontró ningún resultado.";
+                                        }
+                                        else
+                                            $resultado->mensajeError = "Falló el enlace del resultado";
+                                    }
+                                    else
+                                        $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;
+                                }
+                                else
+                                    $resultado->mensajeError = "Falló el enlace de parámetros";
+                            }
+                            else
+                                $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
+                                return $resultado;
     }
-
-
-    public function consultarPorId($id)
-    {
-        $portables = array();
-        $consulta =   " SELECT "
-                   . " BTCPORTABILIDADSERIEID consecutivo, "
-                   . " BTCPORTABILIDADNUM numero, "
-                   . " BTCPORTABILIDADMPIO municipio, "
-                   . " BTCPORTABILIDADCIA descripcion, "
-                   . " BTCPORTABILIDADPOB poblacion, "
-                   . " BTCPORTABILIDADEDO estado) "                  
-                   . " WHERE BTCPORTABILIDADNIRID  = ?";
-        if($sentencia = $this->conexion->prepare($consulta))
-        {
-            $sentencia->bind_param("i",$id);
-            if($sentencia->execute())
-            {
-                
-                if ($sentencia->bind_result($id, $consecutivo, $numero, $municipio, $descripcion, $poblacion, $estado))
-                {
-                    
-                    while($row = $sentencia->fetch())
-                    {
-                        $portables = new Portables();
-                        $portable->consecutivo = utf8_encode($consecutivo);
-                        $portable->numero = utf8_encode($numero);
-                        $portable->municipio = utf8_encode($municipio);
-                        $portable->descripcion = utf8_encode($descripcion);
-                        $portable->poblacion = utf8_encode($poblacion);
-                        $portable->estado = utf8_encode($estado);
-                        array_push($portables,$portable);
-                    }
-                }
-                
-            }
-            
-        }else{
-            echo "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
-        }
-        return $portables;
-    }
-    public function consultarConsecutivo($consecutivo)
-    {}
-
-
+    
+    
+    
     
 }
 

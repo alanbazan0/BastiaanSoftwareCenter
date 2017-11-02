@@ -1,8 +1,8 @@
 <?php
 use php\clases\AdministradorConexion;
 use php\clases\JsonMapper;
-use php\modelos\Portable;
-use php\repositorios\PortablesRepositorio;
+use php\modelos\Version;
+use php\repositorios\VersionesRepositorio;
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -11,7 +11,7 @@ ini_set('display_errors', 1);
 include '../clases/JsonMapper.php';
 include '../clases/Utilidades.php';
 include '../clases/AdministradorConexion.php';
-include '../repositorios/PortablesRepositorio.php';
+include '../repositorios/VersionesRepositorio.php';
 
 
 
@@ -27,50 +27,50 @@ try
     if($conexion)
     {
         $accion = REQUEST('accion');
-        $repositorio = new PortablesRepositorio($conexion);
+        $repositorio = new VersionesRepositorio($conexion);
         switch ($accion)
         {
-            
+           
             case 'insertar':
-                $json = json_decode(REQUEST('portable'));
+                $json = json_decode(REQUEST('version'));
                 $mapper = new JsonMapper();
-                $portable = $mapper->map($json, new Portable());
-                $resultado = $repositorio->insertar($portable);
+                $version = $mapper->map($json, new Version());            
+                $resultado = $repositorio->insertar($version);
                 if($resultado!=null)
                     echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
-                    break;
+            break;
             case 'actualizar':
-                $json = json_decode(REQUEST('portable'));
+                $json = json_decode(REQUEST('version'));
                 $mapper = new JsonMapper();
-                $portable = $mapper->map($json, new Portable());
-                $resultado = $repositorio->actualizar($portable) ;
+                $version = $mapper->map($json, new Version());
+                $resultado = $repositorio->actualizar($version) ;
                 if($resultado!=null)
                     echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
-                    break;
-            case 'eliminar':
-                $llaves = json_decode(REQUEST('llaves'));
-                $resultado = $repositorio->eliminar($llaves);
-                if($resultado!=null)
-                    echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
-                    break;
+            break;
+            case 'eliminar':               
+               $llaves = json_decode(REQUEST('llaves'));
+               $resultado = $repositorio->eliminar($llaves);           
+               if($resultado!=null)
+                   echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
+            break;           
             case 'consultarPorLlaves':
                 $llaves = json_decode(REQUEST('llaves'));
                 $resultado = $repositorio->consultarPorLlaves($llaves);
                 if($resultado!=null)
                     echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
-                    break;
+            break;
             case 'consultar':
                 $criteriosSeleccion = json_decode(REQUEST('criteriosSeleccion'));
                 $resultado = $repositorio->consultar($criteriosSeleccion);
                 if($resultado!=null)
                     echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
-                    break;
+           break;
         }
     }
     
 }
 catch(Exception $e)
-{
+{   
     echo $e->getMessage(), '\n';
 }
 finally

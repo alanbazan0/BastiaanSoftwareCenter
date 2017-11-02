@@ -1,12 +1,12 @@
 <?php
 namespace php\interfaces;
 
-use php\modelos\Portable;
+use php\modelos\Version;
 
-interface IPortablesRepositorio
+interface IVersionesRepositorio
 {
-    public function insertar(Portable $portable);
-    public function actualizar(Portable $portable);
+    public function insertar(Version $version);
+    public function actualizar(Version $version);
     public function eliminar($id);
     
     public function consultarPorLlaves($id);
