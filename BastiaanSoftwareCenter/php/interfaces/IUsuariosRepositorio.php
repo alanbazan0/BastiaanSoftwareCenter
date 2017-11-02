@@ -7,9 +7,9 @@ interface IUsuariosRepositorio
     //data mapper
     public function insertar(Usuario $usuario);
     public function actualizar(Usuario $usuario);
-    public function eliminar(Usuario $usuario);
+    public function eliminar($id);
     
-    //query object
-    public function consultarPorIdContrasena($id, $contrasena);
+    public function consultarPorLlaves($id);
+    public function consultar($criteriosSeleccion); 
 }
 

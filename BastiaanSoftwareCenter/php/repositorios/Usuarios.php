@@ -1,11 +1,14 @@
 <?php
 use php\clases\AdministradorConexion;
+use php\clases\JsonMapper;
+use php\modelos\Usuario;
 use php\repositorios\UsuariosRepositorio;
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 
+include '../clases/JsonMapper.php';
 include '../clases/Utilidades.php';
 include '../clases/AdministradorConexion.php';
 include '../repositorios/UsuariosRepositorio.php';
@@ -26,17 +29,45 @@ try
         $accion = REQUEST('accion');
         $repositorio = new UsuariosRepositorio($conexion);
         switch ($accion)
-        {        
-            case 'consultarPorIdContrasena':
-                $id = REQUEST('id');
-                $contrasena = REQUEST('contrasena');
-                $usuario = $repositorio->consultarPorIdContrasena($id, $contrasena) ;     
-                if($usuario!=null)
-                    echo json_encode($usuario);
-            break;
+        {
+            
+            case 'insertar':
+                $json = json_decode(REQUEST('usuario'));
+                $mapper = new JsonMapper();
+                $usuario = $mapper->map($json, new Usuario());
+                $resultado = $repositorio->insertar($usuario);
+                if($resultado!=null)
+                    echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
+                    break;
+            case 'actualizar':
+                $json = json_decode(REQUEST('usuario'));
+                $mapper = new JsonMapper();
+                $usuario = $mapper->map($json, new Usuario());
+                $resultado = $repositorio->actualizar($usuario) ;
+                if($resultado!=null)
+                    echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
+                    break;
+            case 'eliminar':
+                $llaves = json_decode(REQUEST('llaves'));
+                $resultado = $repositorio->eliminar($llaves);
+                if($resultado!=null)
+                    echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
+                    break;
+            case 'consultarPorLlaves':
+                $llaves = json_decode(REQUEST('llaves'));
+                $resultado = $repositorio->consultarPorLlaves($llaves);
+                if($resultado!=null)
+                    echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
+                    break;
+            case 'consultar':
+                $criteriosSeleccion = json_decode(REQUEST('criteriosSeleccion'));
+                $resultado = $repositorio->consultar($criteriosSeleccion);
+                if($resultado!=null)
+                    echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
+                    break;
         }
     }
-        
+    
 }
 catch(Exception $e)
 {
@@ -44,7 +75,7 @@ catch(Exception $e)
 }
 finally
 {
-    $administrador_conexion->cerrar($conexion);    
+    $administrador_conexion->cerrar($conexion);
 }
 
 
