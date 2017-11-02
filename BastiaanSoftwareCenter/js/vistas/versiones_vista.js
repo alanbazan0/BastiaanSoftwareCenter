@@ -18,11 +18,11 @@ class VersionesVista
 		this.grid._columnas = [
 			
 			{longitud:100, 	titulo:"Id",   	alias:"id", alineacion:"I" },
-			{longitud:200, 	titulo:"Descripcion Corta",   alias:"versionDescripcionCorta", alineacion:"I" },
-			{longitud:200, 	titulo:"Descripcion Larga",   alias:"versionDescripcionLarga", alineacion:"I" },
-			{longitud:200, 	titulo:"principal",   alias:"versionNombrePrincipal", alineacion:"I" },
-			{longitud:200, 	titulo:"Fecha",   alias:"versionFecha", alineacion:"I" },
-			{longitud:200, 	titulo:"Hora",   alias:"versionHora", alineacion:"I" },
+			{longitud:200, 	titulo:"Descripciòn Corta",   alias:"descripcionCorta", alineacion:"I" },
+			{longitud:200, 	titulo:"Descripciòn Larga",   alias:"descripcionLarga", alineacion:"I" },
+			{longitud:200, 	titulo:"principal",   alias:"nombrePila", alineacion:"I" },
+			{longitud:200, 	titulo:"Fecha",   alias:"fecha", alineacion:"I" },
+			{longitud:200, 	titulo:"Hora",   alias:"hora", alineacion:"I" },
 			
         ]
 		
@@ -158,11 +158,11 @@ class VersionesVista
 	set version(valor)
 	{		
 		$('#idFormularioInput').val(valor.id);
-		$('#versionDescripcionCortaFormularioInput').val(valor.versionDescripcionCorta);
-		$('#versionDescripcionLargaFormularioInput').val(valor.versionDescripcionLarga);
-		$('#versionNombrePrincipalFormularioInput').val(valor.versionNombrePrincipal);
-		$('#versionFechaFormularioInput').val(valor.versionFecha);
-		$('#versionHoraFormularioInput').val(valor.versionHora);
+		$('#descripcionCortaFormularioInput').val(valor.descripcionCorta);
+		$('#descripcionLargaFormularioInput').val(valor.descripcionLarga);
+		$('#nombrePilaFormularioInput').val(valor.nombrePila);
+		$('#fechaFormularioInput').val(valor.fecha);
+		$('#horaFormularioInput').val(valor.hora);
 	}
 	
 	get version()
@@ -170,11 +170,11 @@ class VersionesVista
 		 var version = 
 		 {				    
 			 id:$('#idFormularioInput').val(),
-			 versionDescripcionCorta:$('#versionDescripcionCortaFormularioInput').val(),
-			 versionDescripcionLarga:$('#versionDescripcionLargaFormularioInput').val(),
-			 versionNombrePrincipal:$('#versionNombrePrincipalFormularioInput').val(),
-			 versionFecha:$('#versionFechaFormularioInput').val(),
-			 versionHora:$('#versionHoraFormularioInput').val()
+			 descripcionCorta:$('#descripcionCortaFormularioInput').val(),
+			 descripcionLarga:$('#descripcionLargaFormularioInput').val(),
+			 nombrePila:$('#nombrePilaFormularioInput').val(),
+			 fecha:$('#fechaFormularioInput').val(),
+			 hora:$('#horaFormularioInput').val()
 		 };
 		 return version;
 	 }
@@ -206,8 +206,22 @@ class VersionesVista
 	
 	campoObligatorioVacio()
 	{
-		if($('#versionDescripcionCortaFormularioInput').val()=='')					
-			return $('#versionDescripcionLargaFormularioInput');
+		if($('#descripcionCortaFormularioInput').val()=='')					
+			return $('#descripcionCortaFormularioInput');
+		
+		
+		if($('#descripcionLargaFormularioInput').val()=='')					
+			return $('#descripcionLargaFormularioInput');
+		
+		if($('#nombrePilaFormularioInput').val()=='')					
+			return $('#nombrePilaFormularioInput');
+		
+		if($('#fechaFormularioInput').val()=='')					
+			return $('#fechaFormularioInput');
+		
+		if($('#horaFormularioInput').val()=='')					
+			return $('#horaFormularioInput');
+		
 		
 		return null;
 	}	
@@ -218,11 +232,11 @@ class VersionesVista
 	limpiarFormulario()
 	{
 		$('#idFormularioInput').val("");
-		$('#versionDescripcionCortaFormularioInput').val("");
-		$('#versionDescripcionLargaFormularioInput').val("");
-		$('#versionNombrePrincipalFormularioInput').val("");
-		$('#versionFechaFormularioInput').val("");
-		$('#versionHoraFormularioInput').val("");
+		$('#descripcionCortaFormularioInput').val("");
+		$('#descripcionLargaFormularioInput').val("");
+		$('#nombrePilaFormularioInput').val("");
+		$('#fechaFormularioInput').val("");
+		$('#horaFormularioInput').val("");
 	
 	}
 

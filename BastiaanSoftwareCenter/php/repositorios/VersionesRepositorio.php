@@ -63,11 +63,11 @@ class VersionesRepositorio implements IVersionesRepositorio
                         . " VALUE(?,?,?,?,?,?) ";
             if($sentencia = $this->conexion->prepare($consulta))
             {
-                if( $sentencia->bind_param("isssss", $id,$version->versionDescripcionCorta,                       
-                                                         $version->versionDescripcionLarga,
-                                                         $version->versionNombrePrincipal,
-                                                         $version->versionFecha,
-                                                         $version->versionHora))
+                if( $sentencia->bind_param("isssss", $id,$version->descripcionCorta,                       
+                                                         $version->descripcionLarga,
+                                                         $version->nombrePila,
+                                                         $version->fecha,
+                                                         $version->hora))
                 {
                     if(!$sentencia->execute())                
                         $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;                       
@@ -119,11 +119,11 @@ class VersionesRepositorio implements IVersionesRepositorio
                     
         if($sentencia = $this->conexion->prepare($consulta))
         {
-            if($sentencia->bind_param("ssssss",$version->versionDescripcionCorta,
-                                               $version->versionDescripcionLarga,
-                                               $version->versionNombrePrincipal,
-                                               $version->versionFecha,
-                                               $version->versionHora,
+            if($sentencia->bind_param("ssssss",$version->descripcionCorta,
+                                               $version->descripcionLarga,
+                                               $version->nombrePila,
+                                               $version->fecha,
+                                               $version->hora,
                                                $version->id))
             {
                if($sentencia->execute())
@@ -147,11 +147,11 @@ class VersionesRepositorio implements IVersionesRepositorio
        
         $consulta =  " SELECT "
                      . " BTVERSIONID id, "
-                     . " BTVERSIONDSCC versionDescripcionCorta, "
-                     . " BTVERSIONDSCL versionDescripcionLarga, "
-                     . " BTVERSIONNOMP versionNombrePrincipal, "    
-                     . " BTVERSIONFECHA versionFecha, "
-                     . " BTVERSIONHORA versionHora "
+                     . " BTVERSIONDSCC descripcionCorta, "
+                     . " BTVERSIONDSCL descripcionLarga, "
+                     . " BTVERSIONNOMP nombrePila, "    
+                     . " BTVERSIONFECHA fecha, "
+                     . " BTVERSIONHORA hora "
                      . " FROM BSTNTRN.BTVERSION  "
                      . " WHERE BTVERSIONID like  CONCAT('%',?,'%') ";
                      
@@ -161,17 +161,17 @@ class VersionesRepositorio implements IVersionesRepositorio
             {
                 if($sentencia->execute())
                 {                
-                    if ($sentencia->bind_result($id, $versionDescripcionCorta, $versionDescripcionLarga, $versionNombrePrincipal, $versionFecha, $versionHora)  )
+                    if ($sentencia->bind_result($id, $descripcionCorta, $descripcionLarga, $nombrePila, $fecha, $hora)  )
                     {                    
                         while($row = $sentencia->fetch())
                         {
                             $version = (object) [
                                 'id' => utf8_encode($id),
-                                'versionDescripcionCorta' =>  utf8_encode($versionDescripcionCorta),
-                                'versionDescripcionLarga' => utf8_encode($versionDescripcionLarga),
-                                'versionNombrePrincipal' => utf8_encode($versionNombrePrincipal),
-                                'versionFecha' => utf8_encode($versionFecha),
-                                'versionHora' => utf8_encode($versionHora)
+                                'descripcionCorta' =>  utf8_encode($descripcionCorta),
+                                'descripcionLarga' => utf8_encode($descripcionLarga),
+                                'nombrePila' => utf8_encode($nombrePila),
+                                'fecha' => utf8_encode($fecha),
+                                'hora' => utf8_encode($hora)
                             ];  
                             array_push($versiones,$version);
                         }
@@ -199,11 +199,11 @@ class VersionesRepositorio implements IVersionesRepositorio
         $resultado = new Resultado();       
         $consulta =   " SELECT "
                      . " BTVERSIONID id, "
-                     . " BTVERSIONDSCC versionDescripcionCorta, "
-                     . " BTVERSIONDSCL versionDescripcionLarga, "
-                     . " BTVERSIONNOMP versionNombrePrincipal, "
-                     . " BTVERSIONFECHA versionFecha, "
-                     . " BTVERSIONHORA versionHora "
+                     . " BTVERSIONDSCC descripcionCorta, "
+                     . " BTVERSIONDSCL descripcionLarga, "
+                     . " BTVERSIONNOMP nombrePila, "
+                     . " BTVERSIONFECHA fecha, "
+                     . " BTVERSIONHORA hora "
                      . " FROM BTVERSION "
                      . " WHERE BTVERSIONID = ?";
         if($sentencia = $this->conexion->prepare($consulta))
@@ -212,17 +212,17 @@ class VersionesRepositorio implements IVersionesRepositorio
             {
                 if($sentencia->execute())
                 {                    
-                    if ($sentencia->bind_result($id, $versionDescripcionCorta, $versionDescripcionLarga, $versionNombrePrincipal, $versionFecha, $versionHora))
+                    if ($sentencia->bind_result($id, $descripcionCorta, $descripcionLarga, $nombrePila, $fecha, $hora))
                     {                        
                         if($sentencia->fetch())
                         {
                             $version = new Version();
                             $version->id =  utf8_encode($id);
-                            $version->versionDescripcionCorta = utf8_encode($versionDescripcionCorta);
-                            $version->versionDescripcionLarga = utf8_encode($versionDescripcionLarga);
-                            $version->versionNombrePrincipal = utf8_encode($versionNombrePrincipal);
-                            $version->versionFecha = utf8_encode($versionFecha);
-                            $version->versionHora = utf8_encode($versionHora);
+                            $version->descripcionCorta = utf8_encode($descripcionCorta);
+                            $version->descripcionLarga = utf8_encode($descripcionLarga);
+                            $version->nombrePila = utf8_encode($nombrePila);
+                            $version->fecha = utf8_encode($fecha);
+                            $version->hora = utf8_encode($hora);
                             $resultado->valor = $version;                           
                         }
                         else

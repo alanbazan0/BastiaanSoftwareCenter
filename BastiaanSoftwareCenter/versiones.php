@@ -171,38 +171,38 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								   		</td>
 								   	
 								    	<td >
-								     		<label style="position: relative; left: 3px; ">Version descripcion corta</label>
+								     		<label style="position: relative; left: 3px; ">Version descripci√≥n corta</label>
 								   		</td>
 								   		<td >
-								     		<input class="input" id="versionDescripcionCortaFormularioInput" descripcion="Descripcion Corta" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px "/>
+								     		<input class="input" id="descripcionCortaFormularioInput" descripcion="DescripciÚn corta" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px "/>
 								   		</td>
 								   		<td >
-								     		<label style="position: relative; left: 3px; ">Version descripcion Larga</label>
+								     		<label style="position: relative; left: 3px; ">Version descripci√≥n Larga</label>
 								   		</td>
 								  		
 								   		<td >
-								     		<input class="input" id="versionDescripcionlargaFormularioInput" descripcion="Descripcion Larga" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px "/>
+								     		<input class="input" id="descripcionLargaFormularioInput" descripcion="DescripciÚn larga" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px "/>
 								   		</td>
 								   </tr>
 								   <tr>
 								   		
 								   		<td >
-								     		<label style="position: relative; left: 3px; ">Version nombre Principal</label>
+								     		<label style="position: relative; left: 3px; ">Nombre Pila</label>
 								   		</td>
 								   		<td >
-								     		<input class="input" id="versionNombrePrincipalFormularioInput" descripcion="Nombre Principal" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px "/>
+								     		<input class="input" id="nombrePilaFormularioInput" descripcion="Nombre pila" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px "/>
 								   		</td>
 								   		<td >
-								     		<label style="position: relative; left: 3px; ">Version fecha </label>
+								     		<label style="position: relative; left: 3px; ">Fecha </label>
 								   		</td>
 								   		<td >
-								     		<input class="input" id="versionFechaFormularioInput" descripcion="fecha" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px "/>
+								     		<input class="input" id="fechaFormularioInput" descripcion="Fecha" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px "/>
 								   		</td>
 								   		<td >
-								     		<label style="position: relative; left: 3px; ">Version hora</label>
+								     		<label style="position: relative; left: 3px; ">Hora</label>
 								   		</td>
 								   		<td >
-								     		<input class="input" id="versionHoraFormularioInput" descripcion="hora " style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px "/>
+								     		<input class="input" id="horaFormularioInput" descripcion="Hora " style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px "/>
 								   		</td>
 								   </tr>
 								   		</table>	    
