@@ -170,7 +170,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								   		</td>
 								   	
 								    	<td >
-								     		<label style="position: relative; left: 3px; ">Version descripciÃ³n corta</label>
+								     		<label style="position: relative; left: 3px; ">Version descripción corta</label>
 								   		</td>
 								   		<td >
 								     		<input class="input" id="descripcionCortaFormularioInput" descripcion="Descripciòn corta" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px "/>
@@ -214,12 +214,12 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 						</div>
 				</div>
 		</div>
-		<table>
+		
 <div id="criteriosDiv" style="display:none ;height: 90%;">
 
 	<div id="menuPrincipal"  align="right" class="contieneCriteriosAribaBtn" style="background-color: #6b6b6b;    height: 56px; " > 
 				<img class='logoBAS' style='float: left;' id='logoFRM' src='assets/pantalla/logoTipo.png'  />
-				<span id="txtTitulo" style="float:left;margin-top: 20px;margin-left: 15px;color: #FFFFFF;float: left;font-family: Verdana;font-size: 11px;font-weight: bold;">Criterios de Selecciòn</span>
+				<span id="txtTitulo" style="float:left;margin-top: 20px;margin-left: 15px;color: #FFFFFF;float: left;font-family: Verdana;font-size: 11px;font-weight: bold;">Criterios de Selecci&oacuten</span>
 				<img style="padding: 2px;" class='imgTipoBoton' id='btnGuardarFormulario' src='assets/botones/imgGuardar.png' onclick='vista.btnGuardarFormulario_onClick();' title='Guardar' />
 				<img style="padding: 2px;" class='imgTipoBoton' id='btnSalirFormulario' src='assets/botones/btnSalir.png' onClick="vista.btnSalirFormulario_onClick();" title='Salir'  />
 			</div>
@@ -254,21 +254,39 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 				</div>
 			</div>
 		 -->
-			<div id="panelesArea0panel0componentescriterios" style="width:50%;height:100%;overflow:hidden;display:inline-block;">
-            	<div id="panelesArea0panel0componentecriterios" style='overflow: auto; position:static;height:100%; width:90%; top:10px;left:3px;'>
-            	 		<div id="grid2" style="float:right; overflow: auto;  height:100%; width:80%; display: inline-block; top:5px;right:3px;"></div>                						
-        		
-        		</div>
-          </div>   
-          <div id="panelesArea0panel0componentescriterios2" style="width:45%;height:100%;overflow:hidden;display:inline-block;">
-            	<div id="panelesArea0panel0componente2" style='overflow: auto; position:static;height:100%; width:90%; top:10px;left:3px;'>
-            	 		<div id="grid3" style="float:left; overflow: auto;  height:100%; width:80%; display: inline-block; top:5px;left:3px;"></div>                						
-        		</div>
-          </div>    
+		 <div id="panelesArea0" style="margin-left: 12px;float:left; height:98%; width:76.5%;">
+						<div id="panelesArea0paneles" class="PcontenComp" style="">
+							<div id="panelesArea0panel0" class="contenedorIEC" style="width: 100%; height: 99.5%; z-index: 1; float: left; margin-right: 2px; margin-bottom: 2px; margin-left: 2px; overflow: hidden;">
+								<div id="panelesArea0panel0barra" class="barracomandosContenedorIEC" style="position:relative;">
+									<span id="panelesArea0panel0Titulo" class="tituloContenedorIEC"></span>	
+								</div>
+								<div id="panelesArea0panel0componentes" style="width:99%;height:99%;overflow:hidden;position:relative;">
+                                	<div id="panelesArea0panel0componente0" style='overflow: auto; position:static;height:98%; width:100%; top:10px;left:3px;'>
+                                	 		<div id="grid2" style="float:left; overflow: auto; position:static; height:95%; width:100%; display: block; top:5px;left:3px;"></div>                						
+                            		</div>
+                           		</div>                                
+							</div>
+						</div>
+					</div>	
+			 <div id="panelesArea1" style="margin-left: 12px;float:left; height:98%; width:20.5%;">
+						<div id="panelesArea1paneles" class="PcontenComp" style="">
+							<div id="panelesArea1panel0" class="contenedorIEC" style="width: 100%; height: 99.5%; z-index: 1; float: left; margin-right: 2px; margin-bottom: 2px; margin-left: 2px; overflow: hidden;">
+								<div id="panelesArea1panel0barra" class="barracomandosContenedorIEC" style="position:relative;">
+									<span id="panelesArea0panel0Titulo" class="tituloContenedorIEC"></span>	
+								</div>
+								<div id="panelesArea1panel0componentes" style="width:99%;height:99%;overflow:hidden;position:relative;">
+                                	<div id="panelesArea1panel0componente0" style='overflow: auto; position:static;height:98%; width:100%; top:10px;left:3px;'>
+                                	 		<div id="grid3" style="float:left; overflow: auto; position:static; height:95%; width:100%; display: block; top:5px;left:3px;"></div>                						
+                            		</div>
+                           		</div>                                
+							</div>
+						</div>
+					</div>	
+           
            
 
 </div>		
-		</table>
+		
 		<div class='ventana' id='PromptListaDistribucion' style='display: none; z-index:9001;'></div>
 		<div class='ventana' id='_promptRelacionReporte' style='display: none;'></div>
 		<div class='ventana' id='PromptCalendario' style='display: none; z-index:9001;'></div>  
