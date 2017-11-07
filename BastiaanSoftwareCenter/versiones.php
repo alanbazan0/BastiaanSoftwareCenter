@@ -83,9 +83,8 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 							<table class="tablaBotonesIEC">
 								<tr>
 									<td><img id="btnAlta" class="botonMenuIEC" title="Alta" src="assets/botones/imgAlta.png" onClick="vista.btnAlta_onClick();"></td>
-									<td><img id="btnBaja" class="botonMenuIEC" title="Baja" src="assets/botones/imgBaja.png" onClick="vista.btnBaja_onClick();"></td>
 									<td><img id="btnCambio" class="botonMenuIEC" title="Cambio" src="assets/botones/imgCambio.png" onClick="vista.btnCambio_onClick();"></td>									
-									<td><img id="btnSeleccion" class="botonMenuIEC" title="Seleccion" src="assets/botones/imgCambio.png" onClick="vista.btnSeleccion_onClick();"></td>
+									<td><img id="btncriterios" class="botonMenuIEC" title="Criterios" src="assets/botones/tres.png" onClick="vista.btncriterios_onClick();"></td>
 									<td><img id="btnSalir" class="botonMenuIEC" title="Salir"  src="assets/botones/btnSalir.png" onClick="vista.btnSalir_onClick();" ></td>
 								</tr>
                              </table>   
@@ -146,7 +145,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
  -->
 			<div id="menuPrincipal"  align="right" class="contieneCriteriosAribaBtn" style="background-color: #6b6b6b;    height: 56px; " > 
 				<img class='logoBAS' style='float: left;' id='logoFRM' src='assets/pantalla/logoTipo.png'  />
-				<span id="txtTitulo" style="float:left;margin-top: 20px;margin-left: 15px;color: #FFFFFF;float: left;font-family: Verdana;font-size: 11px;font-weight: bold;">Postales</span>
+				<span id="txtTitulo" style="float:left;margin-top: 20px;margin-left: 15px;color: #FFFFFF;float: left;font-family: Verdana;font-size: 11px;font-weight: bold;">Versiones</span>
 				<img style="padding: 2px;" class='imgTipoBoton' id='btnGuardarFormulario' src='assets/botones/imgGuardar.png' onclick='vista.btnGuardarFormulario_onClick();' title='Guardar' />
 				<img style="padding: 2px;" class='imgTipoBoton' id='btnSalirFormulario' src='assets/botones/btnSalir.png' onClick="vista.btnSalirFormulario_onClick();" title='Salir'  />
 			</div>
@@ -215,8 +214,61 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 						</div>
 				</div>
 		</div>
+		<table>
+<div id="criteriosDiv" style="display:none ;height: 90%;">
+
+	<div id="menuPrincipal"  align="right" class="contieneCriteriosAribaBtn" style="background-color: #6b6b6b;    height: 56px; " > 
+				<img class='logoBAS' style='float: left;' id='logoFRM' src='assets/pantalla/logoTipo.png'  />
+				<span id="txtTitulo" style="float:left;margin-top: 20px;margin-left: 15px;color: #FFFFFF;float: left;font-family: Verdana;font-size: 11px;font-weight: bold;">Criterios de Selecciòn</span>
+				<img style="padding: 2px;" class='imgTipoBoton' id='btnGuardarFormulario' src='assets/botones/imgGuardar.png' onclick='vista.btnGuardarFormulario_onClick();' title='Guardar' />
+				<img style="padding: 2px;" class='imgTipoBoton' id='btnSalirFormulario' src='assets/botones/btnSalir.png' onClick="vista.btnSalirFormulario_onClick();" title='Salir'  />
+			</div>
+			
+			
+		  <div id="estiloBotonesInferior" class="estiloBotonesInferior" align="center">
+				<div id="criteriosMetaT2" class="criteriosMeta">
+					<div id="criteriosSeleccion0_t2" style="float:left; margin-top: 6px; margin-left: 10px;">
+						<div>
+							<table style="position:relative;left:40px; text-align:left; margin-top:10px; margin-bottom:10px;">
+								<tr>
+									<td style="padding:6px 0px 4px 10px;">		<label  style="font-family: Verdana; font-size: 10px;">Versiones</label></td>
+								</tr>
+								
+							</table>
+						</div>
+					</div>
+					
+			
+                </div>
+		  </div>
 		
-		
+			<!-- 
+			<div id="criteriosSeleccion0_t2" style="float:left; margin-top: 6px; margin-left: 10px;">
+				<div>
+					<table style="position:relative;left:40px; text-align:left; margin-top:10px; margin-bottom:10px;">
+						<tr>
+							<td style="padding:6px 0px 4px 10px;">		<label  style="font-family: Verdana; font-size: 10px;">Versiones</label></td>
+							<td style="padding:6px 0px 4px 10px;">		<input  id='idCriterioInput' type='text' style='height: 20px; width:200px;'/></input></td>	
+						</tr>		
+					</table>
+				</div>
+			</div>
+		 -->
+			<div id="panelesArea0panel0componentescriterios" style="width:50%;height:100%;overflow:hidden;display:inline-block;">
+            	<div id="panelesArea0panel0componentecriterios" style='overflow: auto; position:static;height:100%; width:90%; top:10px;left:3px;'>
+            	 		<div id="grid2" style="float:right; overflow: auto;  height:100%; width:80%; display: inline-block; top:5px;right:3px;"></div>                						
+        		
+        		</div>
+          </div>   
+          <div id="panelesArea0panel0componentescriterios2" style="width:45%;height:100%;overflow:hidden;display:inline-block;">
+            	<div id="panelesArea0panel0componente2" style='overflow: auto; position:static;height:100%; width:90%; top:10px;left:3px;'>
+            	 		<div id="grid3" style="float:left; overflow: auto;  height:100%; width:80%; display: inline-block; top:5px;left:3px;"></div>                						
+        		</div>
+          </div>    
+           
+
+</div>		
+		</table>
 		<div class='ventana' id='PromptListaDistribucion' style='display: none; z-index:9001;'></div>
 		<div class='ventana' id='_promptRelacionReporte' style='display: none;'></div>
 		<div class='ventana' id='PromptCalendario' style='display: none; z-index:9001;'></div>  
@@ -225,7 +277,6 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 		<div class='ventana' id='PromptCorreo' style='display: none;'></div>
 		<div class='ventana' id='PromptSentencia' style='display:none; z-index:9001;'></div>
 		<div class='ventana' id='PromptCriterioSeleccion' style='display:none; z-index:9001;'></div>    
-</div>
 
 </form>
 </body>

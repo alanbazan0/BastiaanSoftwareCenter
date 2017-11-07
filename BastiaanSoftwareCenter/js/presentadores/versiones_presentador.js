@@ -18,8 +18,35 @@ class VersionesPresentador
 		else
 			this.vista.mostrarMensaje("Error",resultado.mensajeError);
 	 }
+	 /* grid3*/ 
+	 consultarPorCampo()
+	 {
+		 var repositorio = new VersionesRepositorio(this);		
+		 repositorio.consultarPorCampo(this,this.consultarPorCampoResultado,this.vista.criteriosCampos);
+	 }
+	 consultarPorCampoResultado(resultado)
+	 {
+		if(resultado.mensajeError=="")
+			this.vista.datos = resultado.valor;
+		else
+			this.vista.mostrarMensaje("Error",resultado.mensajeError);
+	 }
+	/*  */
+	 /* grid2 */
+	 consultarPorVersion()
+	 {
+		 var repositorio = new VersionesRepositorio(this);		
+		 repositorio.consultarPorVersion(this,this.consultarPorVersionResultado,this.vista.criteriosVersion);
+	 }
 	 
-	
+	 consultarPorVersionResultado(resultado)
+	 {
+		if(resultado.mensajeError=="")
+			this.vista.datosCriterios = resultado.valor;
+		else
+			this.vista.mostrarMensaje("Error",resultado.mensajeError);
+	 }
+	 /* */
 	 insertar()
 	 {
 		 var repositorio = new VersionesRepositorio(this);			 
@@ -72,6 +99,8 @@ class VersionesPresentador
 		 else
 			 this.vista.mostrarMensaje("Error","Ocurrió un error al consultar el registro. " + resultado.mensajeError);
 	 }
+	 	 
+
 	 
 	 eliminar()
 	 {

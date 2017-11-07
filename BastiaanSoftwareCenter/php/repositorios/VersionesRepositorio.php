@@ -140,6 +140,59 @@ class VersionesRepositorio implements IVersionesRepositorio
         return $resultado;        
     }
     
+    
+    /* grid 3 */
+    public function consultarPorCampo($criteriosCampos)
+    {
+        $resultado = new Resultado();
+        $campos = array();
+        
+        $consulta = " SELECT "
+            ." BTCAMPOID campoId, "
+            ." BTCAMPONUMERO campoNumero, "
+            ." BTTABLAID tablaId, "
+            ." BTCAMPOTIPO tipoCampo, "
+            ." BTCAMPOTAMANO tamanoCampo, "
+            ." BTCAMPOTITULO tituloCampo " 
+            ." FROM BSTNTRN.BTCAMPO ";
+        //    . " WHERE BTCAMPOID like  CONCAT('%',?,'%') ";
+       if($sentencia = $this->conexion->prepare($consulta))
+                     {
+                         if($sentencia->bind_param("s",$criteriosCampos->campoId))
+                         {
+                            if($sentencia->execute())
+                               {
+                                if ($sentencia->bind_result($campoId, $campoNumero, $tablaId, $tipoCampo, $tamanoCampo, $tituloCampo)  )
+                                     {
+                                        while($row = $sentencia->fetch())
+                                          {
+                                             $campo = (object) [
+                                                 'campoId' => utf8_encode($campoId),
+                                                 'campoNumero' =>  utf8_encode($campoNumero),
+                                                 'tablaId' => utf8_encode($tablaId),
+                                                 'tipoCampo' => utf8_encode($tipoCampo),
+                                                 'tamanoCampo' => utf8_encode($tamanoCampo),
+                                                 'tituloCampo' => utf8_encode($tituloCampo)
+                                                                 ];
+                                             array_push($campos,$campo);
+                                          }
+                                        $resultado->valor = $campos;
+                                       }
+                                      else
+                                    $resultado->mensajeError = "Falló el enlace del resultado.";
+                                   }
+                                else
+                              $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;
+                             }
+                          else
+                       $resultado->mensajeError = "Falló el enlace de parámetros";
+                      }
+                    else
+                          $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
+                                                        
+              return $resultado;
+    }
+    /* fin */
     public function consultar($criteriosSeleccion)
     {     
         $resultado = new Resultado();
@@ -193,6 +246,61 @@ class VersionesRepositorio implements IVersionesRepositorio
         return $resultado;     
     }    
 
+    
+    /* grid 2 */
+   
+    public function consultarPorVersion($criteriosVersion)
+    {
+        $resultado = new Resultado();
+        $registros = array();
+        
+        $consulta =   " SELECT BTCRITERIOID id, CR.BTCAMPOID campoId, BTCRITERIOORDEN orden, BTCRITERIOPRESENTACION presentacion, BTCRITERIOTITULO titulo, BTTABLAID tablaId, BTCAMPOTIPO tipoDato, BTCAMPOTAMANO tamano " .
+                        "FROM BSTNTRN.BTCRITERIO CR ".
+                        "   INNER JOIN BSTNTRN.BTCAMPO C ON CR.BTCAMPOID = C.BTCAMPOID " .
+                        "WHERE BTVERSIONID = ? ".
+                        "ORDER BY BTCRITERIOORDEN";
+        
+        if($sentencia = $this->conexion->prepare($consulta))
+        {
+            if($sentencia->bind_param("i",$criteriosVersion->id))
+            {
+                if($sentencia->execute())
+                {
+                    if ($sentencia->bind_result($id, $campoId, $orden, $presentacion, $titulo,  $tablaId, $tipoDato, $tamano))
+                    {
+                        while($sentencia->fetch())
+                        {
+                            $registro = (object) [
+                                'id' =>  utf8_encode($id),
+                                'campoId' => utf8_encode($campoId),
+                                'orden' => utf8_encode($orden),
+                                'presentacion' => utf8_encode($presentacion),
+                                'titulo' => utf8_encode($titulo),
+                                'tablaId' => utf8_encode($tablaId),
+                                'tipoDato' => utf8_encode($tipoDato),
+                                'tamano' => utf8_encode($tamano)
+                            ];
+                            array_push($registros,$registro);
+                        }
+                        $resultado->valor = $registros;
+                    }
+                    else
+                        $resultado->mensajeError = "Falló el enlace del resultado.";
+                }
+                else
+                    $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;
+            }
+            else
+                $resultado->mensajeError = "Falló el enlace de parámetros";
+        }
+        else
+            $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
+            
+            
+            return $resultado;
+    }        
+    
+    
     public function consultarPorLlaves($llaves)
     {
         

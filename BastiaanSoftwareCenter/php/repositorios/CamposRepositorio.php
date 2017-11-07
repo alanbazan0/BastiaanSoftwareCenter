@@ -7,6 +7,7 @@ include "../interfaces/ICamposRepositorio.php";
 include "../clases/Resultado.php";
 
 
+
 class CamposRepositorio implements  ICamposRepositorio
 {
     protected $conexion;
@@ -21,11 +22,17 @@ class CamposRepositorio implements  ICamposRepositorio
         $resultado = new Resultado();
         $registros = array();
         
-        $consulta =   " SELECT BTCAMPOID campoId, BTCAMPONUMERO campoNumero, BTTABLAID tablaId, BTCAMPOTIPO tipoCampo, BTCAMPOTAMANO tamanoCampo, BTCAMPOTITULO tituloCampo " .
-            "FROM BSTNTRN.BTCAMPO";
-        
-        
-        if($sentencia = $this->conexion->prepare($consulta))
+        $consulta =   " SELECT "
+                     ." BTCAMPOID campoId, "
+                     ." BTCAMPONUMERO campoNumero, "
+                     ." BTTABLAID tablaId, "
+                     ." BTCAMPOTIPO tipoCampo, " 
+                     ." BTCAMPOTAMANO tamanoCampo, " 
+                     ." BTCAMPOTITULO tituloCampo " .
+                      "FROM BSTNTRN.BTCAMPO ";
+                           /*"WHERE BTTABLAID = BTCLIENTE"; */
+  
+         if($sentencia = $this->conexion->prepare($consulta))
         {
             if($sentencia->bind_param("s",$tablas))
             {

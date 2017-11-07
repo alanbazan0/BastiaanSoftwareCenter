@@ -150,7 +150,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
  -->
 			<div id="menuPrincipal"  align="right" class="contieneCriteriosAribaBtn" style="background-color: #6b6b6b;    height: 56px; " > 
 				<img class='logoBAS' style='float: left;' id='logoFRM' src='assets/pantalla/logotipo.png'  />
-				<span id="txtTitulo" style="float:left;margin-top: 20px;margin-left: 15px;color: #FFFFFF;float: left;font-family: Verdana;font-size: 11px;font-weight: bold;">Catálogo de clientes</span>
+				<span id="txtTitulo" style="float:left;margin-top: 20px;margin-left: 15px;color: #FFFFFF;float: left;font-family: Verdana;font-size: 11px;font-weight: bold;">Catálogo de usuarios</span>
 				<img style="padding: 2px;" class='imgTipoBoton' id='btnGuardarFormulario' src='assets/botones/imgGuardar.png' onclick='vista.btnGuardarFormulario_onClick();' title='Guardar' />
 				<img style="padding: 2px;" class='imgTipoBoton' id='btnSalirFormulario' src='assets/botones/btnSalir.png' onClick="vista.btnSalirFormulario_onClick();" title='Salir'  />
 			</div>
@@ -159,189 +159,253 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
  -->
 			
 <!--barra principal -->
-			<div id="cargador" class="cargadorFRM2"></div>
+			<div id="cargador" class="cargadorFRM2" ></div>
 				<div class="pContenido" id="estadoEstructura" >
 						<div class="contenidoNormalUS">
 					 		<div class="explicacionFRM" >
 								<div id="filtros " class="contenedorIEC" style="overflow: auto; position: relative; width: 100%; display: block;">
-								 <div style="width: 80%; display: block; height: 100%;  padding-top: 10px; padding-left: 34px;">								 	
-								   <table WIDHT=25%; HEIGHT=25%;  CELLPADDING=0; cellspacing="10" style="padding-top: 12px; padding-left: 1%; position:relative;  ">
-								   	 <tr>
-								   	 <td >
+								 <div style="width: 96%; display: block; height: 100%;  padding-top: 10px; padding-left: 34px;">								 	
+								   <table WIDHT=25%; HEIGHT=60%;  CELLPADDING=0; cellspacing="10" style="padding-top: 12px; padding-left: 1%; position:relative;display:inline-block; border: #006699 5px solid;">		
+								 				<td>
+								   		<label style="position: relative; left: 100px;">Datos del usuario</label></tr>
+								   		</td>		   	    
+								   	    <tr>
+								    	 <td >
 								     		<label style="position: relative; left: 3px; ">Id de usuario</label>
 								   		</td>
-								   		<td >
+								   		<td>
 								     		<input class="input" id="idFormularioInput" descripcion="Id usuario" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px "/>
 								   		</td>
+								   		</tr>
+								   		<tr>
 								   		 <td >
-								     		<label style="position: relative; left: 3px; ">Password de usuario</label>
+								     		<label style="position: relative; left: 3px; ">Contraseña de usuario</label>
 								   		</td>
 								   		<td >
 								     		<input class="input" id="passwordFormularioInput" descripcion="Password usuario" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px "/>
 								   		</td>
+								        </tr>
+								   		<tr>
 								    	<td >
-								     		<label style="position: relative; left: 3px; ">Primer nombre</label>
+								     		<label style="position: relative; left: 3px; "> Primer nombre</label>
 								   		</td>
 								   		<td >
 								     		<input class="input" id="primerNombreFormularioInput" descripcion="Primer nombre" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px "/>
 								   		</td>
+								   		<tr>
 								   		<td>						    
 								    		<label style="position: relative; left: 3px; ">Segundo nombre</label>
 								   		</td>
 								   		<td>						    
 								    		<input class="input" id="segundoNombreFormularioInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
 								   		</td>
-								    </tr>
-								   	<tr>
+								   		</tr>
+								   		<tr>
 								  		<td>	
-								    		<label style="position: relative; left: 3px; ">Primer apellido</label>
+								    		<label style="position: relative; left: 3px; ">Apellido Paterno</label>
 								   		</td>
 								   		<td>	
 								    		<input class="input" id="apellidoPaternoFormularioInput" style="width:130px; font-family:Verdana; font-size:9px; text-align:left; color:#006699;position: relative; left: 6px"/>
 								   		</td>
+								   		</tr>
+								   		<tr>
 								   		<td>	
-								    		<label style="position: relative; left: 3px; ">Segundo apellido</label>
+								    		<label style="position: relative; left: 3px;  ">Apellido Materno</label>
 								   		</td>
 								   		<td>	
 								    		<input class="input" id="apellidoMaternoFormularioInput" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
 								   		</td>
+								   		</tr>
 								   		<td>	
 								    		<label style="position: relative; left: 3px; ">Nombre completo</label>
 								   		</td>
 								   		<td>	
-								    		<input class="input" id="nombreCompletoFormularioInput" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
+								    		<input class="input" id="nombreCompletoFormularioInput" style=" width:230px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px" disabled/>
 								   		</td>
+								   		</tr>
+								   		<tr>
 								   		<td >
 								     		<label style="position: relative; left: 3px; ">Genero</label>
 								   		</td>
 								   		<td >
 								     		<input class="input" id="idGeneroFormularioInput" descripcion="Id genero" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px "/>
 								   		</td>
-								    </tr>
-								    
-								    <tr>
-								    <td>	
+								   		</tr>
+								   		<tr>
+								        <td>	
 								    		<label style="position: relative; left: 3px;">Nacionalidad</label>
 								   		</td>
 								   		<td>	
 								    		<input class="input" id="nacionalidadFormularioInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
 								   		</td>
+								   		</tr>
+								   		<tr>
 								   		<td>	
 								    		<label style="position: relative; left: 3px;">Fecha de nacimiento</label>
 								   		</td>
 								   		<td>	
-								    		<input class="input" id="fechaNacimientoFormularioInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
+								    		<input class="input" id="fechaNacimientoFormularioInput" style="width:80px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
 								   		</td>
-								  		<td>	
-								    		<label style="position: relative; left: 3px;">RFC</label>
-								   		</td>
-								   		<td>	
-								    		<input class="input" id="rfcFormularioInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
-								   		</td>
-								   		
-								   		<td>	
-								    		<label style="position: relative; left: 3px;">NSS</label>
-								   		</td>
-								   		<td>	
-								    		<input class="input" id="nssFormularioInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
-								   		</td>
-								   		<td>	
-								    		<label style="position: relative; left: 3px;">CURP</label>
-								   		</td>
-								   		<td>	
-								    		<input class="input" id="curpFormularioInput" style=";width:130px; font-family:Verdana; font-size:9px; text-align:left; color:#006699;position: relative; left: 6px"/>
-								   		</td>
-								   	</tr>
-								   	<tr>
-								   	<td>	
-								    		<label style="position: relative; left: 3px;">Codigo Postal</label>
-								   		</td>
-								   		<td>	
-								    		<input class="input" id="codigoPostalFormularioInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
-								   		</td>
-								   		<td>	
-								    		<td>	
-								    		<label style="position: relative; left: 3px;">Numero exterior</label>
-								   		</td>
-								   		<td>	
-								    		<input class="input" id="numeroExteriorFormularioInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
-								   		</td>
-								   		<td>
-								   			 <label style="position: relative; left: 3px; ">Numero interior</label>
-								   		</td>
-								   		<td>
-								   			 <input class="input" id="numeroInteriorFormularioInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
-								   		</td>
-								   		<td>
-								   			<label style="position: relative; left: 3px; ">Calle</label>
-								   		</td>
-								   		<td>
-								   			<input class="input" id="calleFormularioInput" style="width:130px; font-family:Verdana; font-size:9px; text-align:left; color:#006699;position: relative; left: 6px"/>
-								   		</td>		
-								   		<td>
-								   			<label style="position: relative; left: 3px; ">Colonia</label>
-								   		</td>
-								   		<td>
-								   			<input class="input" id="coloniaFormularioInput" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
-								   		</td>
-								    </tr>
-								    <tr>
+								   		</tr>
+								   		</table>
+    								    <table WIDHT=25%; HEIGHT=60%;  CELLPADDING=0; cellspacing="10" style="padding-top: 12px; padding-left: 1%; position:relative;display:inline-block; border: #006699 5px solid  ">								  								   
     								    <td>
-    								    	<label style="position: relative; left: 3px; ">Estado</label>
-    								    </td>
-    								    <td>
-    								    	<input class="input" id="estadoFormularioInput" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
-    								    </td>
-    								    <td>
-    								    	<label style="position: relative; left: 3px; ">Pais</label>
-    								    </td>
-    								    <td>
-    								    	<input class="input" id="paisFormularioInput" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
-    								    </td>
-    								     <td>
-    								    	<label style="position: relative; left: 3px; ">Ciudad</label>
-    								    </td>
-    								    <td>
-    								    	<input class="input" id="ciudadFormularioInput" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
-    								    </td>
-    								     <td>
-    								    	<label style="position: relative; left: 3px; ">Direccion completa</label>
-    								    </td>
-    								    <td>
-    								    	<input class="input" id="direccionFormularioInput" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
-    								    </td>
+								   		<label style="position: relative; left: 90px;">Datos de contacto del usuario</label></tr>
+								   		</td>
+    								    <tr>
     								    <td>
     								    	<label style="position: relative; left: 3px; ">Correo electronico de empresa</label>
     								    </td>
     								     <td>
-    								    	<input class="input" id="correoElectronicoEmpresaFormularioInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
+    								    	<input class="input" id="correoElectronicoEmpresaFormularioInput" style="width:165px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
     								    </td>
+    								    </tr>
+    								    <tr>
     								    <td>
     								    	<label style="position: relative; left: 3px; ">Correo electronico personal</label>
     								    </td>
     								     <td>
-    								    	<input class="input" id="correoElectronicoPersonalFormularioInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
-    								    </td>
-								    </tr>
-								    <tr>
-								    <td>
+    								    	<input class="input" id="correoElectronicoPersonalFormularioInput" style="width:165px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
+    							  	    </td>
+								        </tr>
+								        <tr>
+								        <td>
     								    	<label style="position: relative; left: 3px; ">Numero de telefono celular</label>
     								    </td>
     								    <td>
     								    	<input class="input" id="telefonoCelularFormularioInput" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
     								    </td>
+    								    </tr>
+    								    <tr>
     								    <td>
     								    	<label style="position: relative; left: 3px; ">Numero de telefono de casa</label>
     								    </td>
     								    <td>
     								    	<input class="input" id="telefonoCasaFormularioInput" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
     								    </td>
+    								    </tr>
+    								    <tr>
     								    <td>
     								    	<label style="position: relative; left: 3px; ">Numero de telefono de contacto</label>
     								    </td>
     								    <td>
     								    	<input class="input" id="telefonoContactoFormularioInput" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
     								    </td>
+    								    </tr>
+    								    
+								   </table>
+								   <table WIDHT=25%; HEIGHT=60%;  CELLPADDING=0; cellspacing="10" style="padding-top: 12px; padding-left: 1%; position:relative;display:inline-block;  border: #006699 5px solid ">								  		
+								    	<td>
+								   		<label style="position: relative; left: 130px;">Dirección del usuario</label></tr>
+								   		</td>
+								    	<tr>
+								    	<td>	
+								    	<label style="position: relative; left: 3px;">Codigo Postal</label>
+								   		</td>
+								   		<td>	
+								    		<input class="input" id="codigoPostalFormularioInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
+								   		</td>
+								   		</tr>
+								   		<tr>
+								   		<td>		
+								    		<label style="position: relative; left: 3px;">Numero exterior</label>
+								   		</td>
+								   		<td>	
+								    		<input class="input" id="numeroExteriorFormularioInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
+								   		</td>
+								   		</tr>
+								   		<tr>
+								   		<td>
+								   			 <label style="position: relative; left: 3px; ">Numero interior</label>
+								   		</td>
+								   		<td>
+								   			 <input class="input" id="numeroInteriorFormularioInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
+								   		</td>
+								   		</tr>
+								   		<tr>
+								   		<td>
+								   			<label style="position: relative; left: 3px; ">Calle</label>
+								   		</td>
+								   		<td>
+								   			<input class="input" id="calleFormularioInput" style="width:130px; font-family:Verdana; font-size:9px; text-align:left; color:#006699;position: relative; left: 6px"/>
+								   		</td>	
+								   		</tr>
+								   		<tr>	
+								   		<td>
+								   			<label style="position: relative; left: 3px; ">Colonia</label>
+								   		</td>
+								   		<td>
+								   			<input class="input" id="coloniaFormularioInput" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
+								   		</td>
+								        </tr>
+								        <tr>
+    								    <td>
+    								    	<label style="position: relative; left: 3px; ">Estado</label>
+    								    </td>
+    								    <td>
+    								    	<input class="input" id="estadoFormularioInput" style=" width:230px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
+    								    </td>
+    								    </tr>
+    								    <tr>
+    								    <td>
+    								    	<label style="position: relative; left: 3px; ">Pais</label>
+    								    </td>
+    								    <td>
+    								    	<input class="input" id="paisFormularioInput" style=" width:80px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
+    								    </td>
+    								    </tr>
+    								    <tr>
+    								     <td>
+    								    	<label style="position: relative; left: 3px; ">Ciudad</label>
+    								    </td>
+    								    <td>
+    								    	<input class="input" id="ciudadFormularioInput" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
+    								    </td>
+    								    </tr>
+    								    <tr>
+    								     <td>
+    								    	<label style="position: relative; left: 3px; ">Dirección completa</label>
+    								    </td>
+    								     <td>
+    								    	<input class="input" id="direccionFormularioInput" style=" width:300px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
+    								    </td>
+    								    </tr>
+    								    </table>
+    								    <table WIDHT=25%; HEIGHT=25%;  CELLPADDING=0; cellspacing="10" style="padding-top: 12px; padding-left: 1%; position:relative;display:inline-block; border: #006699 5px solid;"> 
+								   		<tr>
+								   		<td>
+								   		<label style="position: relative; left: 80px;">Datos de identificación del usuario</label></tr>
+								   		</td>
+								  		<td>	
+								    		<label style="position: relative; left: 3px;">RFC</label>
+								   		</td>
+								   		
+								   		<td>	
+								    		<input class="input" id="rfcFormularioInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
+								   		</td>
+								   		</tr>
+								   		<tr>
+								   		<td>	
+								    		<label style="position: relative; left: 3px;">NSS</label>
+								   		</td>
+								   		<td>	
+								    		<input class="input" id="nssFormularioInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
+								   		</td>
+								   		</tr>
+								   		<tr>
+								   		<td>	
+								    		<label style="position: relative; left: 3px;">CURP</label>
+								   		</td>
+								   		<td>	
+								    		<input class="input" id="curpFormularioInput" style=";width:168px; font-family:Verdana; font-size:9px; text-align:left; color:#006699;position: relative; left: 6px"/>
+								   		</td>
+								     	</tr>
+								    	</table>
+								    	<table WIDHT=25%; HEIGHT=25%;  CELLPADDING=0; cellspacing="10" style="padding-top: 12px; padding-left: 1%; position:relative;display:inline-block; border: #006699 5px solid;"> 
+								    	<td>
+    								    	<label style="position: relative; left: 200px;text-align:center;">Datos para la empresa</label>
+    								    </td>
+								    	<tr>
     								    <td>
     								    	<label style="position: relative; left: 3px; ">Numero de empleado</label>
     								    </td>
@@ -352,7 +416,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								    		<label style="position: relative; left: 3px;">Fecha de ingreso</label>
 								   		</td>
 								   		<td>	
-								    		<input class="input" id="fechaIngresoFormularioInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
+								    		<input class="input" id="fechaIngresoFormularioInput" style="width:80px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
 								   		</td>
 								   		</tr>
 								   		<tr>
@@ -368,6 +432,8 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								   		<td>	
 								    		<input class="input" id="claveBancariaFormularioInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
 								   		</td>
+								   		</tr>
+								   		<tr>
 								   		<td>	
 								    		<label style="position: relative; left: 3px;">Sueldo</label>
 								   		</td>
@@ -378,8 +444,10 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								    		<label style="position: relative; left: 3px;">Fecha de baja</label>
 								   		</td>
 								   		<td>	
-								    		<input class="input" id="fechaBajaFormularioInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
+								    		<input class="input" id="fechaBajaFormularioInput" style="width:80px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
 								   		</td>
+								   		</tr>
+								   		<tr>
 								   		 <td>	
 								    		<label style="position: relative; left: 3px;">Id de baja</label>
 								   		</td>
@@ -387,25 +455,20 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								    		<input class="input" id="idBajaFormularioInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
 								   		</td>
 								   		<td>	
-								    		<label style="position: relative; left: 3px;">Extension de usuario</label>
+								    		<label style="position: relative; left: 3px;">Extensión de usuario</label>
 								   		</td>
 								   		<td>	
 								    		<input class="input" id="extensionUsuarioFormularioInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px"/>
 								   		</td>
 								    </tr>
-								   </table>
-								    	    
-								    	
+								    </table>
 									</div>
-									
 								 </div>
 								</div>				  	
 							</div>
 						</div>
 				</div>
 		</div>
-		
-		
 		<div class='ventana' id='PromptListaDistribucion' style='display: none; z-index:9001;'></div>
 		<div class='ventana' id='_promptRelacionReporte' style='display: none;'></div>
 		<div class='ventana' id='PromptCalendario' style='display: none; z-index:9001;'></div>  
