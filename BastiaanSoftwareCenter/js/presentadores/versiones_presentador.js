@@ -27,11 +27,11 @@ class VersionesPresentador
 	 consultarPorCampoResultado(resultado)
 	 {
 		if(resultado.mensajeError=="")
-			this.vista.datos = resultado.valor;
+			this.vista.datosCampos = resultado.valor;
 		else
 			this.vista.mostrarMensaje("Error",resultado.mensajeError);
 	 }
-	/*  */
+	
 	 /* grid2 */
 	 consultarPorVersion()
 	 {

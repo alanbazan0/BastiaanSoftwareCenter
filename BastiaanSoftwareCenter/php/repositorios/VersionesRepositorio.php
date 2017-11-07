@@ -142,7 +142,7 @@ class VersionesRepositorio implements IVersionesRepositorio
     
     
     /* grid 3 */
-    public function consultarPorCampo($criteriosCampos)
+    public function consultarPorCampo()
     {
         $resultado = new Resultado();
         $campos = array();
@@ -155,10 +155,9 @@ class VersionesRepositorio implements IVersionesRepositorio
             ." BTCAMPOTAMANO tamanoCampo, "
             ." BTCAMPOTITULO tituloCampo " 
             ." FROM BSTNTRN.BTCAMPO ";
-        //    . " WHERE BTCAMPOID like  CONCAT('%',?,'%') ";
        if($sentencia = $this->conexion->prepare($consulta))
                      {
-                         if($sentencia->bind_param("s",$criteriosCampos->campoId))
+                        if(true)
                          {
                             if($sentencia->execute())
                                {

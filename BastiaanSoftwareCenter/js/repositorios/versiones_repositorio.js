@@ -74,10 +74,9 @@ class VersionesRepositorio
 		this.functionRetorno = functionRetorno;
 		var parametros;
 		parametros = "accion=consultarPorCampo";
-		parametros += "&criteriosCampos=" + encodeURIComponent(JSON.stringify(criteriosCampos));
 		var contextHandler = new AjaxContextHandler();
 		var host = window.location.origin + "/BastiaanSoftwareCenter";	
-		var ai = new Ajaxv2(host +"/php/repositorios/Versiones.php", this, this.consultarPorVersionResultado, "POST", parametros, contextHandler);		
+		var ai = new Ajaxv2(host +"/php/repositorios/Versiones.php", this, this.consultarPorCampoResultado, "POST", parametros, contextHandler);		
 		contextHandler.AddAjaxv2Object(ai); 		
 		ai.GetPost(true);
 	}

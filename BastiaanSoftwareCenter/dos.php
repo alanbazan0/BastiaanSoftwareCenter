@@ -5,29 +5,29 @@ class VersionesVista
 		this.ventana = ventana;
 		this.presentador = new VersionesPresentador(this);
 		this.manejadorEventos = new ManejadorEventos();
-		this.grid = new GridReg("grid");
-	    this.grid2= new GridReg("grid2");
-	    this.grid3= new GridReg("grid3");
+		this.grid = new GridReg("grid");	
+		this.grid2 = new GridReg("grid2");	
 	}
 	onLoad()
 	{			
 		this.crearColumnasGrid();
-		this.cargargridCriterio();
 		this.presentador.consultar();
-	    //this.presentador.consultarPorVersion();
-	   //this.presentador.consultarPorCampo();
-
 	}
+	
 	crearColumnasGrid()
 	{
 		this.grid._columnas = [
-			{longitud:100, 	titulo:"Id",   	alias:"id", alineacion:"I" },
-			{longitud:200, 	titulo:"DescripciÃ²n Corta",   alias:"descripcionCorta", alineacion:"I" },
-		    {longitud:200, 	titulo:"DescripciÃ²n Larga",   alias:"descripcionLarga", alineacion:"I" },
-			{longitud:200, 	titulo:"principal",   alias:"nombrePila", alineacion:"I" },
-			{longitud:200, 	titulo:"Fecha",   alias:"fecha", alineacion:"I" },
-			{longitud:200, 	titulo:"Hora",   alias:"hora", alineacion:"I" }
+			
+			{longitud:100, 	titulo:"titulo",   	alias:"titulo", alineacion:"I" },
+			{longitud:200, 	titulo:"presentar",   alias:"presentacion", alineacion:"I" },
+			{longitud:200, 	titulo:"orden",   alias:"orden", alineacion:"I" },
+			{longitud:200, 	titulo:"presentacion",   alias:"presentacion", alineacion:"I" }
+			
+			
         ];
+		
+	
+		
 		this.grid._origen="vista";
 		this.grid.manejadorEventos=this.manejadorEventos;
 		this.grid._ajustarAltura = true;
@@ -38,76 +38,59 @@ class VersionesVista
 		this.grid._colorLetraEncabezado = "#ffffff";
 		this.grid._colorLetraCuerpo = "#000000";
 		this.grid._regExtra=20;
+	/*	this.grid. */
 		this.grid._presentacionGranTotal = "SI";
-		this.grid.render();		
+		this.grid.render();	
+		
+		
+		
+	this.grid2._columnas = [
+			
+			{longitud:100, 	titulo:"Titulo campo",   	alias:"titituloCampo", alineacion:"I" }
+			
+        ];
+		
+
+		this.grid2._origen="vista";
+		this.grid2.manejadorEventos=this.manejadorEventos;
+		this.grid2._ajustarAltura = true;
+		this.grid2._colorRenglon1 = "#FFFFFF";	
+		this.grid2._colorRenglon2 = "#f8f2de";
+		this.grid2._colorEncabezado1 = "#FF6600";
+		this.grid2._colorEncabezado2 = "#FF6600";
+		this.grid2._colorLetraEncabezado = "#ffffff";
+		this.grid2._colorLetraCuerpo = "#000000";
+		this.grid2._regExtra=20;
+	/*	this.grid. */
+		this.grid2._presentacionGranTotal = "SI";
+		this.grid2.render();	
 	}
-	cargargridCriterio()
-	{		 
-		 this.grid2._columnas = [
-				{longitud:100, 	titulo:"titulo",   	alias:"titulo", alineacion:"I" },
-				{longitud:200, 	titulo:"presentar",   alias:"presentacion", alineacion:"I" },
-				{longitud:200, 	titulo:"orden",   alias:"orden", alineacion:"I" },
-				{longitud:200, 	titulo:"presentacion",   alias:"presentacin", alineacion:"I" }
-				                ];
-			this.grid2._origen="vista";
-			this.grid2.manejadorEventos=this.manejadorEventos;
-			this.grid2._ajustarAltura = true;
-			this.grid2._colorRenglon1 = "#FFFFFF";	
-			this.grid2._colorRenglon2 = "#f8f2de";
-			this.grid2._colorEncabezado1 = "#FF6600";
-			this.grid2._colorEncabezado2 = "#FF6600";
-			this.grid2._colorLetraEncabezado = "#ffffff";
-			this.grid2._colorLetraCuerpo = "#000000";
-			this.grid2._regExtra=20;
-			this.grid2._presentacionGranTotal = "SI";
-			this.grid2.render();
-			// este el grid 3
-			this.grid3._columnas = [
-				{longitud:200, 	titulo:"Titulo campo",   	alias:"tituloCampo", alineacion:"I" }
-	                                ];
-			this.grid3._origen="vista";
-			this.grid3.manejadorEventos=this.manejadorEventos;
-			this.grid3._ajustarAltura = true;
-			this.grid3._colorRenglon1 = "#FFFFFF";	
-			this.grid3._colorRenglon2 = "#f8f2de";
-			this.grid3._colorEncabezado1 = "#FF6600";
-			this.grid3._colorEncabezado2 = "#FF6600";
-			this.grid3._colorLetraEncabezado = "#ffffff";
-			this.grid3._colorLetraCuerpo = "#000000";
-			this.grid3._regExtra=20;
-			this.grid3._presentacionGranTotal = "SI";
-			this.grid3.render();	
-	 }
+	
 	/*
 	 * Eventos en botones
 	*/
-		btnAlta_onClick()
+	
+	btnAlta_onClick()
 	{
 		this.modo = "ALTA";
 		this.limpiarFormulario();	
 		this.mostrarFormulario();		
 	}
+	
+	
+	btnCriterios_onClick()
+	{
+		this.modo = "CRITERIOS";
+		this.mostrarFormularioCriterios();		
 		
-		btncriterios_onClick()
-		{
-		    this.modo = "CRITERIOS";
-	        this.mostrarCriterios();
-	        this.presentador.consultarPorCampo();
-		    this.presentador.consultarPorVersion();
-		}	
-		
-		
-		btnConsulta_onClick()
-		{
-			this.presentador.consultar();
-		}	
-		
-		
+	}
+	
+	
 	btnBaja_onClick()
 	{ 
 		if(this.grid._selectedItem!=null)
 		{
-			var confirmacion = confirm("Â¿Esta seguro que desea eliminar el registro?")
+			var confirmacion = confirm("¿Esta seguro que desea eliminar el registro?")
 		    if (confirmacion)
 		    {
 		    	this.presentador.eliminar();
@@ -116,6 +99,7 @@ class VersionesVista
 		else
 			this.mostrarMensaje("Selecciona un registro para eliminar.");
 	}
+	
 	
 	btnCambio_onClick()
 	{
@@ -130,7 +114,11 @@ class VersionesVista
 			this.mostrarMensaje("Selecciona un registro para modificar.");
 				
 	}
-
+	
+	btnConsulta_onClick()
+	{
+		this.presentador.consultar();
+	}	
 	
 	btnGuardarFormulario_onClick()
 	{		
@@ -150,7 +138,7 @@ class VersionesVista
 	
 	btnSalir_onClick()
 	{
-		var confirmacion = confirm("Â¿Esta seguro que desea salir?")
+		var confirmacion = confirm("¿Esta seguro que desea salir?")
 	    if (confirmacion)
 	    	{
 	    	//TODO: Cerrar ventana aqui
@@ -176,10 +164,10 @@ class VersionesVista
 	}
 	
 	/*
-	 * Valores de los criterios de selecciÃ³n
+	 * Valores de los criterios de selección
 	 */
 	
-	get criteriosSeleccion ()
+	get criteriosSeleccion()
 	{
 		 var criteriosSeleccion = 
 		 {				    
@@ -188,44 +176,56 @@ class VersionesVista
 		 return criteriosSeleccion;
 	}		
 	
-
-	get criteriosVersion ()
-	{
-		 var criteriosVersion = 
-		 {				    
-			id:this.grid._selectedItem.id
-		 }
-		 return criteriosVersion;
-	}	
+	
+	
+	
+	
+	
+	/*crear un objeto
+	 * 
+	 * 
+	 * 
+	 
+	 fuction Criterios(){
+	 
+	 
+	 }
+	 
+	 var criterios = new  Criterios();
+	 
+	
+	 
+	 Criterios = fuction(){
+	 var criterios;
+	 
+	 this.setcriterios = function(n){
+	 
+	       criterios = n;
+	    }
+	    
+	    this.getcriterios = function(){
+	     
+	     return criterios;
+	    }
+	    
+	 
+	 }
+	 
+	 
+	 
+	 
+	 */
+	
+	
 	
 	/*
-	get criteriosCampos ()
-	{
-		 var criteriosCampos = 
-		 {		
-	  //      campoTitulo:$('#campoTitulo').val()	 
-		 }
-		 return criteriosCampos;
-	}	
-*/	
+	 * Asignar registros al grid
+	 */
 	
 	set datos(valor)
 	{
 		this.grid._dataProvider = valor;	
 		this.grid.render();
-	}
-	
-	
-	set datosCriterios(valor)
-	{
-		this.grid2._dataProvider = valor;	
-		this.grid2.render();
-	}
-	
-	set  datosCampos(valor)
-	{
-		this.grid3._dataProvider = valor;	
-		this.grid3.render();
 	}
 	
 	/*
@@ -240,8 +240,6 @@ class VersionesVista
 		$('#nombrePilaFormularioInput').val(valor.nombrePila);
 		$('#fechaFormularioInput').val(valor.fecha);
 		$('#horaFormularioInput').val(valor.hora);
-		
-		
 	}
 	
 	get version()
@@ -269,32 +267,38 @@ class VersionesVista
 	
 	mostrarFormulario()
 	{
-		$('#principalDiv').hide();
+		$('#principalDiv').hide()
+	 /*   $('#criteriosDiv').hide()	*/
 		$('#formularioDiv').show();
 	}
 	
-	mostrarCriterios()
-	{
-		$('#principalDiv').hide();
+	
+	/*
+	mostrarFormularioCriterios(){
+		$('#principalDiv').hide()	
+		$('#formularioDiv').hide()
 		$('#criteriosDiv').show();
 		
 	}
 	
+	
+	*/
 	salirFormulario()
 	{
-		$('#principalDiv').show();	
-	    $('#criteriosDiv').hide();
+		$('#principalDiv').show()
+	    $('#criteriosDiv').hide()
 		$('#formularioDiv').hide();
 	}
 	
 	/*
-	 *ValidaciÃ³n de los datos obligatorios del formulario 
+	 *Validación de los datos obligatorios del formulario 
 	 */
 	
 	campoObligatorioVacio()
 	{
 		if($('#descripcionCortaFormularioInput').val()=='')					
 			return $('#descripcionCortaFormularioInput');
+		
 		
 		if($('#descripcionLargaFormularioInput').val()=='')					
 			return $('#descripcionLargaFormularioInput');
