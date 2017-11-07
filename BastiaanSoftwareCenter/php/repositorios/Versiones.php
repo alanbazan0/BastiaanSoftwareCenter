@@ -59,6 +59,18 @@ try
                 if($resultado!=null)
                     echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
             break;
+            case 'consultarPorVersion':
+                $criteriosVersion = json_decode(REQUEST('criteriosVersion'));
+                $resultado = $repositorio->consultarPorVersion($criteriosVersion);
+                if($resultado!=null)
+                    echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
+                    break;
+            case 'consultarPorCampo':
+                $criteriosCampos = json_decode(REQUEST('criteriosCampos'));
+                $resultado = $repositorio->consultarPorCampo($criteriosCampos);
+                if($resultado!=null)
+                    echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
+                    break;
             case 'consultar':
                 $criteriosSeleccion = json_decode(REQUEST('criteriosSeleccion'));
                 $resultado = $repositorio->consultar($criteriosSeleccion);

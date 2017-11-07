@@ -12,4 +12,9 @@ interface IVersionesRepositorio
     public function consultarPorLlaves($id);
     public function consultar($criteriosSeleccion);
     
+    /* grid2 */
+    public function consultarPorVersion($criteriosVersion);
+     /* grid3 */
+   public function consultarPorCampo($criteriosCampos);
+    
 }

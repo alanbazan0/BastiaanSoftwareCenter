@@ -48,31 +48,66 @@ class VersionesRepositorio
 		var datos = JSON.parse(resultado);
 		this.functionRetorno.call(this.contexto,JSON.parse(resultado));
 	}
-	
-	
+
 	consultar(contexto,functionRetorno, criteriosSeleccion)
 	{		
 		this.contexto = contexto;
 		this.functionRetorno = functionRetorno;
-		
 		var parametros;
 		parametros = "accion=consultar";
 		parametros += "&criteriosSeleccion=" + encodeURIComponent(JSON.stringify(criteriosSeleccion));
-		
-		
 		var contextHandler = new AjaxContextHandler();
 		var host = window.location.origin + "/BastiaanSoftwareCenter";	
 		var ai = new Ajaxv2(host +"/php/repositorios/Versiones.php", this, this.consultarResultado, "POST", parametros, contextHandler);		
 		contextHandler.AddAjaxv2Object(ai); 		
 		ai.GetPost(true);
 	}
-	
 	consultarResultado(resultado)
 	{
 		var datos = JSON.parse(resultado);
 		this.functionRetorno.call(this.contexto,JSON.parse(resultado));
 	}	
-	
+/* grid3 */ 
+	consultarPorCampo(contexto,functionRetorno, criteriosCampos)
+	{		
+		this.contexto = contexto;
+		this.functionRetorno = functionRetorno;
+		var parametros;
+		parametros = "accion=consultarPorCampo";
+		parametros += "&criteriosCampos=" + encodeURIComponent(JSON.stringify(criteriosCampos));
+		var contextHandler = new AjaxContextHandler();
+		var host = window.location.origin + "/BastiaanSoftwareCenter";	
+		var ai = new Ajaxv2(host +"/php/repositorios/Versiones.php", this, this.consultarPorVersionResultado, "POST", parametros, contextHandler);		
+		contextHandler.AddAjaxv2Object(ai); 		
+		ai.GetPost(true);
+	}
+	consultarPorCampoResultado(resultado)
+	{
+		var datos = JSON.parse(resultado);
+		this.functionRetorno.call(this.contexto,JSON.parse(resultado));
+	}	
+ /*  */
+/* grid2 */
+	consultarPorVersion(contexto,functionRetorno, criteriosVersion)
+	{		
+		this.contexto = contexto;
+		this.functionRetorno = functionRetorno;
+		
+		var parametros;
+		parametros = "accion=consultarPorVersion";
+		parametros += "&criteriosVersion=" + encodeURIComponent(JSON.stringify(criteriosVersion));
+		var contextHandler = new AjaxContextHandler();
+		var host = window.location.origin + "/BastiaanSoftwareCenter";	
+		var ai = new Ajaxv2(host +"/php/repositorios/Versiones.php", this, this.consultarPorVersionResultado, "POST", parametros, contextHandler);		
+		contextHandler.AddAjaxv2Object(ai); 		
+		ai.GetPost(true);
+	}
+	consultarPorVersionResultado(resultado)
+	{
+		var datos = JSON.parse(resultado);
+		this.functionRetorno.call(this.contexto,JSON.parse(resultado));
+	}	
+	/*  */
 	consultarPorLlaves(contexto,functionRetorno, llaves)
 	{		
 		this.contexto = contexto;
@@ -88,12 +123,12 @@ class VersionesRepositorio
 		ai.GetPost(true);
 	}
 	
+	
 	consultarPorLlavesResultado(resultado)
 	{
 		var datos = JSON.parse(resultado);
 		this.functionRetorno.call(this.contexto,JSON.parse(resultado));
 	}
-	
 	
 	eliminar(contexto,functionRetorno,llaves)
 	{				
