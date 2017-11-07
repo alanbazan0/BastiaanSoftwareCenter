@@ -47,7 +47,7 @@ class VersionesVista
 				{longitud:100, 	titulo:"titulo",   	alias:"titulo", alineacion:"I" },
 				{longitud:200, 	titulo:"presentar",   alias:"presentacion", alineacion:"I" },
 				{longitud:200, 	titulo:"orden",   alias:"orden", alineacion:"I" },
-				{longitud:200, 	titulo:"presentacion",   alias:"presentacion", alineacion:"I" }
+				{longitud:200, 	titulo:"presentacion",   alias:"presentacin", alineacion:"I" }
 				                ];
 			this.grid2._origen="vista";
 			this.grid2.manejadorEventos=this.manejadorEventos;
@@ -189,6 +189,15 @@ class VersionesVista
 	}		
 	
 	
+	get criteriosVersion ()
+	{
+		 var criteriosVersion = 
+		 {				    
+			id:this.grid._selectedItem.id
+		 }
+		 return criteriosVersion;
+	}	
+	
 	/*
 	 * Asignar registros al grid
 	 */
@@ -197,6 +206,13 @@ class VersionesVista
 	{
 		this.grid._dataProvider = valor;	
 		this.grid.render();
+	}
+	
+	
+	set datosCriterios(valor)
+	{
+		this.grid2._dataProvider = valor;	
+		this.grid2.render();
 	}
 	
 	/*

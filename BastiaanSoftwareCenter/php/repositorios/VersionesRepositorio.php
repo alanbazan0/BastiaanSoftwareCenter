@@ -262,7 +262,7 @@ class VersionesRepositorio implements IVersionesRepositorio
         
         if($sentencia = $this->conexion->prepare($consulta))
         {
-            if($sentencia->bind_param("i",$criteriosVersion))
+            if($sentencia->bind_param("i",$criteriosVersion->id))
             {
                 if($sentencia->execute())
                 {

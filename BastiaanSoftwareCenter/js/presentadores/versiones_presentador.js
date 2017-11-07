@@ -42,7 +42,7 @@ class VersionesPresentador
 	 consultarPorVersionResultado(resultado)
 	 {
 		if(resultado.mensajeError=="")
-			this.vista.datos = resultado.valor;
+			this.vista.datosCriterios = resultado.valor;
 		else
 			this.vista.mostrarMensaje("Error",resultado.mensajeError);
 	 }
