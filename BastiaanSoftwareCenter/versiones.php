@@ -1,6 +1,5 @@
 <?php
 include 'php/clases/Utilidades.php';
-
 $modulo = REQUEST('CNMDLSID');
 $opcionTerminal = REQUEST('CNOTRMID');
 $version = REQUEST('CNOTRMVER');
@@ -8,8 +7,6 @@ $usuario = REQUEST('CNUSERID');
 $nomTrabajador = REQUEST('CNUSERDESC');
 $usuarioDsc = REQUEST('CNUSERDESC');
 $CNUSERDESC = REQUEST('CNUSERDESC');
-
-
 ?>
 <html> 
 <title>Catalogo de Versiones</title>
@@ -229,77 +226,12 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 				<div id="criteriosMetaT2" class="criteriosMeta">
 					<div id="criteriosSeleccion0_t2" style="float:left; margin-top: 6px; margin-left: 10px;">
 						<div>
-							<table >
-								   <tr>
-								    	<td >
-								     		 <label style=" width:130px; position: relative; left: 3px; ">Id</label>
-								   		</td>
-								   		<td >
-								     		<input class="input" id="idFormularioInput" descripcion="id" type="text" maxlength="20" value="" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px;" disabled />
-								   		</td>
-								   	
-								    	<td >
-								     		<label style="position: relative; left: 15px; ">Version descripci√≥n corta</label>
-								   		</td>
-								   		<td >
-								     		<input class="input" id="descripcionCortaFormularioInput" descripcion="DescripciÚn corta" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 22px "/>
-								   		</td>
-								   		<td >
-								     		<label style="position: relative; left: 40px; ">Version descripci√≥n Larga</label>
-								   		</td>
-								  		
-								   		<td >
-								     		<input class="input" id="descripcionLargaFormularioInput" descripcion="DescripciÚn larga" style=" width:275px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 52px "/>
-								   		</td>
-								   </tr>
-								    <tr>
-								       <td >
-								       </td >
-								   </tr>
-								   <tr>
-								       <td >
-								       </td >
-								   </tr>
-								   <tr>
-								    <tr>
-								       <td >
-								       </td >
-								   </tr>
-								   <tr>
-								   		
-								   		<td >
-								     		<label style="position: relative; left: 3px; ">Nombre Pila</label>
-								   		</td>
-								   		<td >
-								     		<input class="input" id="nombrePilaFormularioInput" descripcion="Nombre pila" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px "/>
-								   		</td>
-								   		<td >
-								     		<label style="position: relative; left: 15px; ">Fecha </label>
-								   		</td>
-								   		<td >
-								     		<input class="input" id="fechaFormularioInput" descripcion="Fecha" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: -66px "/>
-								   		</td>
-								   		<td >
-								     		<label style="position: relative; left: -41px; ">Hora</label>
-								   		</td>
-								   		<td >
-								     		<input class="input" id="horaFormularioInput" descripcion="Hora " style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: -128px "/>
-								   		</td>
-								   </tr>
-								   <tr>
-								       <td >
-								       </td >
-								   </tr>
-								   <tr>
-								       <td >
-								       </td >
-								   </tr>
-								    <tr>
-								       <td >
-								       </td >
-								   </tr>
-								   <tr>
-						   </table>	
+							<table style="position:relative;left:40px; text-align:left; margin-top:10px; margin-bottom:10px;">
+								<tr>
+									<td style="padding:6px 0px 4px 10px;">		<label  style="font-family: Verdana; font-size: 10px;">Versiones</label></td>
+								</tr>
+								
+							</table>
 						</div>
 					</div>
 					
