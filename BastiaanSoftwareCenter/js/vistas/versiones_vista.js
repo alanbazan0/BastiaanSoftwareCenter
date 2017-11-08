@@ -47,9 +47,9 @@ class VersionesVista
 		 this.grid2._columnas = [
 			 
 			{longitud:200, 	titulo:"titulo",   	alias:"titulo", alineacion:"I" },
-				{longitud:250, 	titulo:"presentar",   alias:"presentacion", alineacion:"I" },
+				{longitud:250, 	titulo:"presentar",   alias:"presentacion", alineacion:"I", itemRender:this.renderSwitch  },
 				{longitud:250, 	titulo:"orden",   alias:"orden", alineacion:"I" },
-				{longitud:250, 	titulo:"presentacion",   alias:"presentacin", alineacion:"I" }
+				{longitud:250, 	titulo:"presentacion",   alias:"tablaId", alineacion:"I" }
 				                ];
 			this.grid2._origen="vista";
 			this.grid2.manejadorEventos=this.manejadorEventos;
@@ -101,8 +101,36 @@ class VersionesVista
 	        this.mostrarCriterios();
 	        this.presentador.consultarPorCampo();
 		    this.presentador.consultarPorVersion();
+		    
+		    var today = new Date();
+			var dd = today.getDate();
+			var mm = today.getMonth()+1;
+			var yyyy = today.getFullYear();
+			
+			if(dd<10){dd='0'+dd} if(mm<10){mm='0'+mm} 
+				var strToday = new Date(mm+'/'+dd+'/'+yyyy); // = '01/'+mm+'/'+yyyy;
+			var strTodayFirst = new Date(mm+'/'+'01/'+yyyy); // = '01/'+mm+'/'+yyyy;
+			
+			
+			$("#"+ "fechaFormularioInput").datepicker( {dateFormat:'dd/mm/yy'});
+			$("#"+ "fechaFormularioInput").datepicker( "option", $.datepicker.regional[ 'es' ] );
+			$("#"+ "fechaFormularioInput").datepicker({showOn:'button', buttonImage:'assets/botones/calendario.svg', buttonImageOnly:true});
+			$("#"+ "fechaFormularioInput").datepicker('option', {dateFormat:'dd/mm/yy'});
+			$("#"+ "fechaFormularioInput").datepicker("setDate", strTodayFirst);
+			$("#"+ "fechaFormularioInput").datepicker();	
+			
+			if(this.grid._selectedItem!=null)
+			{			
+				this.modo = "CAMBIO";
+				this.limpiarFormulario();	
+				this.mostrarFormulario();		
+				this.presentador.consultarPorLlaves();
+			}
+			else
+				this.mostrarMensaje("Selecciona un registro para modificar.");
 		}	
 		
+
 		
 		btnConsulta_onClick()
 		{
@@ -293,6 +321,18 @@ class VersionesVista
 	    $('#criteriosDiv').hide();
 		$('#formularioDiv').hide();
 	}
+	renderSwitch(renglon, campoBase)
+	{		
+		var contenido = "";
+		
+		
+		contenido += "<center>NO<label class='switch'>";
+		contenido += "<input type='checkbox'>A";
+		contenido += "<span class='slider round''></span>";
+		contenido += "</label>SI</center>";
+		
+	    return contenido;
+	}	
 	
 	/*
 	 *Validación de los datos obligatorios del formulario 
