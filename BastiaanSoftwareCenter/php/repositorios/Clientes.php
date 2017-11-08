@@ -2,6 +2,7 @@
 use php\clases\AdministradorConexion;
 use php\clases\JsonMapper;
 use php\modelos\Cliente;
+use php\repositorios\CamposGrid1Repositorio;
 use php\repositorios\ClientesRepositorio;
 use php\modelos\Resultado;
 
@@ -13,7 +14,7 @@ include '../clases/JsonMapper.php';
 include '../clases/Utilidades.php';
 include '../clases/AdministradorConexion.php';
 include '../repositorios/ClientesRepositorio.php';
-
+include '../repositorios/CamposGrid1Repositorio.php';
 
 
 header('Access-Control-Allow-Origin: *');
@@ -57,7 +58,14 @@ try
             break;
             case 'consultarDinamicamente':
                 $filtros = json_decode(REQUEST('filtros'));
-                $resultado = $repositorio->consultarDinamicamente($filtros);                
+                $version = REQUEST('version');                
+                $camposRepositorio = new CamposGrid1Repositorio($conexion);
+                $resultado = $camposRepositorio->consultarPorVersion($version);
+                if($resultado->mensajeError=='')
+                {
+                    $campos = $resultado->valor; 
+                    $resultado = $repositorio->consultarDinamicamente($filtros,$campos); 
+                }
             break;
         }
     }

@@ -11,6 +11,6 @@ interface IClientesRepositorio
     
     public function consultarPorLlaves($id); 
     public function consultar($criteriosSeleccion);   
-    public function consultarDinamicamente($filtros);
+    public function consultarDinamicamente($filtros,$campos);
 }
 
