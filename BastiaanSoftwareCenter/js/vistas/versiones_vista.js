@@ -43,13 +43,14 @@ class VersionesVista
 	}
 	cargargridCriterio()
 	{		 
+		
 		 this.grid2._columnas = [
+			 
 				{longitud:100, 	titulo:"titulo",   	alias:"titulo", alineacion:"I" },
 				{longitud:200, 	titulo:"presentar",   alias:"presentacion", alineacion:"I" },
 				{longitud:200, 	titulo:"orden",   alias:"orden", alineacion:"I" },
-				{longitud:200, 	titulo:"Campo Id",   alias:"campoId", alineacion:"I" },
-				{longitud:200, 	titulo:"Tabla Id",   alias:"tablaId", alineacion:"I" },
-				{longitud:200, 	titulo:"Tamaño",   alias:"tamano", alineacion:"I" }	
+				{longitud:200, 	titulo:"Campo Id",   alias:"campoId", alineacion:"I" }
+				
 				                ];
 			this.grid2._origen="vista";
 			this.grid2.manejadorEventos=this.manejadorEventos;
