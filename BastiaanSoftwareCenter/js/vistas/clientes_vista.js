@@ -32,7 +32,8 @@ class ClientesVista
 			{longitud:200, 	titulo:"Calle",   alias:"calle", alineacion:"I" },	
 			{longitud:200, 	titulo:"Colonia",   alias:"colonia", alineacion:"I" },	
 			{longitud:200, 	titulo:"Estado",   alias:"estado", alineacion:"I" },	
-			{longitud:200, 	titulo:"País",   alias:"pais", alineacion:"I" },	
+			{longitud:200, 	titulo:"País",   alias:"pais", alineacion:"I" },
+			{longitud:200, 	titulo:"Regimen Fiscal",   alias:"regimen", alineacion:"I" },	
 		]
 		
 		this.grid._origen="vista";

@@ -4,7 +4,7 @@ namespace php\modelos;
 class ClienteTelefono
 {
     public $id;
-    public $consecutivo;
+    //public $consecutivo;
     public $nir;
     public $serie;
     public $telefonoCliente;

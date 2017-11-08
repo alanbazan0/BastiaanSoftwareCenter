@@ -208,7 +208,8 @@ class ClientesRepositorio implements IClientesRepositorio
                     . " BTCLIENTECOLONIA colonia, "
                     . " BTCLIENTEESTADO estado, "
                     . " BTCLIENTEPAIS pais, "
-                    . " BTCLIENTECORRELEC correoElectronico "
+                    . " BTCLIENTECORRELEC correoElectronico,"
+                    . " BTCLIENTEREGIMEN regimen"
                     . " FROM BSTNTRN.BTCLIENTE  "
                     . " WHERE BTCLIENTENCOMPLETO like  CONCAT('%',?,'%') "
                     . " AND BTCLIENTERFC like  CONCAT('%',?,'%') "
@@ -220,7 +221,7 @@ class ClientesRepositorio implements IClientesRepositorio
             {
                 if($sentencia->execute())
                 {                
-                    if ($sentencia->bind_result($id, $primerNombre, $segundoNombre, $apellidoPaterno, $apellidoMaterno,  $rfc, $nss, $curp, $codigoPostal, $numeroExterior, $numeroInterior, $calle, $colonia, $estado, $pais,  $correoElectronico )  )
+                    if ($sentencia->bind_result($id, $primerNombre, $segundoNombre, $apellidoPaterno, $apellidoMaterno,  $rfc, $nss, $curp, $codigoPostal, $numeroExterior, $numeroInterior, $calle, $colonia, $estado, $pais,  $correoElectronico, $regimen)  )
                     {                    
                         while($row = $sentencia->fetch())
                         {
@@ -240,7 +241,8 @@ class ClientesRepositorio implements IClientesRepositorio
                                 'colonia' => utf8_encode($colonia),
                                 'estado' => utf8_encode($estado),
                                 'pais' => utf8_encode($pais),
-                                'correoElectronico' => utf8_encode($correoElectronico)
+                                'correoElectronico' => utf8_encode($correoElectronico),
+                                'regimen' => utf8_encode($regimen)
                             ];  
                             array_push($clientes,$cliente);
                         }

@@ -10,7 +10,7 @@ $usuarioDsc = REQUEST('CNUSERDESC');
 $CNUSERDESC = REQUEST('CNUSERDESC');
 ?>
 <html> 
-<title>Catalogo de Telefonos cliente</title>
+<title>Cátalogo de teléfonos cliente</title>
 <head>	
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<script language="JavaScript" type="text/javascript" src="js/librerias/jquery-1.6.2.min.js"></script>
@@ -88,7 +88,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								</tr>
                              </table>   
 						</div>
-						<div id="titulo" style="margin-left:280px;" class="tituloIEC">Cliente Telefonos</div>
+						<div id="titulo" style="margin-left:280px;" class="tituloIEC">Teléfonos del cliente</div>
 					</div>
 				</div>
             </div>        
@@ -100,8 +100,8 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 						<div>
 							<table style="position:relative;left:40px; text-align:left; margin-top:10px; margin-bottom:10px;">
 								<tr>
-									<td style="padding:6px 0px 4px 10px;">		<label  style="font-family: Verdana; font-size: 10px;">Consecutivo</label></td>
-									<td style="padding:6px 0px 4px 10px;">		<input  id='consecutivoCriterioInput' type='text' style='height: 20px; width:200px;'/></input></td>	
+									<td style="padding:6px 0px 4px 10px;">		<label  style="font-family: Verdana; font-size: 10px;">Id Cliente</label></td>
+									<td style="padding:6px 0px 4px 10px;">		<input  id='idCriterioInput' type='text' style='height: 20px; width:200px;'/></input></td>	
 								</tr>
 								
 							</table>
@@ -144,7 +144,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
  -->
 			<div id="menuPrincipal"  align="right" class="contieneCriteriosAribaBtn" style="background-color: #6b6b6b;    height: 56px; " > 
 				<img class='logoBAS' style='float: left;' id='logoFRM' src='assets/pantalla/logoTipo.png'  />
-				<span id="txtTitulo" style="float:left;margin-top: 20px;margin-left: 15px;color: #FFFFFF;float: left;font-family: Verdana;font-size: 11px;font-weight: bold;">Telefonos</span>
+				<span id="txtTitulo" style="float:left;margin-top: 20px;margin-left: 15px;color: #FFFFFF;float: left;font-family: Verdana;font-size: 11px;font-weight: bold;">Teléfonos</span>
 				<img style="padding: 2px;" class='imgTipoBoton' id='btnGuardarFormulario' src='assets/botones/imgGuardar.png' onclick='vista.btnGuardarFormulario_onClick();' title='Guardar' />
 				<img style="padding: 2px;" class='imgTipoBoton' id='btnSalirFormulario' src='assets/botones/btnSalir.png' onClick="vista.btnSalirFormulario_onClick();" title='Salir'  />
 			</div>
@@ -162,20 +162,20 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								   <table WIDHT=25%; HEIGHT=25%;  CELLPADDING=0; cellspacing="10" style="padding-top: 12px; padding-left: 1%; position:relative;  ">
 								   <tr>
 								    	<td >
-								     		 <label style=" width:130px; position: relative; left: 3px; ">N�mero Cliente</label>
+								     		 <label style=" width:130px; position: relative; left: 3px; ">Número Cliente</label>
 								   		</td>
 								   		<td >
 								     		<input class="input" id="idFormularioInput" descripcion="id" type="text" maxlength="20" value="" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px;" disabled />
 								   		</td>
 								   	
-								    	<td >
-								     		<label style="position: relative; left: 3px; ">Consecutivo</label>
+								    	<!-- <td >
+								     		<label style="position: relative; left: 3px;" hidden>Consecutivo</label>
 								   		</td>
 								   		<td >
-								     		<input class="input" id="consecutivoFormularioInput" descripcion="consecutivo" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px "/>
-								   		</td>
+								     		<input class="input" id="consecutivoFormularioInput" descripcion="consecutivo" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px " hidden/>
+								   		</td> -->
 								   		  	<td >
-								     		<label style="position: relative; left: 3px; ">Telefono Cliente</label>
+								     		<label style="position: relative; left: 3px; ">Teléfono Cliente</label>
 								   		</td>
 								  
 								   		<td >
@@ -192,13 +192,13 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								     		<input class="input" id="nirFormularioInput" descripcion="nir" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px "/>
 								   		</td>
 								   		<td >
-								     		<label style="position: relative; left: 3px; ">serie</label>
+								     		<label style="position: relative; left: 3px; ">Serie</label>
 								   		</td>
 								   		<td >
 								     		<input class="input" id="serieFormularioInput" descripcion="serie" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px "/>
 								   		</td>
 								   			<td >
-								     		<label style="position: relative; left: 3px; ">numeracion</label>
+								     		<label style="position: relative; left: 3px; ">Numeración</label>
 								   		</td>
 								  		
 								   		<td >
@@ -206,13 +206,13 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								   		</td>
 								    </tr>		
 								   				<td >
-								     		<label style="position: relative; left: 3px; ">compa�ia</label>
+								     		<label style="position: relative; left: 3px; ">Compañia</label>
 								   		</td>
 								   		<td >
 								     		<input class="input" id="companiaFormularioInput" descripcion="compania" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px "/>
 								   		</td>
 								   				<td >
-								     		<label style="position: relative; left: 3px; ">Tipo Telefono</label>
+								     		<label style="position: relative; left: 3px; ">Tipo Teléfono</label>
 								   		</td>
 								   		<td >
 								     		<input class="input" id="tipoTelefonoFormularioInput" descripcion="serie" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px "/>

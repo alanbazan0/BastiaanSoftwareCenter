@@ -66,8 +66,7 @@ try
                     echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
                     break;
             case 'consultarPorCampo':
-                $criteriosCampos = json_decode(REQUEST('criteriosCampos'));
-                $resultado = $repositorio->consultarPorCampo($criteriosCampos);
+                $resultado = $repositorio->consultarPorCampo();
                 if($resultado!=null)
                     echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
                     break;

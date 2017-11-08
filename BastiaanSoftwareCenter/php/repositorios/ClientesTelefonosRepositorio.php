@@ -59,7 +59,7 @@ class ClientesTelefonosRepositorio implements IClientesTelefonosRepositorio
             $id = $resultado->valor;
             $consulta = " INSERT INTO BSTNTRN.BTCLIENTETEL "
                         . " (BTCLIENTETELNOCTEID, "
-                        . " BTCLIENTETELCONSID, "
+                        //. " BTCLIENTETELCONSID, "
                         . " BTCLIENTETELNIR, "
                         . " BTCLIENTETELSERIE, " 
                         . " BTCLIENTETELNUM, "
@@ -69,7 +69,7 @@ class ClientesTelefonosRepositorio implements IClientesTelefonosRepositorio
                         . " VALUE(?,?,?,?,?,?,?,?) ";
             if($sentencia = $this->conexion->prepare($consulta))
             {
-                if( $sentencia->bind_param("isssssss",$id, $clientetelefono->consecutivo,
+                if( $sentencia->bind_param("issssss",$id, //$clientetelefono->consecutivo,
                                                    $clientetelefono->telefonoCliente,
                                                    $clientetelefono->nir,
                                                    $clientetelefono->serie,
@@ -118,7 +118,7 @@ class ClientesTelefonosRepositorio implements IClientesTelefonosRepositorio
     {     
         $resultado = new Resultado();
         $consulta = " UPDATE BSTNTRN.BTCLIENTETEL SET"
-                    . " BTCLIENTETELCONSID = ? , "
+                    //. " BTCLIENTETELCONSID = ? , "
                     . " BTCLIENTETELNIR = ? , "
                     . " BTCLIENTETELSERIE = ? , "
                     . " BTCLIENTETELNUM = ? , "
@@ -128,7 +128,7 @@ class ClientesTelefonosRepositorio implements IClientesTelefonosRepositorio
                     . " WHERE BTCLIENTETELNOCTEID = ? ";                  
         if($sentencia = $this->conexion->prepare($consulta))
         {
-            if($sentencia->bind_param("ssssssss",$clientetelefono->consecutivo,
+            if($sentencia->bind_param("sssssss",/*$clientetelefono->consecutivo,*/
                                                  $clientetelefono->nir,
                                                  $clientetelefono->serie,
                                                  $clientetelefono->telefonoCliente,
@@ -158,7 +158,7 @@ class ClientesTelefonosRepositorio implements IClientesTelefonosRepositorio
        
         $consulta =   " SELECT "
                       . " BTCLIENTETELNOCTEID id, "
-                      . " BTCLIENTETELCONSID consecutivo, "
+                      //. " BTCLIENTETELCONSID consecutivo, "
                       . " BTCLIENTETELNIR nir, "
                       . " BTCLIENTETELSERIE serie, "
                       . " BTCLIENTETELNUM telefonoCliente,"
@@ -166,20 +166,20 @@ class ClientesTelefonosRepositorio implements IClientesTelefonosRepositorio
                       . " BTCLIENTETELCIA compania, "
                       . " BTCLIENTETELTTELEFONOID tipoTelefono "
                       . " FROM BSTNTRN.BTCLIENTETEL "
-                      . " WHERE BTCLIENTETELCONSID like CONCAT('%',?,'%') ";
+                      . " WHERE BTCLIENTETELNOCTEID like CONCAT('%',?,'%') ";
         if($sentencia = $this->conexion->prepare($consulta))
         {
-            if($sentencia->bind_param("s",$criteriosSeleccion->consecutivo))
+            if($sentencia->bind_param("s",$criteriosSeleccion->id))
             {
                 if($sentencia->execute())
                 {                
-                    if ($sentencia->bind_result($id, $consecutivo,  $nir, $serie, $telefonoCliente, $numeracion, $compania, $tipoTelefono)  )
+                    if ($sentencia->bind_result($id, /*$consecutivo*/  $nir, $serie, $telefonoCliente, $numeracion, $compania, $tipoTelefono)  )
                     {                    
                         while($row = $sentencia->fetch())
                         {
                             $clientetelefono = (object) [
                                 'id' =>  utf8_encode($id),
-                                'consecutivo' => utf8_encode($consecutivo),
+                                //'consecutivo' => utf8_encode($consecutivo),
                                 'nir' => utf8_encode($nir),
                                 'serie' => utf8_encode($serie),
                                 'telefonoCliente' => utf8_encode($telefonoCliente),
@@ -213,7 +213,7 @@ class ClientesTelefonosRepositorio implements IClientesTelefonosRepositorio
         $resultado = new Resultado();       
         $consulta =   " SELECT "
                     . " BTCLIENTETELNOCTEID id, "
-                    . " BTCLIENTETELCONSID consecutivo, "
+                    //. " BTCLIENTETELCONSID consecutivo, "
                     . " BTCLIENTETELNIR nir, "
                     . " BTCLIENTETELSERIE serie, "
                     . " BTCLIENTETELNUM telefonoCliente,"
@@ -234,7 +234,7 @@ class ClientesTelefonosRepositorio implements IClientesTelefonosRepositorio
                         {
                             $clientetelefono = new ClienteTelefono();
                             $clientetelefono->id = utf8_encode($id);
-                            $clientetelefono->consecutivo = utf8_encode($consecutivo);
+                           // $clientetelefono->consecutivo = utf8_encode($consecutivo);
                             $clientetelefono->telefonoCliente = utf8_encode($telefonoCliente);
                             $clientetelefono->nir = utf8_encode($nir);
                             $clientetelefono->serie = utf8_encode($serie);

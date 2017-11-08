@@ -18,14 +18,14 @@ class ClientesTelefonosVista
 	{
 		this.grid._columnas = [
 			
-			{longitud:100, 	titulo:"Numero Cliente",   	alias:"id", alineacion:"I" }, 
-			{longitud:200, 	titulo:"consecutivo",   alias:"consecutivo", alineacion:"I" },
-			{longitud:200, 	titulo:"Telefono Cliente",   alias:"telefonoCliente", alineacion:"I" },
+			{longitud:100, 	titulo:"Número Cliente",   	alias:"id", alineacion:"I" }, 
+			//{longitud:200, 	titulo:"Consecutivo",   alias:"consecutivo", alineacion:"I" },
+			{longitud:200, 	titulo:"Teléfono Cliente",   alias:"telefonoCliente", alineacion:"I" },
 			{longitud:200, 	titulo:"Nir",   alias:"nir", alineacion:"I" },
 			{longitud:100, 	titulo:"Serie",   	alias:"serie", alineacion:"I" }, 
-			{longitud:200, 	titulo:"Numeracion",   alias:"numeracion", alineacion:"I" },
-			{longitud:200, 	titulo:"Campañia",   alias:"compania", alineacion:"I" },
-			{longitud:200, 	titulo:"Tipo telefono",   alias:"tipoTelefono", alineacion:"I" },
+			{longitud:200, 	titulo:"Numeración",   alias:"numeracion", alineacion:"I" },
+			{longitud:200, 	titulo:"Campaña",   alias:"compania", alineacion:"I" },
+			{longitud:200, 	titulo:"Tipo teléfono",   alias:"tipoTelefono", alineacion:"I" },
 			
 			
         ]
@@ -139,7 +139,7 @@ class ClientesTelefonosVista
 	{
 		 var criteriosSeleccion = 
 		 {				    
-			consecutivo:$('#consecutivoCriterioInput').val()
+			id:$('#idCriterioInput').val()
 		 }
 		 return criteriosSeleccion;
 	}		
@@ -162,7 +162,7 @@ class ClientesTelefonosVista
 	set Clientetelefono(valor)
 	{		
 		$('#idFormularioInput').val(valor.id);
-		$('#consecutivoFormularioInput').val(valor.consecutivo);
+		//$('#consecutivoFormularioInput').val(valor.consecutivo);
 		$('#telefonoClienteFormularioInput').val(valor.telefonoCliente);
 		$('#nirFormularioInput').val(valor.nir);
 		$('#serieFormularioInput').val(valor.serie);
@@ -178,7 +178,7 @@ class ClientesTelefonosVista
 		 var Clientetelefono = 
 		 {	
 		    id:$('#idFormularoInput').val(),
-			consecutivo:$('#consecutivoFormularioInput').val(),
+			//consecutivo:$('#consecutivoFormularioInput').val(),
 			telefonoCliente:$('#telefonoClienteFormularioInput').val(),
 			nir:$('#nirFormularioInput').val(v),
 			serie:$('#serieFormularioInput').val(),
@@ -231,7 +231,7 @@ class ClientesTelefonosVista
 	limpiarFormulario()
 	{
 		$('#idFormularioInput').val("");		
-		$('#consecutivoFormularioInput').val("");
+		//$('#consecutivoFormularioInput').val("");
 		$('#telefonoClienteFormularioInput').val("");
 		$('#nirFormularioInput').val("");
 		$('#serieFormularioInput').val("");

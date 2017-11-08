@@ -21,5 +21,6 @@ class Cliente
     public $pais;
     public $direccion;
     public $correoElectronico; 
+    public $regimen;
 }
 
