@@ -46,11 +46,10 @@ class VersionesVista
 		
 		 this.grid2._columnas = [
 			 
-				{longitud:100, 	titulo:"titulo",   	alias:"titulo", alineacion:"I" },
-				{longitud:200, 	titulo:"presentar",   alias:"presentacion", alineacion:"I" },
-				{longitud:200, 	titulo:"orden",   alias:"orden", alineacion:"I" },
-				{longitud:200, 	titulo:"Campo Id",   alias:"campoId", alineacion:"I" }
-				
+			{longitud:200, 	titulo:"titulo",   	alias:"titulo", alineacion:"I" },
+				{longitud:250, 	titulo:"presentar",   alias:"presentacion", alineacion:"I" },
+				{longitud:250, 	titulo:"orden",   alias:"orden", alineacion:"I" },
+				{longitud:250, 	titulo:"presentacion",   alias:"presentacin", alineacion:"I" }
 				                ];
 			this.grid2._origen="vista";
 			this.grid2.manejadorEventos=this.manejadorEventos;

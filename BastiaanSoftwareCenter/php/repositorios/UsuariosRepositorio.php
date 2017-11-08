@@ -98,13 +98,13 @@ class UsuariosRepositorio implements IUsuariosRepositorio
             $usuario->extensionUsuario))
      {
        if(!$sentencia->execute())
-     $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;
+     $resultado->mensajeError = "Fallï¿½ la ejecuciï¿½n (" . $this->conexion->errno . ") " . $this->conexion->error;
       }
   else
-       $resultado->mensajeError = "Falló el enlace de parámetros";
+       $resultado->mensajeError = "Fallï¿½ el enlace de parï¿½metros";
        }
          else
-   $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
+   $resultado->mensajeError = "Fallï¿½ la preparaciï¿½n: (" . $this->conexion->errno . ") " . $this->conexion->error;
         
         return $resultado;
     }
@@ -123,13 +123,13 @@ class UsuariosRepositorio implements IUsuariosRepositorio
                         $resultado->valor = $llaves->id;
                     }
                     else
-                        $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;
+                        $resultado->mensajeError = "Fallï¿½ la ejecuciï¿½n (" . $this->conexion->errno . ") " . $this->conexion->error;
                 }
                 else
-                    $resultado->mensajeError = "Falló el enlace de parámetros";
+                    $resultado->mensajeError = "Fallï¿½ el enlace de parï¿½metros";
             }
             else
-                $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
+                $resultado->mensajeError = "Fallï¿½ la preparaciï¿½n: (" . $this->conexion->errno . ") " . $this->conexion->error;
                 
                 return $resultado;
     }
@@ -217,12 +217,12 @@ class UsuariosRepositorio implements IUsuariosRepositorio
    $resultado->valor=true;
    }
  else
-  $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;
+  $resultado->mensajeError = "Fallï¿½ la ejecuciï¿½n (" . $this->conexion->errno . ") " . $this->conexion->error;
    }
- else  $resultado->mensajeError = "Falló el enlace de parámetros";
+ else  $resultado->mensajeError = "Fallï¿½ el enlace de parï¿½metros";
   }
   else
-  $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
+  $resultado->mensajeError = "Fallï¿½ la preparaciï¿½n: (" . $this->conexion->errno . ") " . $this->conexion->error;
    return $resultado;
     }
     
@@ -324,16 +324,16 @@ if($sentencia = $this->conexion->prepare($consulta))
   $resultado->valor = $usuarios;
   }
            else
-       $resultado->mensajeError = "Falló el enlace del resultado.";
+       $resultado->mensajeError = "Fallï¿½ el enlace del resultado.";
          }
      else
-   $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;
+   $resultado->mensajeError = "Fallï¿½ la ejecuciï¿½n (" . $this->conexion->errno . ") " . $this->conexion->error;
       }
    else
- $resultado->mensajeError = "Falló el enlace de parámetros";
+ $resultado->mensajeError = "Fallï¿½ el enlace de parï¿½metros";
  }
   else
- $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
+ $resultado->mensajeError = "Fallï¿½ la preparaciï¿½n: (" . $this->conexion->errno . ") " . $this->conexion->error;
         return $resultado;
     }
     
@@ -427,22 +427,62 @@ if($sentencia = $this->conexion->prepare($consulta))
                         $resultado->valor = $usuario;
   }
        else
-    $resultado->mensajeError = "No se encontró ningún resultado.";
+    $resultado->mensajeError = "No se encontrï¿½ ningï¿½n resultado.";
      }
       else
-   $resultado->mensajeError = "Falló el enlace del resultado";
+   $resultado->mensajeError = "Fallï¿½ el enlace del resultado";
      }
    else
-  $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;
+  $resultado->mensajeError = "Fallï¿½ la ejecuciï¿½n (" . $this->conexion->errno . ") " . $this->conexion->error;
    }
    else
-  $resultado->mensajeError = "Falló el enlace de parámetros";
+  $resultado->mensajeError = "Fallï¿½ el enlace de parï¿½metros";
  }
   else
-$resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
+$resultado->mensajeError = "Fallï¿½ la preparaciï¿½n: (" . $this->conexion->errno . ") " . $this->conexion->error;
  return $resultado;
     }
     
+    
+    public function consultarPorIdContrasena($id, $contrasena)
+    {
+        $resultado = new Resultado();
+        $consulta = "SELECT SIOUSUARIOID id, SIOUSUARIONCOMPLETO nombre " .
+            "FROM SIOUSUARIO " .
+            "WHERE SIOUSUARIOID = ? AND SIOUSUARIOPSW = ?";
+        if($sentencia = $this->conexion->prepare($consulta))
+        {
+            if($sentencia->bind_param("ss",$id,$contrasena))
+            {
+                if($sentencia->execute())
+                {
+                    
+                    if ($sentencia->bind_result($id, $nombre))
+                    {                        
+                        if ($sentencia->fetch())
+                        {
+                            $usuario = (object) [
+                                'id' =>  utf8_encode($id),
+                                'nombre' => utf8_encode($nombre)
+                            ];
+                            $resultado->valor = $usuario;
+                        }
+                        else
+                            $resultado->mensajeError = "La combinaciÃ³n de usuario y contraseÃ±a es incorrecta.";
+                    }
+                    else
+                        $resultado->mensajeError = "FallÃ³ el enlace del resultado";
+                }
+                else 
+                    $resultado->mensajeError = "FallÃ³ el enlace de parÃ¡metros";
+            }
+            else
+                $resultado->mensajeError = "FallÃ³ el enlace de parÃ¡metros";
+        }
+        else
+            $resultado->mensajeError = "FallÃ³ la preparaciÃ³n: (" . $this->conexion->errno . ") " . $this->conexion->error;
+        return $resultado;
+    }   
     
     
     

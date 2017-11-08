@@ -10,6 +10,7 @@ interface IClientesRepositorio
     public function eliminar($id);
     
     public function consultarPorLlaves($id); 
-    public function consultar($criteriosSeleccion);    
+    public function consultar($criteriosSeleccion);   
+    public function consultarDinamicamente($filtros,$campos);
 }
 

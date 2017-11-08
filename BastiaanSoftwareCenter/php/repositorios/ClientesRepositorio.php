@@ -1,7 +1,7 @@
 <?php
 namespace php\repositorios;
 
-use Exception;
+
 use php\interfaces\IClientesRepositorio;
 use php\modelos\Cliente;
 use php\modelos\Resultado;
@@ -9,9 +9,11 @@ use php\modelos\Resultado;
 
 include "../interfaces/IClientesRepositorio.php";
 include "../modelos/Cliente.php";
-include "../clases/Resultado.php";
+//include "../clases/Resultado.php";
+include "RepositorioBase.php";
+require_once("../clases/Resultado.php");
 
-class ClientesRepositorio implements IClientesRepositorio
+class ClientesRepositorio extends RepositorioBase implements IClientesRepositorio
 {
     protected $conexion;
     public function __construct($conexion)
@@ -336,6 +338,85 @@ class ClientesRepositorio implements IClientesRepositorio
        return $resultado;
     }
 
+    public function consultarDinamicamente($filtros, $campos)
+    {
+        $resultado = new Resultado();
+        $clientes = array();        
+        
+        $consulta = $this->select($campos);
+        $consulta .= " FROM BSTNTRN.BTCLIENTE ";
+     /*   $consulta =   " SELECT "
+                     . " BTCLIENTENUMERO id, "
+                        . " BTCLIENTEPNOMBRE primerNombre, "
+                        . " BTCLIENTESNOMBRE segundoNombre, "
+                        . " BTCLIENTEAPATERNO apellidoPaterno, "
+                        . " BTCLIENTEAMATERNO apellidoMaterno, "
+                        . " BTCLIENTERFC rfc, "
+                        . " BTCLIENTENSS nss, "
+                        . " BTCLIENTECURP curp, "
+                        . " BTCLIENTECPID codigoPostal, "
+                        . " BTCLIENTENEXTERIOR numeroExterior, "
+                        . " BTCLIENTENINTERIOR numeroInterior, "
+                        . " BTCLIENTECALLE calle, "
+                        . " BTCLIENTECOLONIA colonia, "
+                        . " BTCLIENTEESTADO estado, "
+                        . " BTCLIENTEPAIS pais, "
+                        . " BTCLIENTECORRELEC correoElectronico "
+                        . " FROM BSTNTRN.BTCLIENTE  ";*/
+        
+        $consulta .= $this->where($filtros);               
+        
+     
+        if($sentencia = $this->conexion->prepare($consulta))
+        {     
+           if($this->bind_param($sentencia,$filtros))
+            {
+                if($sentencia->execute())
+                {
+                    $resultado->valor = $this->get_result($sentencia);
+                    
+                
+                    
+                   /* if ($sentencia->bind_result($id, $primerNombre, $segundoNombre, $apellidoPaterno, $apellidoMaterno,  $rfc, $nss, $curp, $codigoPostal, $numeroExterior, $numeroInterior, $calle, $colonia, $estado, $pais,  $correoElectronico )  )
+                    {
+                        while($row = $sentencia->fetch())
+                        {
+                            $cliente = (object) [
+                                'id' =>  utf8_encode($id),
+                                'primerNombre' => utf8_encode($primerNombre),
+                                'segundoNombre' => utf8_encode($segundoNombre),
+                                'apellidoPaterno' => utf8_encode($apellidoPaterno),
+                                'apellidoMaterno' => utf8_encode($apellidoMaterno),
+                                'rfc' => utf8_encode($rfc),
+                                'nss' => utf8_encode($nss),
+                                'curp' => utf8_encode($curp),
+                                'codigoPostal' => utf8_encode($codigoPostal),
+                                'numeroExterior' => utf8_encode($numeroExterior),
+                                'numeroInterior' => utf8_encode($numeroInterior),
+                                'calle' => utf8_encode($calle),
+                                'colonia' => utf8_encode($colonia),
+                                'estado' => utf8_encode($estado),
+                                'pais' => utf8_encode($pais),
+                                'correoElectronico' => utf8_encode($correoElectronico)
+                            ];
+                            array_push($clientes,$cliente);
+                        }
+                        $resultado->valor = $clientes;
+                    }        
+                    else
+                        $resultado->mensajeError = "Falló el enlace del resultado";
+                        */
+                }
+                else
+                    $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;
+            }
+            else
+                $resultado->mensajeError = "Falló el enlace de parámetros";
+        }
+        else
+            $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
+        return $resultado;
+    }    
 
 
     
