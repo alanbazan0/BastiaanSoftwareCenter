@@ -10,6 +10,7 @@ $usuarioDsc = REQUEST('CNUSERDESC');
 $CNUSERDESC = REQUEST('CNUSERDESC');
 
 
+
 ?>
 <html> 
 <title>Catalogo de areas</title>
