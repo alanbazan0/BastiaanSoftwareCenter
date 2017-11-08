@@ -38,7 +38,7 @@ class VersionesVista
 		this.grid._colorLetraEncabezado = "#ffffff";
 		this.grid._colorLetraCuerpo = "#000000";
 		this.grid._regExtra=20;
-		//this.grid._presentacionGranTotal = "SI";
+
 		this.grid.render();		
 	}
 	cargargridCriterio()
@@ -51,6 +51,12 @@ class VersionesVista
 				{longitud:200, 	titulo:"orden",   alias:"orden", alineacion:"I" },
 				{longitud:200, 	titulo:"Campo Id",   alias:"campoId", alineacion:"I" }
 				
+
+				{longitud:200, 	titulo:"titulo",   	alias:"titulo", alineacion:"I" },
+				{longitud:250, 	titulo:"presentar",   alias:"presentacion", alineacion:"I" },
+				{longitud:250, 	titulo:"orden",   alias:"orden", alineacion:"I" },
+				{longitud:250, 	titulo:"presentacion",   alias:"presentacin", alineacion:"I" }
+
 				                ];
 			this.grid2._origen="vista";
 			this.grid2.manejadorEventos=this.manejadorEventos;
@@ -62,7 +68,6 @@ class VersionesVista
 			this.grid2._colorLetraEncabezado = "#ffffff";
 			this.grid2._colorLetraCuerpo = "#000000";
 			this.grid2._regExtra=20;
-		//	this.grid2._presentacionGranTotal = "SI";
 			this.grid2.render();
 			// este el grid 3
 			this.grid3._columnas = [
@@ -73,6 +78,13 @@ class VersionesVista
 				{longitud:200, 	titulo:"Tipo de Campo", 	alias:"tamanoCampo", alineacion:"I" },
 				{longitud:200, 	titulo:"Numero de Campo", 	alias:"campoNumero", alineacion:"I" }
 			                        ];
+
+			this.grid2.render();
+			// este el grid 3
+			this.grid3._columnas = [
+				{longitud:300, 	titulo:"Titulo campo",   	alias:"tituloCampo", alineacion:"I" }
+	                                ];
+
 			this.grid3._origen="vista";
 			this.grid3.manejadorEventos=this.manejadorEventos;
 			this.grid3._ajustarAltura = true;
@@ -83,7 +95,6 @@ class VersionesVista
 			this.grid3._colorLetraEncabezado = "#ffffff";
 			this.grid3._colorLetraCuerpo = "#000000";
 			this.grid3._regExtra=20;
-		//	this.grid3._presentacionGranTotal = "SI";
 			this.grid3.render();	
 	 }
 	/*
