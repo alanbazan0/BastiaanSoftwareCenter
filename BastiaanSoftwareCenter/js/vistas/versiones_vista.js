@@ -43,6 +43,7 @@ class VersionesVista
 	}
 	cargargridCriterio()
 	{		 
+		
 		 this.grid2._columnas = [
 			 
 				{longitud:100, 	titulo:"titulo",   	alias:"titulo", alineacion:"I" },
