@@ -48,7 +48,7 @@ class VersionesVista
 			 
 			{longitud:200, 	titulo:"titulo",   	alias:"titulo", alineacion:"I" },
 				{longitud:250, 	titulo:"presentar",   alias:"presentacion", alineacion:"I", itemRender:this.renderSwitch  },
-				{longitud:250, 	titulo:"orden",   alias:"orden", alineacion:"I" },
+				{longitud:250, 	titulo:"orden",   alias:"orden", alineacion:"C" },
 				{longitud:250, 	titulo:"presentacion",   alias:"tablaId", alineacion:"I" }
 				                ];
 			this.grid2._origen="vista";
@@ -60,7 +60,7 @@ class VersionesVista
 			this.grid2._colorEncabezado2 = "#FF6600";
 			this.grid2._colorLetraEncabezado = "#ffffff";
 			this.grid2._colorLetraCuerpo = "#000000";
-			this.grid2._regExtra=20;
+			this.grid2._regExtra=8;
 		//	this.grid2._presentacionGranTotal = "SI";
 			this.grid2.render();
 			// este el grid 3
