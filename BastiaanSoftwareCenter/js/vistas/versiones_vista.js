@@ -48,6 +48,8 @@ class VersionesVista
 				{longitud:200, 	titulo:"presentar",   alias:"presentacion", alineacion:"I" },
 				{longitud:200, 	titulo:"orden",   alias:"orden", alineacion:"I" },
 				{longitud:200, 	titulo:"Campo Id",   alias:"campoId", alineacion:"I" }
+				
+				
 				                ];
 			this.grid2._origen="vista";
 			this.grid2.manejadorEventos=this.manejadorEventos;
