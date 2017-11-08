@@ -14,6 +14,6 @@ interface IVersionesRepositorio
     /* grid2 */
     public function consultarPorVersion($criteriosVersion);
      /* grid3 */
-   public function consultarPorCampo($criteriosCampos);
+   public function consultarPorCampo();
     
 }
