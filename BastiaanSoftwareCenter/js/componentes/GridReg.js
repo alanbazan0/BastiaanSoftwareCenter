@@ -444,7 +444,7 @@ GridReg = function(id) {
 							   	totales[campo] =this.sumaHoras(this._dataProvider,campo)
 							   	
 							}
-							break;			
+							break;							
 						}	
 						else
 						{
