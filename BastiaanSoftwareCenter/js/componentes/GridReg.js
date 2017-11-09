@@ -190,15 +190,15 @@ GridReg = function(id) {
                if(this._tieneDragDrop== true){
                   	if(this._aceptaDrop== true){
                    	    if(this._aceptaDropEncualquierParte==true){
-				           output[output.length] = "<tbody id='" + this._viewport + "Tbody'  ondrop='"+this._id+".dropDR(event)'  ondragover='"+this._id+".allowDrop(event)'     class='grid' style='height:" + (viewport.offsetHeight-altoEncabezado-altoPie) + "px;";
+				           output[output.length] = "<tbody id='" + this._viewport + "Tbody'  ondrop='"+this._id+".dropDR(event)'  ondragover='"+this._origen+"."+this._id+".allowDrop(event)'     class='grid' style='height:" + (viewport.offsetHeight-altoEncabezado-altoPie) + "px;";
 				         }else{
-				            output[output.length] = "<tbody id='" + this._viewport + "Tbody'   ondrop='"+this._id+".drop(event)' ondragover='"+this._id+".allowDrop(event)'     class='grid' style='height:" + (viewport.offsetHeight-altoEncabezado-altoPie) + "px;";
+				            output[output.length] = "<tbody id='" + this._viewport + "Tbody'   ondrop='"+this._origen+"."+this._id+".drop(event)' ondragover='"+this._origen+"."+this._id+".allowDrop(event)'     class='grid' style='height:" + (viewport.offsetHeight-altoEncabezado-altoPie) + "px;";
 				         }
 				     }else{
 				        if(this._aceptaDelete== true){
-				             output[output.length] = "<tbody id='" + this._viewport + "Tbody'  ondrop='"+this._id+".dropD(event)'  ondragover='"+this._id+".allowDrop(event)'     class='grid' style='height:" + (viewport.offsetHeight-altoEncabezado-altoPie) + "px;";
+				             output[output.length] = "<tbody id='" + this._viewport + "Tbody'  ondrop='"+this._id+".dropD(event)'  ondragover='"+this._origen+"."+this._id+".allowDrop(event)'     class='grid' style='height:" + (viewport.offsetHeight-altoEncabezado-altoPie) + "px;";
 				           }else{
-				             output[output.length] = "<tbody id='" + this._viewport + "Tbody'  ondrop='"+this._id+".dropE(event)'  ondragover='"+this._id+".allowDrop(event)'     class='grid' style='height:" + (viewport.offsetHeight-altoEncabezado-altoPie) + "px;";
+				             output[output.length] = "<tbody id='" + this._viewport + "Tbody'  ondrop='"+this._id+".dropE(event)'  ondragover='"+this._origen+"."+this._id+".allowDrop(event)'     class='grid' style='height:" + (viewport.offsetHeight-altoEncabezado-altoPie) + "px;";
 				           }
 				      } 
 			   }else{
@@ -230,7 +230,7 @@ GridReg = function(id) {
 						color=this._colorRenglon2;
 					}
 					if(this._tieneDragDrop== true){
-					 output[output.length] = "<tr id='" + this._viewport + "Table" + i + "' style=''  draggable='true' ondragstart='" + this._id + ".drag(event," + this._id + "._dataProvider[" + i + " ]," + i+ ")');'  ondrop = undefined ";
+					 output[output.length] = "<tr id='" + this._viewport + "Table" + i + "' style=''  draggable='true' ondragstart='"+this._origen+"." + this._id + ".drag(event,"+this._origen+"."+ this._id + "._dataProvider[" + i + " ]," + i+ ")');'  ondrop = undefined ";
 					}else{
 					 output[output.length] = "<tr id='" + this._viewport + "Table" + i + "' style=''   ondrop = undefined ";
 					}
