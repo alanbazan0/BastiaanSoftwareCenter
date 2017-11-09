@@ -22,7 +22,7 @@ class VersionesVista
 	{
 		this.grid._columnas = [
 			{longitud:100, 	titulo:"Id",   	alias:"id", alineacion:"I" },
-			{longitud:200, 	titulo:"Descripciòn Corta",   alias:"descripcionCorta", alineacion:"I" },
+			{longitud:200, 	titulo:"Descripciòn Corta",   alias:"descripcionCorta", alineacion:"I", tamano:"15" },
 		    {longitud:200, 	titulo:"Descripciòn Larga",   alias:"descripcionLarga", alineacion:"I" },
 			{longitud:200, 	titulo:"principal",   alias:"nombrePila", alineacion:"I" },
 			{longitud:200, 	titulo:"Fecha",   alias:"fecha", alineacion:"I" },
@@ -47,9 +47,9 @@ class VersionesVista
 		 this.grid2._columnas = [
 			 
 			{longitud:200, 	titulo:"titulo",   	alias:"titulo", alineacion:"I" },
-				{longitud:250, 	titulo:"presentar",   alias:"presentacion", alineacion:"I", itemRender:this.renderSwitch  },
+				{longitud:250, 	titulo:"presentar",   alias:"presentacion", alineacion:"I", itemRender:this.renderSwitch},
 				{longitud:250, 	titulo:"orden",   alias:"orden", alineacion:"C" },
-				{longitud:250, 	titulo:"presentacion",   alias:"tablaId", alineacion:"I" }
+				{longitud:250, 	titulo:"Catalogo de Cliente",   alias:"tablaId", alineacion:"I" }
 				                ];
 			this.grid2._origen="vista";
 			this.grid2.manejadorEventos=this.manejadorEventos;
