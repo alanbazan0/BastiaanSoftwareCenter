@@ -81,10 +81,42 @@ class VersionesRepositorio implements IVersionesRepositorio
         return $resultado;
     }
     
+    /* grid2 de criterios*/
+    
+    Public function insertarGrid2(Version $datos)
+    {
+   
+            $consulta = " INSERT INTO BSTNTRN.BTCRITERIO"
+                . "(BTVERSIONID, "
+                . "  BTCAMPOID, "
+                . "  BTCRITERIOPRESENTACION, "
+                . "  BTCRITERIOORDEN, "
+                . "  BTCRITERIOTITULO) "
+                . "  VALUE(?,?,?,?,?) ";          
+             if($sentencia = $this->conexion->prepare($consulta))
+               {
+                                        if( $sentencia->bind_param("sssss",
+                                            $datos->version,
+                                            $datos->tablaCriterio,
+                                            $datos->presentacion,
+                                            $datos->orden,
+                                            $datos->titulo
+                                            ))
+                                                {
+                                                if(!$sentencia->execute())
+                                                    $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;
+                                                }
+                                            else
+                                                $resultado->mensajeError = "Falló el enlace de parámetros";
+                                         }
+                                        
+        return $resultado;
+    } 
+
     public function eliminar($llaves)
     {
         $resultado = new Resultado();
-        $consulta = " DELETE FROM BSTNTRN.BTVERSION "
+        $consulta = " DELETE FROM BSTNTRN.BTCRITERIO"
                     . "  WHERE BTVERSIONID = ? ";
          if($sentencia = $this->conexion->prepare($consulta))
          {
@@ -348,7 +380,6 @@ class VersionesRepositorio implements IVersionesRepositorio
             $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;     
        return $resultado;
     }
-
 
     
 }

@@ -66,6 +66,27 @@ class VersionesPresentador
 			
 	 }	
 	 
+	 /* inserta grid2 */
+	 insertarGrid2()
+	 {
+		 var repositorio = new VersionesRepositorio(this);			 
+		 repositorio.insertarGrid2(this,this.insertarResultado2,this.vista.insertarGrid2);	
+	 }
+	 insertarResultado2(resultado)
+	 {
+		if(resultado.mensajeError=="")
+		{	
+			this.vista.mostrarMensaje("Aviso","La información se guardó IdCriterio: " + resultado.valor);
+			//this.vista.salirFormulario();
+			//this.consultarPorVersion();
+		}
+		else
+			this.vista.mostrarMensaje("Error","Ocurrió un error al guardar el registro. " + resultado.mensajeError);			
+	 }	
+	 
+	 
+	 
+	 
 	 actualizar()
 	 {
 		 var repositorio = new VersionesRepositorio(this);		
@@ -101,7 +122,6 @@ class VersionesPresentador
 	 }
 	 	 
 
-	 
 	 eliminar()
 	 {
 		 var repositorio = new VersionesRepositorio(this);		

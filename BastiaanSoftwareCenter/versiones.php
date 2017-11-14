@@ -84,7 +84,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								<tr>
 									<td><img id="btnAlta" class="botonMenuIEC" title="Alta" src="assets/botones/imgAlta.png" onClick="vista.btnAlta_onClick();"></td>
 								<!-- 	<td><img id="btnCambio" class="botonMenuIEC" title="Cambio" src="assets/botones/imgCambio.png" onClick="vista.btnCambio_onClick();"></td>	 -->								
-									<td><img id="btncriterios" class="botonMenuIEC" title="Criterios" src="assets/botones/tres.png" onClick="vista.btncriterios_onClick();"></td>
+									<td><img id="btncriterios" class="botonMenuIEC" title="Criterios" src="assets/botones/imgCambio.png" onClick="vista.btncriterios_onClick();"></td>
 									<td><img id="btnSalir" class="botonMenuIEC" title="Salir"  src="assets/botones/btnSalir.png" onClick="vista.btnSalir_onClick();" ></td>
 								</tr>
                              </table>   
@@ -117,7 +117,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 		
 			<div id="Pcontenido" style="position:relative;">            
 				<div id="tabs" class="PcontenComp" style="display:block;"></div>
-				<div id="paneles" class="PcontenComp" style="margin: auto; padding-left: 10px; padding-top: 0px; width: 99.5%; height: 90%; overflow: visible; position: relative;">
+				<div id="paneles" class="PcontenComp" style="margin: auto; padding-left: 10px; padding-top: 0px; width: 99.5%; height: 83%; overflow: visible; position: relative;">
 					<div id="panelesArea0" style="float:left; height:98%; width:98.5%;">
 						<div id="panelesArea0paneles" class="PcontenComp" style="">
 							<div id="panelesArea0panel0" class="contenedorIEC" style="width: 100%; height: 99.5%; z-index: 1; float: left; margin-right: 2px; margin-bottom: 2px; margin-left: 2px; overflow: hidden;">
@@ -143,7 +143,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 			
 <!--  barra de men� para botones de la pantalla
  -->
-			<div id="menuPrincipal"  align="right" class="contieneCriteriosAribaBtn" style="background-color: #6b6b6b;    height: 80px; " > 
+			<div id="menuPrincipal"  align="right" class="contieneCriteriosAribaBtn" style="background-color: #6b6b6b;    height: 55px; " > 
 				<img class='logoBAS' style='float: left;' id='logoFRM' src='assets/pantalla/logoTipo.png'  />
 				<span id="txtTitulo" style="float:left;margin-top: 20px;margin-left: 15px;color: #FFFFFF;float: left;font-family: Verdana;font-size: 11px;font-weight: bold;">Criterios de Selecci&oacuten</span>
 				<img style="padding: 2px;" class='imgTipoBoton' id='btnGuardarFormulario' src='assets/botones/imgGuardar.png' onclick='vista.btnGuardarFormulario_onClick();' title='Guardar' />
@@ -213,6 +213,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 						</div>
 				</div>
 </div>
+<div id="criteriosDiv" style="display: none">
 	           <div id="panelesArea0" style="margin-left: 12px;float:left; height:85%; width:76.5%;">
 						<div id="panelesArea0paneles" class="PcontenComp" style="">
 							<div id="panelesArea0panel0" class="contenedorIEC" style="width: 100%; height: 85%; z-index: 1; float: left; margin-right: 2px; margin-bottom: 2px; margin-left: 2px; overflow: hidden;">
@@ -241,7 +242,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 						</div>
 				  </div>
 			</div>	
-           
+  </div>	      
           
 
 	

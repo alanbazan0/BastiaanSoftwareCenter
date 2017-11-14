@@ -39,6 +39,22 @@ try
                 if($resultado!=null)
                     echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
             break;
+            
+            case 'insertarGrid2':
+                $json = json_decode(REQUEST('datosGrid2'));
+                $mapper = new JsonMapper();
+                print_r($json2);
+                for($i=0; $i< 7; $i++)
+                {
+              //      echo "<script>alert(".$json.count().")</script>";
+                    $datos = $mapper->map( $json['datosGrid2'][$i], new Version());
+                    $resultado = $repositorio->insertarGrid2($datos);
+                    $resultado=$json;
+                    if($resultado!=null)
+                        echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
+                }
+                    break;
+                    
             case 'actualizar':
                 $json = json_decode(REQUEST('version'));
                 $mapper = new JsonMapper();
@@ -71,6 +87,8 @@ try
                     echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
                     break;
             case 'consultar':
+              //  echo"<script type=\"text/javascript\">alert('Lo estamos redireccionando'); </script>"; 
+               // printf("<script type='text/javascript'>alert('Lo estamos redireccionando'); </script>");
                 $criteriosSeleccion = json_decode(REQUEST('criteriosSeleccion'));
                 $resultado = $repositorio->consultar($criteriosSeleccion);
                 if($resultado!=null)

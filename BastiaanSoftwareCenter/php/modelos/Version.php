@@ -10,10 +10,17 @@ class Version
     public $fecha;
     public $hora;
     /* grid2  */
-    public $titulo;
-    public $presentar;
-    public $orden;
+    
+   
+  //  public $titulo;
+    
+    
+    public $idCriterio; 
+    public $version;
+    public $tablaCriterio;
     public $presentacion;
+    public $orden;
+    public $titulo;
         
    
     /* grid3  */

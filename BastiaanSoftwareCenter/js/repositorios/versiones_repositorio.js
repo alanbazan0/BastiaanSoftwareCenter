@@ -26,6 +26,28 @@ class VersionesRepositorio
 		var datos = JSON.parse(resultado);
 		this.functionRetorno.call(this.contexto,JSON.parse(resultado));
 	}
+	/* insertar grid 2*/
+	 insertarGrid2(contexto,functionRetorno, datosGrid2)
+	{		
+		this.contexto = contexto;
+		this.functionRetorno = functionRetorno;
+		
+		var parametros;
+		parametros = "accion=insertarGrid2";
+		parametros += "&datosGrid2=" + encodeURIComponent(JSON.stringify(datosGrid2));	
+		
+		var contextHandler = new AjaxContextHandler();
+		var host = window.location.origin + "/BastiaanSoftwareCenter";	
+		var ai = new Ajaxv2(host +"/php/repositorios/Versiones.php", this, this.insertarResultado2, "POST", parametros, contextHandler);		
+		contextHandler.AddAjaxv2Object(ai); 		
+		ai.GetPost(true);
+	}
+	
+	insertarResultado2(resultado)
+	{
+		var datos = JSON.parse(resultado);
+		this.functionRetorno.call(this.contexto,JSON.parse(resultado));
+	}
 	
 	actualizar(contexto,functionRetorno, version)
 	{		
