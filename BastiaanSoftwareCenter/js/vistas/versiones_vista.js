@@ -196,7 +196,22 @@ class VersionesVista
 		 {
 			this.mostrarMensaje('Error','El campo "' + campoObligatorioVacio.attr("descripcion") + '" es obligatorio.');
 		 }
+		//para el swithc
+		 for(var b = 0; b < this.grid2._dataProvider.length; b++)
+			{		
+					if(document.getElementById(b).checked)
+					{		
+						
+						this.grid2._dataProvider[b].presentacion="1"
+					}
+					else	
+					{					
+						this.grid2._dataProvider[b].presentacion="0"
+					}			
+			}
+		 this.presentador.eliminar();
 		 this.presentador.insertarGrid2();
+		 
 		//this.presentador.actualizarGrid2();
 			  
 		
@@ -258,7 +273,7 @@ class VersionesVista
 	{
 		var llaves =
 		{
-			id:this.grid._selectedItem.id	
+			id:this.grid._selectedItem.id
 		}
 		return llaves;
 	}
@@ -291,7 +306,8 @@ class VersionesVista
 	{
 		 var insertarGrid2 = 
 		 {		
-		 	datosGrid2:this.grid2._dataProvider 
+		 	datosGrid2:this.grid2._dataProvider ,
+		 	versionId:$('#idFormularioInput').val()
 		 }
 		 return insertarGrid2;
 	}	
@@ -508,7 +524,7 @@ class VersionesVista
 		this._arrayCampo=[];
 		this._arrayCampo=this.grid2._dataProvider;
 		var o = this.grid2._dataProvider.length+1;
-		this._arrayCampo.push({titulo:Sel.tituloCampo,tablaId:Sel.tablaId,presentacion:"",orden:o}); 
+		this._arrayCampo.push({titulo:Sel.tituloCampo,tablaId:Sel.tablaId,presentacion:"",orden:o,campoId:Sel.campoId}); 
 
 		
 	    this.grid2._dataProvider=this._arrayCampo
@@ -525,9 +541,13 @@ class VersionesVista
 			if(this.grid2._dataProvider[b].presentacion ===  "1")
 			{		
 				document.getElementById(b).checked = true;
+				this.grid2._dataProvider[b].presentacion="1"
 			}
-			else				
-				document.getElementById(b).checked = false; 		
+			else	
+			{
+				document.getElementById(b).checked = false; 
+				this.grid2._dataProvider[b].presentacion="0"
+			}			
 		}
 	    
 	    

@@ -95,19 +95,19 @@ class VersionesRepositorio implements IVersionesRepositorio
                 . "  VALUE(?,?,?,?,?) ";          
              if($sentencia = $this->conexion->prepare($consulta))
                {
-                                        if( $sentencia->bind_param("sssss",
+                 if( $sentencia->bind_param("iisss",
                                             $datos->version,
-                                            $datos->tablaCriterio,
+                                            $datos->campoId,
                                             $datos->presentacion,
                                             $datos->orden,
                                             $datos->titulo
                                             ))
                                                 {
                                                 if(!$sentencia->execute())
-                                                    $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;
+                                                    $resultado->mensajeError = "Falla la ejecucion (" . $this->conexion->errno . ") " . $this->conexion->error;
                                                 }
                                             else
-                                                $resultado->mensajeError = "Falló el enlace de parámetros";
+                                                $resultado->mensajeError = "Falla� el enlace de parametros";
                                          }
                                         
         return $resultado;
@@ -285,7 +285,7 @@ class VersionesRepositorio implements IVersionesRepositorio
         $resultado = new Resultado();
         $registros = array();
         
-        $consulta =   " SELECT BTCRITERIOID id, CR.BTCAMPOID campoId, BTCRITERIOORDEN orden, BTCRITERIOPRESENTACION presentacion, BTCRITERIOTITULO titulo, BTTABLAID tablaId, BTCAMPOTIPO tipoDato, BTCAMPOTAMANO tamano " .
+        $consulta =   " SELECT BTCRITERIOID id,CR.BTCAMPOID campoId, BTCRITERIOORDEN orden, BTCRITERIOPRESENTACION presentacion, BTCRITERIOTITULO titulo, BTTABLAID tablaId, BTCAMPOTIPO tipoDato, BTCAMPOTAMANO tamano " .
                         "FROM BSTNTRN.BTCRITERIO CR ".
                         "   INNER JOIN BSTNTRN.BTCAMPO C ON CR.BTCAMPOID = C.BTCAMPOID " .
                         "WHERE BTVERSIONID = ? ".

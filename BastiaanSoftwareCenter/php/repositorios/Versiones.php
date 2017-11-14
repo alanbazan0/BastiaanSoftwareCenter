@@ -32,7 +32,7 @@ try
         {
            
             case 'insertar':
-                $json = json_decode(REQUEST('version'));
+                $json = json_decode(REQUEST('version'),true);
                 $mapper = new JsonMapper();
                 $version = $mapper->map($json, new Version());            
                 $resultado = $repositorio->insertar($version);
@@ -41,37 +41,32 @@ try
             break;
             
             case 'insertarGrid2':
-                $json = json_decode(REQUEST('datosGrid2', true));
-                
-              //  var_dump(json_decode($json, true));
+                $string =REQUEST('datosGrid2');               
+                $arrayData = json_decode($string, true); 
                 $mapper = new JsonMapper();
-                 
-                /*
-                 $jsondata = '';
-                 $arr = json_decode($jsondata, true);
-                 foreach ($arr as $k=>$v){
-                 echo $v; // etc.
-                 */
                 
-               // echo"<script type=\"text/javascript\">alert('$json'); </script>";
+                $idVersion=json_encode($arrayData['versionId'], JSON_UNESCAPED_UNICODE);
+                $arr=json_encode($arrayData['datosGrid2'], JSON_UNESCAPED_UNICODE);                
+                $arrayData2= (array)json_decode($arr, true); 
                 
-        //        print_r($json2);
-        
-                
-                //aqui va foreach
-                for($i=0; $i< 7; $i++)
+                if (isset($arrayData2))
                 {
-              //      echo "<script>alert(".$json.count().")</script>";
-                    $datos = $mapper->map($json['datosGrid2'][$i], new Version());
-                    
-                    
-                    
-                    
-                    $resultado = $repositorio->insertarGrid2($datos);
-                    $resultado=$json;
-                    if($resultado!=null)
-                        echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
-                    
+                    print_r($idVersion); 
+                    //echo json_encode($arrayData2[0]['id'], JSON_UNESCAPED_UNICODE);
+                    for($i=0; $i< 1; $i++)                    
+                    {                
+                        
+                        $object= new Version();
+                        $object->version=     $idVersion;
+                        $object->campoId=     $arrayData2[$i]['campoId'];
+                        $object->presentacion=$arrayData2[$i]['presentacion'];
+                        $object->titulo=      $arrayData2[$i]['titulo'];
+                        $object->orden=       $arrayData2[$i]['orden'];
+                        
+                        $resultado = $repositorio->insertarGrid2($object);
+                        if($resultado!=null)
+                            echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
+                    }
                 }
                     break;
                     
