@@ -132,8 +132,8 @@ class VersionesPresentador
 	 {
 		if(resultado.mensajeError=="")
 		{
-			this.vista.mostrarMensaje("Aviso", "El registro se eliminó correctamente.");
-			this.consultar();
+			//this.vista.mostrarMensaje("Aviso", "El registro se eliminó correctamente.");
+			//this.consultar();
 		}
 		else
 			this.vista.mostrarMensaje("Error","Ocurrió un error al eliminar el registro. " + resultado.mensajeError);		

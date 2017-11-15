@@ -51,18 +51,19 @@ try
                 
                 if (isset($arrayData2))
                 {
-                    print_r($idVersion); 
+                    
+                    //print_r("'".$campoID."'"); 
                     //echo json_encode($arrayData2[0]['id'], JSON_UNESCAPED_UNICODE);
-                    for($i=0; $i< 1; $i++)                    
+                    for($i=0; $i< count($arrayData2); $i++)                    
                     {                
-                        
+                        $campoID=$arrayData2[$i]['campoId'];
                         $object= new Version();
                         $object->version=     $idVersion;
-                        $object->campoId=     $arrayData2[$i]['campoId'];
+                        $object->campoId=     $campoID;
                         $object->presentacion=$arrayData2[$i]['presentacion'];
                         $object->titulo=      $arrayData2[$i]['titulo'];
                         $object->orden=       $arrayData2[$i]['orden'];
-                        
+                        echo count($arrayData2[$i]);
                         $resultado = $repositorio->insertarGrid2($object);
                         if($resultado!=null)
                             echo json_encode($resultado, JSON_UNESCAPED_UNICODE);

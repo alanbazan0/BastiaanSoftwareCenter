@@ -6,7 +6,7 @@ class VersionesVista
 		this.presentador = new VersionesPresentador(this);
 		this.manejadorEventos = new ManejadorEventos();
 		this.grid = new GridReg("grid");
-	    this.grid2= new GridReg("grid2");
+	    //this.grid2= new GridReg("grid2");
 	    this.grid3= new GridReg("grid3");	    
 	}
 	onLoad()
@@ -14,6 +14,7 @@ class VersionesVista
 		this.crearColumnasGrid();
 		this.cargargridCriterio();
 		this.presentador.consultar();
+		this._arrayCampo=[];
 	    //this.presentador.consultarPorVersion();
 	   //this.presentador.consultarPorCampo();
 
@@ -42,30 +43,8 @@ class VersionesVista
 		this.grid.render();		
 	}
 	cargargridCriterio()
-	{		 
+	{		
 		
-		 this.grid2._columnas = [
-			 
-			{longitud:200, 	titulo:"titulo",   	alias:"titulo", alineacion:"I" },
-				{longitud:250, 	titulo:"presentar",   alias:"presentacion", alineacion:"I", itemRender:this.renderSwitch},
-				{longitud:250, 	titulo:"orden",   alias:"orden", alineacion:"C" },
-				{longitud:250, 	titulo:"Catalogo de Cliente",   alias:"tablaId", alineacion:"I" }
-				                ];
-			this.grid2._origen="vista";
-			this.grid2.manejadorEventos=this.manejadorEventos;
-			this.grid2._ajustarAltura = true;
-			this.grid2._colorRenglon1 = "#FFFFFF";	
-			this.grid2._colorRenglon2 = "#f8f2de";
-			this.grid2._colorEncabezado1 = "#FF6600";
-			this.grid2._colorEncabezado2 = "#FF6600";
-			this.grid2._colorLetraEncabezado = "#ffffff";
-			this.grid2._colorLetraCuerpo = "#000000";
-			this.grid2._regExtra=12;
-			this.grid2._tieneDragDrop= true;
-	        this.grid2._aceptaDrop=true;
-	        this.grid2.subscribirAEvento(this, "drop",this.agregarSalida );
-		//	this.grid2._presentacionGranTotal = "SI";
-			this.grid2.render();
 			// este el grid 3
 			this.grid3._columnas = [
 				{longitud:200, 	titulo:"Titulo campo", 	alias:"tituloCampo", alineacion:"I" },
@@ -93,7 +72,7 @@ class VersionesVista
 			this.grid3.render();	
 			this.a=0;
 		    
-		    var a = 0;
+		    
 	 }
 	/*
 	 * Eventos en botones
@@ -107,6 +86,32 @@ class VersionesVista
 		
 		btncriterios_onClick()
 		{
+			this.a=0;
+			this.grid2= new GridReg("grid2");
+			 this.grid2._columnas = [
+				 
+					{longitud:200, 	titulo:"titulo",   	alias:"titulo", alineacion:"I" },
+						{longitud:250, 	titulo:"presentar",   alias:"presentacion", alineacion:"I", itemRender:this.renderSwitch},
+						{longitud:250, 	titulo:"orden",   alias:"orden", alineacion:"C" },
+						{longitud:250, 	titulo:"Catalogo de Cliente",   alias:"tablaId", alineacion:"I" }
+						                ];
+					this.grid2._origen="vista";
+					this.grid2.manejadorEventos=this.manejadorEventos;
+					this.grid2._ajustarAltura = true;
+					this.grid2._colorRenglon1 = "#FFFFFF";	
+					this.grid2._colorRenglon2 = "#f8f2de";
+					this.grid2._colorEncabezado1 = "#FF6600";
+					this.grid2._colorEncabezado2 = "#FF6600";
+					this.grid2._colorLetraEncabezado = "#ffffff";
+					this.grid2._colorLetraCuerpo = "#000000";
+					this.grid2._regExtra=12;
+					this.grid2._tieneDragDrop= true;
+			        this.grid2._aceptaDrop=true;
+			        this.grid2.subscribirAEvento(this, "drop",this.agregarSalida );
+			        this.grid2._dataProvider=[];
+				//	this.grid2._presentacionGranTotal = "SI";
+					this.grid2.render();
+			
 		    this.modo = "CRITERIOS";
 	        this.mostrarCriterios();
 	        this.presentador.consultarPorCampo();
@@ -140,7 +145,49 @@ class VersionesVista
 				this.mostrarMensaje("Selecciona un registro para modificar.");
 		}	
 		
+       /*
+        * botones para subir y bajar posicion
+        * 
+        */
+		
+		btnSubir()
+		{
+			var reg=this.grid2._selectedIndex;
+			var item=this.grid2._selectedItem;
+			var itemAux={};
+			
+			if(reg>0)
+			{
+				itemAux=this.grid2._dataProvider[reg-1];
+				
+				this.grid2._dataProvider[reg]=itemAux;
+				this.grid2._dataProvider[reg-1]=item
+				
+				this.grid2._selectedIndex=reg-1; 
+				this.a=0;
+				this.grid2.render();
+				
 
+				for(var b = 0; b < this.grid2._dataProvider.length; b++)
+				{		
+					this.grid2._dataProvider[b].orden=b+1;
+					if(this.grid2._dataProvider[b].presentacion ===  "1")
+					{	
+						document.getElementById(b).checked = true;
+					}
+					else				
+						document.getElementById(b).checked = false; 					
+				}
+			} 
+			
+		}
+		btnBajar()
+		{
+			if(reg>this.grid2._dataProvider.legnth)
+			{
+				
+			}
+		}
 		
 		btnConsulta_onClick()
 		{
@@ -171,15 +218,13 @@ class VersionesVista
 		{			
 			this.modo = "CAMBIO";
 			this.limpiarFormulario();	
-			this.mostrarFormulario();		
+			this.mostrarFormulario();	
 			this.presentador.consultarPorLlaves();
 		}
 		else
 			this.mostrarMensaje("Selecciona un registro para modificar.");
 				
 	}
-	
-
 	
 	btnGuardarFormulario_onClick()
 	{		
@@ -200,8 +245,7 @@ class VersionesVista
 		 for(var b = 0; b < this.grid2._dataProvider.length; b++)
 			{		
 					if(document.getElementById(b).checked)
-					{		
-						
+					{							
 						this.grid2._dataProvider[b].presentacion="1"
 					}
 					else	
@@ -211,44 +255,6 @@ class VersionesVista
 			}
 		 this.presentador.eliminar();
 		 this.presentador.insertarGrid2();
-		 
-		//this.presentador.actualizarGrid2();
-			  
-		
-
-		 
-		 /*
-			if(this.grid2._dataProvider!=null)
-			{
-				var confirmacion = confirm("¿Esta seguro que desea eliminar el registro?")
-			    if (confirmacion)
-			    {
-			    	this.presentador.eliminar();
-			    }	
-			}
-			else
-				this.mostrarMensaje("Selecciona un registro para eliminar.");
-			*/
-			
-			
-		 
-	    //	this.presentador.eliminar();
-		 
-		
-		
-			/*  insert del item  */
-		    /*
-			 var campoObligatorioVacio = this.campoObligatorioVacio();
-			 if(campoObligatorioVacio==null)
-			 {
-	               this.presentador.insertarGrid2();
-				  this.presentador.actualizarGrid2();
-			 }	
-			 else
-			 {
-				this.mostrarMensaje('Error','El campo "' + campoObligatorioVacio.attr("descripcion") + '" es obligatorio.');
-			 }	
-	       */
 	}
 	
 	btnSalir_onClick()
@@ -307,7 +313,7 @@ class VersionesVista
 		 var insertarGrid2 = 
 		 {		
 		 	datosGrid2:this.grid2._dataProvider ,
-		 	versionId:$('#idFormularioInput').val()
+		 	versionId:parseInt($('#idFormularioInput').val())
 		 }
 		 return insertarGrid2;
 	}	
@@ -335,10 +341,7 @@ class VersionesVista
 			
 		}
 		
-	}
-	
-	
-	
+	}	
 	
 	set  datosCampos(valor)
 	{
@@ -377,12 +380,7 @@ class VersionesVista
 	 }
 	 /*
 	  * Propiedades especiales o calculas
-	  */
-	
-	
-   
-	 
-	
+	  */	
 	mostrarMensaje(titulo,mensaje)
 	{
 		alert(mensaje);	
@@ -405,8 +403,7 @@ class VersionesVista
 	{
 		$('#principalDiv').show();
 		$('#criteriosDiv').hide();
-	}
-	
+	}	
 	
 	
 	salirFormulario()
@@ -415,22 +412,6 @@ class VersionesVista
 	    $('#criteriosDiv').hide();
 		$('#formularioDiv').hide();
 	}
-	
-	
-	
-	
-	
-	
-	/*
-	for (var a = 0; i < 9; a++) {
-		   n += i;
-		   mifuncion(n);
-		}
-		*/
-	
-	/*
-	 *Validación de los datos obligatorios del formulario 
-	 */
 	
 	campoObligatorioVacio()
 	{
@@ -457,67 +438,29 @@ class VersionesVista
 	 * Limpiar formulario
 	 */
 	limpiarFormulario()
-	{
+	{		
 		$('#idFormularioInput').val("");
 		$('#descripcionCortaFormularioInput').val("");
 		$('#descripcionLargaFormularioInput').val("");
 		$('#nombrePilaFormularioInput').val("");
 		$('#fechaFormularioInput').val("");
 		$('#horaFormularioInput').val("");
-	
 	}
 	
-	
-
-	/*alert("hola")
-	var Sel =this.Grid3._selectedItem;
-	
-    this._arraySalida.push( {BTVERSIONID:"1",BTCAMPOID:"campoID",BTCRITERIOPRESENTACION:"",BTCRITERIOORDEN:"", titulo:""+Sel.tituloCampo,REPTSDSC:""+this.gridTipoDocumentos._selectedItem.REPTSDSC});
-    this.Grid2._dataProvider=this._arraySalida;
- 	this.Grid2.render();	   
-
-*/
-	
-	
 	renderSwitch(renglon, campoBase)
-	{				
-	   // this.a=0;
-		//a;
+	{	   
 		var contenido = "";
 		contenido += "<center>NO<label class='switch'>";
 		contenido += "<input id='"+vista.a+"'  type='checkbox'>A"; 
 		contenido += "<span class='slider round''></span>";
 		contenido += "</label>SI</center>";
 		vista.a++;
-
-
-//		document.getElementById("a").checked = true;
-		
-		
-		
-		/*
-		function check() {
-		    document.getElementById("a").checked = true;
-		}
-
-		function uncheck() {
-		    document.getElementById("a").checked = false;
-		}
-		
-		
-		*/
-
 	    return contenido;
 	}	
     
 	
 	agregarSalida (evento) 
-	{ 		
-		
-	
-		
-		alert("salida")
-		
+	{ 	
 		this.a=0;
 		var Sel = this.grid3._selectedItem;
 		
@@ -525,15 +468,9 @@ class VersionesVista
 		this._arrayCampo=this.grid2._dataProvider;
 		var o = this.grid2._dataProvider.length+1;
 		this._arrayCampo.push({titulo:Sel.tituloCampo,tablaId:Sel.tablaId,presentacion:"",orden:o,campoId:Sel.campoId}); 
-
 		
-	    this.grid2._dataProvider=this._arrayCampo
-	    
-	    
-	    
-	    
+	    this.grid2._dataProvider=this._arrayCampo	    
 		this.grid2.render();	    
-	    
 	    
         //para el swithc
 	    for(var b = 0; b < this.grid2._dataProvider.length; b++)
@@ -548,14 +485,8 @@ class VersionesVista
 				document.getElementById(b).checked = false; 
 				this.grid2._dataProvider[b].presentacion="0"
 			}			
-		}
-	    
-	    
-	    
-	}
-
-
-	
+		}	    	    
+	}	
 	drop(ev) 
 	{	    
 		var data = ev.dataTransfer.getData("text");

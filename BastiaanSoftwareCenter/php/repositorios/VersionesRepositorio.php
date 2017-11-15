@@ -95,7 +95,7 @@ class VersionesRepositorio implements IVersionesRepositorio
                 . "  VALUE(?,?,?,?,?) ";          
              if($sentencia = $this->conexion->prepare($consulta))
                {
-                 if( $sentencia->bind_param("iisss",
+                 if( $sentencia->bind_param("issss",
                                             $datos->version,
                                             $datos->campoId,
                                             $datos->presentacion,
@@ -104,7 +104,7 @@ class VersionesRepositorio implements IVersionesRepositorio
                                             ))
                                                 {
                                                 if(!$sentencia->execute())
-                                                    $resultado->mensajeError = "Falla la ejecucion (" . $this->conexion->errno . ") " . $this->conexion->error;
+                                                    $resultado->mensajeError = "Falla la ejecucion (" . $this->conexion->errno . ") " . $this->conexion->error .$datos->campoId;
                                                 }
                                             else
                                                 $resultado->mensajeError = "Falla³ el enlace de parametros";
