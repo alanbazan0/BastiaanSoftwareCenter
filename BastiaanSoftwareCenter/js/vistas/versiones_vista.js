@@ -183,8 +183,31 @@ class VersionesVista
 		}
 		btnBajar()
 		{
+			
+			var reg=this.grid2._selectedIndex;
+			var item=this.grid2._selectedItem;
+			var itemAux={};
 			if(reg>this.grid2._dataProvider.legnth)
 			{
+				
+               itemAux=this.grid2._dataProvider[reg+1];
+				this.grid2._dataProvider[reg]=itemAux;
+				this.grid2._dataProvider[reg+1]=item
+				
+				this.grid2._selectedIndex=reg+1; 
+				this.a=0;
+				this.grid2.render();
+				
+				for(var b = 0; b < this.grid2._dataProvider.length; b++)
+				{		
+					this.grid2._dataProvider[b].orden=b+1;
+					if(this.grid2._dataProvider[b].presentacion ===  "1")
+					{	
+						document.getElementById(b).checked = true;
+					}
+					else				
+						document.getElementById(b).checked = false; 					
+				}
 				
 			}
 		}
