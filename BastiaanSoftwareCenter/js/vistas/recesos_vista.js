@@ -18,7 +18,7 @@ class RecesosVista
 	{
 		this.grid._columnas = [
 			{longitud:100, 	titulo:"Id",   	alias:"id", alineacion:"I" }, 
-			{longitud:200, 	titulo:"Descripcion",   alias:"rDescripcion", alineacion:"I" }, 
+			{longitud:200, 	titulo:"Descripción",   alias:"rDescripcion", alineacion:"I" }, 
 			{longitud:200, 	titulo:"Nombre Corto",   alias:"rCorto", alineacion:"I" }, 
 			{longitud:200, 	titulo:"Nombre Largo",   alias:"rLargo", alineacion:"I" },
 		]
@@ -106,7 +106,6 @@ class RecesosVista
 	btnSalirFormulario_onClick()
 	{		
 		this.salirFormulario();
-		this.presentador.actualizar();
 	}	
 	
 	/*
@@ -130,10 +129,7 @@ class RecesosVista
 	{
 		 var criteriosSeleccion = 
 		 {				    
-			id:$('#idRecesoCriterioInput').val(),
-			rDescripcion:$('#rDescripcionCriterioInput').val(),
-			rCorto:$('#rCortoCriterioInput').val(),
-			rLargo:$('#rLargoCriterioInput').val()
+			id:$('#idRecesoCriterioInput').val()
 		 }
 		 return criteriosSeleccion;
 	}		

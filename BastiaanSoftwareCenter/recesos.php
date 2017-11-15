@@ -104,14 +104,6 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								<tr>
 								    <td style="padding:6px 0px 4px 10px;">		<label  style="font-family: Verdana; font-size: 10px;">Id Receso</label></td>									
 									<td style="padding:6px 0px 4px 10px;">		<input  id='idRecesoCriterioInput' type='text' style='height: 20px; width:200px;'/></input></td>
-									 
-									<td style="padding:6px 0px 4px 10px;">		<label  style="font-family: Verdana; font-size: 10px;">Descripcion Receso</label></td>
-									<td style="padding:6px 0px 4px 10px;">		<input  id='rDescripcionCriterioInput' type='text' style='height: 20px; width:200px;'/></input></td>	
-									<td style="padding:6px 0px 4px 10px;">		<label  style="font-family: Verdana; font-size: 10px;">Nombre Corto</label></td>
-									<td style="padding:6px 0px 4px 10px;">		<input  id='rCortoCriterioInput' type='text' style='height: 20px; width:200px;'/></input></td>	
-									<td style="padding:6px 0px 4px 10px;">		<label  style="font-family: Verdana; font-size: 10px;">Nombre Largo</label></td>
-									<td style="padding:6px 0px 4px 10px;">		<input  id='rLargoCriterioInput' type='text' style='height: 20px; width:200px;'/></input></td>	
-									 		
 								</tr>
 							</table>
 						</div>
@@ -167,7 +159,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								<div id="filtros " class="contenedorIEC" style="overflow: auto; position: relative; width: 100%; display: block;">
 								 <div style="width: 80%; display: block; height: 100%;  padding-top: 10px; padding-left: 34px;">								 	
 								   
-								   <table WIDHT=25%; HEIGHT=27%;  CELLPADDING=0; cellspacing="10" style="padding-top: 12px; padding-left: 1%; position:relative;display:inline-block; border: #ff6600 1px solid;">										 		
+								   <table WIDHT=25%; HEIGHT=23%;  CELLPADDING=0; cellspacing="10" style="padding-top: 12px; padding-left: 1%; position:relative;display:inline-block; border: #ff6600 1px solid;">										 		
 								    <tr>
 								    <td>
 								   	  <label style="position: relative; left: 3px;">ID Receso</label>
@@ -176,24 +168,30 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								     		<input class="input" id="idFormularioInput" type="text" maxlength="20" value="" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
 								   		</td>
 								    	<td >
-								     		<label style=" width:130px; position: relative; left: 3px; ">Descripcion Receso</label>
+								     		<label style=" width:130px; position: relative; left: 3px; ">Descripción Receso</label>
 								   		</td>
 								   		<td >
-								     		<input class="input" id="rDescripcionFormularioInput" type="text" maxlength="20" value="" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
+								     		<input class="input" id="rDescripcionFormularioInput" type="text" maxlength="20" value="" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; right:4px; box-shadow: 2px 2px 5px #999;"/>
 								   		</td>
 								   	</tr>
+								   	<tr>
+								   	<tr>
+								   	<tr>
 								    	<td >
 								     		<label style="position: relative; left: 3px; ">Nombre Corto</label>
 								   		</td>
 								   		<td >
-								     		<input class="input" id="rCortoFormularioInput" descripcion="Primer nombre" style="width:200px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
+								     		<input class="input" id="rCortoFormularioInput" descripcion="Primer nombre" style="width:200%; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
 								   		</td>
+								   		</tr>
+								   		<tr>
 								   		<td>						    
 								    		<label style="position: relative; left: 3px; ">Nombre Largo</label>
 								   		</td>
 								   		<td>						    
-								    		<input class="input" id="rLargoFormularioInput" style="width:200px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
+								    		<input class="input" id="rLargoFormularioInput" style="width:200%; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
 								   		</td>
+								   		</tr>
 								   </table>	     	
 									</div>
 									

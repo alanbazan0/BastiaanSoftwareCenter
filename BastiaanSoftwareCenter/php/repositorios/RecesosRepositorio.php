@@ -113,13 +113,10 @@ class RecesosRepositorio implements IRecesosRepositorio
                      . " NRHTPREGNOMC rCorto, "
                      . " NRHTPREGNOML rLargo "
                      . " FROM BSTNTRN.NRHTPREG  "
-                     . " WHERE NRHTPREGID like  CONCAT('%',?,'%') "
-                     . " AND NRHTPREGNOMP like  CONCAT('%',?,'%') "
-                     . " AND NRHTPREGNOMC like  CONCAT('%',?,'%') "
-                     . " AND NRHTPREGNOML like  CONCAT('%',?,'%') ";
+                     . " WHERE NRHTPREGID like  CONCAT('%',?,'%') ";
         if($sentencia = $this->conexion->prepare($consulta))
         {
-            if($sentencia->bind_param("ssss",$criteriosSeleccion->id,$criteriosSeleccion->rDescripcion,$criteriosSeleccion->rCorto,$criteriosSeleccion->rLargo))
+            if($sentencia->bind_param("s",$criteriosSeleccion->id))
             {
                 if($sentencia->execute())
                 {                
