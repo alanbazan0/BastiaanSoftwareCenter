@@ -21,6 +21,8 @@ class RecesosVista
 			{longitud:200, 	titulo:"Descripción",   alias:"rDescripcion", alineacion:"I" }, 
 			{longitud:200, 	titulo:"Nombre Corto",   alias:"rCorto", alineacion:"I" }, 
 			{longitud:200, 	titulo:"Nombre Largo",   alias:"rLargo", alineacion:"I" },
+			{longitud:200, 	titulo:"Maximo de Tiempo",   alias:"rTiempo", alineacion:"I" }, 
+			{longitud:200, 	titulo:"Maximo de Recesos",   alias:"rRecesos", alineacion:"I" },
 		]
 		this.grid._origen="vista";
 		this.grid.manejadorEventos=this.manejadorEventos;
@@ -155,6 +157,8 @@ class RecesosVista
 		$('#rDescripcionFormularioInput').val(valor.rDescripcion);
 		$('#rCortoFormularioInput').val(valor.rCorto);
 		$('#rLargoFormularioInput').val(valor.rLargo);
+		$('#rTiempoFormularioInput').val(valor.rTiempo);
+		$('#rRecesosFormularioInput').val(valor.rRecesos);
 	}
 	
 	get receso()
@@ -164,7 +168,9 @@ class RecesosVista
 			 id:$('#idFormularioInput').val(),
 			 rDescripcion:$('#rDescripcionFormularioInput').val(),
 			 rCorto:$('#rCortoFormularioInput').val(),
-			 rLargo:$('#rLargoFormularioInput').val()
+			 rLargo:$('#rLargoFormularioInput').val(),
+			 rTiempo:$('#rTiempoFormularioInput').val(),
+			 rRecesos:$('#rRecesosFormularioInput').val()
 		 };
 		 return receso;
 	 }
@@ -209,6 +215,8 @@ class RecesosVista
 		$('#rDescripcionFormularioInput').val("");
 		$('#rCortoFormularioInput').val("");
 		$('#rLargoFormularioInput').val("");
+		$('#rTiempoFormularioInput').val("");
+		$('#rRecesosFormularioInput').val("");
 	}
 	
 }

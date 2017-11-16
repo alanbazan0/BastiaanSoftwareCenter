@@ -161,10 +161,10 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								   
 								   <table WIDHT=25%; HEIGHT=23%;  CELLPADDING=0; cellspacing="10" style="padding-top: 12px; padding-left: 1%; position:relative;display:inline-block; border: #ff6600 1px solid;">										 		
 								    <tr>
-								    <td>
-								   	  <label style="position: relative; left: 3px;">ID Receso</label>
+								       <td>
+								   	     <label style="position: relative; left: 3px;">ID Receso</label>
 								   	  </td>
-								   	  <td>
+								   	   <td>
 								     		<input class="input" id="idFormularioInput" type="text" maxlength="20" value="" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
 								   		</td>
 								    	<td >
@@ -174,25 +174,39 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								     		<input class="input" id="rDescripcionFormularioInput" type="text" maxlength="20" value="" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; right:4px; box-shadow: 2px 2px 5px #999;"/>
 								   		</td>
 								   	</tr>
+								 	</tr>
 								   	<tr>
-								   	<tr>
+								   	</tr>
 								   	<tr>
 								    	<td >
 								     		<label style="position: relative; left: 3px; ">Nombre Corto</label>
 								   		</td>
 								   		<td >
-								     		<input class="input" id="rCortoFormularioInput" descripcion="Primer nombre" style="width:200%; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
+								   	 		<input class="input" id="rCortoFormularioInput" descripcion="Primer nombre" style="width:200%; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
 								   		</td>
-								   		</tr>
-								   		<tr>
+								   </tr>	
 								   		<td>						    
 								    		<label style="position: relative; left: 3px; ">Nombre Largo</label>
 								   		</td>
 								   		<td>						    
 								    		<input class="input" id="rLargoFormularioInput" style="width:200%; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
 								   		</td>
-								   		</tr>
-								   </table>	     	
+								   	</tr>	
+								   	<tr>
+								   		<td>						    
+								    		<label  style="position: relative; left: 3px;">Tiempo de Recesos</label>
+								   		</td>
+								   		<td>						    
+								    		<input class="input" id="rTiempoFormularioInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
+								   		</td>
+								   			<td>						    
+								    		<label  style="position: relative; left: 3px;">Maximo de Recesos</label>
+								   		</td>
+								   		<td>						    
+								    		<input class="input" id="rRecesosFormularioInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
+								   		</td>
+								   	</tr>
+								   	</table>	     	
 									</div>
 									
 								 </div>

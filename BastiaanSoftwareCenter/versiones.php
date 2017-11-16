@@ -222,8 +222,8 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								</div>
 								<div id="panelesArea0panel0componentes" style="width:99%;height:85%;overflow:hidden;position:relative;">
                                 	<div id="panelesArea0panel0componente0"   style='overflow: auto; position:static;height:98%; width:100%; top:10px;left:3px;'>
-                                	<img id="btnBajar" class="botonMenuIEC" title="Bajar" src="assets/botones/abajo.jpg" width="42" height="42" onClick="vista.btnBajar;">
-                                	<img id="btnSubir" class="botonMenuIEC" title="Subir" src="assets/botones/arriba.jpg" width="42" height="42" onClick="vista.btnSubir();">
+                                	<img id="btnBajar" class="botonMenuIEC" title="Bajar" src="assets/botones/imagen1.png" width="42" height="42" onClick="vista.btnBajar;">
+                                	<img id="btnSubir" class="botonMenuIEC" title="Subir" src="assets/botones/imagen2.png" width="42" height="42" onClick="vista.btnSubir();">
                                 	 		<div id="grid2" style="float:left; overflow: auto; position:static; height:95%; width:100%; display: block; top:5px;left:3px;"></div>                						
                             		</div>
                            		</div>                                

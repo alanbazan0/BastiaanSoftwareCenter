@@ -17,23 +17,26 @@ class RecesosRepositorio implements IRecesosRepositorio
         $this->conexion = $conexion;
     }
     
-    
     public function insertar(Receso $receso)
     {
         $resultado = "";
         
-        $consulta = " INSERT INTO BSTNTRN.NRHTPREG "
-            . " (NRHTPREGID, "
-            . " NRHTPREGNOMP, "
-            . " NRHTPREGNOMC, "
-            . " NRHTPREGNOML) "
-            . " VALUE(?, ?, ?, ?)";
+        $consulta = " INSERT INTO BSTNTRN.BTCRECESO "
+            . " (BTCRECESOID, "
+            . " BTCRECESONOMP, "
+            . " BTCRECESONOMC, "
+            . " BTCRECESONOML, "
+            . " BTCRECESOMAXTMP, "
+            . " BTCRECESOMAXREC) "
+            . " VALUE(?, ?, ?, ?, ?, ?)";
                  if($sentencia = $this->conexion->prepare($consulta))
                             {
-                                if( $sentencia->bind_param("ssss",$receso->id,
+                                if( $sentencia->bind_param("ssssss",$receso->id,
                                     $receso->rDescripcion,
                                     $receso->rCorto,
-                                    $receso->rLargo))
+                                    $receso->rLargo,
+                                    $receso->rTiempo,
+                                    $receso->rRecesos))
                                   {
                                     if(!$sentencia->execute())
                                         $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;
@@ -50,8 +53,8 @@ class RecesosRepositorio implements IRecesosRepositorio
     public function eliminar($llaves)
     {
         $resultado = new Resultado();
-        $consulta = " DELETE FROM BSTNTRN.NRHTPREG "
-                    . "  WHERE NRHTPREGID = ? ";
+        $consulta = " DELETE FROM BSTNTRN.BTCRECESO "
+                    . "  WHERE BTCRECESOID = ? ";
          if($sentencia = $this->conexion->prepare($consulta))
          {
              if($sentencia->bind_param("s",$llaves->id))
@@ -75,17 +78,21 @@ class RecesosRepositorio implements IRecesosRepositorio
     public function actualizar(Receso $receso)
     {     
         $resultado = new Resultado();
-        $consulta = " UPDATE BSTNTRN.NRHTPREG SET"
-                    . " NRHTPREGNOMP= ?, "
-                    . " NRHTPREGNOMC= ?, "
-                    . " NRHTPREGNOML= ? "
-                    . " WHERE NRHTPREGID = ? "; 
+        $consulta = " UPDATE BSTNTRN.BTCRECESO SET"
+                    . " BTCRECESONOMP= ?, "
+                    . " BTCRECESONOMC= ?, "
+                    . " BTCRECESONOML= ?, "
+                    . " BTCRECESOMAXTMP= ?, "
+                    . " BTCRECESOMAXREC= ? "
+                    . " WHERE BTCRECESOID = ? "; 
         if($sentencia = $this->conexion->prepare($consulta))
         {
-            if($sentencia->bind_param("ssss",
+            if($sentencia->bind_param("ssssss",
                                                $receso->rDescripcion,
                                                $receso->rCorto,
                                                $receso->rLargo,
+                                               $receso->rTiempo,
+                                               $receso->rRecesos,
                                                $receso->id))
             {
                if($sentencia->execute())
@@ -108,19 +115,21 @@ class RecesosRepositorio implements IRecesosRepositorio
         $recesos = array();     
        
         $consulta =   " SELECT "
-                     . " NRHTPREGID id, "
-                     . " NRHTPREGNOMP rDescripcion, "
-                     . " NRHTPREGNOMC rCorto, "
-                     . " NRHTPREGNOML rLargo "
-                     . " FROM BSTNTRN.NRHTPREG  "
-                     . " WHERE NRHTPREGID like  CONCAT('%',?,'%') ";
+                     . " BTCRECESOID id, "
+                     . " BTCRECESONOMP rDescripcion, "
+                     . " BTCRECESONOMC rCorto, "
+                     . " BTCRECESONOML rLargo, "
+                     . " BTCRECESOMAXTMP rTiempo, "
+                     . " BTCRECESOMAXREC rRecesos  "
+                     . " FROM BSTNTRN.BTCRECESO  "
+                     . " WHERE BTCRECESOID like  CONCAT('%',?,'%') ";
         if($sentencia = $this->conexion->prepare($consulta))
         {
             if($sentencia->bind_param("s",$criteriosSeleccion->id))
             {
                 if($sentencia->execute())
                 {                
-                    if ($sentencia->bind_result($id, $rDescripcion, $rCorto, $rLargo))
+                    if ($sentencia->bind_result($id, $rDescripcion, $rCorto, $rLargo, $rTiempo, $rRecesos))
                     {                    
                         while($row = $sentencia->fetch())
                         {
@@ -128,7 +137,9 @@ class RecesosRepositorio implements IRecesosRepositorio
                                 'id' => utf8_encode($id),
                                 'rDescripcion' =>  utf8_encode($rDescripcion),
                                 'rCorto' => utf8_encode($rCorto),
-                                'rLargo' => utf8_encode($rLargo)
+                                'rLargo' => utf8_encode($rLargo),
+                                'rTiempo' => utf8_encode($rTiempo),
+                                'rRecesos' => utf8_encode($rRecesos)
                             ];  
                             array_push($recesos,$receso);
                         }
@@ -155,19 +166,21 @@ class RecesosRepositorio implements IRecesosRepositorio
         
         $resultado = new Resultado();       
         $consulta =   " SELECT "
-                     . " NRHTPREGID id, "
-                     . " NRHTPREGNOMP rDescripcion, "
-                     . " NRHTPREGNOMC rCorto, "
-                     . " NRHTPREGNOML rLargo "
-                     . " FROM NRHTPREG "
-                     . " WHERE NRHTPREGID = ?";
+                     . " BTCRECESOID id, "
+                     . " BTCRECESONOMP rDescripcion, "
+                     . " BTCRECESONOMC rCorto, "
+                     . " BTCRECESONOML rLargo, "
+                     . " BTCRECESOMAXTMP rTiempo,"
+                     . " BTCRECESOMAXREC rRecesos  "
+                     . " FROM BTCRECESO "
+                     . " WHERE BTCRECESOID = ?";
         if($sentencia = $this->conexion->prepare($consulta))
         {
             if($sentencia->bind_param("s",$llaves->id))
             {
                 if($sentencia->execute())
                 {                    
-                    if ($sentencia->bind_result($id, $rDescripcion, $rCorto, $rLargo))
+                    if ($sentencia->bind_result($id, $rDescripcion, $rCorto, $rLargo, $rTiempo, $rRecesos))
                     {                        
                         if($sentencia->fetch())
                         {
@@ -176,6 +189,8 @@ class RecesosRepositorio implements IRecesosRepositorio
                             $receso->rDescripcion =  utf8_encode($rDescripcion);
                             $receso->rCorto =  utf8_encode($rCorto);
                             $receso->rLargo =  utf8_encode($rLargo);
+                            $receso->rTiempo =  utf8_encode($rTiempo);
+                            $receso->rRecesos =  utf8_encode($rRecesos);
                             $resultado->valor = $receso;                           
                         }
                         else

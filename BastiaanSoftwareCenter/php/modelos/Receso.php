@@ -7,5 +7,7 @@ class Receso
     public $rDescripcion;
     public $rCorto;
     public $rLargo;
+    public $rTiempo;
+    public $rRecesos;
 
 }
