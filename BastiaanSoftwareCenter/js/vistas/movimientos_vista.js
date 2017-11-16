@@ -23,7 +23,6 @@ class MovimientosVista
 			{longitud:200, 	titulo:"Fecha Inicial",   alias:"fInicial", alineacion:"I" },
 			{longitud:200, 	titulo:"Fecha Final",   alias:"fFinal", alineacion:"I" }, 
 			{longitud:200, 	titulo:"Fecha Personal",   alias:"fPersonal", alineacion:"I" },
-			
 		]
 		this.grid._origen="vista";
 		this.grid.manejadorEventos=this.manejadorEventos;
