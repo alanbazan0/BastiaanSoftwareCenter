@@ -48,7 +48,27 @@ class MovimientosRepositorio
 	{
 		var datos = JSON.parse(resultado);
 		this.functionRetorno.call(this.contexto,JSON.parse(resultado));
+	}
+	
+	
+	consultarPorReceso(contexto,functionRetorno, criteriosRecesos)
+	{		
+		this.contexto = contexto;
+		this.functionRetorno = functionRetorno;
+		var parametros;
+		parametros = "accion=consultarPorReceso";
+		var contextHandler = new AjaxContextHandler();
+		var host = window.location.origin + "/BastiaanSoftwareCenter";	
+		var ai = new Ajaxv2(host +"/php/repositorios/Movimientos.php", this, this.consultarPorRecesoResultado, "POST", parametros, contextHandler);		
+		contextHandler.AddAjaxv2Object(ai); 		
+		ai.GetPost(true);
+	}
+	consultarPorRecesoResultado(resultado)
+	{
+		var datos = JSON.parse(resultado);
+		this.functionRetorno.call(this.contexto,JSON.parse(resultado));
 	}	
+	
 	actualizar(contexto,functionRetorno, movimiento)
 	{		
 		this.contexto = contexto;

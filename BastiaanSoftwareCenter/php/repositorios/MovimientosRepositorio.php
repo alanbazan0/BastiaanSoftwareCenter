@@ -160,8 +160,57 @@ class MovimientosRepositorio implements IMovimientosRepositorio
         
        
         return $resultado;     
-    }    
-
+    }   
+    
+    public function consultarPorReceso()
+    {
+        $resultado = new Resultado();
+        $recesos = array();
+  
+        $consulta = " SELECT "
+         . " BTCRECESOID recesoId, "
+         . " BTCRECESONOMP rDescripcion, "
+         . " BTCRECESONOMC rCorto, "
+         . " BTCRECESONOML rLargo, "
+         . " BTCRECESOMAXTMP rTiempo, "
+         . " BTCRECESOMAXREC rRecesos  "
+         . " FROM BSTNTRN.BTCRECESO  ";
+            if($sentencia = $this->conexion->prepare($consulta))
+                                    {
+                                        if(true)
+                                        {
+                                            if($sentencia->execute())
+                                            {
+                                                if ($sentencia->bind_result($recesoId, $rDescripcion, $rCorto, $rLargo, $rTiempo, $rRecesos)  )
+                                                {
+                                                    while($row = $sentencia->fetch())
+                                                    {
+                                                        $receso = (object) [
+                                                            'recesoId' => utf8_encode($recesoId),
+                                                            'rDescripcion' =>  utf8_encode($rDescripcion),
+                                                            'rCorto' => utf8_encode($rCorto),
+                                                            'rLargo' => utf8_encode($rLargo),
+                                                            'rTiempo' => utf8_encode($rTiempo),
+                                                            'rRecesos' => utf8_encode($rRecesos)
+                                                        ];
+                                                        array_push($recesos,$receso);
+                                                    }
+                                                    $resultado->valor = $recesos;
+                                                }
+                                                else
+                                                    $resultado->mensajeError = "Falló el enlace del resultado.";
+                                            }
+                                            else
+                                                $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;
+                                        }
+                                        else
+                                            $resultado->mensajeError = "Falló el enlace de parámetros";
+                                    }
+                                    else
+                                        $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
+                                        
+                    return $resultado;
+    }
     public function consultarPorLlaves($llaves)
     {
         

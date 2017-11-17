@@ -63,6 +63,11 @@ try
                 if($resultado!=null)
                     echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
            break;
+            case 'consultarPorReceso':
+                $resultado = $repositorio->consultarPorReceso();
+                if($resultado!=null)
+                    echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
+                    break;
         }
     }
     

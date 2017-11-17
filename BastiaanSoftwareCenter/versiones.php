@@ -146,7 +146,9 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 			<div id="menuPrincipal"  align="right" class="contieneCriteriosAribaBtn" style="background-color: #6b6b6b;    height: 55px; " > 
 				<img class='logoBAS' style='float: left;' id='logoFRM' src='assets/pantalla/logoTipo.png'  />
 				<span id="txtTitulo" style="float:left;margin-top: 20px;margin-left: 15px;color: #FFFFFF;float: left;font-family: Verdana;font-size: 11px;font-weight: bold;">Criterios de Selecci&oacuten</span>
-				<img style="padding: 2px;" class='imgTipoBoton' id='btnGuardarFormulario' src='assets/botones/imgGuardar.png' onclick='vista.btnGuardarFormulario_onClick();' title='Guardar' />
+                <img style="padding: 2px;" class='imgTipoBoton' id="btnSubir" class="botonMenuIEC" title="Subir" src="assets/botones/imagen1.png" width="52" height="52" onClick="vista.btnSubir();"></td>
+			    <img  style="padding: 2px;" class='imgTipoBoton'id="btnBajar" class="botonMenuIEC" title="Bajar" src="assets/botones/imagen2.png" width="52" height="52" onClick="vista.btnBajar;"></td>
+                <img style="padding: 2px;" class='imgTipoBoton' id='btnGuardarFormulario' src='assets/botones/imgGuardar.png' onclick='vista.btnGuardarFormulario_onClick();' title='Guardar' />
 				<img style="padding: 2px;" class='imgTipoBoton' id='btnSalirFormulario' src='assets/botones/btnSalir.png' onClick="vista.btnSalirFormulario_onClick();" title='Salir'  />
 			</div>
 <!--
@@ -222,9 +224,11 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								</div>
 								<div id="panelesArea0panel0componentes" style="width:99%;height:85%;overflow:hidden;position:relative;">
                                 	<div id="panelesArea0panel0componente0"   style='overflow: auto; position:static;height:98%; width:100%; top:10px;left:3px;'>
+                               <!-- 
                                 	<img id="btnBajar" class="botonMenuIEC" title="Bajar" src="assets/botones/imagen1.png" width="42" height="42" onClick="vista.btnBajar;">
                                 	<img id="btnSubir" class="botonMenuIEC" title="Subir" src="assets/botones/imagen2.png" width="42" height="42" onClick="vista.btnSubir();">
-                                	 		<div id="grid2" style="float:left; overflow: auto; position:static; height:95%; width:100%; display: block; top:5px;left:3px;"></div>                						
+                                	 -->
+                                	 <div id="grid2" style="float:left; overflow: auto; position:static; height:95%; width:100%; display: block; top:5px;left:3px;"></div>                						
                             		</div>
                            		</div>                                
 							</div>

@@ -10,7 +10,7 @@ class MovimientosPresentador
 		 var repositorio = new MovimientosRepositorio(this);		
 		 repositorio.consultar(this,this.consultarResultado,this.vista.criteriosSeleccion);
 	 }
-	 
+
 	 consultarResultado(resultado)
 	 {
 		if(resultado.mensajeError=="")
@@ -19,7 +19,24 @@ class MovimientosPresentador
 			this.vista.mostrarMensaje("Error",resultado.mensajeError);
 	 }
 	 
-	
+		
+	 /* recesos*/ 
+	 consultarPorReceso()
+	 {
+		 var repositorio = new MovimientosRepositorio(this);		
+		 repositorio.consultarPorReceso(this,this.consultarPorRecesoResultado,this.vista.criteriosRecesos);
+	 }
+	 consultarPorRecesoResultado(resultado)
+	 {
+		if(resultado.mensajeError=="")
+			this.vista.datosRecesos = resultado.valor;
+		else
+			this.vista.mostrarMensaje("Error",resultado.mensajeError);
+	 }
+
+	 
+	 
+	 
 	 insertar()
 	 {
 		 var repositorio = new MovimientosRepositorio(this);			 

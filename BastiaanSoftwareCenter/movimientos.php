@@ -148,6 +148,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 <!--
   barra de men�...fin
  -->
+ 
 <!--barra principal -->
 			<div id="cargador" class="cargadorFRM2"></div>
 				<div class="pContenido" id="estadoEstructura" >
@@ -168,10 +169,9 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								     		<label style=" width:130px; position: relative; left: 3px; ">Agente ID</label>
 								   		</td>
 								   		<td >
-								     		<input class="input" id="agenteIdFormularioInput" type="text" maxlength="20" value="" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; right:4px; box-shadow: 2px 2px 5px #999;"/>
-								   		</td>
+								   	 		<select class="input" id="agenteIdFormularioInput" descripcion="Id agente" style=" width:230px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999; "/></select>
+								    	</td>
 								   	</tr>
-								 	</tr>
 								   	<tr>
 								   	</tr>
 								   	<tr>
@@ -188,21 +188,21 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								    		<label style="position: relative; left: 3px; ">Fecha Inicial</label>
 								   		</td>
 								   		<td>		
-								   			<input class="input" id="fInicialFormularioInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
+								   			<input class="input" id="fInicialFormularioInput"   descripcion="Fecha"  style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
 								   		</td>
 								   		<td>						    
 								    		<label  style="position: relative; left: 3px;">Fecha Final</label>
 								   		</td>
 								 
 								   		<td>						    
-								    		<input class="input" id="fFinalFormularioInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
+								    		<input class="input" id="fFinalFormularioInput"   descripcion="Fecha"  style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
 								   		</td>
 								   	
 								   			<td>						    
 								    		<label  style="position: relative; left: 3px;">Fecha Personal</label>
 								   		</td>
 								   		<td>						    
-								    		<input class="input" id="fPersonalFormularioInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
+								    		<input class="input" id="fPersonalFormularioInput"   descripcion="Fecha"  style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
 								   		</td>
 								   </tr>		
 		   						  

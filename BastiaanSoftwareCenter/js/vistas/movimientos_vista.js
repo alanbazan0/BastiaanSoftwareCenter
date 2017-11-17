@@ -5,14 +5,23 @@ class MovimientosVista
 		this.ventana = ventana;
 		this.presentador = new MovimientosPresentador(this);
 		this.manejadorEventos = new ManejadorEventos();
-		this.grid = new GridReg("grid");	
+		this.grid = new GridReg("grid");		
+		
 	}
 	
 	onLoad()
 	{			
 		this.crearColumnasGrid();
 		this.presentador.consultar();
+	
+		
+		this.cmbEstatus = new Combo("agenteIdFormularioInput");
+		this.cmbEstatus.setViewport("agenteIdFormularioInput");
+		this.cmbEstatus._dataField = "recesoId";
+		this.cmbEstatus._labelField = "rCorto";
+		this.cmbEstatus.render();
 	}
+	
 	
 	crearColumnasGrid()
 	{
@@ -46,7 +55,39 @@ class MovimientosVista
 	{
 		this.modo = "ALTA";
 		this.limpiarFormulario();	
-		this.mostrarFormulario();		
+		this.mostrarFormulario();	
+		this.presentador.consultarPorReceso();
+	
+		var today = new Date();
+		var dd = today.getDate();
+		var mm = today.getMonth()+1;
+		var yyyy = today.getFullYear();
+		
+		if(dd<10){dd='0'+dd} if(mm<10){mm='0'+mm} 
+			var strToday = new Date(mm+'/'+dd+'/'+yyyy); // = '01/'+mm+'/'+yyyy;
+		var strTodayFirst = new Date(mm+'/'+'01/'+yyyy); // = '01/'+mm+'/'+yyyy;
+		
+		
+		$("#"+ "fFinalFormularioInput").datepicker( {dateFormat:'dd/mm/yy'});
+		$("#"+ "fFinalFormularioInput").datepicker( "option", $.datepicker.regional[ 'es' ] );
+		$("#"+ "fFinalFormularioInput").datepicker({showOn:'button', buttonImage:'assets/botones/calendario.svg', buttonImageOnly:true});
+		$("#"+ "fFinalFormularioInput").datepicker('option', {dateFormat:'dd/mm/yy'});
+		$("#"+ "fFinalFormularioInput").datepicker("setDate", strTodayFirst);
+		$("#"+ "fFinalFormularioInput").datepicker();	
+		
+		$("#"+ "fInicialFormularioInput").datepicker( {dateFormat:'dd/mm/yy'});
+		$("#"+ "fInicialFormularioInput").datepicker( "option", $.datepicker.regional[ 'es' ] );
+		$("#"+ "fInicialFormularioInput").datepicker({showOn:'button', buttonImage:'assets/botones/calendario.svg', buttonImageOnly:true});
+		$("#"+ "fInicialFormularioInput").datepicker('option', {dateFormat:'dd/mm/yy'});
+		$("#"+ "fInicialFormularioInput").datepicker("setDate", strTodayFirst);
+		$("#"+ "fInicialFormularioInput").datepicker();
+		
+		$("#"+ "fPersonalFormularioInput").datepicker( {dateFormat:'dd/mm/yy'});
+		$("#"+ "fPersonalFormularioInput").datepicker( "option", $.datepicker.regional[ 'es' ] );
+		$("#"+ "fPersonalFormularioInput").datepicker({showOn:'button', buttonImage:'assets/botones/calendario.svg', buttonImageOnly:true});
+		$("#"+ "fPersonalFormularioInput").datepicker('option', {dateFormat:'dd/mm/yy'});
+		$("#"+ "fPersonalFormularioInput").datepicker("setDate", strTodayFirst);
+		$("#"+ "fPersonalFormularioInput").datepicker();
 	}
 	
 	btnBaja_onClick()
@@ -71,6 +112,39 @@ class MovimientosVista
 			this.limpiarFormulario();	
 			this.mostrarFormulario();		
 			this.presentador.consultarPorLlaves();
+			this.presentador.consultarPorReceso();
+			
+		    var today = new Date();
+			var dd = today.getDate();
+			var mm = today.getMonth()+1;
+			var yyyy = today.getFullYear();
+			
+			if(dd<10){dd='0'+dd} if(mm<10){mm='0'+mm} 
+				var strToday = new Date(mm+'/'+dd+'/'+yyyy); // = '01/'+mm+'/'+yyyy;
+			var strTodayFirst = new Date(mm+'/'+'01/'+yyyy); // = '01/'+mm+'/'+yyyy;
+			
+			
+			$("#"+ "fFinalFormularioInput").datepicker( {dateFormat:'dd/mm/yy'});
+			$("#"+ "fFinalFormularioInput").datepicker( "option", $.datepicker.regional[ 'es' ] );
+			$("#"+ "fFinalFormularioInput").datepicker({showOn:'button', buttonImage:'assets/botones/calendario.svg', buttonImageOnly:true});
+			$("#"+ "fFinalFormularioInput").datepicker('option', {dateFormat:'dd/mm/yy'});
+			$("#"+ "fFinalFormularioInput").datepicker("setDate", strTodayFirst);
+			$("#"+ "fFinalFormularioInput").datepicker();
+			
+			$("#"+ "fInicialFormularioInput").datepicker( {dateFormat:'dd/mm/yy'});
+			$("#"+ "fInicialFormularioInput").datepicker( "option", $.datepicker.regional[ 'es' ] );
+			$("#"+ "fInicialFormularioInput").datepicker({showOn:'button', buttonImage:'assets/botones/calendario.svg', buttonImageOnly:true});
+			$("#"+ "fInicialFormularioInput").datepicker('option', {dateFormat:'dd/mm/yy'});
+			$("#"+ "fInicialFormularioInput").datepicker("setDate", strTodayFirst);
+			$("#"+ "fInicialFormularioInput").datepicker();
+			
+			$("#"+ "fPersonalFormularioInput").datepicker( {dateFormat:'dd/mm/yy'});
+			$("#"+ "fPersonalFormularioInput").datepicker( "option", $.datepicker.regional[ 'es' ] );
+			$("#"+ "fPersonalFormularioInput").datepicker({showOn:'button', buttonImage:'assets/botones/calendario.svg', buttonImageOnly:true});
+			$("#"+ "fPersonalFormularioInput").datepicker('option', {dateFormat:'dd/mm/yy'});
+			$("#"+ "fPersonalFormularioInput").datepicker("setDate", strTodayFirst);
+			$("#"+ "fPersonalFormularioInput").datepicker();
+			
 		}
 		else
 			this.mostrarMensaje("Selecciona un registro para modificar.");
@@ -136,6 +210,11 @@ class MovimientosVista
 		 return criteriosSeleccion;
 	}		
 	
+	set datosRecesos(valor)
+	{
+		this.cmbEstatus._dataProvider = valor;
+		this.cmbEstatus.render();	
+	}
 	
 	/*
 	 * Asignar registros al grid
@@ -167,7 +246,7 @@ class MovimientosVista
 		 {				    
 			 id:$('#idFormularioInput').val(),
 			 agenteId:$('#agenteIdFormularioInput').val(),
-			 recesoId:$('#recesoIdFormularioInput').val(),
+			 recesoId:this.cmbEstatus._selectedItem.recesoId,
 			 fInicial:$('#fInicialFormularioInput').val(),
 			 fFinal:$('#fFinalFormularioInput').val(),
 			 fPersonal:$('#fPersonalFormularioInput').val()

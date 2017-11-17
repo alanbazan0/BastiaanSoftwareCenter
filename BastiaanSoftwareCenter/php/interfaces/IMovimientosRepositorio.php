@@ -11,5 +11,6 @@ interface IMovimientosRepositorio
     
     public function consultarPorLlaves($id); 
     public function consultar($criteriosSeleccion);   
+    public function consultarPorReceso();   
 }
 
