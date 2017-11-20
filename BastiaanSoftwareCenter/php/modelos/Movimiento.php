@@ -16,7 +16,17 @@ class Movimiento
     public $rLargo;
     public $rTiempo;
     public $rRecesos;
-
+    
+    
+    public $hInicial;
+    public $hFinal;
+    public $dPersonal;
+    public $dsPersonal;
+    
+    
+    
+    
    }
 
+   
    

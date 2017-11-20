@@ -22,17 +22,22 @@ class MovimientosVista
 		this.cmbEstatus.render();
 	}
 	
-	
 	crearColumnasGrid()
 	{
 		this.grid._columnas = [
+	
 			{longitud:100, 	titulo:"Id",   	alias:"id", alineacion:"I" }, 
-			{longitud:200, 	titulo:"Id agente",   alias:"agenteId", alineacion:"I" }, 
-			{longitud:200, 	titulo:"Id receso",   alias:"recesoId", alineacion:"I" }, 
-			{longitud:200, 	titulo:"Fecha Inicial",   alias:"fInicial", alineacion:"I" },
-			{longitud:200, 	titulo:"Fecha Final",   alias:"fFinal", alineacion:"I" }, 
-			{longitud:200, 	titulo:"Fecha Personal",   alias:"fPersonal", alineacion:"I" },
-		]
+			{longitud:190, 	titulo:"Nombre Agente",   alias:"agenteId", alineacion:"I" }, 
+			{longitud:100, 	titulo:"Nombre Pila",   alias:"recesoId", alineacion:"I" }, 
+			{longitud:100, 	titulo:"F.Incial",   alias:"fInicial", alineacion:"C" },
+			{longitud:100, 	titulo:"F.Final",   alias:"fFinal", alineacion:"C" },
+			{longitud:100, 	titulo:"H.Inicial",   alias:"hInicial", alineacion:"C" },
+			{longitud:100, 	titulo:"H.Final",   alias:"hFinal", alineacion:"C" }, 
+			{longitud:100, 	titulo:"Duracion",   alias:"dPersonal", alineacion:"C" }, 
+			{longitud:150, 	titulo:"Duración en Segundos",  alias:"dsPersonal", alineacion:"D" }, 
+			//{longitud:150, 	titulo:"Fecha Personal",   alias:"fPersonal", alineacion:"I" },
+			
+		    ]
 		this.grid._origen="vista";
 		this.grid.manejadorEventos=this.manejadorEventos;
 		this.grid._ajustarAltura = true;
@@ -205,7 +210,9 @@ class MovimientosVista
 	{
 		 var criteriosSeleccion = 
 		 {				    
-			id:$('#agenteIdCriterioInput').val()
+			id:$('#agenteIdCriterioInput').val(),
+			fFinal:$('#fFinalCriterioInput').val(),
+			fInicial:$('#fInicialCriterioInput').val()
 		 }
 		 return criteriosSeleccion;
 	}		
@@ -238,6 +245,13 @@ class MovimientosVista
 		$('#fInicialFormularioInput').val(valor.fInicial);
 		$('#fFinalFormularioInput').val(valor.fFinal);
 		$('#fPersonalFormularioInput').val(valor.fPersonal);
+		
+		$('#hInicialFormularioInput').val(valor.hInicial);
+		$('#hFinalFormularioInput').val(valor.hFinal);
+		$('#dPersonalFormularioInput').val(valor.dPersonal);
+		$('#dsPersonalFormularioInput').val(valor.dsPersonal);
+		
+		
 	}
 	
 	get receso()
@@ -249,7 +263,12 @@ class MovimientosVista
 			 recesoId:this.cmbEstatus._selectedItem.recesoId,
 			 fInicial:$('#fInicialFormularioInput').val(),
 			 fFinal:$('#fFinalFormularioInput').val(),
-			 fPersonal:$('#fPersonalFormularioInput').val()
+			 fPersonal:$('#fPersonalFormularioInput').val(),
+		
+			 hInicial:$('#hInicialFormularioInput').val(),
+			 hFinal:$('#hFinalFormularioInput').val(),
+			 dPersonal:$('#dPersonalFormularioInput').val(),
+			 dsPersonal:$('#dsPersonalFormularioInput').val()
 		 };
 		 return receso;
 	 }
@@ -296,8 +315,13 @@ class MovimientosVista
 		$('#fInicialFormularioInput').val("");
 		$('#fFinalFormularioInput').val("");
 		$('#fPersonalFormularioInput').val("");
+		
+		$('#hInicialFormularioInput').val("");
+		$('#hFinalFormularioInput').val("");
+		$('#dPersonalFormularioInput').val("");
+		$('#dsPersonalFormularioInput').val("");
+		
 	}
-	
 }
 var vista = new MovimientosVista(this);
 

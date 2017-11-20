@@ -10,7 +10,7 @@ $usuarioDsc = REQUEST('CNUSERDESC');
 $CNUSERDESC = REQUEST('CNUSERDESC');
 ?>
 <html> 
-<title>Catalogo movimientos de personal</title>
+<title>Movimientos de personal</title>
 <head>	
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<script language="JavaScript" type="text/javascript" src="js/librerias/jquery-1.6.2.min.js"></script>
@@ -80,6 +80,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 						<div id="botones" style="width:auto;overflow:auto;">
 							<table class="tablaBotonesIEC">
 								<tr>
+									<td><img id="btnExcel" class="botonMenuIEC" title="Exportar" src="assets/botones/btnExcel.png" onClick="vista.btnExcel_onClick();"></td>
 									<td><img id="btnAlta" class="botonMenuIEC" title="Alta" src="assets/botones/imgAlta.png" onClick="vista.btnAlta_onClick();"></td>
 									<td><img id="btnBaja" class="botonMenuIEC" title="Baja" src="assets/botones/imgBaja.png" onClick="vista.btnBaja_onClick();"></td>
 									<td><img id="btnCambio" class="botonMenuIEC" title="Cambio" src="assets/botones/imgCambio.png" onClick="vista.btnCambio_onClick();"></td>
@@ -88,7 +89,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								</tr>
                              </table>   
 						</div>
-						<div id="titulo" style="margin-left:280px;" class="tituloIEC">Catalogo movimientos de personal</div>
+						<div id="titulo" style="margin-left:280px;" class="tituloIEC">Movimientos de personal</div>
 					</div>
 				</div>
             </div>        
@@ -102,6 +103,13 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								<tr>
 								    <td style="padding:6px 0px 4px 10px;">		<label  style="font-family: Verdana; font-size: 10px;">Id Agente</label></td>									
 									<td style="padding:6px 0px 4px 10px;">		<input  id='agenteIdCriterioInput' type='text' style='height: 20px; width:200px;'/></input></td>
+								    <td style="padding:6px 0px 4px 10px;">		<label  style="font-family: Verdana; font-size: 10px;">F. Inicial</label></td>									
+									<td style="padding:6px 0px 4px 10px;">		<input  id='fInialCriterioInput' type='date'  descripcion="Fecha"  style='height: 20px; width:200px;'/></input></td>
+								    <td style="padding:6px 0px 4px 10px;">		<label  style="font-family: Verdana; font-size: 10px;">F. Final</label></td>									
+									<td style="padding:6px 0px 4px 10px;">		<input  id='fFinalCriterioInput' type='date'  descripcion="Fecha"  style='height: 20px; width:200px;'/></input></td>
+								
+								
+								
 								</tr>
 							</table>
 						</div>
@@ -157,16 +165,18 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								<div id="filtros " class="contenedorIEC" style="overflow: auto; position: relative; width: 100%; display: block;">
 								 <div style="width: 80%; display: block; height: 100%;  padding-top: 10px; padding-left: 34px;">								 	
 								   
-								   <table WIDHT=25%; HEIGHT=23%;  CELLPADDING=0; cellspacing="10" style="padding-top: 12px; padding-left: 1%; position:relative;display:inline-block; border: #ff6600 1px solid;">										 		
+								   <table WIDHT=35%; HEIGHT=33%;  CELLPADDING=0; cellspacing="10" style="padding-top: 12px; padding-left: 1%; position:relative;display:inline-block; border: #ff6600 1px solid;">										 		
 								    <tr>
 								       <td>
-								   	     <label style="position: relative; left: 3px;">Personal ID</label>
+								   	     <label style="position: relative; left: 3px;">Usuario</label>
+								   	     <img src='css/imagenes/asisFRM.png' onClick="vista.btnUsuarios_onClick();" title='Asistente Usuarios'> 
 								   	  </td>
+								   	  
 								   	   <td>
 								     		<input class="input" id="idFormularioInput" type="text" maxlength="20" value="" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
 								   		</td>
 								    	<td >
-								     		<label style=" width:130px; position: relative; left: 3px; ">Agente ID</label>
+								     		<label style=" width:130px; position: relative; left: 3px; ">Tipo de receso</label>
 								   		</td>
 								   		<td >
 								   	 		<select class="input" id="agenteIdFormularioInput" descripcion="Id agente" style=" width:230px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999; "/></select>
@@ -204,6 +214,39 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								   		<td>						    
 								    		<input class="input" id="fPersonalFormularioInput"   descripcion="Fecha"  style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
 								   		</td>
+								   </tr>
+								   
+								   
+								   <tr>
+							          <td>						    
+								    		<label style="position: relative; left: 3px; ">Hora Inicial</label>
+								   		</td>
+								   		<td>		
+								   			<input class="input" id="hInicialFormularioInput"   style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
+								   		</td>
+								   		<td>						    
+								    		<label  style="position: relative; left: 3px;">Hora Final</label>
+								   		</td>
+								 
+								   		<td>						    
+								    		<input class="input" id="hFinalFormularioInput"    style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
+								   		</td>
+								   	
+								   		<td>						    
+								    		<label  style="position: relative; left: 3px;">Duraciòn</label>
+								   		</td>
+								   		<td>						    
+								    		<input class="input" id="dPersonalFormularioInput"    style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
+								   		</td>
+								   
+								   
+								        <td>						    
+								    		<label  style="position: relative; left: 3px;">Duraciòn Personal</label>
+								   		</td>
+								   		<td>						    
+								    		<input class="input" id="dsPersonalFormularioInput"   style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
+								   		</td>
+								   
 								   </tr>		
 		   						  
 								   	</table>	     	

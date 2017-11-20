@@ -23,19 +23,23 @@ class MovimientosRepositorio implements IMovimientosRepositorio
         $resultado = "";
         
         $consulta = " INSERT INTO BSTNTRN.BTMPERSONAL "
-            . " (BTMPERSONALID, "
-            . " BTMPERSONALUSUID, "
+            . " BTMPERSONALIDN,  "
             . " BTMPERSONALRECID, "
+            . " BTMPERSONALFINI, "
             . " BTMPERSONALHINI, "
             . " BTMPERSONALHFIN, "
+            . " BTMPERSONALFFIN, "
+            . " BTMPERSONALDUR, "
+            . " BTMPERSONALDURS, "
             . " BTMPERSONALFECHA) "
-            . " VALUE(?, ?, ?, ?, ?, ?)";
+            . " VALUE(?, ?, ?, ?, ?, ?, ?, ?)";
                  if($sentencia = $this->conexion->prepare($consulta))
                             {
-                                if( $sentencia->bind_param("ssssss",$movimiento->id,
+                                if( $sentencia->bind_param("ssssssss",$movimiento->id,
                                     $movimiento->agenteId,
                                     $movimiento->recesoId,
                                     $movimiento->fInicial,
+                                    $movimiento->hInicial,
                                     $movimiento->fFinal,
                                     $movimiento->fPersonal))
                                   {
@@ -82,18 +86,25 @@ class MovimientosRepositorio implements IMovimientosRepositorio
         $consulta = " UPDATE BSTNTRN.BTMPERSONAL SET"
                     . " BTMPERSONALUSUID= ?, "
                     . " BTMPERSONALRECID= ?, "
+                    . " BTMPERSONALFINI= ?, "
                     . " BTMPERSONALHINI= ?, "
                     . " BTMPERSONALHFIN= ?, "
+                    . " BTMPERSONALFFIN= ?, "
+                    . " BTMPERSONALDUR= ?, "
+                    . " BTMPERSONALDURS= ?,"
                     . " BTMPERSONALFECHA= ? "
-                    . " WHERE BTMPERSONALID = ? "; 
+                    . " WHERE BTMPERSONALID = ? ";
         if($sentencia = $this->conexion->prepare($consulta))
         {
-            if($sentencia->bind_param("ssssss",
+            if($sentencia->bind_param("sssssssss",
                                                $movimiento->agenteId,
                                                $movimiento->recesoId,
                                                $movimiento->fInicial,
+                                               $movimiento->hInicial,
+                                               $movimiento->hFinal,
                                                $movimiento->fFinal,
-                                               $movimiento->fPersonal,
+                                               $movimiento->dPersonal,
+                                               $movimiento->dsPersonal,
                                                $movimiento->id))
             {
                if($sentencia->execute())
@@ -115,22 +126,18 @@ class MovimientosRepositorio implements IMovimientosRepositorio
         $resultado = new Resultado();
         $movimientos = array();     
        
-        $consulta =   " SELECT "
-                     . " BTMPERSONALID id, "
-                     . " BTMPERSONALUSUID agenteId, "
-                     . " BTMPERSONALRECID recesoId, "
-                     . " BTMPERSONALHINI fInicial, "
-                     . " BTMPERSONALHFIN fFinal, "
-                     . " BTMPERSONALFECHA fPersonal  "
-                     . " FROM BSTNTRN.BTMPERSONAL  "
-                     . " WHERE BTMPERSONALID like  CONCAT('%',?,'%') ";
+        $consulta = " SELECT BTMPERSONALIDN id, SIOUSUARIONCOMPLETO agenteId, BTMPERSONALRECID recesoId, BTMPERSONALFINI fInicial, BTMPERSONALHINI hInicial, BTMPERSONALHFIN hFinal, BTMPERSONALFFIN fFinal, BTMPERSONALDUR dPersonal, BTMPERSONALDURS dsPersonal,  BTMPERSONALFECHA fPersonal".
+                    " FROM BSTNTRN.BTMPERSONAL A".
+                    " INNER JOIN BSTNTRN.SIOUSUARIO B ON A.SIOUSUARIOID = B.SIOUSUARIOID " .
+                    " WHERE BTMPERSONALIDN like CONCAT('%',?,'%') ";
+                     
         if($sentencia = $this->conexion->prepare($consulta))
         {
             if($sentencia->bind_param("s",$criteriosSeleccion->id))
             {
                 if($sentencia->execute())
                 {                
-                    if ($sentencia->bind_result($id, $agenteId, $recesoId, $fInicial, $fFinal, $fPersonal))
+                    if ($sentencia->bind_result($id, $agenteId, $recesoId, $fInicial, $hInicial, $hFinal, $fFinal, $dPersonal, $dsPersonal, $fPersonal))
                     {                    
                         while($row = $sentencia->fetch())
                         {
@@ -139,7 +146,11 @@ class MovimientosRepositorio implements IMovimientosRepositorio
                                 'agenteId' =>  utf8_encode($agenteId),
                                 'recesoId' => utf8_encode($recesoId),
                                 'fInicial' => utf8_encode($fInicial),
-                                'fFinal' => utf8_encode($fFinal),
+                                'hInicial' => utf8_encode($hInicial), 
+                                'hFinal' => utf8_encode($hFinal), 
+                                'fFinal' => utf8_encode($fFinal), 
+                                'dPersonal' => utf8_encode($dPersonal),
+                                'dsPersonal' => utf8_encode($dsPersonal),
                                 'fPersonal' => utf8_encode($fPersonal)
                             ];  
                             array_push($movimientos,$movimiento);

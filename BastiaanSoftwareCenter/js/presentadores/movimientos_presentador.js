@@ -18,8 +18,33 @@ class MovimientosPresentador
 		else
 			this.vista.mostrarMensaje("Error",resultado.mensajeError);
 	 }
+	
+	 /* usuarios */	 
+	 consultarPorUsuarios()
+	 {
+		 var repositorio = new VersionesRepositorio(this);		
+		 repositorio.consultarPorUsuarios(this,this.consultarPorUsuariosResultado,this.vista.criteriosUsuario);
+	 }
+	 consultarPorCampoResultado(resultado)
+	 {
+		if(resultado.mensajeError=="")
+			this.vista.datosCampos = resultado.valor;
+		else
+			this.vista.mostrarMensaje("Error",resultado.mensajeError);
+	 }
+	/* */
 	 
-		
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
 	 /* recesos*/ 
 	 consultarPorReceso()
 	 {
