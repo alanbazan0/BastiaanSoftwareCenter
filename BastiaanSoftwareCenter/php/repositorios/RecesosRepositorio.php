@@ -209,6 +209,113 @@ class RecesosRepositorio implements IRecesosRepositorio
             $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;     
        return $resultado;
     }
+    public function consultar2()
+    {
+        $resultado = new Resultado();
+        $recesos = array();
+        
+        $consulta =   " SELECT "
+            . " BTCRECESOID id, "
+                . " BTCRECESONOMP rDescripcion, "
+                    . " BTCRECESONOMC rCorto, "
+                        . " BTCRECESONOML rLargo, "
+                            . " BTCRECESOMAXTMP rTiempo, "
+                                . " BTCRECESOMAXREC rRecesos  "
+                                    . " FROM BSTNTRN.BTCRECESO  ";
+                                        if($sentencia = $this->conexion->prepare($consulta))
+                                        {
+                                                if($sentencia->execute())
+                                                {
+                                                    if ($sentencia->bind_result($id, $rDescripcion, $rCorto, $rLargo, $rTiempo, $rRecesos))
+                                                    {
+                                                        while($row = $sentencia->fetch())
+                                                        {
+                                                            $receso = (object) [
+                                                                'id' => utf8_encode($id),
+                                                                'rDescripcion' =>  utf8_encode($rDescripcion),
+                                                                'rCorto' => utf8_encode($rCorto),
+                                                                'rLargo' => utf8_encode($rLargo),
+                                                                'rTiempo' => utf8_encode($rTiempo),
+                                                                'rRecesos' => utf8_encode($rRecesos)
+                                                            ];
+                                                            array_push($recesos,$receso);
+                                                        }
+                                                        $resultado->valor = $recesos;
+                                                    }
+                                                    else
+                                                        $resultado->mensajeError = "Falló el enlace del resultado.";
+                                                }
+                                                else
+                                                    $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;
+                                          
+                                        }
+                                        else
+                                            $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
+                                            
+                                            
+                                            return $resultado;
+    } 
+    public function ActuaizaSolictarReceso($NombreUsuario,$idTipoSolicitud,$DescTipoSolicitud,$EstatusSolicitud,$LlamadaId)
+    {
+        $resultado = new Resultado();
+        $consulta = "UPDATE  BSTNTRN.BTESTAGNT "
+                    ." SET BTESTAGNTT=?, BTESTAGNTCALLID=?, BTESTAGNTMOTIVO=?, BTESTAGNTMOTIVOID=? "
+                    ." WHERE BTESTAGNTUSR=?";
+        if($sentencia = $this->conexion->prepare($consulta))
+        {
+            if($sentencia->bind_param("sssss",
+                $EstatusSolicitud,
+                $LlamadaId,
+                $DescTipoSolicitud,
+                $idTipoSolicitud,
+                $NombreUsuario))
+            {
+                if($sentencia->execute())
+                {
+                   
+                    if( $this->conexion->affected_rows>0)
+                         $resultado->valor="ES MAYOR ".$this->conexion->affected_rows;
+                    else 
+                        $resultado->valor="ES MENOR ".$this->conexion->affected_rows;
+                }
+                else
+                    $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;
+            }
+            else  $resultado->mensajeError = "Falló el enlace de parámetros";
+        }
+        else
+            $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;   
+            return $resultado;
+    } 
+    
+   
+    public function InsertarSolictarReceso($NombreUsuario,$idTipoSolicitud,$DescTipoSolicitud,$EstatusSolicitud,$LlamadaId)
+    {
+        $resultado = new Resultado();
+        $consulta = "INSERT INTO BSTNTRN.BTESTAGNT (BTESTAGNTT, BTESTAGNTCALLID, BTESTAGNTUSR, BTESTAGNTMOTIVO, BTESTAGNTMOTIVOID)"
+                     ."VALUES (?,?,?,?,?)";
+        if($sentencia = $this->conexion->prepare($consulta))
+        {
+            if($sentencia->bind_param("sssss",
+                $EstatusSolicitud,
+                $LlamadaId,
+                $NombreUsuario,
+                $DescTipoSolicitud,
+                $idTipoSolicitud))
+            {
+                if($sentencia->execute())
+                {
+                    $resultado->valor=true;
+                }
+                else
+                    $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;
+            }
+            else  $resultado->mensajeError = "Falló el enlace de parámetros";
+        }
+        else
+            $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
+            return $resultado;
+    } 
     
 }
 

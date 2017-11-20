@@ -322,6 +322,17 @@ class MovimientosVista
 		$('#dsPersonalFormularioInput').val("");
 		
 	}
+	
+	verDatosAsis()
+	{
+		var datosPrompt = {};
+		datosPrompt.listaArchivos = "";
+		datosPrompt.rutaArchivo = "";
+		this._promptUsuarios = new PromptUsuarios("_promptUsuarios")
+		this._promptUsuarios.setViewport("PromptUsuario");
+		this._promptUsuarios.load(datosPrompt);				
+		this._promptUsuarios.render();
+	}
 }
 var vista = new MovimientosVista(this);
 

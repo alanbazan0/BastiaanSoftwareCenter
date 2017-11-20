@@ -35,6 +35,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 	<script language="JavaScript" type="text/JavaScript" src="js/componentes/GridReg.js"></script>
 	<script language="JavaScript" type="text/JavaScript" src="js/componentes/Combo.js"></script>
 	
+	<script language="JavaScript" type="text/javascript" src="prompts/PromptUsuarios.js"></script>
 	<!-- Llamado de prompts
 	<script language="JavaScript" type="text/javascript" src="../GV/prompts/PromptConcepto.js">  </script>
 	<script language="JavaScript" type="text/javascript" src="../GV/prompts/PromptVerficador.js"></script> 
@@ -169,7 +170,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								    <tr>
 								       <td>
 								   	     <label style="position: relative; left: 3px;">Usuario</label>
-								   	     <img src='css/imagenes/asisFRM.png' onClick="vista.btnUsuarios_onClick();" title='Asistente Usuarios'> 
+								   	     <img src='css/imagenes/asisFRM.png' onClick="vista.verDatosAsis();" title='Asistente Usuarios'> 
 								   	  </td>
 								   	  
 								   	   <td>
@@ -259,7 +260,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 				</div>
 		</div>
 		
-		<div class='ventana' id='PromptListaDistribucion' style='display: none; z-index:9001;'></div>
+		<div class='ventana' id='PromptUsuario' style='display: none;'></div>
 		<div class='ventana' id='_promptRelacionReporte' style='display: none;'></div>
 		<div class='ventana' id='PromptCalendario' style='display: none; z-index:9001;'></div>  
 		<div class='ventana' id='promptListaRelaciones' style='display: none;'></div>

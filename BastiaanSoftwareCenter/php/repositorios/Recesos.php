@@ -63,6 +63,27 @@ try
                 if($resultado!=null)
                     echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
            break;
+            case 'consultar2':                
+                $resultado = $repositorio->consultar2();
+                if($resultado!=null)
+                    echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
+                    break;
+            case 'SolictarReceso':
+                $NombreUsuario = REQUEST('NombreUsuario');
+                $idTipoSolicitud = REQUEST('idTipoSolicitud');
+                $DescTipoSolicitud = REQUEST('DescTipoSolicitud');
+                $EstatusSolicitud = REQUEST('EstatusSolicitud');
+                $LlamadaId = REQUEST('LlamadaId');
+                $resultado = $repositorio->ActuaizaSolictarReceso($NombreUsuario,$idTipoSolicitud,$DescTipoSolicitud,$EstatusSolicitud,$LlamadaId);
+               /* if($resultado)
+                {
+                    $resultado="si entro al if";
+                }
+                else  {}*/
+                 // $resultado = $repositorio->InsertarSolictarReceso($NombreUsuario,$idTipoSolicitud,$DescTipoSolicitud,$EstatusSolicitud,$LlamadaId);
+                if($resultado!=null)
+                    echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
+                    break;
         }
     }
     
