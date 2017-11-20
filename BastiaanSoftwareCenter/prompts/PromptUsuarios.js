@@ -1,18 +1,25 @@
-  function PromptUsuarios(id) {
+  
+function PromptUsuarios(id) {
 	that = this;
 	 this._viewport =id;
 	this._id = id;
+	this._agenteId = "";
+	this.agenteId = "";
+	this.agenteId = this.agenteId;
 	this._subscriptoresEventos = [];
+	this.datos=[];
+	this.padre;
 	
 	/*
 	* esta funcion carga el objeto de datos 
 	*/
-	this.load = function(datos) {
+
+	
+	this.load = function(datos,padre) {
 		try{
-			this._listaArchivos = datos.listaArchivos;
-			this._opciones = datos.opciones;
-			this._rutaArchivo = datos.rutaArchivo;
-			this._titulo ="";
+			
+			this.datos=datos;	
+			this.padre=padre;
 			this._listoInformacion = true;
 		}catch(error){
 			this._listoInformacion = false;
@@ -52,7 +59,8 @@
 			
 			_gridListaArchivos = new GridReg("_gridListaArchivos");
 			var columnas = [
-				{longitud:230, titulo:"Archivo", alias:"nombre", alineacion:"I"}
+				{longitud:230, titulo:"Id", alias:"id", alineacion:"I"},
+				{longitud:230, titulo:"Nombre Agente", alias:"agenteId", alineacion:"I"}
 			];
 			_gridListaArchivos._columnas = columnas;
 			_gridListaArchivos._ajustarAltura 		= true;
@@ -64,9 +72,12 @@
 			_gridListaArchivos._colorLetraCuerpo 	= "#464646";
 		    _gridListaArchivos._colorLetraCuerpo 	= "#000000";
 		    _gridListaArchivos.subscribirAEvento(this, "eventGridRowDoubleClick",this.clickListaArchivos );
-			_gridListaArchivos._dataProvider = this._listaArchivos;
+			_gridListaArchivos._dataProvider = this.datos;
 			_gridListaArchivos.setViewport(this._viewport + "Grid");
 			_gridListaArchivos.render();
+			
+			
+			this.padre.consutarUsuarioCri();
 		}catch(error){
 			throw "error al renderizar:" + error;
 			return false;
@@ -77,6 +88,17 @@
 	/*
 	*
 	*/
+	
+	/*
+	set datosUsuarios(valor)
+	{
+	this.PromptUsuarios = valor;
+	this.grid.render();
+	}
+	*/
+	
+	
+	
 	this.clickListaArchivos = function (evento)
 	{
 		var archivo = "";
@@ -98,5 +120,4 @@
 	} 
 
 };
-	
 PromptUsuarios.inheritsFrom(Base);
