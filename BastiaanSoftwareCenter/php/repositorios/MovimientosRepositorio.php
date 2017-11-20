@@ -9,8 +9,7 @@ include "../interfaces/IMovimientosRepositorio.php";
 include "../modelos/Movimiento.php";
 include "../clases/Resultado.php";
 
-
-class MovimientosRepositorio implements IMovimientosRepositorio
+ class MovimientosRepositorio implements IMovimientosRepositorio
 {
     protected $conexion;
     public function __construct($conexion)
@@ -173,6 +172,50 @@ class MovimientosRepositorio implements IMovimientosRepositorio
         return $resultado;     
     }   
     
+   
+    
+    public function   consultarPorUsuario()
+  
+    {
+        $resultado = new Resultado();
+        $usuarios = array();
+        
+        $consulta = " SELECT SIOUSUARIOID id, SIOUSUARIONCOMPLETO agenteId".
+            " FROM BSTNTRN.SIOUSUARIO ";
+        if($sentencia = $this->conexion->prepare($consulta))
+        {
+            if(true)
+            {
+                if($sentencia->execute())
+                {
+                    if ($sentencia->bind_result($id, $agenteId)  )
+                    {
+                        while($row = $sentencia->fetch())
+                        {
+                            $usuario = (object) [
+                                'id' => utf8_encode($id),
+                                'agenteId' =>  utf8_encode($agenteId)
+                            ];
+                            array_push($usuarios,$usuario);
+                        }
+                        $resultado->valor = $usuarios;
+                    }
+                    else
+                        $resultado->mensajeError = "Falló el enlace del resultado.";
+                }
+                else
+                    $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;
+            }
+            else
+                $resultado->mensajeError = "Falló el enlace de parámetros";
+        }
+        else
+            $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
+            
+            
+            return $resultado;
+    }   
+    
     public function consultarPorReceso()
     {
         $resultado = new Resultado();
@@ -224,7 +267,7 @@ class MovimientosRepositorio implements IMovimientosRepositorio
     }
     public function consultarPorLlaves($llaves)
     {
-        
+  
         $resultado = new Resultado();       
         $consulta =   " SELECT "
                      . " BTMPERSONALID id, "
@@ -272,4 +315,3 @@ class MovimientosRepositorio implements IMovimientosRepositorio
     }
     
 }
-

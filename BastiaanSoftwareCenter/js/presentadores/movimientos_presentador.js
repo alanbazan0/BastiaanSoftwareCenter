@@ -20,30 +20,19 @@ class MovimientosPresentador
 	 }
 	
 	 /* usuarios */	 
-	 consultarPorUsuarios()
+	 consultarPorUsuario()
 	 {
-		 var repositorio = new VersionesRepositorio(this);		
-		 repositorio.consultarPorUsuarios(this,this.consultarPorUsuariosResultado,this.vista.criteriosUsuario);
+		 var repositorio = new MovimientosRepositorio(this);		
+		 repositorio.consultarPorUsuario(this,this.consultarPorUsuarioResultado,this.vista.criteriosUsuarios);
 	 }
-	 consultarPorCampoResultado(resultado)
+	 consultarPorUsuarioResultado(resultado)
 	 {
 		if(resultado.mensajeError=="")
-			this.vista.datosCampos = resultado.valor;
+			this.vista.datosUsuarios = resultado.valor;
 		else
 			this.vista.mostrarMensaje("Error",resultado.mensajeError);
 	 }
 	/* */
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
 	 
 	 /* recesos*/ 
 	 consultarPorReceso()
@@ -59,7 +48,6 @@ class MovimientosPresentador
 			this.vista.mostrarMensaje("Error",resultado.mensajeError);
 	 }
 
-	 
 	 
 	 
 	 insertar()

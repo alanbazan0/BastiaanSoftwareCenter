@@ -13,13 +13,13 @@ class MovimientosVista
 	{			
 		this.crearColumnasGrid();
 		this.presentador.consultar();
-	
 		
 		this.cmbEstatus = new Combo("agenteIdFormularioInput");
 		this.cmbEstatus.setViewport("agenteIdFormularioInput");
 		this.cmbEstatus._dataField = "recesoId";
 		this.cmbEstatus._labelField = "rCorto";
 		this.cmbEstatus.render();
+	
 	}
 	
 	crearColumnasGrid()
@@ -93,6 +93,9 @@ class MovimientosVista
 		$("#"+ "fPersonalFormularioInput").datepicker('option', {dateFormat:'dd/mm/yy'});
 		$("#"+ "fPersonalFormularioInput").datepicker("setDate", strTodayFirst);
 		$("#"+ "fPersonalFormularioInput").datepicker();
+		
+
+	    this.presentador.consultarPorUsuario();
 	}
 	
 	btnBaja_onClick()
@@ -149,6 +152,9 @@ class MovimientosVista
 			$("#"+ "fPersonalFormularioInput").datepicker('option', {dateFormat:'dd/mm/yy'});
 			$("#"+ "fPersonalFormularioInput").datepicker("setDate", strTodayFirst);
 			$("#"+ "fPersonalFormularioInput").datepicker();
+			
+
+		    this.presentador.consultarPorUsuario();
 			
 		}
 		else
@@ -223,6 +229,9 @@ class MovimientosVista
 		this.cmbEstatus.render();	
 	}
 	
+	
+	
+	
 	/*
 	 * Asignar registros al grid
 	 */
@@ -232,6 +241,16 @@ class MovimientosVista
 		this.grid._dataProvider = valor;	
 		this.grid.render();
 	}
+	
+	set datosUsuarios(valor)
+	{
+	this.PromptUsuarios = valor;
+
+	}
+	
+	
+	
+	
 	
 	/*
 	 * Mapeo de datos del formulario con el modelo
@@ -323,16 +342,37 @@ class MovimientosVista
 		
 	}
 	
+	
+	/*
 	verDatosAsis()
 	{
-		var datosPrompt = {};
-		datosPrompt.listaArchivos = "";
-		datosPrompt.rutaArchivo = "";
+		var datosPrompt = {};	
+		datosPrompt.agenteId = "";
 		this._promptUsuarios = new PromptUsuarios("_promptUsuarios")
 		this._promptUsuarios.setViewport("PromptUsuario");
 		this._promptUsuarios.load(datosPrompt);				
 		this._promptUsuarios.render();
 	}
+}
+
+*/
+
+consutarUsuarioCri()
+{
+	//consultar criterios
+	alert( "si");
+}
+
+
+verDatosAsis()
+{	
+	this._promptUsuarios = new PromptUsuarios("_promptUsuarios")
+	this._promptUsuarios.setViewport("PromptUsuario");
+	this._promptUsuarios.load(this.PromptUsuarios,this);				
+	this._promptUsuarios.render();
+}
+
+
 }
 var vista = new MovimientosVista(this);
 

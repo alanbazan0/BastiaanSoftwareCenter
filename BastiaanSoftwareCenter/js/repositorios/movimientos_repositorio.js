@@ -26,6 +26,28 @@ class MovimientosRepositorio
 		this.functionRetorno.call(this.contexto,JSON.parse(resultado));
 	}
 	
+	
+	/* Usuarios */ 
+	consultarPorUsuario(contexto,functionRetorno, criteriosUsuarios)
+	{		
+		this.contexto = contexto;
+		this.functionRetorno = functionRetorno;
+		var parametros;
+		parametros = "accion=consultarPorUsuario";
+		var contextHandler = new AjaxContextHandler();
+		var host = window.location.origin + "/BastiaanSoftwareCenter";	
+		var ai = new Ajaxv2(host +"/php/repositorios/Movimientos.php", this, this.consultarPorUsuarioResultado, "POST", parametros, contextHandler);		
+		contextHandler.AddAjaxv2Object(ai); 		
+		ai.GetPost(true);
+	}
+	consultarPorUsuarioResultado(resultado)
+	{
+		var datos = JSON.parse(resultado);
+		this.functionRetorno.call(this.contexto,JSON.parse(resultado));
+	}	
+ /*  */
+	
+	
 
 	consultar(contexto,functionRetorno, criteriosSeleccion)
 	{		
