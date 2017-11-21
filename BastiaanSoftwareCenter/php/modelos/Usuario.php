@@ -38,5 +38,12 @@ class Usuario
     public $fechaBaja;
     public $idBaja;
     public $extensionUsuario;
+    
+    public $idPostal;
+    public $nirPostal;
+    public $asentamientoPostal;
+    public $municipioPostal;
+    public $estadoPostal;
+    public $ciudadPostal;
 }
 

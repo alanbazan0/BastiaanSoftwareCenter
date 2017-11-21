@@ -337,6 +337,58 @@ if($sentencia = $this->conexion->prepare($consulta))
         return $resultado;
     }
     
+    public function   consultarPorPostal()
+    
+    {
+        $resultado = new Resultado();
+        $postales = array();
+        
+        $consulta = " SELECT "
+            . " BTCPOSTALIDN idPostal, "
+                . " BTCPOSTALID nirPostal, "
+                    . " BTCPOSTALASENT asentamientoPostal, "
+                        . " BTCPOSTALMPIO municipioPostal, "
+                            . " BTCPOSTALESTADO estadoPostal, "
+                                . " BTCPOSTALCIUDAD ciudadPostal "
+                                    . " FROM BSTNTRN.BTCPOSTAL  ";
+        if($sentencia = $this->conexion->prepare($consulta))
+        {
+            if(true)
+            {
+                if($sentencia->execute())
+                {
+                    if ($sentencia->bind_result($idPostal, $nirPostal, $asentamientoPostal, $municipioPostal, $estadoPostal, $ciudadPostal)  )
+                    {
+                        while($row = $sentencia->fetch())
+                        {
+                            $postal = (object) [
+                                'idPostal' => utf8_encode($idPostal),
+                                'nirPostal' =>  utf8_encode($nirPostal),
+                                'asentamientoPostal' => utf8_encode($asentamientoPostal),
+                                'municipioPostal' => utf8_encode($municipioPostal),
+                                'estadoPostal' => utf8_encode($estadoPostal),
+                                'ciudadPostal' => utf8_encode($ciudadPostal)
+                            ];
+                            array_push($postales,$postal);
+                        }
+                        $resultado->valor = $postales; 
+                    }
+                    else
+                        $resultado->mensajeError = "Falló el enlace del resultado.";
+                }
+                else
+                    $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;
+            }
+            else
+                $resultado->mensajeError = "Falló el enlace de parámetros";
+        }
+        else
+            $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
+            
+            
+            return $resultado;
+    }   
+    
     public function consultarPorLlaves($llaves)
     {
         $resultado = new Resultado();

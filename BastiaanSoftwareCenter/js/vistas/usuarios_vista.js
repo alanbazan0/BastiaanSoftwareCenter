@@ -76,7 +76,8 @@ class UsuariosVista
 	{
 		this.modo = "ALTA";
 		this.limpiarFormulario();	
-		this.mostrarFormulario();		
+		this.mostrarFormulario();
+		this.presentador.consultarPorPostal();
 	}
 	
 	btnBaja_onClick()
@@ -100,6 +101,7 @@ class UsuariosVista
 			this.modo = "CAMBIO";
 			this.mostrarFormulario();		
 			this.presentador.consultarPorLlaves();
+			this.presentador.consultarPorPostal();
 		}
 		else
 			this.mostrarMensaje("Selecciona un registro para modificar.");
@@ -177,6 +179,11 @@ class UsuariosVista
 	{
 		this.grid._dataProvider = valor;	
 		this.grid.render();
+	}
+	set datosPostales(valor)
+	{
+	this.PromptPostales = valor;
+
 	}
 	
 	/*
@@ -336,7 +343,20 @@ class UsuariosVista
 		$('#idBajaFormularioInput').val("");
 		$('#extensionUsuarioFormularioInput').val("");
 	}
-	
+	consutarPostalCri()
+	{
+		//consultar criterios
+		alert( "si");
+	}
+
+
+	verDatosAsis()
+	{	
+		this._promptPostales = new PromptPostales("_promptPostales")
+		this._promptPostales.setViewport("PromptPostal");
+		this._promptPostales.load(this.PromptPostales,this);				
+		this._promptPostales.render();
+	}
 
 	
 }

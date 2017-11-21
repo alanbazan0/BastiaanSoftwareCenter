@@ -26,7 +26,20 @@ class UsuariosPresentador
 		 repositorio.insertar(this,this.insertarResultado,this.vista.usuario);	
 
 	 }
-	 
+	 /* postales */	 
+	 consultarPorPostal()
+	 {
+		 var repositorio = new UsuariosRepositorio(this);		
+		 repositorio.consultarPorPostal(this,this.consultarPorPostalResultado,this.vista.criteriosPostales);
+	 }
+	 consultarPorPostalResultado(resultado)
+	 {
+		if(resultado.mensajeError=="")
+			this.vista.datosPostales = resultado.valor;
+		else
+			this.vista.mostrarMensaje("Error",resultado.mensajeError);
+	 }
+	/* */
 	 insertarResultado(resultado)
 	 {
 		if(resultado.mensajeError=="")

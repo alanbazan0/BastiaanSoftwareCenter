@@ -56,6 +56,11 @@ try
                 $criteriosSeleccion = json_decode(REQUEST('criteriosSeleccion'));
                 $resultado = $repositorio->consultar($criteriosSeleccion);               
             break;
+            case 'consultarPorPostal':
+                $resultado = $repositorio->consultarPorPostal();
+                if($resultado!=null)
+                    echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
+                    break;
             case 'consultarPorIdContrasena':
                     $id = REQUEST('id');
                     $contrasena = REQUEST('contrasena');

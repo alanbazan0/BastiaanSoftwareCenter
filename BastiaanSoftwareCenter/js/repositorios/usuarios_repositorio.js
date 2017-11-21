@@ -87,7 +87,25 @@ class UsuariosRepositorio
 		contextHandler.AddAjaxv2Object(ai); 		
 		ai.GetPost(true);
 	}
-	
+	/* Postales */ 
+	consultarPorPostal(contexto,functionRetorno, criteriosPostales)
+	{		
+		this.contexto = contexto;
+		this.functionRetorno = functionRetorno;
+		var parametros;
+		parametros = "accion=consultarPorPostal";
+		var contextHandler = new AjaxContextHandler();
+		var host = window.location.origin + "/BastiaanSoftwareCenter";	
+		var ai = new Ajaxv2(host +"/php/repositorios/Usuarios.php", this, this.consultarPorPostalResultado, "POST", parametros, contextHandler);		
+		contextHandler.AddAjaxv2Object(ai); 		
+		ai.GetPost(true);
+	}
+	consultarPorPostalResultado(resultado)
+	{
+		var datos = JSON.parse(resultado);
+		this.functionRetorno.call(this.contexto,JSON.parse(resultado));
+	}	
+ /*  */
 	consultarPorLlavesResultado(resultado)
 	{
 		var datos = JSON.parse(resultado);

@@ -39,8 +39,10 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 	
 	<!-- Llamado de prompts
 	<script language="JavaScript" type="text/javascript" src="../GV/prompts/PromptConcepto.js">  </script>
-	<script language="JavaScript" type="text/javascript" src="../GV/prompts/PromptVerficador.js"></script> 
+	<script language="JavaScript" type="text/javascript" src="../GV/prompts/PromptVerficador.js"></script>
+	 
 	-->
+	<script language="JavaScript" type="text/javascript" src="prompts/PromptPostales.js"></script>
 	
 	<link type='text/css' href='js/librerias/Datapickerjs/ui.datepicker.css' rel='stylesheet' />
 	<link type='text/css' href='js/librerias/Datapickerjs/demos.css' rel='stylesheet' />
@@ -322,7 +324,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								   		<tr>
 								    	<td>	
 								    	<label style="position: relative; left: 3px;">Codigo Postal</label>
-								    	<img src="css/imagenes/asisFRM.png">
+								    	<img src='css/imagenes/asisFRM.png' onClick="vista.verDatosAsis();" title='Asistente Postales'> 
 								   		</td>
 								   		<td>	
 								    		<input class="input" id="codigoPostalFormularioInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>								   		
@@ -455,6 +457,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 						</div>
 				</div>
 		</div>
+		<div class='ventana' id='PromptPostal' style='display: none;'></div>
 		<div class='ventana' id='PromptListaDistribucion' style='display: none; z-index:9001;'></div>
 		<div class='ventana' id='_promptRelacionReporte' style='display: none;'></div>
 		<div class='ventana' id='PromptCalendario' style='display: none; z-index:9001;'></div>  
