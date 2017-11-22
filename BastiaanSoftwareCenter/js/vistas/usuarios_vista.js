@@ -64,7 +64,6 @@ class UsuariosVista
 		this.grid._colorLetraEncabezado = "#ffffff";
 		this.grid._colorLetraCuerpo = "#000000";
 		this.grid._regExtra=20;
-		this.grid._presentacionGranTotal = "SI";
 		this.grid.render();		
 	}
 	
@@ -99,6 +98,7 @@ class UsuariosVista
 		if(this.grid._selectedItem!=null)
 		{			
 			this.modo = "CAMBIO";
+			this.limpiarFormulario();	
 			this.mostrarFormulario();		
 			this.presentador.consultarPorLlaves();
 			this.presentador.consultarPorPostal();
@@ -180,10 +180,12 @@ class UsuariosVista
 		this.grid._dataProvider = valor;	
 		this.grid.render();
 	}
+	
+	
 	set datosPostales(valor)
 	{
-	this.PromptPostales = valor;
-
+		this.DatosPostales = valor;
+		this.render();
 	}
 	
 	/*
@@ -354,7 +356,7 @@ class UsuariosVista
 	{	
 		this._promptPostales = new PromptPostales("_promptPostales")
 		this._promptPostales.setViewport("PromptPostal");
-		this._promptPostales.load(this.PromptPostales,this);				
+		this._promptPostales.load(this.DatosPostales,this);
 		this._promptPostales.render();
 	}
 

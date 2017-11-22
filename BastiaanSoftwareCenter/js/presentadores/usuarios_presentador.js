@@ -30,13 +30,13 @@ class UsuariosPresentador
 	 consultarPorPostal()
 	 {
 		 var repositorio = new UsuariosRepositorio(this);		
-		 repositorio.consultarPorPostal(this,this.consultarPorPostalResultado,this.vista.criteriosPostales);
+		 repositorio.consultarPorPostal(this,this.consultarPorPostalResultado);
 	 }
 	 consultarPorPostalResultado(resultado)
 	 {
 		if(resultado.mensajeError=="")
-			this.vista.datosPostales = resultado.valor;
-		else
+			this.vista.datosPostales = resultado.valor; 
+		    else
 			this.vista.mostrarMensaje("Error",resultado.mensajeError);
 	 }
 	/* */

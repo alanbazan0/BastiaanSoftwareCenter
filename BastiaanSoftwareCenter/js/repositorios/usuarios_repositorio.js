@@ -88,7 +88,7 @@ class UsuariosRepositorio
 		ai.GetPost(true);
 	}
 	/* Postales */ 
-	consultarPorPostal(contexto,functionRetorno, criteriosPostales)
+	consultarPorPostal(contexto,functionRetorno)
 	{		
 		this.contexto = contexto;
 		this.functionRetorno = functionRetorno;
@@ -102,7 +102,7 @@ class UsuariosRepositorio
 	}
 	consultarPorPostalResultado(resultado)
 	{
-		var datos = JSON.parse(resultado);
+		var datosPostales = JSON.parse(resultado);
 		this.functionRetorno.call(this.contexto,JSON.parse(resultado));
 	}	
  /*  */

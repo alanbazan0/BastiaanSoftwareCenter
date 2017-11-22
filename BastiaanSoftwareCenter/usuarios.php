@@ -167,12 +167,16 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								<div id="filtros " class="contenedorIEC" style="overflow: auto; position: relative; width: 100%; display: block;">
 								 <div style="width: 96%; display: block; height: 100%;  padding-top: 10px; padding-left: 34px;">								 	
 								   <tr>
-								   <table WIDHT=25%; HEIGHT=27%;  CELLPADDING=0; cellspacing="10" style="padding-top: 12px; padding-left: 1%; position:relative;display:inline-block; border: #ff6600 1px solid;">		
-								 				<td>
-								   		<label style="position: relative; left: 100px;">Datos del usuario</label></tr>
-								   		</td>		   	    
-								   	    <tr>
-								    	 <td >
+								   <table WIDHT=25%; HEIGHT=35%;  CELLPADDING=0; cellspacing="10" style="padding-top: 12px; padding-left: 1%; position:relative;display:inline-block; border: #ff6600 1px solid;">										
+								 	   <td>
+								   		<label style="position: relative; left: 180%; " >Datos del usuario</label>
+								   		</td>
+								   		<tr>
+								   		<tr>
+								    	 <td colspan = 18 style="border-top: #ff6600 1px solid;">
+								    	 </td>
+								    	 </tr>
+								    	 <td>
 								     		<label style="position: relative; left: 3px; ">Id de usuario</label>
 								   		</td>
 								   		<td>
@@ -247,10 +251,14 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								   		</td>
 								   		</tr>
 								   		</table>
-    								    <table WIDHT=25px; HEIGHT=20%;  CELLPADDING=0; cellspacing="10" style="top: 2px; padding-left: 1%; position:relative;display:inline-block; border: #ff6600 1px solid  ">								  								   
+    								    <table WIDHT=25px; HEIGHT=35%;  CELLPADDING=0; cellspacing="10" style="top: 2px; padding-left: 1%; position:relative;display:inline-block; border: #ff6600 1px solid  ">								  								   
     								    <td>
-								   		<label style="position: relative; left: 90px;">Datos para contactar al usuario</label></tr>
+								   		<label style="position: relative; left: 130%;">Datos para contactar al usuario</label></tr>
 								   		</td>
+								   		<tr>
+								    	 <td colspan = 18 style="border-top: #ff6600 1px solid;">
+								    	 </td>
+								    	 </tr>
     								    <tr>
     								    <td>
     								    	<label style="position: relative; left: 3px; ">Correo electronico de empresa</label>
@@ -288,14 +296,17 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
     								    	<input class="input" id="telefonoContactoFormularioInput" style=" width:161px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; right: 3px; box-shadow: 2px 2px 5px #999;"/>
     								    </td>
     								    </tr>
-    								    
 								   </table>
 								   </tr>
 								   <tr>
-								   <table WIDHT=25%; HEIGHT=20%;  CELLPADDING=0; cellspacing="10" style="top: 6px; padding-left: 1%; position:relative;display:inline-block;  border:#ff6600 1px solid ">								  		
+								   <table WIDHT=25%; HEIGHT=30%;  CELLPADDING=0; cellspacing="10" style="top: 6px; padding-left: 1%; position:relative;display:inline-block;  border:#ff6600 1px solid ">								  		
 								    	<td>
-								   		<label style="position: relative; left: 130px;">Dirección del usuario</label></tr>
+								   		<label style="position: relative; left: 130%;">Dirección del usuario</label></tr>
 								   		</td>
+								   		<tr>
+								    	 <td colspan = 18 style="border-top: #ff6600 1px solid;">
+								    	 </td>
+								    	 </tr>
 								   		<tr>
 								   		<td>
 								   			<label style="position: relative; left: 3px; ">Calle</label>
@@ -360,11 +371,15 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
     								    </tr>
     								    <tr>
     								    <tr>
-    								    <table WIDHT=25%; HEIGHT=26%;  CELLPADDING=0; cellspacing="10" style="top: 10px; padding-left: 1%; position:relative;display:inline-block; border: #ff6600 1px solid;"> 
+    								    <table WIDHT=25%; HEIGHT=35%;  CELLPADDING=0; cellspacing="10" style="top: 10px; padding-left: 1%; position:relative;display:inline-block; border: #ff6600 1px solid;"> 
 								   		<tr>
 								   		<td>
-								   		<label style="position: relative; left: 80px;">Datos de identificación del usuario</label></tr>
+								   		<label style="position: relative; left: 100%;">Datos de identificación del usuario</label></tr>
 								   		</td>
+								   		<tr>
+								    	 <td colspan = 18 style="border-top: #ff6600 1px solid;">
+								    	 </td>
+								    	 </tr>
 								  		<td>	
 								    		<label style="position: relative; right:120px;">RFC</label>
 								   		</td>
@@ -389,10 +404,14 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								   		</td>
 								     	</tr>
 								    	</table>
-								    	<table WIDHT=25%; HEIGHT=26%;  CELLPADDING=0; cellspacing="10" style="top: 10px; left: 1px; position:relative;display:inline-block; border: #ff6600 1px solid;"> 
+								    	<table WIDHT=25%; HEIGHT=35%;  CELLPADDING=0; cellspacing="10" style="top: 10px; left: 1px; position:relative;display:inline-block; border: #ff6600 1px solid;"> 
 								    	<td>
-    								    	<label style="position: relative; left: 200px;text-align:center;">Datos para la empresa</label>
+    								    	<label style="position: relative; left: 130%;text-align:center;">Datos para la empresa</label>
     								    </td>
+    								    <tr>
+								    	 <td colspan = 18 style="border-top: #ff6600 1px solid;">
+								    	 </td>
+								    	 </tr>
 								    	<tr>
     								    <td>
     								    	<label style="position: relative; left: 3px; ">Numero de empleado</label>
@@ -456,7 +475,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 							</div>
 						</div>
 				</div>
-		</div>
+</div>
 		<div class='ventana' id='PromptPostal' style='display: none;'></div>
 		<div class='ventana' id='PromptListaDistribucion' style='display: none; z-index:9001;'></div>
 		<div class='ventana' id='_promptRelacionReporte' style='display: none;'></div>
@@ -466,8 +485,6 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 		<div class='ventana' id='PromptCorreo' style='display: none;'></div>
 		<div class='ventana' id='PromptSentencia' style='display:none; z-index:9001;'></div>
 		<div class='ventana' id='PromptCriterioSeleccion' style='display:none; z-index:9001;'></div>
-		<div class='ventana' id='PromptGenero' style='display:none; z-indez:9001;'></div>   
-</div>
 </form>
 </body>
 </html>

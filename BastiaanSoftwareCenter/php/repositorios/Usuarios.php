@@ -8,19 +8,16 @@ use php\modelos\Resultado;
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-
 include '../clases/JsonMapper.php';
 include '../clases/Utilidades.php';
 include '../clases/AdministradorConexion.php';
 include '../repositorios/UsuariosRepositorio.php';
 
-
-
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json; charset=UTF-8');
 
 $administrador_conexion = new AdministradorConexion();
-$resultado = new Resultado();
+
 $conexion;
 try
 {
@@ -58,13 +55,12 @@ try
             break;
             case 'consultarPorPostal':
                 $resultado = $repositorio->consultarPorPostal();
-                if($resultado!=null)
-                    echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
-                    break;
+                echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
+                 break;
             case 'consultarPorIdContrasena':
                     $id = REQUEST('id');
                     $contrasena = REQUEST('contrasena');
-                    $resultado = $repositorio->consultarPorIdContrasena($id, $contrasena) ;                 
+                    $resultado = $repositorio->consultarPorIdContrasena($id, $contrasena) ; 
             break;
         }
     }

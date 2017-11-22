@@ -1,8 +1,9 @@
   
-function PromptPostales(idPostal) {
+function PromptPostales(id) {
 	that = this;
-	 this._viewport =idPostal;
-	this._idPostal = idPostal;
+	this._viewport =id;
+	this._id = id;
+	this.idPostal = this.idPostal;
 	this.nirPostal = this.nirPostal;
 	this.asentamientoPostal = this.asentamientoPostal;
 	this.municipioPostal = this.municipioPostal;
@@ -61,12 +62,12 @@ function PromptPostales(idPostal) {
 			
 			_gridListaArchivos = new GridReg("_gridListaArchivos");
 			var columnas = [
-				{longitud:100, 	titulo:"Id",   	alias:"idPostal", alineacion:"I" },
-				{longitud:200, 	titulo:"Codigo Postal",   alias:"nirPostal", alineacion:"I" },
-				{longitud:200, 	titulo:"Asentamiento",   alias:"asentamientoPostal", alineacion:"I" },
-				{longitud:200, 	titulo:"Municipio",   alias:"municipioPostal", alineacion:"I" },
-				{longitud:200, 	titulo:"Estado",   alias:"estadoPostal", alineacion:"I" },
-				{longitud:200, 	titulo:"Ciudad",   alias:"ciudadPostal", alineacion:"I" }
+				{longitud:86, titulo:"Id", alias:"idPostal", alineacion:"I"},
+				{longitud:86, titulo:"Codigo Postal",  alias:"nirPostal", alineacion:"I" },
+				{longitud:86, titulo:"Asentamiento",  alias:"asentamientoPostal", alineacion:"I" },
+				{longitud:86, titulo:"Municipio",  alias:"municipioPostal", alineacion:"I" },
+				{longitud:86, titulo:"Estado",  alias:"estadoPostal", alineacion:"I" },
+				{longitud:86, titulo:"Ciudad",  alias:"ciudadPostal", alineacion:"I" }
 			];
 			_gridListaArchivos._columnas = columnas;
 			_gridListaArchivos._ajustarAltura 		= true;

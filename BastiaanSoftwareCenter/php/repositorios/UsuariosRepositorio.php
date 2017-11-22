@@ -336,21 +336,15 @@ if($sentencia = $this->conexion->prepare($consulta))
  $resultado->mensajeError = "Fall� la preparaci�n: (" . $this->conexion->errno . ") " . $this->conexion->error;
         return $resultado;
     }
-    
-    public function   consultarPorPostal()
+    //prompt
+    public function consultarPorPostal()
     
     {
         $resultado = new Resultado();
         $postales = array();
         
-        $consulta = " SELECT "
-            . " BTCPOSTALIDN idPostal, "
-                . " BTCPOSTALID nirPostal, "
-                    . " BTCPOSTALASENT asentamientoPostal, "
-                        . " BTCPOSTALMPIO municipioPostal, "
-                            . " BTCPOSTALESTADO estadoPostal, "
-                                . " BTCPOSTALCIUDAD ciudadPostal "
-                                    . " FROM BSTNTRN.BTCPOSTAL  ";
+        $consulta = " SELECT BTCPOSTALIDN idPostal, BTCPOSTALID nirPostal, BTCPOSTALASENT asentamientoPostal, BTCPOSTALMPIO municipioPostal, BTCPOSTALESTADO estadoPostal, BTCPOSTALCIUDAD ciudadPostal ".
+          " FROM BSTNTRN.BTCPOSTAL ";
         if($sentencia = $this->conexion->prepare($consulta))
         {
             if(true)
