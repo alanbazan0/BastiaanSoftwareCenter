@@ -167,11 +167,10 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								<div id="filtros " class="contenedorIEC" style="overflow: auto; position: relative; width: 100%; display: block;">
 								 <div style="width: 96%; display: block; height: 100%;  padding-top: 10px; padding-left: 34px;">								 	
 								   <tr>
-								   <table WIDHT=25%; HEIGHT=35%;  CELLPADDING=0; cellspacing="10" style="padding-top: 12px; padding-left: 1%; position:relative;display:inline-block; border: #ff6600 1px solid;">										
+								   <table WIDHT=25%; HEIGHT=29%;  CELLPADDING=0; cellspacing="10" style="padding-top: 1px; padding-left: 1%; position:relative;display:inline-block; border: #ff6600 1px solid;">										
 								 	   <td>
 								   		<label style="position: relative; left: 180%; " >Datos del usuario</label>
 								   		</td>
-								   		<tr>
 								   		<tr>
 								    	 <td colspan = 18 style="border-top: #ff6600 1px solid;">
 								    	 </td>
@@ -301,7 +300,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								   <tr>
 								   <table WIDHT=25%; HEIGHT=30%;  CELLPADDING=0; cellspacing="10" style="top: 6px; padding-left: 1%; position:relative;display:inline-block;  border:#ff6600 1px solid ">								  		
 								    	<td>
-								   		<label style="position: relative; left: 130%;">Dirección del usuario</label></tr>
+								   		<label style="position: relative; left: 150px;">Dirección del usuario</label></tr>
 								   		</td>
 								   		<tr>
 								    	 <td colspan = 18 style="border-top: #ff6600 1px solid;">
@@ -374,14 +373,14 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
     								    <table WIDHT=25%; HEIGHT=35%;  CELLPADDING=0; cellspacing="10" style="top: 10px; padding-left: 1%; position:relative;display:inline-block; border: #ff6600 1px solid;"> 
 								   		<tr>
 								   		<td>
-								   		<label style="position: relative; left: 100%;">Datos de identificación del usuario</label></tr>
+								   		<label style="position: relative; left: 150px;">Datos de identificación del usuario</label></tr>
 								   		</td>
 								   		<tr>
 								    	 <td colspan = 18 style="border-top: #ff6600 1px solid;">
 								    	 </td>
 								    	 </tr>
 								  		<td>	
-								    		<label style="position: relative; right:120px;">RFC</label>
+								    		<label style="position: relative; left:3px;">RFC</label>
 								   		</td>
 								   		<td>	
 								    		<input class="input" id="rfcFormularioInput" style="width:250px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; right: 50%; box-shadow: 2px 2px 5px #999;"/>
@@ -389,7 +388,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								   		</tr>
 								   		<tr>
 								   		<td>	
-								    		<label style="position: relative; right:100px;">NSS</label>
+								    		<label style="position: relative; left:3px;">NSS</label>
 								   		</td>
 								   		<td>	
 								    		<input class="input" id="nssFormularioInput" style="width:250px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; right: 50%; box-shadow: 2px 2px 5px #999;"/>
@@ -397,7 +396,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								   		</tr>
 								   		<tr>
 								   		<td>	
-								    		<label style="position: relative; left: 3px;">CURP</label>
+								    		<label style="position: relative; left:3px;">CURP</label>
 								   		</td>
 								   		<td>	
 								    		<input class="input" id="curpFormularioInput" style=";width:250px; font-family:Verdana; font-size:9px; text-align:left; color:#006699;position: relative; right: 50%; box-shadow: 2px 2px 5px #999;"/>
@@ -406,7 +405,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								    	</table>
 								    	<table WIDHT=25%; HEIGHT=35%;  CELLPADDING=0; cellspacing="10" style="top: 10px; left: 1px; position:relative;display:inline-block; border: #ff6600 1px solid;"> 
 								    	<td>
-    								    	<label style="position: relative; left: 130%;text-align:center;">Datos para la empresa</label>
+    								    	<label style="position: relative; left: 150px;">Datos para la empresa</label>
     								    </td>
     								    <tr>
 								    	 <td colspan = 18 style="border-top: #ff6600 1px solid;">
