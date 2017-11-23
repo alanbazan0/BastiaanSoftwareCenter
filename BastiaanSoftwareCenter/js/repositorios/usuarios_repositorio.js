@@ -88,7 +88,7 @@ class UsuariosRepositorio
 		ai.GetPost(true);
 	}
 	/* Postales */ 
-	consultarPorPostal(contexto,functionRetorno)
+	consultarPorPostal(contexto,functionRetorno, criteriosPostales)
 	{		
 		this.contexto = contexto;
 		this.functionRetorno = functionRetorno;

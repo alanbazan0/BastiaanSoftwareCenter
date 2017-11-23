@@ -184,8 +184,10 @@ class UsuariosVista
 	
 	set datosPostales(valor)
 	{
-		this.DatosPostales = valor;
-		this.render();
+		
+		this.promptPostales = valor;
+		//this.datosPostales = valor;
+		//this.render();
 	}
 	
 	/*
@@ -356,7 +358,7 @@ class UsuariosVista
 	{	
 		this._promptPostales = new PromptPostales("_promptPostales")
 		this._promptPostales.setViewport("PromptPostal");
-		this._promptPostales.load(this.DatosPostales,this);
+		this._promptPostales.load(this.datosPostales,this);
 		this._promptPostales.render();
 	}
 
