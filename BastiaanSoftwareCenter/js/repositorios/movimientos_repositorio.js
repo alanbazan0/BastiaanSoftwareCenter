@@ -30,6 +30,7 @@ class MovimientosRepositorio
 	/* Usuarios */ 
 	consultarPorUsuario(contexto,functionRetorno, criteriosUsuarios)
 	{		
+		
 		this.contexto = contexto;
 		this.functionRetorno = functionRetorno;
 		var parametros;
@@ -42,7 +43,7 @@ class MovimientosRepositorio
 	}
 	consultarPorUsuarioResultado(resultado)
 	{
-		var datos = JSON.parse(resultado);
+		var datosUsuarios = JSON.parse(resultado);
 		this.functionRetorno.call(this.contexto,JSON.parse(resultado));
 	}	
  /*  */
