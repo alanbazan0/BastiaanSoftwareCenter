@@ -15,7 +15,7 @@ class MovimientosVista
 		this.presentador.consultar();
 		
 		this.cmbEstatus = new Combo("agenteIdFormularioInput");
-		this.cmbEstatus.setViewport("agenteIdFormularioInput");
+		this.cmbEstatus.setViewport("recesoIdFormularioInput");
 		this.cmbEstatus._dataField = "recesoId";
 		this.cmbEstatus._labelField = "rCorto";
 		this.cmbEstatus.render();
@@ -29,6 +29,7 @@ class MovimientosVista
 			{longitud:100, 	titulo:"Id",   	alias:"id", alineacion:"I" }, 
 			{longitud:190, 	titulo:"Nombre Agente",   alias:"agenteId", alineacion:"I" }, 
 			{longitud:100, 	titulo:"Nombre Pila",   alias:"recesoId", alineacion:"I" }, 
+			{longitud:200, 	titulo:"Descripcion",   alias:"recesoC", alineacion:"I" }, 
 			{longitud:100, 	titulo:"F.Incial",   alias:"fInicial", alineacion:"C" },
 			{longitud:100, 	titulo:"F.Final",   alias:"fFinal", alineacion:"C" },
 			{longitud:100, 	titulo:"H.Inicial",   alias:"hInicial", alineacion:"C" },
@@ -119,9 +120,8 @@ class MovimientosVista
 			this.modo = "CAMBIO";
 			this.limpiarFormulario();	
 			this.mostrarFormulario();		
-			this.presentador.consultarPorLlaves();
+		    this.presentador.consultarPorLlaves();
 			this.presentador.consultarPorReceso();
-			
 		    var today = new Date();
 			var dd = today.getDate();
 			var mm = today.getMonth()+1;
@@ -226,7 +226,9 @@ class MovimientosVista
 	set datosRecesos(valor)
 	{
 		this.cmbEstatus._dataProvider = valor;
-		this.cmbEstatus.render();	
+		this.cmbEstatus.setSeleccionado("recesoId",this.recesoId);
+		this.cmbEstatus.render();
+		
 	}
 	
 	
@@ -246,11 +248,7 @@ class MovimientosVista
 	{
 	this.PromptUsuarios = valor;
 
-	}
-	
-	
-	
-	
+	}	
 	
 	/*
 	 * Mapeo de datos del formulario con el modelo
@@ -260,7 +258,9 @@ class MovimientosVista
 	{		
 		$('#idFormularioInput').val(valor.id);
 		$('#agenteIdFormularioInput').val(valor.agenteId);
+		$('#agenteFormularioInput').val(valor.agente);
 		$('#recesoIdFormularioInput').val(valor.recesoId);
+		$('#recesoCFormularioInput').val(valor.recesoC);
 		$('#fInicialFormularioInput').val(valor.fInicial);
 		$('#fFinalFormularioInput').val(valor.fFinal);
 		$('#fPersonalFormularioInput').val(valor.fPersonal);
@@ -269,6 +269,7 @@ class MovimientosVista
 		$('#hFinalFormularioInput').val(valor.hFinal);
 		$('#dPersonalFormularioInput').val(valor.dPersonal);
 		$('#dsPersonalFormularioInput').val(valor.dsPersonal);
+		this.recesoId = valor.recesoId
 		
 		
 	}
@@ -279,11 +280,12 @@ class MovimientosVista
 		 {				    
 			 id:$('#idFormularioInput').val(),
 			 agenteId:$('#agenteIdFormularioInput').val(),
+			 agente:$('#agenteFormularioInput').val(),
+			 recesoC:$('#recesoCFormularioInput').val(),
 			 recesoId:this.cmbEstatus._selectedItem.recesoId,
 			 fInicial:$('#fInicialFormularioInput').val(),
 			 fFinal:$('#fFinalFormularioInput').val(),
 			 fPersonal:$('#fPersonalFormularioInput').val(),
-		
 			 hInicial:$('#hInicialFormularioInput').val(),
 			 hFinal:$('#hFinalFormularioInput').val(),
 			 dPersonal:$('#dPersonalFormularioInput').val(),
@@ -330,11 +332,12 @@ class MovimientosVista
 	{
 		$('#idFormularioInput').val("");
 		$('#agenteIdFormularioInput').val("");
+		$('#agenteFormularioInput').val("");
+		$('#recesoCFormularioInput').val("");
 		$('#recesoIdFormularioInput').val("");
 		$('#fInicialFormularioInput').val("");
 		$('#fFinalFormularioInput').val("");
 		$('#fPersonalFormularioInput').val("");
-		
 		$('#hInicialFormularioInput').val("");
 		$('#hFinalFormularioInput').val("");
 		$('#dPersonalFormularioInput').val("");
@@ -360,7 +363,7 @@ class MovimientosVista
 consutarUsuarioCri()
 {
 	//consultar criterios
-	alert( "si");
+	//alert( "si");
 }
 
 

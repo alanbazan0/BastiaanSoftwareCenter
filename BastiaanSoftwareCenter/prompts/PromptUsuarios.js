@@ -37,20 +37,36 @@ function PromptUsuarios(id) {
 		try{
 			var output = "";
 			output += '<div style="position: fixed; top: 0px; left: 0px; display: block; width: 100%; height: 100%; z-index: 5001; background-color: rgba(255, 255, 250, 0.75);" >'
-			output += "<div class='panelAsistenteFRM' id='PMenuAsistente' style='width:120px;background-color:#BCBCBC;height:auto; margin-left:auto;margin-right:auto;margin-top:50px;padding-top:0px;padding-left: 0px;padding-right: 0px;' >";
-			output += "<div class='tituloCriterio' style='height:42px;border-radius: 10px 10px 0px 0px;";
+			output += "<div class='panelAsistenteFRM' id='PMenuAsistente' style='width:520px;background-color:#BCBCBC;height:auto; margin-left:auto;margin-right:auto;margin-top:50px;padding-top:0px;padding-left: 0px;padding-right: 0px;' >";
+			output += "<div class='tituloCriterio' style='height:52px;border-radius:6px 6px 6px 6px;";
 			output += "background-image: linear-gradient(bottom, rgb(100,100,100) 30%, rgb(140,140,140) 90%);";
 			output += "background-image: -o-linear-gradient(bottom, rgb(100,100,100) 30%, rgb(140,140,140) 90%);";
 			output += "background-image: -moz-linear-gradient(bottom, rgb(100,100,100) 30%, rgb(140,140,140) 90%);";
 			output += "background-image: -webkit-linear-gradient(bottom, rgb(100,100,100) 30%, rgb(140,140,140) 90%);";
 			output += "'>";
-			output += "<img src='../COM/estilo/estacion/botones/btnSalir.png' style='float:right;cursor:pointer;width:38px;height:38px;'";
+			
+			output += "<img src='assets/botones/lupa.png' style='float:right;cursor:pointer;width:48px;height:48px;'";
+			output += "<img src='assets/botones/btnSalir.png' style='float:right;cursor:pointer;width:48px;height:48px;'";
 			output += " onclick='regresa();' >";
 			output += "</div>";
-   			output += "<div class='contCriterios2' id='contCriterios2' style='height:220px;'>";
-   			output +=" <div id='" + this._viewport + "Grid' class='gridPrompt' style='height:200px;width:260px;></div>";	
+   			output += "<div class='contCriterios2' id='contCriterios2' style='height:365'>";
+   			
+   			/*
+   			output += " <table WIDHT=35%; HEIGHT=33%; CELLPADDING=0;>";
+   			*/
+  			output += "<label>Id</label>";
+			output += "	<input  id='agenteIdcriterioInput' type='text' width:100px;'/>";
+			output += "<label>Nombre Agente</label>";
+			output += "	<input id='agentecriterioInput' type='text' width:100px;'>" ;
+			/*  
+			output += "</table>";
+			*/
+   			
+   			output +=" <div id='" + this._viewport + "Grid' class='gridPrompt' style='height:89%;width:491px;></div>";	
+   		
+   			
    			output += "</div'>";
-
+   			
 			output += "</div'>";
 			output += "</div'>";
 			document.getElementById(this._viewport).innerHTML = output;
@@ -59,18 +75,18 @@ function PromptUsuarios(id) {
 			
 			_gridListaArchivos = new GridReg("_gridListaArchivos");
 			var columnas = [
-				{longitud:230, titulo:"Id", alias:"id", alineacion:"I"},
-				{longitud:230, titulo:"Nombre Agente", alias:"agenteId", alineacion:"I"}
+				{longitud:180, titulo:"Id", alias:"id", alineacion:"I"},
+				{longitud:235, titulo:"Nombre Agente", alias:"agenteId", alineacion:"I"}
 			];
 			_gridListaArchivos._columnas = columnas;
 			_gridListaArchivos._ajustarAltura 		= true;
 		    _gridListaArchivos._colorRenglon1 		= "#FFFFFF";
-			_gridListaArchivos._colorRenglon2 		= "#f8f2de";
-			_gridListaArchivos._colorEncabezado1 	= "#ff6600";
-			_gridListaArchivos._colorEncabezado2 	= "#ff6600";
-			_gridListaArchivos._colorLetraEncabezado = "#ffffff";
-			_gridListaArchivos._colorLetraCuerpo 	= "#464646";
-		    _gridListaArchivos._colorLetraCuerpo 	= "#000000";
+			_gridListaArchivos._colorRenglon2 		= "#FFFFFF";
+			_gridListaArchivos._colorEncabezado1 	= "#CCC";
+			_gridListaArchivos._colorEncabezado2 	= "#CCC";
+			_gridListaArchivos._colorLetraEncabezado = "#444444";
+			_gridListaArchivos._colorLetraCuerpo 	= "#888888";
+		    _gridListaArchivos._colorLetraCuerpo 	= "#888888";
 		    _gridListaArchivos.subscribirAEvento(this, "eventGridRowDoubleClick",this.clickListaArchivos );
 			_gridListaArchivos._dataProvider = this.datos;
 			_gridListaArchivos.setViewport(this._viewport + "Grid");

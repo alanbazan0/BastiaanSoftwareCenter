@@ -17,6 +17,35 @@ include "../clases/Resultado.php";
         $this->conexion = $conexion;
     }
     
+    
+    public function calcularId()
+    {
+        $resultado = new Resultado();
+        $consulta =  "SELECT MAX(IFNULL(BTMPERSONALIDN,0))+1 AS id FROM BSTNTRN.BTMPERSONALIDN";
+        if($sentencia = $this->conexion->prepare($consulta))
+        {
+            if($sentencia->execute())
+            {
+                if ($sentencia->bind_result($id))
+                {
+                    if($sentencia->fetch())
+                    {
+                        $resultado->valor = $id;
+                    }
+                    else
+                        $resultado->mensajeError = "No se encontró ningún resultado";
+                }
+                else
+                    $resultado->mensajeError = "Falló el enlace del resultado";
+            }
+            else
+                $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;
+        }
+        else
+            $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
+            return $resultado;
+    }
+    
     public function insertar(Movimiento $movimiento)
     {
         $resultado = "";
@@ -58,7 +87,7 @@ include "../clases/Resultado.php";
     {
         $resultado = new Resultado();
         $consulta = " DELETE FROM BSTNTRN.BTMPERSONAL "
-                    . "  WHERE BTMPERSONALID = ? ";
+                    . "  WHERE BTMPERSONALIDN = ? ";
          if($sentencia = $this->conexion->prepare($consulta))
          {
              if($sentencia->bind_param("s",$llaves->id))
@@ -83,52 +112,50 @@ include "../clases/Resultado.php";
     {     
         $resultado = new Resultado();
         $consulta = " UPDATE BSTNTRN.BTMPERSONAL SET"
-                    . " BTMPERSONALUSUID= ?, "
-                    . " BTMPERSONALRECID= ?, "
-                    . " BTMPERSONALFINI= ?, "
-                    . " BTMPERSONALHINI= ?, "
-                    . " BTMPERSONALHFIN= ?, "
-                    . " BTMPERSONALFFIN= ?, "
-                    . " BTMPERSONALDUR= ?, "
-                    . " BTMPERSONALDURS= ?,"
-                    . " BTMPERSONALFECHA= ? "
-                    . " WHERE BTMPERSONALID = ? ";
-        if($sentencia = $this->conexion->prepare($consulta))
+                    ." BTMPERSONALFINI = ?, "
+                    ." BTMPERSONALHINI = ?, "
+                    ." BTMPERSONALFFIN = ?, "        
+                    ." BTMPERSONALHFIN = ?, "
+                    ." BTMPERSONALDUR = ?, "
+                    ." BTMPERSONALDURS = ?, "
+                    ." BTMPERSONALFECHA = ? "
+                    ." WHERE BTMPERSONALIDN = ? ";
+         if($sentencia = $this->conexion->prepare($consulta))
         {
-            if($sentencia->bind_param("sssssssss",
-                                               $movimiento->agenteId,
-                                               $movimiento->recesoId,
+            if($sentencia->bind_param("ssssssss",
                                                $movimiento->fInicial,
                                                $movimiento->hInicial,
-                                               $movimiento->hFinal,
                                                $movimiento->fFinal,
+                                               $movimiento->hFinal,
                                                $movimiento->dPersonal,
                                                $movimiento->dsPersonal,
+                                               $movimiento->fPersonal,
                                                $movimiento->id))
-            {
-               if($sentencia->execute())
-               {
-                   $resultado->valor=true;
-               }
-               else
-                   $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;  
-            }
-            else  $resultado->mensajeError = "Falló el enlace de parámetros";  
+                     {
+                      if($sentencia->execute()){
+                                               $resultado->valor=true;
+                        }else
+                               $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;
+                     }
+              else  $resultado->mensajeError = "Falló el enlace de parámetros";
         }
-        else
-            $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;   
-        return $resultado;        
-    }
-    
+        else 
+            $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
+  
+            
+            return $resultado;  
+ }
+ 
     public function consultar($criteriosSeleccion)
     {     
         $resultado = new Resultado();
         $movimientos = array();     
        
-        $consulta = " SELECT BTMPERSONALIDN id, SIOUSUARIONCOMPLETO agenteId, BTMPERSONALRECID recesoId, BTMPERSONALFINI fInicial, BTMPERSONALHINI hInicial, BTMPERSONALHFIN hFinal, BTMPERSONALFFIN fFinal, BTMPERSONALDUR dPersonal, BTMPERSONALDURS dsPersonal,  BTMPERSONALFECHA fPersonal".
-                    " FROM BSTNTRN.BTMPERSONAL A".
-                    " INNER JOIN BSTNTRN.SIOUSUARIO B ON A.SIOUSUARIOID = B.SIOUSUARIOID " .
-                    " WHERE BTMPERSONALIDN like CONCAT('%',?,'%') ";
+            $consulta = " SELECT BTMPERSONALIDN id, SIOUSUARIONCOMPLETO agenteId, B.SIOUSUARIOID agente, BTCRECESONOML recesoC, BTMPERSONALRECID recesoId, BTMPERSONALFINI fInicial, BTMPERSONALHINI hInicial, BTMPERSONALHFIN hFinal, BTMPERSONALFFIN fFinal, BTMPERSONALDUR dPersonal, BTMPERSONALDURS dsPersonal,  BTMPERSONALFECHA fPersonal".
+                        " FROM BSTNTRN.BTMPERSONAL A".
+                        " INNER JOIN BSTNTRN.SIOUSUARIO B ON A.SIOUSUARIOID = B.SIOUSUARIOID " .
+                        " INNER JOIN BSTNTRN.BTCRECESO C ON C.BTCRECESONOMC= A.BTCRECESONOMC " .
+                        " WHERE BTMPERSONALIDN like CONCAT('%',?,'%') ";
                      
         if($sentencia = $this->conexion->prepare($consulta))
         {
@@ -136,13 +163,15 @@ include "../clases/Resultado.php";
             {
                 if($sentencia->execute())
                 {                
-                    if ($sentencia->bind_result($id, $agenteId, $recesoId, $fInicial, $hInicial, $hFinal, $fFinal, $dPersonal, $dsPersonal, $fPersonal))
+                    if ($sentencia->bind_result($id, $agenteId, $agente,  $recesoC, $recesoId, $fInicial, $hInicial, $hFinal, $fFinal, $dPersonal, $dsPersonal, $fPersonal))
                     {                    
                         while($row = $sentencia->fetch())
                         {
                             $movimiento = (object) [
                                 'id' => utf8_encode($id),
                                 'agenteId' =>  utf8_encode($agenteId),
+                                'agente' =>  utf8_encode($agente), 
+                                'recesoC' =>  utf8_encode($recesoC), 
                                 'recesoId' => utf8_encode($recesoId),
                                 'fInicial' => utf8_encode($fInicial),
                                 'hInicial' => utf8_encode($hInicial), 
@@ -166,15 +195,11 @@ include "../clases/Resultado.php";
                 $resultado->mensajeError = "Falló el enlace de parámetros";    
         }
         else                 
-            $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;        
-        
-       
+            $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;              
         return $resultado;     
     }   
-    
-   
-    
-    public function   consultarPorUsuario()
+ 
+    public function  consultarPorUsuario()
   
     {
         $resultado = new Resultado();
@@ -269,33 +294,36 @@ include "../clases/Resultado.php";
     {
   
         $resultado = new Resultado();       
-        $consulta =   " SELECT "
-                     . " BTMPERSONALID id, "
-                     . " BTMPERSONALUSUID agenteId, "
-                     . " BTMPERSONALRECID recesoId, "
-                     . " BTMPERSONALHINI fInicial, "
-                     . " BTMPERSONALHFIN fFinal,"
-                     . " BTMPERSONALFECHA fPersonal  "
-                     . " FROM BTMPERSONAL "
-                     . " WHERE BTMPERSONALID = ?";
+        $consulta =  " SELECT BTMPERSONALIDN id, SIOUSUARIONCOMPLETO agenteId, B.SIOUSUARIOID agente, BTCRECESONOML recesoC, BTMPERSONALRECID recesoId, BTMPERSONALFINI fInicial, BTMPERSONALHINI hInicial, BTMPERSONALHFIN hFinal, BTMPERSONALFFIN fFinal, BTMPERSONALDUR dPersonal, BTMPERSONALDURS dsPersonal,  BTMPERSONALFECHA fPersonal".
+                     " FROM BSTNTRN.BTMPERSONAL A".
+                     " INNER JOIN BSTNTRN.SIOUSUARIO B ON A.SIOUSUARIOID = B.SIOUSUARIOID " .
+                     " INNER JOIN BSTNTRN.BTCRECESO C ON C.BTCRECESONOMC= A.BTCRECESONOMC " .
+                     " WHERE BTMPERSONALIDN = ? ";           
         if($sentencia = $this->conexion->prepare($consulta))
         {
             if($sentencia->bind_param("s",$llaves->id))
             {
                 if($sentencia->execute())
                 {                    
-                    if ($sentencia->bind_result($id, $agenteId, $recesoId, $fInicial, $fFinal, $fPersonal))
+                    if ($sentencia->bind_result($id, $agenteId, $agente, $recesoC, $recesoId, $fInicial, $hInicial, $hFinal, $fFinal, $dPersonal, $dsPersonal, $fPersonal))
                     {                        
                         if($sentencia->fetch())
                         {
                             $movimiento = new Movimiento();
                             $movimiento->id =  utf8_encode($id);
                             $movimiento->agenteId =  utf8_encode($agenteId);
+                            $movimiento->agente =  utf8_encode($agente);
+                            $movimiento->recesoC =  utf8_encode($recesoC);
                             $movimiento->recesoId =  utf8_encode($recesoId);
                             $movimiento->fInicial =  utf8_encode($fInicial);
+                            $movimiento->hInicial =  utf8_encode($hInicial);
+                            $movimiento->hFinal =  utf8_encode($hFinal);
                             $movimiento->fFinal =  utf8_encode($fFinal);
+                            $movimiento->dPersonal =  utf8_encode($dPersonal);
+                            $movimiento->dsPersonal =  utf8_encode($dsPersonal);
                             $movimiento->fPersonal =  utf8_encode($fPersonal);
-                            $resultado->valor = $movimiento;                           
+                            $resultado->valor = $movimiento;            
+                            
                         }
                         else
                             $resultado->mensajeError = "No se encontró ningún resultado.";

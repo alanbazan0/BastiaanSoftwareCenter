@@ -5,6 +5,7 @@ class Movimiento
 {
     public $id;
     public $agenteId;
+    public $agente;
     public $recesoId;
     public $fInicial;
     public $fFinal;
@@ -22,8 +23,7 @@ class Movimiento
     public $hFinal;
     public $dPersonal;
     public $dsPersonal;
-    
-    
+    public $recesoC;
     
     
    }
