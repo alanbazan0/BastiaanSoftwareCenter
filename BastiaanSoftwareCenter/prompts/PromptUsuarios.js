@@ -38,31 +38,44 @@ function PromptUsuarios(id) {
 			var output = "";
 			output += '<div style="position: fixed; top: 0px; left: 0px; display: block; width: 100%; height: 100%; z-index: 5001; background-color: rgba(255, 255, 250, 0.75);" >'
 			output += "<div class='panelAsistenteFRM' id='PMenuAsistente' style='width:520px;background-color:#BCBCBC;height:auto; margin-left:auto;margin-right:auto;margin-top:50px;padding-top:0px;padding-left: 0px;padding-right: 0px;' >";
-			output += "<div class='tituloCriterio' style='height:52px;border-radius:6px 6px 6px 6px;";
+			output += "<div class='tituloCriterio' style='height:52px;border-radius:20px;";
 			output += "background-image: linear-gradient(bottom, rgb(100,100,100) 30%, rgb(140,140,140) 90%);";
 			output += "background-image: -o-linear-gradient(bottom, rgb(100,100,100) 30%, rgb(140,140,140) 90%);";
 			output += "background-image: -moz-linear-gradient(bottom, rgb(100,100,100) 30%, rgb(140,140,140) 90%);";
 			output += "background-image: -webkit-linear-gradient(bottom, rgb(100,100,100) 30%, rgb(140,140,140) 90%);";
 			output += "'>";
-			
-			output += "<img src='assets/botones/lupa.png' style='float:right;cursor:pointer;width:48px;height:48px;'";
+			output += "<td>";
+			output += "<td>";
 			output += "<img src='assets/botones/btnSalir.png' style='float:right;cursor:pointer;width:48px;height:48px;'";
 			output += " onclick='regresa();' >";
+			output += "</td>";
+			output += "<img src='assets/botones/imgConsulta.png' style='float:right;cursor:pointer;width:48px;height:48px;'>";
+			output += "</td>";
 			output += "</div>";
-   			output += "<div class='contCriterios2' id='contCriterios2' style='height:365'>";
-   			
-   			/*
-   			output += " <table WIDHT=35%; HEIGHT=33%; CELLPADDING=0;>";
-   			*/
-  			output += "<label>Id</label>";
-			output += "	<input  id='agenteIdcriterioInput' type='text' width:100px;'/>";
-			output += "<label>Nombre Agente</label>";
-			output += "	<input id='agentecriterioInput' type='text' width:100px;'>" ;
-			/*  
+   			output += "<div class='contCriterios2' id='contCriterios2' style='height:370'>";
+   			output += "<table WIDHT=25%; HEIGHT=35%;  CELLPADDING=0; cellspacing='15' style='padding-top: 1px; padding-left: 1%; position:relative;display:block;'>";  
+   			output += "<td>";
+   			output += "<tr>";	
+   			output += "<td>";
+  			output += "<label style='position: relative; left: 15px'>Id:</label>";
+  			output += "</td>"
+  			output += "<td>";
+			output += "	<input  id='agenteIdcriterioInput' type='text' style='left: 80px;box-shadow: 2px 2px 5px #999;' width:100px;'/>";
+  			output += "</td>"	
+			output += "</tr>";
+			output += "<tr>";
+			output += "<td>";
+			output += "<label style='position: relative; left: 15px'>Nombre Agente:</label>";
+  			output += "</td>"
+  			output += "<td>"
+			output += "	<input id='agentecriterioInput' type='text' style='right:3%;box-shadow: 2px 2px 5px #999;' width:100px;'>" ;
+			output += "</td>";
+			output += "</tr>";
+			output += "</td>";
 			output += "</table>";
-			*/
+			
    			
-   			output +=" <div id='" + this._viewport + "Grid' class='gridPrompt' style='height:89%;width:491px;></div>";	
+   			output +=" <div id='" + this._viewport + "Grid' class='gridPrompt' style='height:60%;width:491px;></div>";	
    		
    			
    			output += "</div'>";
@@ -76,7 +89,7 @@ function PromptUsuarios(id) {
 			_gridListaArchivos = new GridReg("_gridListaArchivos");
 			var columnas = [
 				{longitud:180, titulo:"Id", alias:"id", alineacion:"I"},
-				{longitud:235, titulo:"Nombre Agente", alias:"agenteId", alineacion:"I"}
+				{longitud:272, titulo:"Nombre Agente", alias:"agenteId", alineacion:"I"}
 			];
 			_gridListaArchivos._columnas = columnas;
 			_gridListaArchivos._ajustarAltura 		= true;
