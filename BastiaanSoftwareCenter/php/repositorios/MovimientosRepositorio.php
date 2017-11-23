@@ -17,7 +17,7 @@ include "../clases/Resultado.php";
         $this->conexion = $conexion;
     }
     
-    
+    /*
     public function calcularId()
     {
         $resultado = new Resultado();
@@ -45,7 +45,7 @@ include "../clases/Resultado.php";
             $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
             return $resultado;
     }
-    
+    */
     public function insertar(Movimiento $movimiento)
     {
         $resultado = "";
@@ -154,9 +154,9 @@ include "../clases/Resultado.php";
             $consulta = " SELECT BTMPERSONALIDN id, SIOUSUARIONCOMPLETO agenteId, B.SIOUSUARIOID agente, BTCRECESONOML recesoC, BTMPERSONALRECID recesoId, BTMPERSONALFINI fInicial, BTMPERSONALHINI hInicial, BTMPERSONALHFIN hFinal, BTMPERSONALFFIN fFinal, BTMPERSONALDUR dPersonal, BTMPERSONALDURS dsPersonal,  BTMPERSONALFECHA fPersonal".
                         " FROM BSTNTRN.BTMPERSONAL A".
                         " INNER JOIN BSTNTRN.SIOUSUARIO B ON A.SIOUSUARIOID = B.SIOUSUARIOID " .
-                        " INNER JOIN BSTNTRN.BTCRECESO C ON C.BTCRECESONOMC= A.BTCRECESONOMC " .
+                        " INNER JOIN BSTNTRN.BTCRECESO C ON C.BTCRECESONOMC= A.BTCRECESONOMC ".
                         " WHERE BTMPERSONALIDN like CONCAT('%',?,'%') ";
-                     
+                  
         if($sentencia = $this->conexion->prepare($consulta))
         {
             if($sentencia->bind_param("s",$criteriosSeleccion->id))

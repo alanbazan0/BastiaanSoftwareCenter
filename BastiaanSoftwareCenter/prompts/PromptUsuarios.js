@@ -46,10 +46,10 @@ function PromptUsuarios(id) {
 			output += "'>";
 			output += "<td>";
 			output += "<td>";
-			output += "<img src='assets/botones/btnSalir.png' style='float:right;cursor:pointer;width:48px;height:48px;'";
+			output += "<img src='assets/botones/btnSalir.png' 'onClick='vista.btnsalirPromt_onClick();' style='float:right;cursor:pointer;width:48px;height:48px;'";
 			output += " onclick='regresa();' >";
 			output += "</td>";
-			output += "<img src='assets/botones/imgConsulta.png' style='float:right;cursor:pointer;width:48px;height:48px;'>";
+			output += "<img src='assets/botones/imgConsulta.png' 'onClick='vista."+ this._id +".btnconsulta_onClick();' style='float:right;cursor:pointer;width:48px;height:48px;'>";
 			output += "</td>";
 			output += "</div>";
    			output += "<div class='contCriterios2' id='contCriterios2' style='height:370'>";
@@ -60,7 +60,7 @@ function PromptUsuarios(id) {
   			output += "<label style='position: relative; left: 15px'>Id:</label>";
   			output += "</td>"
   			output += "<td>";
-			output += "	<input  id='agenteIdcriterioInput' type='text' style='left: 80px;box-shadow: 2px 2px 5px #999;' width:100px;'/>";
+			output += "	<input  id='AgenteIdCriterioInput' type='text' style='left: 80px;box-shadow: 2px 2px 5px #999;' width:100px;'/>";
   			output += "</td>"	
 			output += "</tr>";
 			output += "<tr>";
@@ -68,7 +68,7 @@ function PromptUsuarios(id) {
 			output += "<label style='position: relative; left: 15px'>Nombre Agente:</label>";
   			output += "</td>"
   			output += "<td>"
-			output += "	<input id='agentecriterioInput' type='text' style='right:3%;box-shadow: 2px 2px 5px #999;' width:100px;'>" ;
+			output += "	<input id='agenteCriterioInput' type='text' style='right:3%;box-shadow: 2px 2px 5px #999;' width:100px;'>" ;
 			output += "</td>";
 			output += "</tr>";
 			output += "</td>";
@@ -113,6 +113,33 @@ function PromptUsuarios(id) {
 		}
 		return true;
 	}
+	
+	
+	
+	vista.this.btnconsulta_onClick = function (evento)
+	{		
+		
+		alert("hola")
+		//this.btnconsulta();
+	}	
+	
+	
+	
+	
+	
+	/*  Salir*/
+	/*
+	
+	btnSalirPromt_onClick()
+	{		
+		this.salirPromt();
+	}	
+	
+	*/
+	
+	
+	
+	
 
 	/*
 	*
@@ -124,6 +151,20 @@ function PromptUsuarios(id) {
 	this.PromptUsuarios = valor;
 	this.grid.render();
 	}
+	*/
+	
+	/*
+	
+	get criteriosPromt()
+	 {	
+	var criteriosSeleccion =
+       {
+	     AgenteId:$('#AgenteIdCriterioInput').val(),
+	     agente:$('#agenteCriterioInput').val()
+	    }
+	return criteriosPromt;
+    }
+	
 	*/
 	
 	

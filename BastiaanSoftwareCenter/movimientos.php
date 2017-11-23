@@ -223,13 +223,24 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								   		<td>						    
 								    		<input class="input" id="fFinalFormularioInput"   descripcion="Fecha"  style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
 								   		</td>
-								   	
-								   			<td>						    
+								   		
+								   		  <td>						    
+								    		<label  style="position: relative; left: 3px;">Duracion en Segundos</label>
+								   		</td>
+								   		<td>						    
+								    		<input class="input" id="dsPersonalFormularioInput"   style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
+								   		</td>
+								   
+								   		
+								   	<!-- 
+								   		<td>						    
 								    		<label  style="position: relative; left: 3px;">Fecha Personal</label>
 								   		</td>
 								   		<td>						    
 								    		<input class="input" id="fPersonalFormularioInput"   descripcion="Fecha"  style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
 								   		</td>
+								   		
+								    -->		
 								   </tr>
 								   
 								   
@@ -249,20 +260,14 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								   		</td>
 								   	
 								   		<td>						    
-								    		<label  style="position: relative; left: 3px;">Duraciòn</label>
+								    		<label  style="position: relative; left: 3px;">Duracion</label>
 								   		</td>
 								   		<td>						    
 								    		<input class="input" id="dPersonalFormularioInput"    style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
 								   		</td>
 								   
 								   
-								        <td>						    
-								    		<label  style="position: relative; left: 3px;">Duraciòn Personal</label>
-								   		</td>
-								   		<td>						    
-								    		<input class="input" id="dsPersonalFormularioInput"   style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
-								   		</td>
-								   
+								      
 								   </tr>		
 		   						  
 								   	</table>	     	
