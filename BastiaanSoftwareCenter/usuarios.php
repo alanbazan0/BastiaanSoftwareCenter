@@ -167,7 +167,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								<div id="filtros " class="contenedorIEC" style="overflow: auto; position: relative; width: 100%; display: block;">
 								 <div style="width: 96%; display: block; height: 100%;  padding-top: 10px; padding-left: 34px;">								 	
 								   <tr>
-								   <table WIDHT=25%; HEIGHT=29%;  CELLPADDING=0; cellspacing="10" style="padding-top: 1px; padding-left: 1%; position:relative;display:inline-block; border: #ff6600 1px solid;">										
+								   <table WIDHT=25%; HEIGHT=35%;  CELLPADDING=0; cellspacing="10" style="padding-top: 1px; padding-left: 1%; position:relative;display:inline-block; border: #ff6600 1px solid;">										
 								 	   <td>
 								   		<label style="position: relative; left: 180%; " >Datos del usuario</label>
 								   		</td>
@@ -211,7 +211,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								    		<label style="position: relative; left: 3px;  ">Apellido Materno</label>
 								   		</td>
 								   		<td>	
-								    		<input class="input" id="apellidoMaternoFormularioInput" style=" width:135px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; right: 3px; box-shadow: 2px 2px 5px #999;"/>
+								    		<input class="input" id="apellidoMaternoFormularioInput" style=" width:139px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; right: 3px; box-shadow: 2px 2px 5px #999;"/>
 								   		</td>
 								   		<tr>
 								   		<td>	
@@ -250,7 +250,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								   		</td>
 								   		</tr>
 								   		</table>
-    								    <table WIDHT=25px; HEIGHT=35%;  CELLPADDING=0; cellspacing="10" style="top: 2px; padding-left: 1%; position:relative;display:inline-block; border: #ff6600 1px solid  ">								  								   
+    								    <table WIDHT=25px; HEIGHT=29%;  CELLPADDING=0; cellspacing="10" style="top: 2px; padding-left: 1%; position:relative;display:inline-block; border: #ff6600 1px solid  ">								  								   
     								    <td>
 								   		<label style="position: relative; left: 130%;">Datos para contactar al usuario</label></tr>
 								   		</td>
@@ -292,7 +292,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
     								    	<label style="position: relative; left: 3px; ">Numero de telefono de contacto</label>
     								    </td>
     								    <td>
-    								    	<input class="input" id="telefonoContactoFormularioInput" style=" width:161px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; right: 3px; box-shadow: 2px 2px 5px #999;"/>
+    								    	<input class="input" id="telefonoContactoFormularioInput" style=" width:170px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; right: 3px; box-shadow: 2px 2px 5px #999;"/>
     								    </td>
     								    </tr>
 								   </table>
