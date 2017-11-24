@@ -70,7 +70,7 @@ try
                 break;
                 
                 
-                case 'consultarPorPostal':
+            case 'consultarPorPostal':
                     $criteriosPostales = json_decode(REQUEST('criteriosPostales'));
                     $resultado = $repositorio->consultarPorPostal($criteriosPostales);
                     if($resultado!=null)
@@ -92,5 +92,7 @@ catch(Exception $e)
 finally
 {
     $administrador_conexion->cerrar($conexion);
+    if($resultado!=null)
+        echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
 }
 
