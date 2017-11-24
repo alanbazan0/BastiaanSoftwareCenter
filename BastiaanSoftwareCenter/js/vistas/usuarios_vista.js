@@ -328,6 +328,19 @@ class UsuariosVista
 		$('#formularioDiv').hide();
 	}
 	
+	usuarioSelect()
+	{
+		
+		
+		$('#codigoPostalFormularioInput').val(this._gridListaArchivos._selectedItem.nirPostal);
+		
+	    $('#principalDiv').hide()	
+		$('#formularioDiv').show();
+		this.mostrarFormulario();
+	 } 	
+	
+	
+	
 	/*
 	 *Validación de los datos obligatorios del formulario 
 	 */
@@ -387,10 +400,6 @@ class UsuariosVista
 		//consultar criterios
 		//alert( "si");
 	}
-	postalSelect()
-	{
-		$('#codigoPostalFormularioInput').val(this._gridListaArchivos._selectedItem.nirPostal);
-	 }
 	
 
 	verDatosAsis()
@@ -407,7 +416,7 @@ class UsuariosVista
 		output += "<td>";
 		output += "<td>";
 		output += "<img src='assets/botones/btnSalir.png' onClick='vista.btnsalirPromt_onClick();' style='float:right;cursor:pointer;width:48px;height:48px;'";
-		output += " onclick='regresa();' >";
+		output += "' >";
 		output += "</td>";
 		output += "<img src='assets/botones/imgConsulta.png' onClick='vista.btnconsultaPrompt_onClick();' style='float:right;cursor:pointer;width:48px;height:48px;'>";
 		output += "</td>";
@@ -465,12 +474,12 @@ class UsuariosVista
 		this._gridListaArchivos._colorLetraEncabezado = "#444444";
 		this._gridListaArchivos._colorLetraCuerpo 	= "#888888";
 		this._gridListaArchivos._colorLetraCuerpo 	= "#888888";
-		this._gridListaArchivos.subscribirAEvento(this, "eventGridRowDoubleClick",this.clickListaArchivos );
+		this._gridListaArchivos.manejadorEventos=this.manejadorEventos;
+		this._gridListaArchivos.subscribirAEvento(this, "eventGridRowDoubleClick",vista.usuarioSelect );
 		
 		this._gridListaArchivos.setViewport("PromptPostalGrid");
 		this._gridListaArchivos.render();
 		this.presentador.consultarPorPostal();
-		
 		
 		
 		/*
