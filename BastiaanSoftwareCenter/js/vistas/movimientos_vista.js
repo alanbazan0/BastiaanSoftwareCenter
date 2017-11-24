@@ -516,7 +516,7 @@ verDatosAsis()
 	//this._gridListaArchivos._dataProvider = [];
 	this._gridListaArchivos.setViewport("PromptUsuarioGrid");
 	this._gridListaArchivos.render();
-	this.presentador.consultarPorUsuario();
+	this.presentador.consultarPorUsuario();   
 	
 }
 
