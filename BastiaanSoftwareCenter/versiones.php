@@ -147,7 +147,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 				<img class='logoBAS' style='float: left;' id='logoFRM' src='assets/pantalla/logoTipo.png'  />
 				<span id="txtTitulo" style="float:left;margin-top: 20px;margin-left: 15px;color: #FFFFFF;float: left;font-family: Verdana;font-size: 11px;font-weight: bold;">Criterios de Selecci&oacuten</span>
                 <img style="padding: 2px;" class='imgTipoBoton' id="btnSubir" class="botonMenuIEC" title="Subir" src="assets/botones/imagen1.png" width="52" height="52" onClick="vista.btnSubir();"></td>
-			    <img  style="padding: 2px;" class='imgTipoBoton'id="btnBajar" class="botonMenuIEC" title="Bajar" src="assets/botones/imagen2.png" width="52" height="52" onClick="vista.btnBajar;"></td>
+			    <img  style="padding: 2px;" class='imgTipoBoton'id="btnBajar" class="botonMenuIEC" title="Bajar" src="assets/botones/imagen2.png" width="52" height="52" onClick="vista.btnBajar();"></td>
                 <img style="padding: 2px;" class='imgTipoBoton' id='btnGuardarFormulario' src='assets/botones/imgGuardar.png' onclick='vista.btnGuardarFormulario_onClick();' title='Guardar' />
 				<img style="padding: 2px;" class='imgTipoBoton' id='btnSalirFormulario' src='assets/botones/btnSalir.png' onClick="vista.btnSalirFormulario_onClick();" title='Salir'  />
 			</div>

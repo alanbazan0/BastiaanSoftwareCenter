@@ -218,9 +218,7 @@ class VersionesVista
 					}
 					else				
 						document.getElementById(b).checked = false; 					
-				}
-				
-				
+				}					
 			}
 		}
 		
