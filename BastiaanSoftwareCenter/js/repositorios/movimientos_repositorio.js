@@ -35,6 +35,7 @@ class MovimientosRepositorio
 		this.functionRetorno = functionRetorno;
 		var parametros;
 		parametros = "accion=consultarPorUsuario";
+        parametros += "&criteriosUsuarios=" +  encodeURIComponent(JSON.stringify(criteriosUsuarios));
 		var contextHandler = new AjaxContextHandler();
 		var host = window.location.origin + "/BastiaanSoftwareCenter";	
 		var ai = new Ajaxv2(host +"/php/repositorios/Movimientos.php", this, this.consultarPorUsuarioResultado, "POST", parametros, contextHandler);		

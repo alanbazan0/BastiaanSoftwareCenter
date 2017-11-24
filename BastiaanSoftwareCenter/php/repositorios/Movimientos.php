@@ -65,7 +65,8 @@ try
            break;
            
             case 'consultarPorUsuario':
-                $resultado = $repositorio->consultarPorUsuario();
+                $criteriosUsuarios = json_decode(REQUEST('criteriosUsuarios'));
+                $resultado = $repositorio->consultarPorUsuario($criteriosUsuarios);
                 if($resultado!=null)
                     echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
                 break;

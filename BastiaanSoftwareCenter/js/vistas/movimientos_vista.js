@@ -19,7 +19,6 @@ class MovimientosVista
 		this.cmbEstatus._dataField = "recesoId";
 		this.cmbEstatus._labelField = "rCorto";
 		this.cmbEstatus.render();
-	
 	}
 	
 	crearColumnasGrid()
@@ -61,6 +60,7 @@ class MovimientosVista
 		this.modo = "ALTA";
 		this.limpiarFormulario();	
 		this.mostrarFormulario();	
+		
 		this.presentador.consultarPorReceso();
 		
 	
@@ -152,10 +152,6 @@ class MovimientosVista
 			$("#"+ "fPersonalFormularioInput").datepicker('option', {dateFormat:'dd/mm/yy'});
 			$("#"+ "fPersonalFormularioInput").datepicker("setDate", strTodayFirst);
 			$("#"+ "fPersonalFormularioInput").datepicker();
-			
-
-		    this.presentador.consultarPorUsuario();
-			
 		}
 		else
 			this.mostrarMensaje("Selecciona un registro para modificar.");
@@ -168,9 +164,9 @@ class MovimientosVista
 	}	
 	btnconsultaPrompt_onClick()
 	{
-		alert("holaaa");
-		this.presentador.consultarPorUsuario();
 
+		this.presentador.consultarPorUsuario();
+		
 	}
 	btnGuardarFormulario_onClick()
 	{		
@@ -228,15 +224,27 @@ class MovimientosVista
 	get criteriosSeleccion()
 	{
 		 var criteriosSeleccion = 
-		 {				    
-			id:$('#agenteIdCriterioInput').val(),
-			fFinal:$('#fFinalCriterioInput').val(),
-			fInicial:$('#fInicialCriterioInput').val(),
-	
-			
+		 {			
+		    id:$('#agenteIdCriterioInput').val(),
+		    fInicial:$('#fInicialCriterioInput').val(),
+			fFinal:$('#fFinalCriterioInput').val()
+
 		 }
 		 return criteriosSeleccion;
 	}		
+	
+	get criteriosUsuarios()
+	{	
+		var criteriosUsuarios =
+	    {
+		agenteId:$('#idCriterioAsistenteInput').val(),
+		agente:$('#dscCriterioAsistenteInput').val()
+	    }
+	    return 	criteriosUsuarios;
+	}	
+	
+	
+	
 	
 	set datosRecesos(valor)
 	{
@@ -245,6 +253,15 @@ class MovimientosVista
 		this.cmbEstatus.render();
 		
 	}
+	
+
+	set datos(valor)
+	{
+		this.grid._dataProvider = valor;	
+		this.grid.render();
+	}
+	
+	
 	
 
 	set datosUsuarios(valor)
@@ -256,25 +273,12 @@ class MovimientosVista
 	}	
 	
 	
+	
+	
 
-	set datos(valor)
-	{
-		this.grid._dataProvider = valor;	
-		this.grid.render();
-	}
+	
 	
 	/*
-	set criteriosUsuarios(valor)
-	{		
-		$('#AgenteIdCriterioInput').val(valor.agente);
-		$('#agenteCriterioInput').val(valor.agenteId);
-		this.agenteId = valor.agenteId
-		
-	}
-	
-	
-	
-	
 	get criteriosUsuarios()
 	 {	
 	var criteriosSeleccion =
@@ -287,14 +291,10 @@ class MovimientosVista
 	
 	*/
 	
-	
-	
-	
+
 	/*
 	 * Asignar registros al grid
 	 */
-	
-
 	/*
 	 * Mapeo de datos del formulario con el modelo
 	 */
@@ -338,10 +338,7 @@ class MovimientosVista
 		 return receso;
 	 }
 
-	
-	
-	
-	
+
 	
 	mostrarMensaje(titulo,mensaje)
 	{
@@ -352,6 +349,7 @@ class MovimientosVista
 	{
 		$('#principalDiv').hide()	
 		$('#formularioDiv').show();
+		$('#PromptUsuario').hide();
 	}
 	
 	salirFormulario()
@@ -364,7 +362,12 @@ class MovimientosVista
 	{
 		$('#principalDiv').hide()	
 		$('#formularioDiv').show();
+		this.mostrarFormulario();
 	}
+	
+	
+	
+	
 	
 	/*
 	 *Validación de los datos obligatorios del formulario 
@@ -400,6 +403,13 @@ class MovimientosVista
 		
 	}
 	
+	
+	
+	usuarioSelect()
+	{
+		$('#idFormularioInput').val(this._gridListaArchivos._selectedItem.id);
+		$('#agenteIdFormularioInput').val(this._gridListaArchivos._selectedItem.agenteId);
+	 }
 	
 	/*
 	verDatosAsis()
@@ -455,7 +465,7 @@ verDatosAsis()
 		output += "<label style='position: relative; left: 15px'>Id:</label>";
 		output += "</td>"
 		output += "<td>";
-	output += "	<input  id='AgenteIdCriterioInput' type='text' style='left: 80px;box-shadow: 2px 2px 5px #999;' width:100px;'/>";
+	output += "	<input  id='idCriterioAsistenteInput' type='text' style='left: 80px;box-shadow: 2px 2px 5px #999;' width:100px;'/>";
 		output += "</td>"	
 	output += "</tr>";
 	output += "<tr>";
@@ -463,7 +473,7 @@ verDatosAsis()
 	output += "<label style='position: relative; left: 15px'>Nombre Agente:</label>";
 		output += "</td>"
 		output += "<td>"
-	output += "	<input id='agenteCriterioInput' type='text' style='right:3%;box-shadow: 2px 2px 5px #999;' width:100px;'>" ;
+	output += "	<input id='dscCriterioAsistenteInput' type='text' style='right:3%;box-shadow: 2px 2px 5px #999;' width:100px;'>" ;
 	output += "</td>";
 	output += "</tr>";
 	output += "</td>";
@@ -487,6 +497,7 @@ verDatosAsis()
 		{longitud:180, titulo:"Id", alias:"id", alineacion:"I"},
 		{longitud:272, titulo:"Nombre Agente", alias:"agenteId", alineacion:"I"}
 	];
+	this._gridListaArchivos._origen="vista";
 	this._gridListaArchivos._columnas = columnas;
 	this._gridListaArchivos._ajustarAltura 		= true;
 	this._gridListaArchivos._colorRenglon1 		= "#FFFFFF";
@@ -496,10 +507,8 @@ verDatosAsis()
 	this._gridListaArchivos._colorLetraEncabezado = "#444444";
 	this._gridListaArchivos._colorLetraCuerpo 	= "#888888";
 	this._gridListaArchivos._colorLetraCuerpo 	= "#888888";
-	this._gridListaArchivos.subscribirAEvento(this, "eventGridRowDoubleClick",this.clickListaArchivos );
+	this._gridListaArchivos.subscribirAEvento(this, "eventGridRowDoubleClick",vista.usuarioSelect);
 	//this._gridListaArchivos._dataProvider = [];
-
-
 	this._gridListaArchivos.setViewport("PromptUsuarioGrid");
 	this._gridListaArchivos.render();
 	this.presentador.consultarPorUsuario();

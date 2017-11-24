@@ -151,10 +151,9 @@ include "../clases/Resultado.php";
         $resultado = new Resultado();
         $movimientos = array();     
        
-            $consulta = " SELECT BTMPERSONALIDN id, SIOUSUARIONCOMPLETO agenteId, B.SIOUSUARIOID agente, BTCRECESONOML recesoC, BTMPERSONALRECID recesoId, BTMPERSONALFINI fInicial, BTMPERSONALHINI hInicial, BTMPERSONALHFIN hFinal, BTMPERSONALFFIN fFinal, BTMPERSONALDUR dPersonal, BTMPERSONALDURS dsPersonal,  BTMPERSONALFECHA fPersonal".
+            $consulta = " SELECT BTMPERSONALIDN id, SIOUSUARIONCOMPLETO agenteId, B.SIOUSUARIOID agente ,  BTCRECESONOMC recesoC, BTMPERSONALRECID recesoId, BTMPERSONALFINI fInicial, BTMPERSONALHINI hInicial, BTMPERSONALHFIN hFinal, BTMPERSONALFFIN fFinal, BTMPERSONALDUR dPersonal, BTMPERSONALDURS dsPersonal,  BTMPERSONALFECHA fPersonal".
                         " FROM BSTNTRN.BTMPERSONAL A".
                         " INNER JOIN BSTNTRN.SIOUSUARIO B ON A.SIOUSUARIOID = B.SIOUSUARIOID " .
-                        " INNER JOIN BSTNTRN.BTCRECESO C ON C.BTCRECESONOMC= A.BTCRECESONOMC ".
                         " WHERE BTMPERSONALIDN like CONCAT('%',?,'%') ";
                   
         if($sentencia = $this->conexion->prepare($consulta))
@@ -199,17 +198,21 @@ include "../clases/Resultado.php";
         return $resultado;     
     }   
  
-    public function  consultarPorUsuario()
-  
+    public function  consultarPorUsuario($criteriosUsuarios)
+
     {
         $resultado = new Resultado();
         $usuarios = array();
         
         $consulta = " SELECT SIOUSUARIOID id, SIOUSUARIONCOMPLETO agenteId".
-            " FROM BSTNTRN.SIOUSUARIO ";
+            " FROM BSTNTRN.SIOUSUARIO ".
+            " WHERE SIOUSUARIOID like CONCAT ('%',?,'%') ".
+             "AND  SIOUSUARIONCOMPLETO  like CONCAT('%',?,'%')";
+        
         if($sentencia = $this->conexion->prepare($consulta))
         {
-            if(true)
+            if($sentencia->bind_param("ss",$criteriosUsuarios->agenteId,
+                                            $criteriosUsuarios->agente))
             {
                 if($sentencia->execute())
                 {
@@ -294,11 +297,10 @@ include "../clases/Resultado.php";
     {
   
         $resultado = new Resultado();       
-        $consulta =  " SELECT BTMPERSONALIDN id, SIOUSUARIONCOMPLETO agenteId, B.SIOUSUARIOID agente, BTCRECESONOML recesoC, BTMPERSONALRECID recesoId, BTMPERSONALFINI fInicial, BTMPERSONALHINI hInicial, BTMPERSONALHFIN hFinal, BTMPERSONALFFIN fFinal, BTMPERSONALDUR dPersonal, BTMPERSONALDURS dsPersonal,  BTMPERSONALFECHA fPersonal".
-                     " FROM BSTNTRN.BTMPERSONAL A".
-                     " INNER JOIN BSTNTRN.SIOUSUARIO B ON A.SIOUSUARIOID = B.SIOUSUARIOID " .
-                     " INNER JOIN BSTNTRN.BTCRECESO C ON C.BTCRECESONOMC= A.BTCRECESONOMC " .
-                     " WHERE BTMPERSONALIDN = ? ";           
+        $consulta =  " SELECT BTMPERSONALIDN id, SIOUSUARIONCOMPLETO agenteId, B.SIOUSUARIOID agente ,  BTCRECESONOMC recesoC, BTMPERSONALRECID recesoId, BTMPERSONALFINI fInicial, BTMPERSONALHINI hInicial, BTMPERSONALHFIN hFinal, BTMPERSONALFFIN fFinal, BTMPERSONALDUR dPersonal, BTMPERSONALDURS dsPersonal,  BTMPERSONALFECHA fPersonal".
+            " FROM BSTNTRN.BTMPERSONAL A".
+            " INNER JOIN BSTNTRN.SIOUSUARIO B ON A.SIOUSUARIOID = B.SIOUSUARIOID " .
+            " WHERE BTMPERSONALIDN like CONCAT('%',?,'%') ";
         if($sentencia = $this->conexion->prepare($consulta))
         {
             if($sentencia->bind_param("s",$llaves->id))
