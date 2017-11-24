@@ -30,7 +30,7 @@ class UsuariosPresentador
 	 consultarPorPostal()
 	 {
 		 var repositorio = new UsuariosRepositorio(this);		
-		 repositorio.consultarPorPostal(this,this.consultarPorPostalResultado);
+		 repositorio.consultarPorPostal(this,this.consultarPorPostalResultado,this.vista.criteriosPostales);
 	 }
 	 consultarPorPostalResultado(resultado)
 	 {

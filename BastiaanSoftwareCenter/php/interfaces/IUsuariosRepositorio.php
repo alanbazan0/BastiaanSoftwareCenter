@@ -11,6 +11,7 @@ interface IUsuariosRepositorio
     
     public function consultarPorLlaves($id);
     public function consultar($criteriosSeleccion); 
-    public function consultarPorPostal();  
+
+    public function consultarPorPostal($criteriosPostales);  
 }
 

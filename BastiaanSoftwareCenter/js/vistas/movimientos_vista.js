@@ -407,9 +407,13 @@ class MovimientosVista
 	
 	usuarioSelect()
 	{
-		$('#idFormularioInput').val(this._gridListaArchivos._selectedItem.id);
+		
+		$('#agenteFormularioInput').val(this._gridListaArchivos._selectedItem.id);
 		$('#agenteIdFormularioInput').val(this._gridListaArchivos._selectedItem.agenteId);
-	 }
+		$('#principalDiv').hide()	
+		$('#formularioDiv').show();
+		this.mostrarFormulario();
+	 }      
 	
 	/*
 	verDatosAsis()
@@ -452,7 +456,7 @@ verDatosAsis()
 	output += "<td>";
 	output += "<td>";
 	output += "<img src='assets/botones/btnSalir.png' onClick='vista.btnsalirPromt_onClick();' style='float:right;cursor:pointer;width:48px;height:48px;'";
-	output += " onclick='regresa();' >";
+	output += "  >";
 	output += "</td>";
 	output += "<img src='assets/botones/imgConsulta.png' onClick='vista.btnconsultaPrompt_onClick();' style='float:right;cursor:pointer;width:48px;height:48px;'>";
 	output += "</td>";
@@ -508,11 +512,12 @@ verDatosAsis()
 	this._gridListaArchivos._colorLetraEncabezado = "#444444";
 	this._gridListaArchivos._colorLetraCuerpo 	= "#888888";
 	this._gridListaArchivos._colorLetraCuerpo 	= "#888888";
+	this._gridListaArchivos.manejadorEventos=this.manejadorEventos;
 	this._gridListaArchivos.subscribirAEvento(this, "eventGridRowDoubleClick",vista.usuarioSelect);
 	//this._gridListaArchivos._dataProvider = [];
 	this._gridListaArchivos.setViewport("PromptUsuarioGrid");
 	this._gridListaArchivos.render();
-	this.presentador.consultarPorUsuario();
+	this.presentador.consultarPorUsuario();   
 	
 }
 
