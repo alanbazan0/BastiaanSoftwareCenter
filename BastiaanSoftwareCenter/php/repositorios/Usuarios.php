@@ -71,10 +71,11 @@ try
                 
                 
                 case 'consultarPorPostal':
-                $resultado = $repositorio->consultarPorPostal();
-                if($resultado!=null)
-                    echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
-                 break;
+                    $criteriosPostales = json_decode(REQUEST('criteriosPostales'));
+                    $resultado = $repositorio->consultarPorPostal($criteriosPostales);
+                    if($resultado!=null)
+                        echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
+                        break;
             case 'consultarPorIdContrasena':
                     $id = REQUEST('id');
                     $contrasena = REQUEST('contrasena');

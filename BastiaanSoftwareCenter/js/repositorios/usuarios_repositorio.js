@@ -94,6 +94,7 @@ class UsuariosRepositorio
 		this.functionRetorno = functionRetorno;
 		var parametros;
 		parametros = "accion=consultarPorPostal";
+		parametros += "&criteriosPostales=" +  encodeURIComponent(JSON.stringify(criteriosPostales));
 		var contextHandler = new AjaxContextHandler();
 		var host = window.location.origin + "/BastiaanSoftwareCenter";	
 		var ai = new Ajaxv2(host +"/php/repositorios/Usuarios.php", this, this.consultarPorPostalResultado, "POST", parametros, contextHandler);		

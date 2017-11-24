@@ -241,7 +241,7 @@ class UsuariosRepositorio implements IUsuariosRepositorio
         . " SIOUSUARIONCOMPLETO nombreCompleto, "
         . " SIOUSUARIOGENEROID idGenero, "
         . " SIOUSUARIONAL nacionalidad, "
-        . " SIOUSUARIOFNAC fechaNacimiento, "
+        . " DATE_FORMAT(SIOUSUARIOFNAC,'%d/%m/%Y') fechaNacimiento, "
         . " SIOUSUARIORFC rfc, "
         . " SIOUSUARIONSS nss, "
         . " SIOUSUARIOCURP curp, "
@@ -337,17 +337,20 @@ if($sentencia = $this->conexion->prepare($consulta))
         return $resultado;
     }
     //prompt
-    public function consultarPorPostal()
+    public function consultarPorPostal($criteriosPostales)
     
     {
         $resultado = new Resultado();
         $postales = array();
         
         $consulta = " SELECT BTCPOSTALIDN idPostal, BTCPOSTALID nirPostal, BTCPOSTALASENT asentamientoPostal, BTCPOSTALMPIO municipioPostal, BTCPOSTALESTADO estadoPostal, BTCPOSTALCIUDAD ciudadPostal ".
-          " FROM BSTNTRN.BTCPOSTAL ";
+          " FROM BSTNTRN.BTCPOSTAL "
+           ." WHERE BTCPOSTALIDN like CONCAT ('%',?,'%')"
+           ." AND BTCPOSTALID like CONCAT ('%',?,'%')";
         if($sentencia = $this->conexion->prepare($consulta))
         {
-            if(true)
+            if($sentencia->bind_param("ss",$criteriosPostales->idPostal,
+                $criteriosPostales->nirPostal))
             {
                 if($sentencia->execute())
                 {
