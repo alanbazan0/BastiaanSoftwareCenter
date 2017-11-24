@@ -35,7 +35,7 @@ try
                 $usuario = $mapper->map($json, new Usuario());
                 $resultado = $repositorio->insertar($usuario);    
                 if($resultado!=null)
-                    echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
+             //       echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
                     break;
                     
                 
@@ -45,28 +45,28 @@ try
                 $usuario = $mapper->map($json, new Usuario());
                 $resultado = $repositorio->actualizar($usuario) ;              
                 if($resultado!=null)
-                    echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
+           //         echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
                     break;
                     
             case 'eliminar':
                 $llaves = json_decode(REQUEST('llaves'));
                 $resultado = $repositorio->eliminar($llaves);               
                 if($resultado!=null)
-                    echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
+            //        echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
                     break;
                     
             case 'consultarPorLlaves':
                 $llaves = json_decode(REQUEST('llaves'));
                 $resultado = $repositorio->consultarPorLlaves($llaves);     
                 if($resultado!=null)
-                    echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
+          //          echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
                     break;
                 
             case 'consultar':
                 $criteriosSeleccion = json_decode(REQUEST('criteriosSeleccion'));
                 $resultado = $repositorio->consultar($criteriosSeleccion);   
                 if($resultado!=null)
-                    echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
+        //            echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
                 break;
                 
                 
@@ -74,7 +74,7 @@ try
                     $criteriosPostales = json_decode(REQUEST('criteriosPostales'));
                     $resultado = $repositorio->consultarPorPostal($criteriosPostales);
                     if($resultado!=null)
-                        echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
+    //                    echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
                         break;
             case 'consultarPorIdContrasena':
                     $id = REQUEST('id');
