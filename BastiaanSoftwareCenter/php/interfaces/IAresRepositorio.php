@@ -3,6 +3,7 @@ namespace php\interfaces;
 
 use php\modelos\Area;
 
+
 interface IAresRepositorio
 {
     public function insertar(Area $area);

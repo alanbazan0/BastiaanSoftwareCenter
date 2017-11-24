@@ -74,13 +74,66 @@ try
                 $DescTipoSolicitud = REQUEST('DescTipoSolicitud');
                 $EstatusSolicitud = REQUEST('EstatusSolicitud');
                 $LlamadaId = REQUEST('LlamadaId');
-                $resultado = $repositorio->ActuaizaSolictarReceso($NombreUsuario,$idTipoSolicitud,$DescTipoSolicitud,$EstatusSolicitud,$LlamadaId);
-               /* if($resultado)
+                
+                $resultado= $repositorio->consultarIdUsuarioExt($NombreUsuario);
+                if($resultado->valor)
                 {
-                    $resultado="si entro al if";
+                    $resultado = $repositorio->ActuaizaSolictarReceso($NombreUsuario,$idTipoSolicitud,$DescTipoSolicitud,$EstatusSolicitud,$LlamadaId);
                 }
-                else  {}*/
-                 // $resultado = $repositorio->InsertarSolictarReceso($NombreUsuario,$idTipoSolicitud,$DescTipoSolicitud,$EstatusSolicitud,$LlamadaId);
+                else  
+                 {
+                     $resultado = $repositorio->InsertarSolictarReceso($NombreUsuario,$idTipoSolicitud,$DescTipoSolicitud,$EstatusSolicitud,$LlamadaId);
+                 }
+                 
+                
+               
+                if($resultado!=null)
+                    echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
+                    break;
+            case 'autoriza':
+                $NombreUsuario = REQUEST('NombreUsuario');
+                $EstatusSolicitud = REQUEST('EstatusSolicitud');
+                $resultado= $repositorio->actualizaEstatusReceso($NombreUsuario,$EstatusSolicitud);       
+                if($resultado!=null)
+                    echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
+               break;
+            case 'consultaMovimientos':
+                $NombreUsuario = REQUEST('NombreUsuario');
+                $resultado= $repositorio->consultaMovimientos($NombreUsuario);
+                if($resultado!=null)
+                    echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
+                    break;
+            case 'ConsultarStatus':
+                $NombreUsuario = REQUEST('NombreUsuario');
+                $resultado= $repositorio->ConsultarStatus($NombreUsuario);
+                if($resultado!=null)
+                    echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
+                    break;
+                    break;
+            case 'actualizarEstatus':
+                $NombreUsuario = REQUEST('NombreUsuario');
+                $EstatusSolicitud = REQUEST('EstatusSolicitud');
+                $resultado= $repositorio->actualizarEstatus($NombreUsuario,$EstatusSolicitud);
+                if($resultado!=null)
+                    echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
+                    break;
+            case 'insertarMovimiento':
+                $NombreUsuario = REQUEST('NombreUsuario');
+                $EstatusSolicitud = REQUEST('EstatusSolicitud');
+                $idTipoReceso = REQUEST('idTipoReceso');
+                $dscTipoSolicutd = REQUEST('dscTipoSolicutd');
+                $resultado= $repositorio->insertarMovimientos($NombreUsuario,$idTipoReceso,$dscTipoSolicutd);
+                $resultado2= $repositorio->consultaMovimientosInsert($NombreUsuario,$idTipoReceso,$resultado->valor);
+                if($resultado!=null)
+                    echo json_encode($resultado2, JSON_UNESCAPED_UNICODE);
+                    break;
+            case 'actualizarMovimientos':
+                $NombreUsuario = REQUEST('NombreUsuario');
+                $fechaInicialGuardada = REQUEST('fechaInicialGuardada');
+                $horaInicialGuardada = REQUEST('horaInicialGuardada');
+                $duracion = REQUEST('duracion');                
+                $duracionSeg = REQUEST('duracionSeg');
+                $resultado= $repositorio->actualizarMovimientos($NombreUsuario,$fechaInicialGuardada,$horaInicialGuardada,$duracion,$duracionSeg);
                 if($resultado!=null)
                     echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
                     break;
