@@ -154,14 +154,16 @@ include "../clases/Resultado.php";
             $consulta = " SELECT BTMPERSONALIDN id, SIOUSUARIONCOMPLETO agenteId, B.SIOUSUARIOID agente ,  BTCRECESONOMC recesoC, BTMPERSONALRECID recesoId,  DATE_FORMAT(BTMPERSONALFINI,'%d/%m/%Y') fInicial ,BTMPERSONALHINI hInicial, BTMPERSONALHFIN hFinal, DATE_FORMAT(BTMPERSONALFFIN,'%d/%m/%Y') fFinal, BTMPERSONALDUR dPersonal, BTMPERSONALDURS dsPersonal,  BTMPERSONALFECHA fPersonal".
                         " FROM BSTNTRN.BTMPERSONAL A".
                         " INNER JOIN BSTNTRN.SIOUSUARIO B ON A.SIOUSUARIOID = B.SIOUSUARIOID " .
-                        " WHERE BTMPERSONALIDN like CONCAT('%',?,'%') ";
+                        " WHERE BTMPERSONALIDN  like CONCAT('%',?,'%') ".
+                        " AND (BTMPERSONALFINI like CONCAT('%',?,'%') ".
+                        " OR BTMPERSONALFFIN like CONCAT('%',?,'%')) ";
             
             
            // " DATE_FORMAT(SIOUSUARIOFNAC,'%d/%m/%Y') fechaNacimiento, "
                   
         if($sentencia = $this->conexion->prepare($consulta))
         {
-            if($sentencia->bind_param("s",$criteriosSeleccion->id))
+            if($sentencia->bind_param("sss",$criteriosSeleccion->id, $criteriosSeleccion->fInicial, $criteriosSeleccion->fFinal))
             {
                 if($sentencia->execute())
                 {                
@@ -296,6 +298,7 @@ include "../clases/Resultado.php";
                                         
                     return $resultado;
     }
+    
     public function consultarPorLlaves($llaves)
     {
   
