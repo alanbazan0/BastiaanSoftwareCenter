@@ -105,7 +105,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								    <td style="padding:6px 0px 4px 10px;">		<label  style="font-family: Verdana; font-size: 10px;">Id Agente</label></td>									
 									<td style="padding:6px 0px 4px 10px;">		<input  id='agenteIdCriterioInput' type='text' style='height: 20px; width:200px;'/></input></td>
 								    <td style="padding:6px 0px 4px 10px;">		<label  style="font-family: Verdana; font-size: 10px;">F. Inicial</label></td>									
-									<td style="padding:6px 0px 4px 10px;">		<input  id='fInialCriterioInput' type='date'  descripcion="Fecha"  style='height: 20px; width:200px;'/></input></td>
+									<td style="padding:6px 0px 4px 10px;">		<input  id='fInicialCriterioInput' type='date'  descripcion="Fecha"  style='height: 20px; width:200px;'/></input></td>
 								    <td style="padding:6px 0px 4px 10px;">		<label  style="font-family: Verdana; font-size: 10px;">F. Final</label></td>									
 									<td style="padding:6px 0px 4px 10px;">		<input  id='fFinalCriterioInput' type='date'  descripcion="Fecha"  style='height: 20px; width:200px;'/></input></td>
 								
