@@ -138,7 +138,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
     
     
 
-<div id="formularioDiv" style="display:none ;height: 190px;">
+<div id="formularioDiv" style="display:none ;height: 170px;">
 		<div>
 			
 <!--  barra de men� para botones de la pantalla
@@ -161,7 +161,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 						<div class="contenidoNormalUS">
 					 		<div class="explicacionFRM" >
 								<div id="filtros " class="contenedorIEC" style="overflow: auto; position: relative; width: 100%; display: block;">
-								 <div style="width: 80%; display: block; height: 48%;  padding-top: 1px; padding-left: 34px;">								 	
+								 <div style="width: 80%; display: block; height: 53%;  padding-top: 1px; padding-left: 34px;">								 	
 								   <table WIDHT=25%; HEIGHT=25%;  CELLPADDING=0; cellspacing="10" style="padding-top: 5px; padding-left: 1%; position:relative;  ">
 								    	<td >
 								     		 <label style=" width:130px; position: relative; left: 3px; ">Id</label>
