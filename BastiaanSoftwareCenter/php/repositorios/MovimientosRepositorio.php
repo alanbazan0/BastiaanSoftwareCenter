@@ -151,10 +151,13 @@ include "../clases/Resultado.php";
         $resultado = new Resultado();
         $movimientos = array();     
        
-            $consulta = " SELECT BTMPERSONALIDN id, SIOUSUARIONCOMPLETO agenteId, B.SIOUSUARIOID agente ,  BTCRECESONOMC recesoC, BTMPERSONALRECID recesoId, BTMPERSONALFINI fInicial, BTMPERSONALHINI hInicial, BTMPERSONALHFIN hFinal, BTMPERSONALFFIN fFinal, BTMPERSONALDUR dPersonal, BTMPERSONALDURS dsPersonal,  BTMPERSONALFECHA fPersonal".
+            $consulta = " SELECT BTMPERSONALIDN id, SIOUSUARIONCOMPLETO agenteId, B.SIOUSUARIOID agente ,  BTCRECESONOMC recesoC, BTMPERSONALRECID recesoId,  DATE_FORMAT(BTMPERSONALFINI,'%d/%m/%Y') fInicial ,BTMPERSONALHINI hInicial, BTMPERSONALHFIN hFinal, DATE_FORMAT(BTMPERSONALFFIN,'%d/%m/%Y') fFinal, BTMPERSONALDUR dPersonal, BTMPERSONALDURS dsPersonal,  BTMPERSONALFECHA fPersonal".
                         " FROM BSTNTRN.BTMPERSONAL A".
                         " INNER JOIN BSTNTRN.SIOUSUARIO B ON A.SIOUSUARIOID = B.SIOUSUARIOID " .
                         " WHERE BTMPERSONALIDN like CONCAT('%',?,'%') ";
+            
+            
+           // " DATE_FORMAT(SIOUSUARIOFNAC,'%d/%m/%Y') fechaNacimiento, "
                   
         if($sentencia = $this->conexion->prepare($consulta))
         {

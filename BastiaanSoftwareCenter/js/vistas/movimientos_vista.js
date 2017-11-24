@@ -497,7 +497,8 @@ verDatosAsis()
 		{longitud:180, titulo:"Id", alias:"id", alineacion:"I"},
 		{longitud:272, titulo:"Nombre Agente", alias:"agenteId", alineacion:"I"}
 	];
-	this._gridListaArchivos._origen="vista";
+	this._gridListaArchivos
+	._origen="vista";
 	this._gridListaArchivos._columnas = columnas;
 	this._gridListaArchivos._ajustarAltura 		= true;
 	this._gridListaArchivos._colorRenglon1 		= "#FFFFFF";
