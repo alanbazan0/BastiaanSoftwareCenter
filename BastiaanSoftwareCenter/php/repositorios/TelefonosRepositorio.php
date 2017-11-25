@@ -210,7 +210,45 @@ class TelefonosRepositorio implements ITelefonosRepositorio
             $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;     
        return $resultado;
     }
-
+    public function consultarCatalagoTipoTelefono()
+    {
+        $resultado = new Resultado();
+        $TiposTelefonos = array();
+        
+        $consulta =   " SELECT BTTTELEFONOID idTelefono, "
+            . " BTTTELEFONODESC descripcionTipo "
+                . " FROM BSTNTRN.BTTTELEFONO ";
+                
+                if($sentencia = $this->conexion->prepare($consulta))
+                {
+                    if($sentencia->execute())
+                    {
+                        if ($sentencia->bind_result($idTelefono, $descripcionTipo))
+                        {
+                            while($row = $sentencia->fetch())
+                            {
+                                $TipoTelefono = (object) [
+                                    'id' =>  utf8_encode($idTelefono),
+                                    'descripcion' => utf8_encode($descripcionTipo)
+                                    
+                                ];
+                                array_push($TiposTelefonos,$TipoTelefono);
+                            }
+                            $resultado->valor = $TiposTelefonos;
+                        }
+                        else
+                            $resultado->mensajeError = "Falló el enlace del resultado.";
+                    }
+                    else
+                        $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;
+                        
+                }
+                else
+                    $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
+                    
+                    
+                    return $resultado;
+    }
 
     
 }
