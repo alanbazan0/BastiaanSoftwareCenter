@@ -166,7 +166,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								<div id="filtros " class="contenedorIEC" style="overflow: auto; position: relative; width: 100%; display: block;">
 								 <div style="width: 80%; display: block; height: 100%;  padding-top: 10px; padding-left: 34px;">								 	
 								   
-								   <table WIDHT=35%; HEIGHT=36%; CELLPADDING=0; cellspacing="10" style="padding-top: 12px; padding-left: 1%; position:relative;display:inline-block; border: #ff6600 1px solid;">										 		
+								   <table WIDHT=38%; HEIGHT=42%; CELLPADDING=0; cellspacing="10" style="padding-top: 12px; padding-left: 1%; position:relative;display:inline-block; border: #ff6600 1px solid;">										 		
 								    
 								    <tr>
 								    <td> 
@@ -174,7 +174,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								   	  	    <label style="position: relative; left: 3px;">Id</label>
 								   	  	    </td>
 								   	  	    <td>
-								     		<input class="input" id="idFormularioInput" descripcion="agente" type="text" maxlength="20"  style="width:100%; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 3px; box-shadow: 2px 2px 5px #999;"/>
+								     		<input class="input" id="idFormularioInput" descripcion="agente" type="text" maxlength="20"  style="width:100%; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 3px; box-shadow: 2px 2px 5px #999;" disabled/>
 								        	</td>
 								    </tr>
 								    
@@ -184,13 +184,13 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								   	  	    <label style="position: relative; left: 3px;">Usuario</label>
 								   	  	    </td>
 								   	  	    <td>
-								     		<input class="input" id="agenteFormularioInput" descripcion="agente" type="text" maxlength="20"  style="width:100%; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 3px; box-shadow: 2px 2px 5px #999;"/>
+								     		<input class="input" id="agenteFormularioInput" descripcion="agente" type="text" maxlength="20"  style="width:100%; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 3px; box-shadow: 2px 2px 5px #999;" disabled/>
 								        	</td>
 								        	<td>
 								        	<img src='css/imagenes/asisFRM.png' onClick="vista.verDatosAsis();" title='Asistente Usuarios' style="left: 3px"> 	
 								        	</td>
 								        	<td>	
-	                                   		<input class="input" id="agenteIdFormularioInput" descripcion="agenteId" style="width:240px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; right: 30px; box-shadow: 2px 2px 5px #999;"/>
+	                                   		<input class="input" id="agenteIdFormularioInput" descripcion="agenteId" style="width:240px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; right: 30px; box-shadow: 2px 2px 5px #999;" disabled/>
 								</td>
 								 </tr>   
 								    	<td>
@@ -225,21 +225,21 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								    		<label style="position: relative; left: 3px; ">Fecha Inicial</label>
 								   		</td>
 								   		<td>		
-								   			<input class="input" id="fInicialFormularioInput"   descripcion="Fecha"  style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
+								   			<input id="fInicialFormularioInput" type='date' style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
 								   		</td>
 								   		<td>						    
-								    		<label  style="position: relative; left: 3px;">Fecha Final</label>
+								    		<label  style="position: relative;  left: 3px;">Fecha Final</label>
 								   		</td>
 								 
 								   		<td>						    
-								    		<input class="input" id="fFinalFormularioInput"   descripcion="Fecha"  style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
+								    		<input  id="fFinalFormularioInput"  type='date'  style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
 								   		</td>
 								   		
 								   		  <td>						    
 								    		<label  style="position: relative; left: 3px;">Duracion en Segundos</label>
 								   		</td>
 								   		<td>						    
-								    		<input class="input" id="dsPersonalFormularioInput"   style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
+								    		<input class="input"   id="dsPersonalFormularioInput"   style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
 								   		</td>
 								   
 								   		
@@ -253,28 +253,27 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								   		
 								    -->		
 								   </tr>
-								   
-								   
+								 
 								   <tr>
 							          <td>						    
 								    		<label style="position: relative; left: 3px; ">Hora Inicial</label>
 								   		</td>
 								   		<td>		
-								   			<input class="input" id="hInicialFormularioInput"   style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
+								   			<input type='time' class="input" id="hInicialFormularioInput"   style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
 								   		</td>
 								   		<td>						    
 								    		<label  style="position: relative; left: 3px;">Hora Final</label>
 								   		</td>
 								 
 								   		<td>						    
-								    		<input class="input" id="hFinalFormularioInput"    style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
+								    		<input  type='time' class="input" id="hFinalFormularioInput"    style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
 								   		</td>
 								   	
 								   		<td>						    
 								    		<label  style="position: relative; left: 3px;">Duracion</label>
 								   		</td>
 								   		<td>						    
-								    		<input class="input" id="dPersonalFormularioInput"    style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
+								    		<input  type='time' class="input" id="dPersonalFormularioInput"    style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
 								   		</td>
 								   
 								   

@@ -54,6 +54,31 @@ include "../clases/Resultado.php";
             . " (BTMPERSONALIDN,  "
             . " SIOUSUARIOID,  "
             . " BTMPERSONALRECID, "
+            . " BTMPERSONALFINI, "
+            . " BTMPERSONALHINI, "
+            . " BTMPERSONALFFIN, "
+            . " BTMPERSONALHFIN, "
+            . " BTMPERSONALDUR, "
+            . " BTMPERSONALDURS, "
+            . " BTCRECESONOMC)"
+            . " VALUE(?,?,?,?,?,?,?,?,?,?)";
+            
+            /*    . " (BTMPERSONALIDN,  "
+             . " SIOUSUARIOID,  "
+             . " BTMPERSONALRECID, "
+             . " BTRECESONOMC, "
+             . " BTMPERSONALFINI, "
+             . " BTMPERSONALHINI, "
+             . " BTMPERSONALFFIN, "
+             . " BTMPERSONALHFIN, "
+             . " BTMPERSONALDUR, "
+             . " BTMPERSONALDURS) "
+             . " VALUE(?,?,?,?,?,?,?,?,?,?)";*/
+             /*
+              $consulta = " INSERT INTO BSTNTRN.BTMPERSONAL "
+            . " (BTMPERSONALIDN,  "
+            . " SIOUSUARIOID,  "
+            . " BTMPERSONALRECID, "
             . " BTRECESONOMC, "
             . " BTMPERSONALFINI, "
             . " BTMPERSONALHINI, "
@@ -62,19 +87,36 @@ include "../clases/Resultado.php";
             . " BTMPERSONALDUR, "
             . " BTMPERSONALDURS) "
             . " VALUE(?,?,?,?,?,?,?,?,?,?)";
+            
+            
+            
+             */
                  if($sentencia = $this->conexion->prepare($consulta))
                             {
                                 if( $sentencia->bind_param("ssssssssss",
                                     $movimiento->id,
                                     $movimiento->recedoId,
-                                    $movimiento->recesoC,
                                     $movimiento->agente,
                                     $movimiento->fInicial,
                                     $movimiento->hInicial,
                                     $movimiento->fFinal,
                                     $movimiento->hFinal,
                                     $movimiento->dPersonal,
-                                    $movimiento->dsPersonal))
+                                    $movimiento->dsPersonal,
+                                    $movimiento->recesoC))
+                                    /*'id' => utf8_encode($id),
+                                     'agenteId' =>  utf8_encode($agenteId),
+                                     'agente' =>  utf8_encode($agente),
+                                     'recesoC' =>  utf8_encode($recesoC),
+                                     'recesoId' => utf8_encode($recesoId),
+                                     'fInicial' => utf8_encode($fInicial),
+                                     'hInicial' => utf8_encode($hInicial),
+                                     'hFinal' => utf8_encode($hFinal),
+                                     'fFinal' => utf8_encode($fFinal),
+                                     'dPersonal' => utf8_encode($dPersonal),
+                                     'dsPersonal' => utf8_encode($dsPersonal),
+                                     'fPersonal' => utf8_encode($fPersonal)*/
+                                
                                     /*'id' => utf8_encode($id),
                                      'agenteId' =>  utf8_encode($agenteId),
                                      'agente' =>  utf8_encode($agente),

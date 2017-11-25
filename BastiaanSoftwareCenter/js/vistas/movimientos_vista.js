@@ -64,7 +64,7 @@ class MovimientosVista
 		this.mostrarFormulario();	
 		
 		this.presentador.consultarPorReceso();
-		
+		/*
 	
 		var today = new Date();
 		var dd = today.getDate();
@@ -97,7 +97,7 @@ class MovimientosVista
 		$("#"+ "fPersonalFormularioInput").datepicker("setDate", strTodayFirst);
 		$("#"+ "fPersonalFormularioInput").datepicker();
 		
-
+        */
 	    this.presentador.consultarPorUsuario();
 	}
 	
@@ -165,6 +165,8 @@ class MovimientosVista
 		this.presentador.consultar();
 	}	
 
+	
+	
 	
 	
 	btnconsultaPrompt_onClick()
