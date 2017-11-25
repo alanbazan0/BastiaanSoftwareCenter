@@ -100,6 +100,33 @@ class RepositorioBase
        
         return $texto;
     }
+    public function insert($tablaId, $campos)
+    {
+        $texto = "";
+        if($campos)
+        {
+            $texto = "INSERT INTO ".$tablaId." ( ";
+            for($i = 0; $i < count($campos); $i++)
+            {
+                if($campos[$i]->tablaId == $tablaId){
+                    $campo = $campos[$i];
+                    $texto .= trim($campo->campoId);
+                    if($i < count($campos) - 1)
+                        $texto .= ", ";
+                }
+            }
+            $texto .= ') VALUES( ';
+            for($i = 0; $i < count($campos); $i++)
+            {
+                if($campos[$i]->tablaId == $tablaId){
+                    $texto .= '?' ;
+                    if($i < count($campos) - 1)
+                        $texto .= ", ";
+                }
+            }
+            $texto .= ')';
+        }
+    }
     
     public function esCadena($tipoDato)
     {

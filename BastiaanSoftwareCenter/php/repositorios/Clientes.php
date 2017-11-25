@@ -5,6 +5,7 @@ use php\modelos\Cliente;
 use php\repositorios\CamposGrid1Repositorio;
 use php\repositorios\ClientesRepositorio;
 use php\modelos\Resultado;
+use php\repositorios\CamposFormularioAltaRepositorio;
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -15,6 +16,7 @@ include '../clases/Utilidades.php';
 include '../clases/AdministradorConexion.php';
 include '../repositorios/ClientesRepositorio.php';
 include '../repositorios/CamposGrid1Repositorio.php';
+include '../repositorios/CamposFormularioAltaRepositorio.php';
 
 
 header('Access-Control-Allow-Origin: *');
@@ -67,6 +69,17 @@ try
                     $resultado = $repositorio->consultarDinamicamente($filtros,$campos); 
                 }
             break;
+            case 'InsertarDinamicamente':
+                $filtros = json_decode(REQUEST('campos'));
+                $version = REQUEST('version');
+                $camposInsertRepositorio = new CamposFormularioAltaRepositorio($conexion);
+                $resultado = $camposInsertRepositorio->consultarPorVersion($version);
+                if($resultado->mensajeError=='')
+                {
+                    $campos = $resultado->valor;
+                    $resultado = $repositorio->insertarDinamicamente($filtros,$campos);
+                }
+                break;
         }
     }
     

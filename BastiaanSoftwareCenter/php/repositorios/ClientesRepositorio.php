@@ -2,6 +2,7 @@
 namespace php\repositorios;
 
 
+
 use php\interfaces\IClientesRepositorio;
 use php\modelos\Cliente;
 use php\modelos\Resultado;
@@ -418,6 +419,40 @@ class ClientesRepositorio extends RepositorioBase implements IClientesRepositori
         return $resultado;
     }    
 
+    public function insertarDinamicamente($filtros, $campos)
+    {
+        $resultado =  $this->calcularId();
+        $llave = (object) [
+            'campoId' =>  'BTCLIENTENUMERO'
+        ];
+        array_push($campos,$llave);
+        if($resultado->mensajeError=="")
+        {
+            $id = $resultado->valor;
+            $consulta = $this->insert('BTCLIENTE', $campos);
+            
+            if($sentencia = $this->conexion->prepare($consulta))
+            {
+                $llave = (object) [
+                    'valor' =>  $id,
+                    'tipoDato' => 'decimal'
+                ];
+                array_push($filtros,$llave);
+                if($this->bind_param($sentencia,$filtros))
+                {
+                    if($sentencia->execute())
+                        $resultado->valor = $id;
+                        else
+                            $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;
+                }
+                else
+                    $resultado->mensajeError = "Falló el enlace de parámetros";
+            }
+            else
+                $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
+        }
+        return $resultado;
+    }
 
     
 }
