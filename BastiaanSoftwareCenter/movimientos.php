@@ -166,7 +166,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								<div id="filtros " class="contenedorIEC" style="overflow: auto; position: relative; width: 100%; display: block;">
 								 <div style="width: 80%; display: block; height: 100%;  padding-top: 10px; padding-left: 34px;">								 	
 								   
-								   <table WIDHT=35%; HEIGHT=33%; CELLPADDING=0; cellspacing="10" style="padding-top: 12px; padding-left: 1%; position:relative;display:inline-block; border: #ff6600 1px solid;">										 		
+								   <table WIDHT=35%; HEIGHT=36%; CELLPADDING=0; cellspacing="10" style="padding-top: 12px; padding-left: 1%; position:relative;display:inline-block; border: #ff6600 1px solid;">										 		
 								    <tr>
 								<td> 
 								  
