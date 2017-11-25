@@ -65,6 +65,12 @@ try
                 if($resultado!=null)
                     echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
                     break;
+            case 'consultarPortabilidad':
+                $numero = json_decode(REQUEST('numero'));
+                $resultado = $repositorio->consultarPortabilidad($numero);
+                if($resultado!=null)
+                    echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
+                    break;
         }
     }
     

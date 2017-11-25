@@ -125,7 +125,9 @@ class RepositorioBase
                 }
             }
             $texto .= ')';
-        }
+        }      
+        
+        return $texto;
     }
     
     public function esCadena($tipoDato)

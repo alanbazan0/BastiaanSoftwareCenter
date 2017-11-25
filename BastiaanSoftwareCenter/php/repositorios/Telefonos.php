@@ -64,7 +64,12 @@ try
                 $resultado = $repositorio->consultar($criteriosSeleccion);
                 if($resultado!=null)
                     echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
-           break;
+            break;
+            case 'ConsultarCatalogoTipoTelefono':
+                $resultado = $repositorio->consultarCatalagoTipoTelefono();
+                if($resultado!=null)
+                    echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
+            break;
         }
     }
     
