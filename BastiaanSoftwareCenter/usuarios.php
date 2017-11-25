@@ -73,6 +73,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 				<input type="hidden" id="CNUSERDESC"           name="CNUSERDESC"            value ='<?php  echo $CNUSERDESC; ?>'/>    
 		</div>
 		
+		
 		<div id="estiloBotonesPeque" class="estiloBotonesPeque">
 			<div id="contieneTuberiaIzq" class="contieneTuberiaIzq">
 				<img src='assets/pantalla/logotipo.png' style="position:absolute; "/>
@@ -83,6 +84,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 						<div id="botones" style="width:auto;overflow:auto;">
 							<table class="tablaBotonesIEC">
 								<tr>
+									<td><img id="btnExcel" class="botonMenuIEC" title="Excel" src="assets/botones/btnExcel.png" onClick="vista.btnExcel_onClick();"></td>
 									<td><img id="btnAlta" class="botonMenuIEC" title="Alta" src="assets/botones/imgAlta.png" onClick="vista.btnAlta_onClick();"></td>
 									<td><img id="btnBaja" class="botonMenuIEC" title="Baja" src="assets/botones/imgBaja.png" onClick="vista.btnBaja_onClick();"></td>
 									<td><img id="btnCambio" class="botonMenuIEC" title="Cambio" src="assets/botones/imgCambio.png" onClick="vista.btnCambio_onClick();"></td>
@@ -246,7 +248,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								    		<label style="position: relative; left: 3px;">Fecha de nacimiento</label>
 								   		</td>
 								   		<td>	
-								    		<input class="input" id="fechaNacimientoFormularioInput" style="width:80px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
+								    		<input type="date" id="fechaNacimientoFormularioInput" style="width:80px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
 								   		</td>
 								   		</tr>
 								   		</table>
@@ -422,7 +424,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								    		<label style="position: relative; left: 6px;">Fecha de ingreso</label>
 								   		</td>
 								   		<td>	
-								    		<input class="input" id="fechaIngresoFormularioInput" style="width:151px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; right: 3px; box-shadow: 2px 2px 5px #999; "/>
+								    		<input type="date"  id="fechaIngresoFormularioInput" style="width:151px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; right: 3px; box-shadow: 2px 2px 5px #999; "/>
 								   		</td>
 								   		</tr>
 								   		<tr>
@@ -464,7 +466,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								    		<label style="position: relative; padding-left: 6px;">Fecha de baja</label>
 								   		</td>
 								   		<td>	
-								    		<input class="input" id="fechaBajaFormularioInput" style="width:151px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; right: 3px; box-shadow: 2px 2px 5px #999;"/>
+								    		<input type="date" id="fechaBajaFormularioInput" style="width:151px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; right: 3px; box-shadow: 2px 2px 5px #999;"/>
 								   		</td>
 								    </tr>
 								    </table>

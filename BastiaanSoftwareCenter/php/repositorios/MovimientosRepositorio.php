@@ -51,25 +51,42 @@ include "../clases/Resultado.php";
         $resultado = "";
         
         $consulta = " INSERT INTO BSTNTRN.BTMPERSONAL "
-            . " BTMPERSONALIDN,  "
+            . " (BTMPERSONALIDN,  "
+            . " SIOUSUARIOID,  "
             . " BTMPERSONALRECID, "
+            . " BTRECESONOMC, "
             . " BTMPERSONALFINI, "
             . " BTMPERSONALHINI, "
-            . " BTMPERSONALHFIN, "
             . " BTMPERSONALFFIN, "
+            . " BTMPERSONALHFIN, "
             . " BTMPERSONALDUR, "
-            . " BTMPERSONALDURS, "
-            . " BTMPERSONALFECHA) "
-            . " VALUE(?, ?, ?, ?, ?, ?, ?, ?)";
+            . " BTMPERSONALDURS) "
+            . " VALUE(?,?,?,?,?,?,?,?,?,?)";
                  if($sentencia = $this->conexion->prepare($consulta))
                             {
-                                if( $sentencia->bind_param("ssssssss",$movimiento->id,
-                                    $movimiento->agenteId,
-                                    $movimiento->recesoId,
+                                if( $sentencia->bind_param("ssssssssss",
+                                    $movimiento->id,
+                                    $movimiento->recedoId,
+                                    $movimiento->recesoC,
+                                    $movimiento->agente,
                                     $movimiento->fInicial,
                                     $movimiento->hInicial,
                                     $movimiento->fFinal,
-                                    $movimiento->fPersonal))
+                                    $movimiento->hFinal,
+                                    $movimiento->dPersonal,
+                                    $movimiento->dsPersonal))
+                                    /*'id' => utf8_encode($id),
+                                     'agenteId' =>  utf8_encode($agenteId),
+                                     'agente' =>  utf8_encode($agente),
+                                     'recesoC' =>  utf8_encode($recesoC),
+                                     'recesoId' => utf8_encode($recesoId),
+                                     'fInicial' => utf8_encode($fInicial),
+                                     'hInicial' => utf8_encode($hInicial),
+                                     'hFinal' => utf8_encode($hFinal),
+                                     'fFinal' => utf8_encode($fFinal),
+                                     'dPersonal' => utf8_encode($dPersonal),
+                                     'dsPersonal' => utf8_encode($dsPersonal),
+                                     'fPersonal' => utf8_encode($fPersonal)*/
                                   {
                                     if(!$sentencia->execute())
                                         $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;
@@ -131,6 +148,7 @@ include "../clases/Resultado.php";
                                                $movimiento->dsPersonal,
                                                $movimiento->fPersonal,
                                                $movimiento->id))
+                                               
                      {
                       if($sentencia->execute()){
                                                $resultado->valor=true;
@@ -151,7 +169,7 @@ include "../clases/Resultado.php";
         $resultado = new Resultado();
         $movimientos = array();     
        
-            $consulta = " SELECT BTMPERSONALIDN id, SIOUSUARIONCOMPLETO agenteId, B.SIOUSUARIOID agente ,  BTCRECESONOMC recesoC, BTMPERSONALRECID recesoId,  DATE_FORMAT(BTMPERSONALFINI,'%d/%m/%Y') fInicial ,BTMPERSONALHINI hInicial, BTMPERSONALHFIN hFinal, DATE_FORMAT(BTMPERSONALFFIN,'%d/%m/%Y') fFinal, BTMPERSONALDUR dPersonal, BTMPERSONALDURS dsPersonal,  BTMPERSONALFECHA fPersonal".
+            $consulta = " SELECT BTMPERSONALIDN id, SIOUSUARIONCOMPLETO agenteId, B.SIOUSUARIOID agente ,  BTCRECESONOMC recesoC, BTMPERSONALRECID recesoId,  DATE_FORMAT(BTMPERSONALFINI,'%d/%m/%Y') fInicial ,BTMPERSONALHINI hInicial, BTMPERSONALHFIN hFinal, DATE_FORMAT(BTMPERSONALFFIN,'%d/%m/%Y') fFinal, BTMPERSONALDUR dPersonal, FORMAT(BTMPERSONALDURS, 3) dsPersonal,  BTMPERSONALFECHA fPersonal".
                         " FROM BSTNTRN.BTMPERSONAL A".
                         " INNER JOIN BSTNTRN.SIOUSUARIO B ON A.SIOUSUARIOID = B.SIOUSUARIOID " .
                         " WHERE BTMPERSONALIDN  like CONCAT('%',?,'%') ".

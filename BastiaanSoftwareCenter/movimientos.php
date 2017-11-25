@@ -167,6 +167,17 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								 <div style="width: 80%; display: block; height: 100%;  padding-top: 10px; padding-left: 34px;">								 	
 								   
 								   <table WIDHT=35%; HEIGHT=36%; CELLPADDING=0; cellspacing="10" style="padding-top: 12px; padding-left: 1%; position:relative;display:inline-block; border: #ff6600 1px solid;">										 		
+								    
+								    <tr>
+								    <td> 
+								  
+								   	  	    <label style="position: relative; left: 3px;">Id</label>
+								   	  	    </td>
+								   	  	    <td>
+								     		<input class="input" id="idFormularioInput" descripcion="agente" type="text" maxlength="20"  style="width:100%; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 3px; box-shadow: 2px 2px 5px #999;"/>
+								        	</td>
+								    </tr>
+								    
 								    <tr>
 								<td> 
 								  
