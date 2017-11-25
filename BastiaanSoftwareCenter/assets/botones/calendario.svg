@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<svg width="22" height="17" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with SVG-edit - http://svg-edit.googlecode.com/ -->
+ <metadata id="metadata30">image/svg+xml</metadata>
+ <defs>
+  <linearGradient id="svg_3" x1="0.488282" y1="0.429688" x2="0.488282" y2="0.679688">
+   <stop offset="0" stop-color="#b2d8ff"/>
+   <stop offset="1" stop-color="#6699cc"/>
+  </linearGradient>
+  <linearGradient y2="0.999729" x2="0.473471" y1="0" x1="0.501656" id="svg_9" gradientTransform="matrix(0.998038, 0, 0, 1.00197, 0, -0.380228)">
+   <stop stop-color="#ffffff" offset="0" id="stop7"/>
+   <stop stop-color="#d7ffff" offset="1" id="stop9"/>
+  </linearGradient>
+  <linearGradient id="svg_17" x1="0" y1="0" x2="0.484375" y2="0.546875">
+   <stop offset="0" stop-color="#ffffff"/>
+   <stop offset="1" stop-color="#ffffff" stop-opacity="0.02"/>
+  </linearGradient>
+  <linearGradient y2="0.546875" x2="0.519531" y1="0.03125" x1="0.027344" id="svg_6">
+   <stop stop-color="#4f4d4d" offset="0"/>
+   <stop stop-color="#b2b2b2" offset="1"/>
+  </linearGradient>
+ </defs>
+ <g id="g21">
+  <title>Layer 1</title>
+  <rect fill-opacity="0.84" fill="url(#svg_6)" stroke="#ff0000" stroke-width="0" x="6.049928" y="1.099779" width="15.349987" height="15.149739" id="svg_19"/>
+  <rect fill="url(#svg_9)" stroke="#525254" x="5.449731" y="4.450099" width="13.049752" height="9.100752" id="svg_2" fill-opacity="0.99"/>
+  <rect fill="url(#svg_3)" stroke="#525254" stroke-width="1.00454" x="5.466072" y="0.516386" width="13.017288" height="4.999884" id="svg_5"/>
+  <line id="svg_4" fill="none" stroke="#525254" x1="11.966668" y1="5.250667" x2="11.966668" y2="13.750005"/>
+  <line fill="none" stroke="#525254" x1="15.183335" y1="5.434032" x2="15.183335" y2="13.732725" id="svg_11"/>
+  <line fill="none" stroke="#525254" x1="8.583335" y1="5.600648" x2="8.583335" y2="13.850051" id="svg_12"/>
+  <line fill="none" stroke="#525254" x1="5.700075" y1="8.367467" x2="18.4506" y2="8.313867" id="svg_18"/>
+  <line fill="none" stroke="#525254" x1="5.533761" y1="11.083975" x2="18.483747" y2="11.233206" id="svg_13"/>
+  <rect fill="none" stroke="#ff0000" x="8.633275" y="8.350021" width="3.316744" height="2.766504" id="svg_14"/>
+  <rect fill="url(#svg_17)" stroke="#ff0000" stroke-width="0" x="5.033544" y="0.116848" width="13.833446" height="13.533327" id="svg_15" fill-opacity="0.44"/>
+ </g>
+</svg>

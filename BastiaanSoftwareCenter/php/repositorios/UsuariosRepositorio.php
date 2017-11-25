@@ -241,7 +241,7 @@ class UsuariosRepositorio implements IUsuariosRepositorio
         . " SIOUSUARIONCOMPLETO nombreCompleto, "
         . " SIOUSUARIOGENEROID idGenero, "
         . " SIOUSUARIONAL nacionalidad, "
-        . " SIOUSUARIOFNAC fechaNacimiento, "
+        . " DATE_FORMAT(SIOUSUARIOFNAC,'%d/%m/%Y') fechaNacimiento, "
         . " SIOUSUARIORFC rfc, "
         . " SIOUSUARIONSS nss, "
         . " SIOUSUARIOCURP curp, "
@@ -336,6 +336,55 @@ if($sentencia = $this->conexion->prepare($consulta))
  $resultado->mensajeError = "Fall� la preparaci�n: (" . $this->conexion->errno . ") " . $this->conexion->error;
         return $resultado;
     }
+    //prompt
+    public function consultarPorPostal($criteriosPostales)
+    
+    {
+        $resultado = new Resultado();
+        $postales = array();
+        
+        $consulta = " SELECT BTCPOSTALIDN idPostal, BTCPOSTALID nirPostal, BTCPOSTALASENT asentamientoPostal, BTCPOSTALMPIO municipioPostal, BTCPOSTALESTADO estadoPostal, BTCPOSTALCIUDAD ciudadPostal ".
+          " FROM BSTNTRN.BTCPOSTAL "
+           ." WHERE BTCPOSTALIDN like CONCAT ('%',?,'%')"
+           ." AND BTCPOSTALID like CONCAT ('%',?,'%')";
+        if($sentencia = $this->conexion->prepare($consulta))
+        {
+            if($sentencia->bind_param("ss",$criteriosPostales->idPostal,
+                $criteriosPostales->nirPostal))
+            {
+                if($sentencia->execute())
+                {
+                    if ($sentencia->bind_result($idPostal, $nirPostal, $asentamientoPostal, $municipioPostal, $estadoPostal, $ciudadPostal)  )
+                    {
+                        while($row = $sentencia->fetch())
+                        {
+                            $postal = (object) [
+                                'idPostal' => utf8_encode($idPostal),
+                                'nirPostal' =>  utf8_encode($nirPostal),
+                                'asentamientoPostal' => utf8_encode($asentamientoPostal),
+                                'municipioPostal' => utf8_encode($municipioPostal),
+                                'estadoPostal' => utf8_encode($estadoPostal),
+                                'ciudadPostal' => utf8_encode($ciudadPostal)
+                            ];
+                            array_push($postales,$postal);
+                        }
+                        $resultado->valor = $postales; 
+                    }
+                    else
+                        $resultado->mensajeError = "Falló el enlace del resultado.";
+                }
+                else
+                    $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;
+            }
+            else
+                $resultado->mensajeError = "Falló el enlace de parámetros";
+        }
+        else
+            $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
+            
+            
+            return $resultado;
+    }   
     
     public function consultarPorLlaves($llaves)
     {

@@ -81,10 +81,42 @@ class VersionesRepositorio implements IVersionesRepositorio
         return $resultado;
     }
     
+    /* grid2 de criterios*/
+    
+    Public function insertarGrid2(Version $datos)
+    {
+   
+            $consulta = " INSERT INTO BSTNTRN.BTCRITERIO"
+                . "(BTVERSIONID, "
+                . "  BTCAMPOID, "
+                . "  BTCRITERIOPRESENTACION, "
+                . "  BTCRITERIOORDEN, "
+                . "  BTCRITERIOTITULO) "
+                . "  VALUE(?,?,?,?,?) ";          
+             if($sentencia = $this->conexion->prepare($consulta))
+               {
+                 if( $sentencia->bind_param("issss",
+                                            $datos->version,
+                                            $datos->campoId,
+                                            $datos->presentacion,
+                                            $datos->orden,
+                                            $datos->titulo
+                                            ))
+                                                {
+                                                if(!$sentencia->execute())
+                                                    $resultado->mensajeError = "Falla la ejecucion (" . $this->conexion->errno . ") " . $this->conexion->error .$datos->campoId;
+                                                }
+                                            else
+                                                $resultado->mensajeError = "Falla� el enlace de parametros";
+                                         }
+                                        
+        return $resultado;
+    } 
+
     public function eliminar($llaves)
     {
         $resultado = new Resultado();
-        $consulta = " DELETE FROM BSTNTRN.BTVERSION "
+        $consulta = " DELETE FROM BSTNTRN.BTCRITERIO"
                     . "  WHERE BTVERSIONID = ? ";
          if($sentencia = $this->conexion->prepare($consulta))
          {
@@ -253,7 +285,7 @@ class VersionesRepositorio implements IVersionesRepositorio
         $resultado = new Resultado();
         $registros = array();
         
-        $consulta =   " SELECT BTCRITERIOID id, CR.BTCAMPOID campoId, BTCRITERIOORDEN orden, BTCRITERIOPRESENTACION presentacion, BTCRITERIOTITULO titulo, BTTABLAID tablaId, BTCAMPOTIPO tipoDato, BTCAMPOTAMANO tamano " .
+        $consulta =   " SELECT BTCRITERIOID id,CR.BTCAMPOID campoId, BTCRITERIOORDEN orden, BTCRITERIOPRESENTACION presentacion, BTCRITERIOTITULO titulo, BTTABLAID tablaId, BTCAMPOTIPO tipoDato, BTCAMPOTAMANO tamano " .
                         "FROM BSTNTRN.BTCRITERIO CR ".
                         "   INNER JOIN BSTNTRN.BTCAMPO C ON CR.BTCAMPOID = C.BTCAMPOID " .
                         "WHERE BTVERSIONID = ? ".
@@ -348,7 +380,6 @@ class VersionesRepositorio implements IVersionesRepositorio
             $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;     
        return $resultado;
     }
-
 
     
 }

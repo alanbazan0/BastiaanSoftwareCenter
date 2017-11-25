@@ -1,4 +1,4 @@
-class VersionesPresentador
+class MovimientosPresentador
 {
 	 constructor(vista)
 	 {
@@ -7,10 +7,10 @@ class VersionesPresentador
 	 
 	 consultar()
 	 {
-		 var repositorio = new VersionesRepositorio(this);		
+		 var repositorio = new MovimientosRepositorio(this);		
 		 repositorio.consultar(this,this.consultarResultado,this.vista.criteriosSeleccion);
 	 }
-	 
+
 	 consultarResultado(resultado)
 	 {
 		if(resultado.mensajeError=="")
@@ -18,39 +18,42 @@ class VersionesPresentador
 		else
 			this.vista.mostrarMensaje("Error",resultado.mensajeError);
 	 }
-	 /* grid3*/ 
-	 consultarPorCampo()
-	 {
-		 var repositorio = new VersionesRepositorio(this);		
-		 repositorio.consultarPorCampo(this,this.consultarPorCampoResultado,this.vista.criteriosCampos);
-	 }
-	 consultarPorCampoResultado(resultado)
-	 {
-		if(resultado.mensajeError=="")
-			this.vista.datosCampos = resultado.valor;
-		else
-			this.vista.mostrarMensaje("Error",resultado.mensajeError);
-	 }
 	
-	 /* grid2 */
-	 consultarPorVersion()
+	 /* usuarios */	 
+	 consultarPorUsuario()
 	 {
-		 var repositorio = new VersionesRepositorio(this);		
-		 repositorio.consultarPorVersion(this,this.consultarPorVersionResultado,this.vista.criteriosVersion);
+		 var repositorio = new MovimientosRepositorio(this);		
+		 repositorio.consultarPorUsuario(this,this.consultarPorUsuarioResultado,this.vista.criteriosUsuarios);
 	 }
-	 
-	 consultarPorVersionResultado(resultado)
+	 consultarPorUsuarioResultado(resultado)
 	 {
 		if(resultado.mensajeError=="")
-			this.vista.datosCriterios = resultado.valor;
+			this.vista.datosUsuarios = resultado.valor;
 		else
 			this.vista.mostrarMensaje("Error",resultado.mensajeError);
 	 }
-	 /* */
+	/* */
+	 
+	 /* recesos*/ 
+	 consultarPorReceso()
+	 {
+		 var repositorio = new MovimientosRepositorio(this);		
+		 repositorio.consultarPorReceso(this,this.consultarPorRecesoResultado,this.vista.criteriosRecesos);
+	 }
+	 consultarPorRecesoResultado(resultado)
+	 {
+		if(resultado.mensajeError=="")
+			this.vista.datosRecesos = resultado.valor;
+		else
+			this.vista.mostrarMensaje("Error",resultado.mensajeError);
+	 }
+
+	 
+	 
 	 insertar()
 	 {
-		 var repositorio = new VersionesRepositorio(this);			 
-		 repositorio.insertar(this,this.insertarResultado,this.vista.version);	
+		 var repositorio = new MovimientosRepositorio(this);			 
+		 repositorio.insertar(this,this.insertarResultado,this.vista.receso);	
 	 }
 	 
 	 insertarResultado(resultado)
@@ -66,31 +69,10 @@ class VersionesPresentador
 			
 	 }	
 	 
-	 /* inserta grid2 */
-	 insertarGrid2()
-	 {
-		 var repositorio = new VersionesRepositorio(this);			 
-		 repositorio.insertarGrid2(this,this.insertarResultado2,this.vista.insertarGrid2);	
-	 }
-	 insertarResultado2(resultado)
-	 {
-		if(resultado.mensajeError=="")
-		{	
-			this.vista.mostrarMensaje("Aviso","La información se guardó IdCriterio: " + resultado.valor);
-			//this.vista.salirFormulario();
-			//this.consultarPorVersion();
-		}
-		else
-			this.vista.mostrarMensaje("Error","Ocurrió un error al guardar el registro. " + resultado.mensajeError);			
-	 }	
-	 
-	 
-	 
-	 
 	 actualizar()
 	 {
-		 var repositorio = new VersionesRepositorio(this);		
-		 repositorio.actualizar(this,this.actualizarResultado,this.vista.version);
+		 var repositorio = new MovimientosRepositorio(this);		
+		 repositorio.actualizar(this,this.actualizarResultado,this.vista.receso);
 	 }
 	 
 	 actualizarResultado(resultado)
@@ -107,7 +89,7 @@ class VersionesPresentador
 	   
 	 consultarPorLlaves()
 	 {
-		 var repositorio = new VersionesRepositorio(this);		
+		 var repositorio = new MovimientosRepositorio(this);		
 		 repositorio.consultarPorLlaves(this,this.consultarPorLlavesResultado,this.vista.llaves);
 	 }
 	 
@@ -115,16 +97,15 @@ class VersionesPresentador
 	 {		
 		 if(resultado.mensajeError=="")
 		 {
-			 this.vista.version = resultado.valor;
+			 this.vista.receso = resultado.valor;
 		 }
 		 else
 			 this.vista.mostrarMensaje("Error","Ocurrió un error al consultar el registro. " + resultado.mensajeError);
 	 }
-	 	 
-
+	 
 	 eliminar()
 	 {
-		 var repositorio = new VersionesRepositorio(this);		
+		 var repositorio = new MovimientosRepositorio(this);		
 		 repositorio.eliminar(this,this.eliminarResultado,this.vista.llaves);		
 	 }
 	 
@@ -132,8 +113,8 @@ class VersionesPresentador
 	 {
 		if(resultado.mensajeError=="")
 		{
-			//this.vista.mostrarMensaje("Aviso", "El registro se eliminó correctamente.");
-			//this.consultar();
+			this.vista.mostrarMensaje("Aviso", "El registro se eliminó correctamente.");
+			this.consultar();
 		}
 		else
 			this.vista.mostrarMensaje("Error","Ocurrió un error al eliminar el registro. " + resultado.mensajeError);		

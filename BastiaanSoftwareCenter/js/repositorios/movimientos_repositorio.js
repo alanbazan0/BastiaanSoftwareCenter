@@ -1,22 +1,21 @@
-class UsuariosRepositorio 
+class MovimientosRepositorio 
 {	
 	constructor()
 	{
 		
 	}
-	
-	insertar(contexto,functionRetorno, usuario)
+	insertar(contexto,functionRetorno, movimiento)
 	{		
 		this.contexto = contexto;
 		this.functionRetorno = functionRetorno;
 		
 		var parametros;
 		parametros = "accion=insertar";
-		parametros += "&usuario=" + encodeURIComponent(JSON.stringify(usuario));	
+		parametros += "&movimiento=" + encodeURIComponent(JSON.stringify(movimiento));	
 		
 		var contextHandler = new AjaxContextHandler();
 		var host = window.location.origin + "/BastiaanSoftwareCenter";	
-		var ai = new Ajaxv2(host +"/php/repositorios/Usuarios.php", this, this.insertarResultado, "POST", parametros, contextHandler);		
+		var ai = new Ajaxv2(host +"/php/repositorios/Movimientos.php", this, this.insertarResultado, "POST", parametros, contextHandler);		
 		contextHandler.AddAjaxv2Object(ai); 		
 		ai.GetPost(true);
 	}
@@ -27,6 +26,31 @@ class UsuariosRepositorio
 		this.functionRetorno.call(this.contexto,JSON.parse(resultado));
 	}
 	
+	
+	/* Usuarios */ 
+	consultarPorUsuario(contexto,functionRetorno, criteriosUsuarios)
+	{		
+		
+		this.contexto = contexto;
+		this.functionRetorno = functionRetorno;
+		var parametros;
+		parametros = "accion=consultarPorUsuario";
+        parametros += "&criteriosUsuarios=" +  encodeURIComponent(JSON.stringify(criteriosUsuarios));
+		var contextHandler = new AjaxContextHandler();
+		var host = window.location.origin + "/BastiaanSoftwareCenter";	
+		var ai = new Ajaxv2(host +"/php/repositorios/Movimientos.php", this, this.consultarPorUsuarioResultado, "POST", parametros, contextHandler);		
+		contextHandler.AddAjaxv2Object(ai); 		
+		ai.GetPost(true);
+	}
+	consultarPorUsuarioResultado(resultado)
+	{
+		var datosUsuarios = JSON.parse(resultado);
+		this.functionRetorno.call(this.contexto,JSON.parse(resultado));
+	}	
+ /*  */
+	
+	
+
 	consultar(contexto,functionRetorno, criteriosSeleccion)
 	{		
 		this.contexto = contexto;
@@ -39,7 +63,7 @@ class UsuariosRepositorio
 		
 		var contextHandler = new AjaxContextHandler();
 		var host = window.location.origin + "/BastiaanSoftwareCenter";	
-		var ai = new Ajaxv2(host +"/php/repositorios/Usuarios.php", this, this.consultarResultado, "POST", parametros, contextHandler);		
+		var ai = new Ajaxv2(host +"/php/repositorios/Movimientos.php", this, this.consultarResultado, "POST", parametros, contextHandler);		
 		contextHandler.AddAjaxv2Object(ai); 		
 		ai.GetPost(true);
 	}
@@ -48,20 +72,39 @@ class UsuariosRepositorio
 	{
 		var datos = JSON.parse(resultado);
 		this.functionRetorno.call(this.contexto,JSON.parse(resultado));
+	}
+	
+	
+	consultarPorReceso(contexto,functionRetorno, criteriosRecesos)
+	{		
+		this.contexto = contexto;
+		this.functionRetorno = functionRetorno;
+		var parametros;
+		parametros = "accion=consultarPorReceso";
+		var contextHandler = new AjaxContextHandler();
+		var host = window.location.origin + "/BastiaanSoftwareCenter";	
+		var ai = new Ajaxv2(host +"/php/repositorios/Movimientos.php", this, this.consultarPorRecesoResultado, "POST", parametros, contextHandler);		
+		contextHandler.AddAjaxv2Object(ai); 		
+		ai.GetPost(true);
+	}
+	consultarPorRecesoResultado(resultado)
+	{
+		var datos = JSON.parse(resultado);
+		this.functionRetorno.call(this.contexto,JSON.parse(resultado));
 	}	
 	
-	actualizar(contexto,functionRetorno, usuario)
+	actualizar(contexto,functionRetorno, movimiento)
 	{		
 		this.contexto = contexto;
 		this.functionRetorno = functionRetorno;
 		
 		var parametros;
 		parametros = "accion=actualizar";
-		parametros += "&usuario=" + encodeURIComponent(JSON.stringify(usuario));	
+		parametros += "&movimiento=" + encodeURIComponent(JSON.stringify(movimiento));	
 		
 		var contextHandler = new AjaxContextHandler();
 		var host = window.location.origin + "/BastiaanSoftwareCenter";	
-		var ai = new Ajaxv2(host +"/php/repositorios/Usuarios.php", this, this.actualizarResultado, "POST", parametros, contextHandler);		
+		var ai = new Ajaxv2(host +"/php/repositorios/Movimientos.php", this, this.actualizarResultado, "POST", parametros, contextHandler);		
 		contextHandler.AddAjaxv2Object(ai); 		
 		ai.GetPost(true);
 	}
@@ -72,7 +115,8 @@ class UsuariosRepositorio
 		this.functionRetorno.call(this.contexto,JSON.parse(resultado));
 	}
 	
-
+	
+	
 	consultarPorLlaves(contexto,functionRetorno, llaves)
 	{		
 		this.contexto = contexto;
@@ -83,35 +127,18 @@ class UsuariosRepositorio
 		parametros += "&llaves=" + encodeURIComponent(JSON.stringify(llaves));
 		var contextHandler = new AjaxContextHandler();
 		var host = window.location.origin + "/BastiaanSoftwareCenter";	
-		var ai = new Ajaxv2(host +"/php/repositorios/Usuarios.php", this, this.consultarPorLlavesResultado, "POST", parametros, contextHandler);		
+		var ai = new Ajaxv2(host +"/php/repositorios/Movimientos.php", this, this.consultarPorLlavesResultado, "POST", parametros, contextHandler);		
 		contextHandler.AddAjaxv2Object(ai); 		
 		ai.GetPost(true);
 	}
-	/* Postales */ 
-	consultarPorPostal(contexto,functionRetorno, criteriosPostales)
-	{		
-		this.contexto = contexto;
-		this.functionRetorno = functionRetorno;
-		var parametros;
-		parametros = "accion=consultarPorPostal";
-		parametros += "&criteriosPostales=" +  encodeURIComponent(JSON.stringify(criteriosPostales));
-		var contextHandler = new AjaxContextHandler();
-		var host = window.location.origin + "/BastiaanSoftwareCenter";	
-		var ai = new Ajaxv2(host +"/php/repositorios/Usuarios.php", this, this.consultarPorPostalResultado, "POST", parametros, contextHandler);		
-		contextHandler.AddAjaxv2Object(ai); 		
-		ai.GetPost(true);
-	}
-	consultarPorPostalResultado(resultado)
-	{
-		var datosPostales = JSON.parse(resultado);
-		this.functionRetorno.call(this.contexto,JSON.parse(resultado));
-	}	
- /*  */
+	
 	consultarPorLlavesResultado(resultado)
 	{
 		var datos = JSON.parse(resultado);
 		this.functionRetorno.call(this.contexto,JSON.parse(resultado));
 	}
+	
+	
 	eliminar(contexto,functionRetorno,llaves)
 	{				
 		this.contexto = contexto;
@@ -122,16 +149,15 @@ class UsuariosRepositorio
 		parametros += "&llaves=" + encodeURIComponent(JSON.stringify(llaves));
 		var contextHandler = new AjaxContextHandler();
 		var host = window.location.origin + "/BastiaanSoftwareCenter";	
-		var ai = new Ajaxv2(host +"/php/repositorios/Usuarios.php", this, this.eliminarResultado, "POST", parametros, contextHandler);		
+		var ai = new Ajaxv2(host +"/php/repositorios/Movimientos.php", this, this.eliminarResultado, "POST", parametros, contextHandler);		
 		contextHandler.AddAjaxv2Object(ai); 		
 		ai.GetPost(true);
 	}
-	
+
 	eliminarResultado(resultado)
 	{
 		var datos = JSON.parse(resultado);
 		this.functionRetorno.call(this.contexto,JSON.parse(resultado));
 	}
-	
 
 }

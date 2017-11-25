@@ -4,8 +4,8 @@
 Combo = function(id) {
 	this._id = id;
 	this._viewport = id;
-	this._dataField = "id";
-	this._labelField = "dsc";
+	this._dataField = "recesoId";
+	this._labelField = "rCorto";
 	this._dataProvider = [];
 	this._selectedItem = null;
 	this._selectedIndex = null;

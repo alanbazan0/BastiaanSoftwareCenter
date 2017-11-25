@@ -12,7 +12,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 
 ?>
 <html> 
-<title>Catalogo de clientes</title>
+<title>Catalogo recesos</title>
 <head>	
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<script language="JavaScript" type="text/javascript" src="js/librerias/jquery-1.6.2.min.js"></script>
@@ -51,15 +51,15 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
     <link rel="shortcut icon" href="css/imagenes/faviSIO.png">
     
    
-    <script language="JavaScript" type="text/JavaScript" src="js/repositorios/clientes_repositorio.js"></script>
-    <script language="JavaScript" type="text/JavaScript" src="js/presentadores/clientes_presentador.js"></script>
-	<script language="JavaScript" type="text/JavaScript" src="js/vistas/clientes_vista.js"></script>
+    <script language="JavaScript" type="text/JavaScript" src="js/repositorios/recesos_repositorio.js"></script>
+    <script language="JavaScript" type="text/JavaScript" src="js/presentadores/recesos_presentador.js"></script>
+	<script language="JavaScript" type="text/JavaScript" src="js/vistas/recesos_vista.js"></script>
 
     
 </head>
 
 <body  bgcolor="#e8e8e8" onLoad="vista.onLoad()" style="overflow: auto;height: 89%;">
-<div id="dialogo" title="Di�logo" style="display:none;">
+<div id="dialogo" title="Diï¿½logo" style="display:none;">
 </div>
 <form id="form">
 	<div id="principalDiv">
@@ -90,7 +90,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								</tr>
                              </table>   
 						</div>
-						<div id="titulo" style="margin-left:280px;" class="tituloIEC">Catálogo de clientes</div>
+						<div id="titulo" style="margin-left:280px;" class="tituloIEC">Catalogo recesos</div>
 					</div>
 				</div>
             </div>        
@@ -102,19 +102,12 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 						<div>
 							<table style="position:relative;left:40px; text-align:left; margin-top:10px; margin-bottom:10px;">
 								<tr>
-									<td style="padding:6px 0px 4px 10px;">		<label  style="font-family: Verdana; font-size: 10px;"> Nombre completo</label></td>									
-									<td style="padding:6px 0px 4px 10px;">		<input  id='nombreCompletoCriterioInput' type='text' style='height: 20px; width:200px;'/></input></td>
-									<td style="padding:6px 0px 4px 10px;">		<label  style="font-family: Verdana; font-size: 10px;">RFC</label></td>
-									<td style="padding:6px 0px 4px 10px;">		<input  id='rfcCriterioInput' type='text' style='height: 20px; width:200px;'/></input></td>	
-									<td style="padding:6px 0px 4px 10px;">		<label  style="font-family: Verdana; font-size: 10px;">CURP</label></td>
-									<td style="padding:6px 0px 4px 10px;">		<input  id='curpCriterioInput' type='text' style='height: 20px; width:200px;'/></input></td>		
+								    <td style="padding:6px 0px 4px 10px;">		<label  style="font-family: Verdana; font-size: 10px;">Id Receso</label></td>									
+									<td style="padding:6px 0px 4px 10px;">		<input  id='idRecesoCriterioInput' type='text' style='height: 20px; width:200px;'/></input></td>
 								</tr>
-								
 							</table>
 						</div>
 					</div>
-					
-			
                 </div>
 		  </div>
 		  
@@ -146,16 +139,16 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 <div id="formularioDiv" style="display:none ;height: 90%;">
 		<div>
 			
-<!--  barra de men� para botones de la pantalla
+<!--  barra de menï¿½ para botones de la pantalla
  -->
 			<div id="menuPrincipal"  align="right" class="contieneCriteriosAribaBtn" style="background-color: #6b6b6b;    height: 56px; " > 
 				<img class='logoBAS' style='float: left;' id='logoFRM' src='assets/pantalla/logoTipo.png'  />
-				<span id="txtTitulo" style="float:left;margin-top: 20px;margin-left: 15px;color: #FFFFFF;float: left;font-family: Verdana;font-size: 11px;font-weight: bold;">Catálogo de clientes</span>
+				<span id="txtTitulo" style="float:left;margin-top: 20px;margin-left: 15px;color: #FFFFFF;float: left;font-family: Verdana;font-size: 11px;font-weight: bold;">Recesos</span>
 				<img style="padding: 2px;" class='imgTipoBoton' id='btnGuardarFormulario' src='assets/botones/imgGuardar.png' onclick='vista.btnGuardarFormulario_onClick();' title='Guardar' />
 				<img style="padding: 2px;" class='imgTipoBoton' id='btnSalirFormulario' src='assets/botones/btnSalir.png' onClick="vista.btnSalirFormulario_onClick();" title='Salir'  />
 			</div>
 <!--
-  barra de men�...fin
+  barra de menï¿½...fin
  -->
 			
 <!--barra principal -->
@@ -165,128 +158,55 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 					 		<div class="explicacionFRM" >
 								<div id="filtros " class="contenedorIEC" style="overflow: auto; position: relative; width: 100%; display: block;">
 								 <div style="width: 80%; display: block; height: 100%;  padding-top: 10px; padding-left: 34px;">								 	
-								   <table WIDHT=25%; HEIGHT=23%;  CELLPADDING=0; cellspacing="10" style="padding-top: 12px; padding-left: 1%; position:relative;display:inline-block; border: #ff6600 1px solid;">
-								        <td>
-								   		<label style="position: relative; left: 100px;">Datos del usuario</label></tr>
-								   		</td>	
-								        <tr>
+								   
+								   <table WIDHT=25%; HEIGHT=23%;  CELLPADDING=0; cellspacing="10" style="padding-top: 12px; padding-left: 1%; position:relative;display:inline-block; border: #ff6600 1px solid;">										 		
+								    <tr>
+								       <td>
+								   	     <label style="position: relative; left: 3px;">ID Receso</label>
+								   	  </td>
+								   	   <td>
+								     		<input class="input" id="idFormularioInput" type="text" maxlength="20" value="" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
+								   		</td>
 								    	<td >
-								     		 <label style=" width:130px; position: relative; left: 3px; ">Id de cliente</label>
+								     		<label style=" width:130px; position: relative; left: 3px; ">Descripción Receso</label>
 								   		</td>
 								   		<td >
-								     		<input class="input" id="idFormularioInput" type="text" maxlength="20" value="" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px;" disabled />
+								     		<input class="input" id="rDescripcionFormularioInput" type="text" maxlength="20" value="" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; right:4px; box-shadow: 2px 2px 5px #999;"/>
 								   		</td>
-								   		</tr>
-								   		<tr>
+								   	</tr>
+								 	</tr>
+								   	<tr>
+								   	</tr>
+								   	<tr>
 								    	<td >
-								     		<label style="position: relative; left: 3px; "> Primer nombre</label>
+								     		<label style="position: relative; left: 3px; ">Nombre Corto</label>
 								   		</td>
 								   		<td >
-								     		<input class="input" id="primerNombreFormularioInput" descripcion="Primer nombre" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
+								   	 		<input class="input" id="rCortoFormularioInput" descripcion="Primer nombre" style="width:200%; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
+								   		</td>
+								   </tr>	
+								   		<td>						    
+								    		<label style="position: relative; left: 3px; ">Nombre Largo</label>
 								   		</td>
 								   		<td>						    
-								    		<label style="position: relative; left: 3px; ">Segundo nombre</label>
+								    		<input class="input" id="rLargoFormularioInput" style="width:200%; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
+								   		</td>
+								   	</tr>	
+								   	<tr>
+								   		<td>						    
+								    		<label  style="position: relative; left: 3px;">Tiempo de Recesos</label>
 								   		</td>
 								   		<td>						    
-								    		<input class="input" id="segundoNombreFormularioInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
+								    		<input class="input" id="rTiempoFormularioInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
 								   		</td>
-								  		<td>	
-								    		<label style="position: relative; left: 3px; ">Apellido Paterno</label>
+								   			<td>						    
+								    		<label  style="position: relative; left: 3px;">Maximo de Recesos</label>
 								   		</td>
-								   		<td>	
-								    		<input class="input" id="apellidoPaternoFormularioInput" style="width:155px; font-family:Verdana; font-size:9px; text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
+								   		<td>						    
+								    		<input class="input" id="rRecesosFormularioInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
 								   		</td>
-								   		<td>	
-								    		<label style="position: relative; left: 3px;  ">Apellido Materno</label>
-								   		</td>
-								   		<td>	
-								    		<input class="input" id="apellidoMaternoFormularioInput" style=" width:157px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; right: 3px; box-shadow: 2px 2px 5px #999;"/>
-								   		</td>
-								        </tr>
-								        <tr>
-								        <td>
-    								    	<label style="position: relative; left: 3%; ">Correo electronico</label>
-    								    </td>
-    								     <td>
-    								    	<input class="input" id="correoElectronicoFormularioInput" style="width:250%; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
-    							  	    </td>
-								        </tr>
-								        </table>
-								        <table WIDHT=25%; HEIGHT=10%;  CELLPADDING=0; cellspacing="10" style="top: 10px; padding-left: 1%; position:relative;display:inline-block; border: #ff6600 1px solid;"> 
-								   		<tr>
-								   		<td>
-								   		<label style="position: relative; left: 80px;">Datos de identificación del usuario</label></tr>
-								   		</td>
-								  		<td>	
-								    		<label style="position: relative; left:3px">RFC</label>
-								   		</td>
-								   		<td>	
-								    		<input class="input" id="rfcFormularioInput" style="width:228px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; right: 60%; box-shadow: 2px 2px 5px #999;"/>
-								   		</td>
-								   		<td>	
-								    		<label style="position: relative; right:125px;">NSS</label>
-								   		</td>
-								   		<td>	
-								    		<input class="input" id="nssFormularioInput" style="width:250px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; right: 50%; box-shadow: 2px 2px 5px #999;"/>
-								   		</td>
-								   		<td>	
-								    		<label style="position: relative; right:100px;">CURP</label>
-								   		</td>
-								   		<td>	
-								    		<input class="input" id="curpFormularioInput" style=";width:245px; font-family:Verdana; font-size:9px; text-align:left; color:#006699;position: relative; right: 40%; box-shadow: 2px 2px 5px #999;"/>
-								   		</td>
-								     	</tr>
-								    	</table>
-								   	<table WIDHT=25%; HEIGHT=20%;  CELLPADDING=0; cellspacing="10" style="top: 20px; padding-left: 1%; position:relative;display:inline-block;  border:#ff6600 1px solid ">								  		
-								    	<td>
-								   		<label style="position: relative; left: 130px;">Dirección del usuario</label></tr>
-								   		</td>
-								   		<tr>
-								   		<td>
-								   			<label style="position: relative; left: 3px; ">Calle</label>
-								   		</td>
-								   		<td>
-								   			<input class="input" id="calleFormularioInput" style="width:130px; font-family:Verdana; font-size:9px; text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
-								   		</td>	
-								   		<td>		
-								    		<label style="position: relative; left: 3px;">Numero exterior</label>
-								   		</td>
-								   		<td>	
-								    		<input class="input" id="numeroExteriorFormularioInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
-								   		</td>
-								   		<td>
-								   			 <label style="position: relative; left: 3px; ">Numero interior</label>
-								   		</td>
-								   		<td>
-								   			 <input class="input" id="numeroInteriorFormularioInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
-								   		</td>	
-								   		<td>
-								   			<label style="position: relative; left: 3px; ">Colonia</label>
-								   		</td>
-								   		<td>
-								   			<input class="input" id="coloniaFormularioInput" style=" width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; right: 3px; box-shadow: 2px 2px 5px #999;"/>
-								   		</td>
-								   		<tr>
-								    	<td>	
-								    	<label style="position: relative; left: 3px;">Codigo Postal</label>
-								   		</td>
-								   		<td>	
-								    		<input class="input" id="codigoPostalFormularioInput" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
-								   		</td>
-    								    <td>
-    								    	<label style="position: relative; left: 3px; ">Estado</label>
-    								    </td>
-    								    <td>
-    								    	<input class="input" id="estadoFormularioInput" style=" width:230px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
-    								    </td>
-    								    <td>
-    								    	<label style="position: relative; left: 3px; ">Pais</label>
-    								    </td>
-    								    <td>
-    								    	<input class="input" id="paisFormularioInput" style=" width:80px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
-    								    </td>
-    								    </tr>
-    								    </table>
+								   	</tr>
+								   	</table>	     	
 									</div>
 									
 								 </div>
@@ -307,14 +227,6 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 		<div class='ventana' id='PromptCriterioSeleccion' style='display:none; z-index:9001;'></div>    
 </div>
 
-    
-    
-    
-    
-    
-    
-    
-    
 </form>
 </body>
 </html>

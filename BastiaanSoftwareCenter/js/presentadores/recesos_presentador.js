@@ -1,14 +1,13 @@
-class UsuariosPresentador
+class RecesosPresentador
 {
 	 constructor(vista)
 	 {
 		this.vista = vista; 
 	 }
 	 
-	 
 	 consultar()
 	 {
-		 var repositorio = new UsuariosRepositorio(this);		
+		 var repositorio = new RecesosRepositorio(this);		
 		 repositorio.consultar(this,this.consultarResultado,this.vista.criteriosSeleccion);
 	 }
 	 
@@ -20,26 +19,13 @@ class UsuariosPresentador
 			this.vista.mostrarMensaje("Error",resultado.mensajeError);
 	 }
 	 
+	
 	 insertar()
 	 {
-		 var repositorio = new UsuariosRepositorio(this);			 
-		 repositorio.insertar(this,this.insertarResultado,this.vista.usuario);	
-
+		 var repositorio = new RecesosRepositorio(this);			 
+		 repositorio.insertar(this,this.insertarResultado,this.vista.receso);	
 	 }
-	 /* postales */	 
-	 consultarPorPostal()
-	 {
-		 var repositorio = new UsuariosRepositorio(this);		
-		 repositorio.consultarPorPostal(this,this.consultarPorPostalResultado,this.vista.criteriosPostales);
-	 }
-	 consultarPorPostalResultado(resultado)
-	 {
-		if(resultado.mensajeError=="")
-			this.vista.datosPostales = resultado.valor; 
-		    else
-			this.vista.mostrarMensaje("Error",resultado.mensajeError);
-	 }
-	/* */
+	 
 	 insertarResultado(resultado)
 	 {
 		if(resultado.mensajeError=="")
@@ -55,8 +41,8 @@ class UsuariosPresentador
 	 
 	 actualizar()
 	 {
-		 var repositorio = new UsuariosRepositorio(this);		
-		 repositorio.actualizar(this,this.actualizarResultado,this.vista.usuario);
+		 var repositorio = new RecesosRepositorio(this);		
+		 repositorio.actualizar(this,this.actualizarResultado,this.vista.receso);
 	 }
 	 
 	 actualizarResultado(resultado)
@@ -73,7 +59,7 @@ class UsuariosPresentador
 	   
 	 consultarPorLlaves()
 	 {
-		 var repositorio = new UsuariosRepositorio(this);		
+		 var repositorio = new RecesosRepositorio(this);		
 		 repositorio.consultarPorLlaves(this,this.consultarPorLlavesResultado,this.vista.llaves);
 	 }
 	 
@@ -81,7 +67,7 @@ class UsuariosPresentador
 	 {		
 		 if(resultado.mensajeError=="")
 		 {
-			 this.vista.usuario = resultado.valor;
+			 this.vista.receso = resultado.valor;
 		 }
 		 else
 			 this.vista.mostrarMensaje("Error","Ocurrió un error al consultar el registro. " + resultado.mensajeError);
@@ -89,7 +75,7 @@ class UsuariosPresentador
 	 
 	 eliminar()
 	 {
-		 var repositorio = new UsuariosRepositorio(this);		
+		 var repositorio = new RecesosRepositorio(this);		
 		 repositorio.eliminar(this,this.eliminarResultado,this.vista.llaves);		
 	 }
 	 

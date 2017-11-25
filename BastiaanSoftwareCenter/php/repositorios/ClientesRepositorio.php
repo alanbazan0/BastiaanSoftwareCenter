@@ -9,8 +9,9 @@ use php\modelos\Resultado;
 
 include "../interfaces/IClientesRepositorio.php";
 include "../modelos/Cliente.php";
-include "../clases/Resultado.php";
+//include "../clases/Resultado.php";
 include "RepositorioBase.php";
+require_once("../clases/Resultado.php");
 
 class ClientesRepositorio extends RepositorioBase implements IClientesRepositorio
 {
@@ -337,12 +338,14 @@ class ClientesRepositorio extends RepositorioBase implements IClientesRepositori
        return $resultado;
     }
 
-    public function consultarDinamicamente($filtros)
+    public function consultarDinamicamente($filtros, $campos)
     {
         $resultado = new Resultado();
-        $clientes = array();
+        $clientes = array();        
         
-        $consulta =   " SELECT "
+        $consulta = $this->select($campos);
+        $consulta .= " FROM BSTNTRN.BTCLIENTE ";
+     /*   $consulta =   " SELECT "
                      . " BTCLIENTENUMERO id, "
                         . " BTCLIENTEPNOMBRE primerNombre, "
                         . " BTCLIENTESNOMBRE segundoNombre, "
@@ -359,33 +362,22 @@ class ClientesRepositorio extends RepositorioBase implements IClientesRepositori
                         . " BTCLIENTEESTADO estado, "
                         . " BTCLIENTEPAIS pais, "
                         . " BTCLIENTECORRELEC correoElectronico "
-                        . " FROM BSTNTRN.BTCLIENTE  ";
+                        . " FROM BSTNTRN.BTCLIENTE  ";*/
         
         $consulta .= $this->where($filtros);               
         
      
         if($sentencia = $this->conexion->prepare($consulta))
-        {          
-            $bind = false;
-            if(count($filtros)>0)
-            {
-                $types = $this->types($filtros);             
-                $bind_names[] = $types;
-                for ($i=0; $i<count($filtros);$i++)
-                {
-                    $bind_name = 'bind' . $i;
-                    $$bind_name = $filtros[$i]->valor;
-                    $bind_names[] = &$$bind_name;
-                }                
-                $bind = call_user_func_array(array($sentencia,'bind_param'),$bind_names);
-            }
-            else
-                $bind = true;
-            if($bind)
+        {     
+           if($this->bind_param($sentencia,$filtros))
             {
                 if($sentencia->execute())
                 {
-                    if ($sentencia->bind_result($id, $primerNombre, $segundoNombre, $apellidoPaterno, $apellidoMaterno,  $rfc, $nss, $curp, $codigoPostal, $numeroExterior, $numeroInterior, $calle, $colonia, $estado, $pais,  $correoElectronico )  )
+                    $resultado->valor = $this->get_result($sentencia);
+                    
+                
+                    
+                   /* if ($sentencia->bind_result($id, $primerNombre, $segundoNombre, $apellidoPaterno, $apellidoMaterno,  $rfc, $nss, $curp, $codigoPostal, $numeroExterior, $numeroInterior, $calle, $colonia, $estado, $pais,  $correoElectronico )  )
                     {
                         while($row = $sentencia->fetch())
                         {
@@ -413,6 +405,7 @@ class ClientesRepositorio extends RepositorioBase implements IClientesRepositori
                     }        
                     else
                         $resultado->mensajeError = "Falló el enlace del resultado";
+                        */
                 }
                 else
                     $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;
