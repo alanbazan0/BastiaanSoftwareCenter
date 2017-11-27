@@ -26,7 +26,7 @@ class ClientesTelefonosRepositorio implements IClientesTelefonosRepositorio
     {   
        
         $resultado = new Resultado();
-        $consulta =  "SELECT MAX(IFNULL(BTCLIENTETELNOCTEID,0))+1 AS id FROM BSTNTRN.BTCLIENTETEL";
+        $consulta =  "SELECT MAX(IFNULL(BTCLIENTETELCONSID,0))+1 AS id FROM BSTNTRN.BTCLIENTETEL";
         if($sentencia = $this->conexion->prepare($consulta))
         {        
             if($sentencia->execute())
@@ -59,23 +59,24 @@ class ClientesTelefonosRepositorio implements IClientesTelefonosRepositorio
             $id = $resultado->valor;
             $consulta = " INSERT INTO BSTNTRN.BTCLIENTETEL "
                         . " (BTCLIENTETELNOCTEID, "
-                        //. " BTCLIENTETELCONSID, "
+                        . " BTCLIENTETELCONSID, "
                         . " BTCLIENTETELNIR, "
                         . " BTCLIENTETELSERIE, " 
                         . " BTCLIENTETELNUM, "
                         . " BTCLIENTETELCIA, "
                         . " BTCLIENTETELTTELEFONOID, "
-                        . " BTCLIENTETELNO, "
+                        . " BTCLIENTETELNO) "
                         . " VALUE(?,?,?,?,?,?,?,?) ";
             if($sentencia = $this->conexion->prepare($consulta))
             {
-                if( $sentencia->bind_param("issssss",$id, //$clientetelefono->consecutivo,
-                                                   $clientetelefono->telefonoCliente,
+                if( $sentencia->bind_param("sissssss",$clientetelefono->id,
+                                                   $id,                                                   
                                                    $clientetelefono->nir,
                                                    $clientetelefono->serie,
                                                    $clientetelefono->numeracion,
                                                    $clientetelefono->compania,
-                                                   $clientetelefono->tipoTelefono))
+                                                   $clientetelefono->tipoTelefono,
+                                                   $clientetelefono->telefonoCliente))
                 {
                     if(!$sentencia->execute())                
                         $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;                       
