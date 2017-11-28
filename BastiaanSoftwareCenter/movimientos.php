@@ -40,6 +40,10 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 	<script language="JavaScript" type="text/javascript" src="../GV/prompts/PromptConcepto.js">  </script>
 	<script language="JavaScript" type="text/javascript" src="../GV/prompts/PromptVerficador.js"></script> 
 	-->
+	<!-- reloj -->
+	<script src="//code.jquery.com/jquery.min.js"></script>
+    <script src="js/librerias/reloj/jquery-clock-timepicker.min.js"></script>
+	<!--  -->
 	
 	<link type='text/css' href='js/librerias/Datapickerjs/ui.datepicker.css' rel='stylesheet' />
 	<link type='text/css' href='js/librerias/Datapickerjs/demos.css' rel='stylesheet' />
@@ -53,10 +57,9 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
     <script language="JavaScript" type="text/JavaScript" src="js/repositorios/movimientos_repositorio.js"></script>
     <script language="JavaScript" type="text/JavaScript" src="js/presentadores/movimientos_presentador.js"></script>
 	<script language="JavaScript" type="text/JavaScript" src="js/vistas/movimientos_vista.js"></script>
+	
 
-    
 </head>
-
 <body  bgcolor="#e8e8e8" onLoad="vista.onLoad()" style="overflow: auto;height: 89%;">
 <div id="dialogo" title="Di�logo" style="display:none;">
 </div>
@@ -259,14 +262,14 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								    		<label style="position: relative; left: 3px; ">Hora Inicial</label>
 								   		</td>
 								   		<td>		
-								   			<input type='time' class="input" id="hInicialFormularioInput"   style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
+								   			<input class="time" type="text" value="14:30" id="hInicialFormularioInput"   style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
 								   		</td>
 								   		<td>						    
 								    		<label  style="position: relative; left: 3px;">Hora Final</label>
 								   		</td>
 								 
 								   		<td>						    
-								    		<input  type='time' class="input" id="hFinalFormularioInput"    style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
+								    		<input class="time" type="text" value="14:30" id="hFinalFormularioInput"    style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
 								   		</td>
 								   	
 								   		<td>						    

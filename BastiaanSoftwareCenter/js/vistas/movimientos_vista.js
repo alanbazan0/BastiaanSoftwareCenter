@@ -64,6 +64,8 @@ class MovimientosVista
 		this.mostrarFormulario();	
 		
 		this.presentador.consultarPorReceso();
+
+		$('.time').clockTimePicker();
 		/*
 	
 		var today = new Date();
@@ -124,6 +126,10 @@ class MovimientosVista
 			this.mostrarFormulario();		
 		    this.presentador.consultarPorLlaves();
 			this.presentador.consultarPorReceso();
+			
+			
+			$('.time').clockTimePicker();
+
 			/*
 		    var today = new Date();
 			var dd = today.getDate();
