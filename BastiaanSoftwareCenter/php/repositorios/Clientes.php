@@ -80,6 +80,17 @@ try
                     $resultado = $repositorio->insertarDinamicamente($filtros,$campos);
                 }
                 break;
+            case 'consultarDinamicamenteTelefono':
+                $numero = REQUEST('numero');
+                $version = REQUEST('version');
+                $camposRepositorio = new CamposGrid1Repositorio($conexion);
+                $resultado = $camposRepositorio->consultarPorVersion($version);
+                if($resultado->mensajeError=='')
+                {
+                    $campos = $resultado->valor;
+                    $resultado = $repositorio->consultarDinamicamenteTelefono($numero,$campos);
+                }
+                break;
         }
     }
     
