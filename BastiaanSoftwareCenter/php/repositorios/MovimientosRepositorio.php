@@ -17,11 +17,11 @@ include "../clases/Resultado.php";
         $this->conexion = $conexion;
     }
     
-    /*
+    
     public function calcularId()
     {
         $resultado = new Resultado();
-        $consulta =  "SELECT MAX(IFNULL(BTMPERSONALIDN,0))+1 AS id FROM BSTNTRN.BTMPERSONALIDN";
+        $consulta =  "SELECT MAX(IFNULL(BTMPERSONALIDN,0))+1 AS id FROM BSTNTRN.BTMPERSONAL";
         if($sentencia = $this->conexion->prepare($consulta))
         {
             if($sentencia->execute())
@@ -45,11 +45,13 @@ include "../clases/Resultado.php";
             $resultado->mensajeError = "FallÃ³ la preparaciÃ³n: (" . $this->conexion->errno . ") " . $this->conexion->error;
             return $resultado;
     }
-    */
+   
     public function insertar(Movimiento $movimiento)
     {
-        $resultado = "";
-        
+        $resultado =  $this->calcularId();
+        if($resultado->mensajeError=="")
+        {
+        $id = $resultado->valor;
         $consulta = " INSERT INTO BSTNTRN.BTMPERSONAL "
             . " (BTMPERSONALIDN,  "
             . " SIOUSUARIOID,  "
@@ -60,75 +62,23 @@ include "../clases/Resultado.php";
             . " BTMPERSONALHFIN, "
             . " BTMPERSONALDUR, "
             . " BTMPERSONALDURS, "
+            . " BTMPERSONALFECHA, "    
             . " BTCRECESONOMC)"
-            . " VALUE(?,?,?,?,?,?,?,?,?,?)";
-            
-            /*    . " (BTMPERSONALIDN,  "
-             . " SIOUSUARIOID,  "
-             . " BTMPERSONALRECID, "
-             . " BTRECESONOMC, "
-             . " BTMPERSONALFINI, "
-             . " BTMPERSONALHINI, "
-             . " BTMPERSONALFFIN, "
-             . " BTMPERSONALHFIN, "
-             . " BTMPERSONALDUR, "
-             . " BTMPERSONALDURS) "
-             . " VALUE(?,?,?,?,?,?,?,?,?,?)";*/
-             /*
-              $consulta = " INSERT INTO BSTNTRN.BTMPERSONAL "
-            . " (BTMPERSONALIDN,  "
-            . " SIOUSUARIOID,  "
-            . " BTMPERSONALRECID, "
-            . " BTRECESONOMC, "
-            . " BTMPERSONALFINI, "
-            . " BTMPERSONALHINI, "
-            . " BTMPERSONALFFIN, "
-            . " BTMPERSONALHFIN, "
-            . " BTMPERSONALDUR, "
-            . " BTMPERSONALDURS) "
-            . " VALUE(?,?,?,?,?,?,?,?,?,?)";
-            
-            
-            
-             */
+            . " VALUE(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                  if($sentencia = $this->conexion->prepare($consulta))
                             {
-                                if( $sentencia->bind_param("ssssssssss",
-                                    $movimiento->id,
-                                    $movimiento->recedoId,
+                                if( $sentencia->bind_param("issssssssss",$id,
                                     $movimiento->agente,
+                                    $movimiento->recesoId,
                                     $movimiento->fInicial,
                                     $movimiento->hInicial,
                                     $movimiento->fFinal,
                                     $movimiento->hFinal,
                                     $movimiento->dPersonal,
                                     $movimiento->dsPersonal,
+                                    $movimiento->fPersonal,
                                     $movimiento->recesoC))
-                                    /*'id' => utf8_encode($id),
-                                     'agenteId' =>  utf8_encode($agenteId),
-                                     'agente' =>  utf8_encode($agente),
-                                     'recesoC' =>  utf8_encode($recesoC),
-                                     'recesoId' => utf8_encode($recesoId),
-                                     'fInicial' => utf8_encode($fInicial),
-                                     'hInicial' => utf8_encode($hInicial),
-                                     'hFinal' => utf8_encode($hFinal),
-                                     'fFinal' => utf8_encode($fFinal),
-                                     'dPersonal' => utf8_encode($dPersonal),
-                                     'dsPersonal' => utf8_encode($dsPersonal),
-                                     'fPersonal' => utf8_encode($fPersonal)*/
-                                
-                                    /*'id' => utf8_encode($id),
-                                     'agenteId' =>  utf8_encode($agenteId),
-                                     'agente' =>  utf8_encode($agente),
-                                     'recesoC' =>  utf8_encode($recesoC),
-                                     'recesoId' => utf8_encode($recesoId),
-                                     'fInicial' => utf8_encode($fInicial),
-                                     'hInicial' => utf8_encode($hInicial),
-                                     'hFinal' => utf8_encode($hFinal),
-                                     'fFinal' => utf8_encode($fFinal),
-                                     'dPersonal' => utf8_encode($dPersonal),
-                                     'dsPersonal' => utf8_encode($dsPersonal),
-                                     'fPersonal' => utf8_encode($fPersonal)*/
+                               
                                   {
                                     if(!$sentencia->execute())
                                         $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;
@@ -138,7 +88,7 @@ include "../clases/Resultado.php";
                             }
                             else
                         $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
-                                
+                  }              
                return $resultado;
     }
     
@@ -171,29 +121,34 @@ include "../clases/Resultado.php";
     {     
         $resultado = new Resultado();
         $consulta = " UPDATE BSTNTRN.BTMPERSONAL SET"
+                    . " SIOUSUARIOID = ?,  "
+                    . " BTMPERSONALRECID = ?, "
                     ." BTMPERSONALFINI = ?, "
                     ." BTMPERSONALHINI = ?, "
                     ." BTMPERSONALFFIN = ?, "        
                     ." BTMPERSONALHFIN = ?, "
                     ." BTMPERSONALDUR = ?, "
                     ." BTMPERSONALDURS = ?, "
-                    ." BTMPERSONALFECHA = ? "
-                    ." WHERE BTMPERSONALIDN = ? ";
+                    ." BTMPERSONALFECHA = ?, "
+                    ." BTCRECESONOMC = ? "
+                    ." WHERE BTMPERSONALIDN = ? ";            
          if($sentencia = $this->conexion->prepare($consulta))
         {
-            if($sentencia->bind_param("ssssssss",
-                                               $movimiento->fInicial,
-                                               $movimiento->hInicial,
-                                               $movimiento->fFinal,
-                                               $movimiento->hFinal,
-                                               $movimiento->dPersonal,
-                                               $movimiento->dsPersonal,
-                                               $movimiento->fPersonal,
-                                               $movimiento->id))
+            if($sentencia->bind_param("sssssssssss",$movimiento->agente,
+                                                    $movimiento->recesoId,
+                                                    $movimiento->fInicial,
+                                                    $movimiento->hInicial,
+                                                    $movimiento->fFinal,
+                                                    $movimiento->hFinal,
+                                                    $movimiento->dPersonal,
+                                                    $movimiento->dsPersonal,
+                                                    $movimiento->fPersonal,
+                                                    $movimiento->recesoC,
+                                                    $movimiento->id))
                                                
-                     {
-                      if($sentencia->execute()){
-                                               $resultado->valor=true;
+                        {
+                           if($sentencia->execute()){
+                               $resultado->valor=true;
                         }else
                                $resultado->mensajeError = "FallÃ³ la ejecuciÃ³n (" . $this->conexion->errno . ") " . $this->conexion->error;
                      }
@@ -201,9 +156,7 @@ include "../clases/Resultado.php";
         }
         else 
             $resultado->mensajeError = "FallÃ³ la preparaciÃ³n: (" . $this->conexion->errno . ") " . $this->conexion->error;
-  
-            
-            return $resultado;  
+           return $resultado;  
  }
  
     public function consultar($criteriosSeleccion)

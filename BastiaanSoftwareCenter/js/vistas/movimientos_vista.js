@@ -191,11 +191,29 @@ class MovimientosVista
 		 }	
 	}
 	
+	
+
 	btnExcel_onClick()
 	{
 	
-	//	this.presentador.consultar();
+
 		
+		 // funciona para los dos navegadores 
+		
+		$("#btnExcel").click(function(e) {
+	        window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('#principalDiv').html()));
+	        e.preventDefault();
+	    });
+		
+		
+		/*
+		$('#btnExcel').on('click',function(){
+	  		// get the table id
+	  		$("#principalDiv").table2excel();
+	  	});
+		*/
+		
+/*		
 		  function descargarExcel(){
 		        //Creamos un Elemento Temporal en forma de enlace
 		        var tmpElemento = document.createElement('a');
@@ -210,6 +228,8 @@ class MovimientosVista
 		        tmpElemento.click();
 		    }
 		    descargarExcel();
+*/    
+		
 	
 	}
 	

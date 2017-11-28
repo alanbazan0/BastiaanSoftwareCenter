@@ -3,6 +3,8 @@ namespace php\modelos;
 
 class Movimiento
 {
+    
+  
     public $id;
     public $agenteId;
     public $agente;
@@ -18,14 +20,12 @@ class Movimiento
     public $rTiempo;
     public $rRecesos;
     
-    
     public $hInicial;
     public $hFinal;
     public $dPersonal;
     public $dsPersonal;
     public $recesoC;
-    
-    
+
    }
 
    
