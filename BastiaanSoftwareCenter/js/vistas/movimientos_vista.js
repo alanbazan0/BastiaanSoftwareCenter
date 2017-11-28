@@ -124,6 +124,7 @@ class MovimientosVista
 			this.mostrarFormulario();		
 		    this.presentador.consultarPorLlaves();
 			this.presentador.consultarPorReceso();
+			/*
 		    var today = new Date();
 			var dd = today.getDate();
 			var mm = today.getMonth()+1;
@@ -153,7 +154,7 @@ class MovimientosVista
 			$("#"+ "fPersonalFormularioInput").datepicker({showOn:'button', buttonImage:'assets/botones/calendario.svg', buttonImageOnly:true});
 			$("#"+ "fPersonalFormularioInput").datepicker('option', {dateFormat:'dd/mm/yy'});
 			$("#"+ "fPersonalFormularioInput").datepicker("setDate", strTodayFirst);
-			$("#"+ "fPersonalFormularioInput").datepicker();
+			$("#"+ "fPersonalFormularioInput").datepicker();*/
 		}
 		else
 			this.mostrarMensaje("Selecciona un registro para modificar.");
@@ -201,7 +202,7 @@ class MovimientosVista
 		 // funciona para los dos navegadores 
 		
 		$("#btnExcel").click(function(e) {
-	        window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('#principalDiv').html()));
+	        window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('#grid').html()));
 	        e.preventDefault();
 	    });
 		

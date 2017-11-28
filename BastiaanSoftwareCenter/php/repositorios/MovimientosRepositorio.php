@@ -169,7 +169,8 @@ include "../clases/Resultado.php";
                         " INNER JOIN BSTNTRN.SIOUSUARIO B ON A.SIOUSUARIOID = B.SIOUSUARIOID " .
                         " WHERE BTMPERSONALIDN  like CONCAT('%',?,'%') ".
                         " AND (BTMPERSONALFINI like CONCAT('%',?,'%') ".
-                        " OR BTMPERSONALFFIN like CONCAT('%',?,'%')) ";
+                        " OR BTMPERSONALFFIN like CONCAT('%',?,'%')) ".
+                        " ORDER BY BTMPERSONALIDN ";
             
             
            // " DATE_FORMAT(SIOUSUARIOFNAC,'%d/%m/%Y') fechaNacimiento, "
