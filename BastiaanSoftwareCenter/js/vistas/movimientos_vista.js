@@ -26,7 +26,7 @@ class MovimientosVista
 		this.grid._columnas = [
 	
 			{longitud:100, 	titulo:"Id",   	alias:"id", alineacion:"I" }, 
-			{longitud:190, 	titulo:"Nombre Agente",   alias:"agenteId", alineacion:"I" }, 
+			{longitud:220, 	titulo:"Nombre Agente",   alias:"agenteId", alineacion:"I" }, 
 			{longitud:100, 	titulo:"Nombre Pila",   alias:"recesoId", alineacion:"I" }, 
 			{longitud:200, 	titulo:"Descripcion",   alias:"recesoC", alineacion:"I" }, 
 			{longitud:100, 	titulo:"F.Incial",   alias:"fInicial", alineacion:"C" },
@@ -34,7 +34,7 @@ class MovimientosVista
 			{longitud:100, 	titulo:"H.Inicial",   alias:"hInicial", alineacion:"C" },
 			{longitud:100, 	titulo:"H.Final",   alias:"hFinal", alineacion:"C" }, 
 			{longitud:100, 	titulo:"Duracion",   alias:"dPersonal", alineacion:"C" }, 
-			{longitud:150, 	titulo:"Duración en Segundos",  alias:"dsPersonal", alineacion:"D" }, 
+			{longitud:130, 	titulo:"Duración en Segundos",  alias:"dsPersonal", alineacion:"D" }, 
 			//{longitud:150, 	titulo:"Fecha Personal",   alias:"fPersonal", alineacion:"I" },
 			
 		    ]
@@ -205,7 +205,7 @@ class MovimientosVista
 		 // funciona para los dos navegadores 
 		
 		$("#btnExcel").click(function(e) {
-			var i = '<table><head><thead><th>ID</th><th>Nombre Agente</th><th>Nombre Pila</th><th>Descripcion</th><th>F. Inicial</th><th>F. Final</th><th>Hora Inicial</th><th>Hora final</th><th>Duracion</th><th>Duracion en segundos</th><th> </th></thead></head><tbody></tbody></table>';
+			var i = '<table><thead><th>ID</th><th>Nombre Agente</th><th>Nombre Pila</th><th>Descripcion</th><th>F. Inicial</th><th>F. Final</th><th>Hora Inicial</th><th>Hora final</th><th>Duracion</th><th>Duracion en segundos</th><th> </th></thead><tbody></tbody></table>';
 			
 	        window.open('data:application/vnd.ms-excel,'+ i + encodeURIComponent($('#grid').html()));
 	        e.preventDefault();
