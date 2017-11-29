@@ -6,6 +6,7 @@ use php\repositorios\CamposGrid1Repositorio;
 use php\repositorios\ClientesRepositorio;
 use php\modelos\Resultado;
 use php\repositorios\CamposFormularioAltaRepositorio;
+use php\repositorios\CamposFormularioActualizacionRepositorio;
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -17,6 +18,7 @@ include '../clases/AdministradorConexion.php';
 include '../repositorios/ClientesRepositorio.php';
 include '../repositorios/CamposGrid1Repositorio.php';
 include '../repositorios/CamposFormularioAltaRepositorio.php';
+include '../repositorios/CamposFormularioActualizacionRepositorio.php';
 
 
 header('Access-Control-Allow-Origin: *');
@@ -69,7 +71,7 @@ try
                     $resultado = $repositorio->consultarDinamicamente($filtros,$campos); 
                 }
             break;
-            case 'InsertarDinamicamente':
+            case 'insertarDinamicamente':
                 $filtros = json_decode(REQUEST('campos'));
                 $version = REQUEST('version');
                 $camposInsertRepositorio = new CamposFormularioAltaRepositorio($conexion);
@@ -94,13 +96,17 @@ try
             case 'consultarDinamicamenteIdCliente':
                 $idCliente = REQUEST('idCliente');
                 $version = REQUEST('version');
-                $camposRepositorio = new CamposFormularioAltaRepositorio($conexion);
+                $camposRepositorio = new CamposFormularioActualizacionRepositorio($conexion);
                 $resultado = $camposRepositorio->consultarPorVersion($version);
                 if($resultado->mensajeError=='')
                 {
                     $campos = $resultado->valor;
                     $resultado = $repositorio->consultarDinamicamenteIdCliente($idCliente,$campos);
                 }
+                break;
+            case 'actualizarDinamicamente':
+                    $valoresCampos = json_decode(REQUEST('campos'));
+                    $resultado = $repositorio->actualizarDinamicamente($valoresCampos);
                 break;
         }
     }

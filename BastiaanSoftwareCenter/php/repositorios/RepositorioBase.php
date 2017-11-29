@@ -126,6 +126,24 @@ class RepositorioBase
         return $texto;
     }
     
+    public function update($tablaId, $campos)
+    {
+        $texto = "";
+        if($campos)
+        {
+            $texto = "UPDATE ".$tablaId." SET ";
+            for($i = 0; $i < count($campos); $i++)
+            {
+                $campo = $campos[$i];
+                $texto .= trim($campo->campoId) ." = ? ";
+                if($i < count($campos) - 1)
+                    $texto .= ", ";
+            }
+        }
+        
+        return $texto;
+    }
+    
     public function esCadena($tipoDato)
     {
         if(strtolower($tipoDato) == 'varchar')

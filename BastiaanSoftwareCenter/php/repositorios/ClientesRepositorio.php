@@ -50,6 +50,17 @@ class ClientesRepositorio extends RepositorioBase implements IClientesRepositori
         return $resultado;
     }
     
+
+    private function buscarIndice($campos, $campoId)
+    {
+        for($i = 0; $i < count($campos); $i++)
+        {
+            $campo = $campos[$i];
+            if($campo->campoId == $campoId)
+                return $i;
+        }
+        return -1;
+    }
     public function insertar(Cliente $cliente)
     {            
         $resultado =  $this->calcularId();
@@ -538,8 +549,6 @@ class ClientesRepositorio extends RepositorioBase implements IClientesRepositori
     public function consultarDinamicamenteIdCliente($idCliente, $campos)
     {
         $resultado = new Resultado();
-        $clientes = array();
-        
         $consulta = $this->select($campos);
         $consulta .= " FROM BSTNTRN.BTCLIENTE ";
         $consulta .= " where BTCLIENTE.BTCLIENTENUMERO = ? ";
@@ -550,7 +559,10 @@ class ClientesRepositorio extends RepositorioBase implements IClientesRepositori
             {
                 if($sentencia->execute())
                 {
-                    $resultado->valor = $this->get_result($sentencia);
+                    $clientes = $this->get_result($sentencia);
+                    if(count($clientes) > 0)
+                        $resultado->valor = $clientes[0];
+                    
                 }
                 else
                     $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;
@@ -561,6 +573,49 @@ class ClientesRepositorio extends RepositorioBase implements IClientesRepositori
         else
             $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
             return $resultado;
+    }
+    
+    public function actualizarDinamicamente($valoresCampos)
+    {
+        $resultado = new Resultado();
+    
+        $indice = $this->buscarIndice($valoresCampos, "BTCLIENTENUMERO" );
+        if($indice != -1)
+        {
+            $id = $valoresCampos[$indice]->valor;
+            array_splice($valoresCampos,$indice,1);
+            //unset($valoresCampos[$indice]);
+            
+            $consulta = $this->update('BTCLIENTE', $valoresCampos);
+            $consulta .= " where BTCLIENTENUMERO = ? ";
+            
+            
+            if($sentencia = $this->conexion->prepare($consulta))
+            {
+                $llave = (object) [
+                    'valor' =>  $id,
+                    'tipoDato' => 'decimal'
+                ];
+                array_push($valoresCampos,$llave);
+                if($this->bind_param($sentencia,$valoresCampos))
+                {
+                    if($sentencia->execute())
+                        $resultado->valor = $id;
+                        else
+                            $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;
+                            
+                }
+                else
+                    $resultado->mensajeError = "Falló el enlace de parámetros";
+            }
+            else
+                $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
+        }
+        else
+            $resultado->mensajeError = "No se ha configurado el campo llave " . $this->conexion->error;
+        
+        return $resultado;
+        
     }
     
 }

@@ -496,7 +496,7 @@ $resultado->mensajeError = "Fall� la preparaci�n: (" . $this->conexion->errn
     public function consultarPorIdContrasena($id, $contrasena)
     {
         $resultado = new Resultado();
-        $consulta = "SELECT SIOUSUARIOID id, SIOUSUARIONCOMPLETO nombre " .
+        $consulta = "SELECT SIOUSUARIOID id, SIOUSUARIONCOMPLETO nombre, SIOUSUARIOEXTENSION extension " .
             "FROM SIOUSUARIO " .
             "WHERE SIOUSUARIOID = ? AND SIOUSUARIOPSW = ?";
         if($sentencia = $this->conexion->prepare($consulta))
@@ -506,13 +506,14 @@ $resultado->mensajeError = "Fall� la preparaci�n: (" . $this->conexion->errn
                 if($sentencia->execute())
                 {
                     
-                    if ($sentencia->bind_result($id, $nombre))
+                    if ($sentencia->bind_result($id, $nombre, $extension))
                     {                        
                         if ($sentencia->fetch())
                         {
                             $usuario = (object) [
                                 'id' =>  utf8_encode($id),
-                                'nombre' => utf8_encode($nombre)
+                                'nombre' => utf8_encode($nombre),
+                                'extension' => utf8_encode($extension)
                             ];
                             $resultado->valor = $usuario;
                         }
