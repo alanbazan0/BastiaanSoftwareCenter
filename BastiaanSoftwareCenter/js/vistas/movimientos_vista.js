@@ -45,7 +45,7 @@ class MovimientosVista
 		this.grid._colorRenglon2 = "#f8f2de";
 		this.grid._colorEncabezado1 = "#FF6600";
 		this.grid._colorEncabezado2 = "#FF6600";
-		this.grid._colorLetraEncabezado = "#ffffff";
+		this.grid._colorLetraEncabezado = "#FFFFFF";
 		this.grid._colorLetraCuerpo = "#000000";
 		this.grid._regExtra=20;
 		this.grid.render();		
@@ -202,13 +202,12 @@ class MovimientosVista
 
 	btnExcel_onClick()
 	{
-	
-
-		
 		 // funciona para los dos navegadores 
 		
 		$("#btnExcel").click(function(e) {
-	        window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('#grid').html()));
+			var i = '<table><head><thead><th>ID</th><th>Nombre Agente</th><th>Nombre Pila</th><th>Descripcion</th><th>F. Inicial</th><th>F. Final</th><th>Hora Inicial</th><th>Hora final</th><th>Duracion</th><th>Duracion en segundos</th><th> </th></thead></head><tbody></tbody></table>';
+			
+	        window.open('data:application/vnd.ms-excel,'+ i + encodeURIComponent($('#grid').html()));
 	        e.preventDefault();
 	    });
 		

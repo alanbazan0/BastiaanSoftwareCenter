@@ -132,9 +132,9 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								<div id="panelesArea0panel0barra" class="barracomandosContenedorIEC" style="position:relative;">
 									<span id="panelesArea0panel0Titulo" class="tituloContenedorIEC"></span>	
 								</div>
-								<div id="panelesArea0panel0componentes" style="width:99%;height:99%;overflow:hidden;position:relative;">
+								<div id="panelesArea0panel0componentes" style=" width:99%;height:99%;overflow:hidden;position:relative;">
                                 	<div id="panelesArea0panel0componente0" style='overflow: auto; position:static;height:98%; width:100%; top:10px;left:3px;'>
-                                	 		<div id="grid" style="float:left; overflow: auto; position:static; height:95%; width:100%; display: block; top:5px;left:3px;"></div>                						
+                                	 		<div id="grid" bordercolor="red" style="float:left; overflow: auto; position:static; height:95%; width:100%; display: block; top:5px;left:3px;">	</div>                						
                             		</div>
                            		</div>                                
 							</div>
