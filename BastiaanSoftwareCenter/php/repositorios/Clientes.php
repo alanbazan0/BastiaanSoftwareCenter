@@ -91,6 +91,17 @@ try
                     $resultado = $repositorio->consultarDinamicamenteTelefono($numero,$campos);
                 }
                 break;
+            case 'consultarDinamicamenteIdCliente':
+                $idCliente = REQUEST('idCliente');
+                $version = REQUEST('version');
+                $camposRepositorio = new CamposFormularioAltaRepositorio($conexion);
+                $resultado = $camposRepositorio->consultarPorVersion($version);
+                if($resultado->mensajeError=='')
+                {
+                    $campos = $resultado->valor;
+                    $resultado = $repositorio->consultarDinamicamenteIdCliente($idCliente,$campos);
+                }
+                break;
         }
     }
     

@@ -535,5 +535,33 @@ class ClientesRepositorio extends RepositorioBase implements IClientesRepositori
             return $resultado;
     }
     
+    public function consultarDinamicamenteIdCliente($idCliente, $campos)
+    {
+        $resultado = new Resultado();
+        $clientes = array();
+        
+        $consulta = $this->select($campos);
+        $consulta .= " FROM BSTNTRN.BTCLIENTE ";
+        $consulta .= " where BTCLIENTE.BTCLIENTENUMERO = ? ";
+                
+        if($sentencia = $this->conexion->prepare($consulta))
+        {
+            if($sentencia->bind_param("s",$idCliente))
+            {
+                if($sentencia->execute())
+                {
+                    $resultado->valor = $this->get_result($sentencia);
+                }
+                else
+                    $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;
+            }
+            else
+                $resultado->mensajeError = "Falló el enlace de parámetros";
+        }
+        else
+            $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
+            return $resultado;
+    }
+    
 }
 
