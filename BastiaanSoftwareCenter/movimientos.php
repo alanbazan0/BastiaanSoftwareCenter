@@ -156,8 +156,6 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 				<span id="txtTitulo" style="float:left;margin-top: 20px;margin-left: 15px;color: #FFFFFF;float: left;font-family: Verdana;font-size: 11px;font-weight: bold;">movimientos de personal</span>
 				<img style="padding: 2px;" class='imgTipoBoton' id='btnGuardarFormulario' src='assets/botones/imgGuardar.png' onclick='vista.btnGuardarFormulario_onClick();' title='Guardar' />
 				<img style="padding: 2px;" class='imgTipoBoton' id='btnSalirFormulario' src='assets/botones/btnSalir.png' onClick="vista.btnSalirFormulario_onClick();" title='Salir'  />
-	
-	            	   		<p><input type="button" onclick="restarHoras();" value="Restar horas"></p>
 			</div>
 <!--
   barra de men�...fin
@@ -171,7 +169,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								<div id="filtros " class="contenedorIEC" style="overflow: auto; position: relative; width: 100%; display: block;">
 								 <div style="width: 80%; display: block; height: 100%;  padding-top: 10px; padding-left: 34px;">								 	
 								   
-								   <table WIDHT=38%; HEIGHT=42%; CELLPADDING=0; cellspacing="10" style="padding-top: 12px; padding-left: 1%; position:relative;display:inline-block; border: #ff6600 1px solid;">										 		
+								   <table WIDHT=38%; id="exito" HEIGHT=42%; CELLPADDING=0; cellspacing="10" style="padding-top: 12px; padding-left: 1%; position:relative;display:inline-block; border: #ff6600 1px solid;">										 		
 								    
 								    <tr>
 								    <td> 
@@ -312,17 +310,6 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 		<div class='ventana' id='PromptCriterioSeleccion' style='display:none; z-index:9001;'></div>    
 </div>
 
-
-<script>
-
-function myFunction() {
-
-	inicio = document.getElementById("hInicialFormularioInput").value;
- //   alert(this.inicio);
-   var inicio = this.inicio;
-	//document.getElementById("dPersonalFormularioInput").value = inicio;
-    
-}
 </script>
 
 </form>

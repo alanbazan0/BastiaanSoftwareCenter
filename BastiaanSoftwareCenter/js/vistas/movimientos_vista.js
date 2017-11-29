@@ -173,9 +173,36 @@ class MovimientosVista
 	}	
 
 	
+/*
 	 myFunction() {
 	    alert("Input field lost focus.");
+
+	     
+	    function myFunction() {
+
+	    	inicio = document.getElementById("hInicialFormularioInput").value;
+	     //   alert(this.inicio);
+	       var inicio = this.inicio;
+	    	//document.getElementById("dPersonalFormularioInput").value = inicio;   
+	    }
+	       
+
+	    var x = document.getElementById("exito"); 
+
+	    x.addEventListener("focusout", myBlurFunction);
+
+	    function calcularDiasAusencia(hInicialFormularioInput, hFinalFormularioInput ) {
+
+	    function myFocusFunction() {
+	        document.getElementById("hInicialFormularioInput").style.backgroundColor = "yellow";
+
+	    	inicio = document.getElementById("hInicialFormularioInput").value;
+	    	fin = document.getElementById("hFinalFormularioInput").value;
+	    }
+	    
 	}
+	    
+	*/
 	
 	btnconsultaPrompt_onClick()
 	{
