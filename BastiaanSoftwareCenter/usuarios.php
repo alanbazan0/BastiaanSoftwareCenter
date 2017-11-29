@@ -9,7 +9,6 @@ $nomTrabajador = REQUEST('CNUSERDESC');
 $usuarioDsc = REQUEST('CNUSERDESC');
 $CNUSERDESC = REQUEST('CNUSERDESC');
 
-
 ?>
 <html> 
 

@@ -13,7 +13,6 @@ class UsuariosVista
 		this.presentador.consultar();
 	}
 	
-	
 	crearColumnasGrid()
 	{
 		this.grid._columnas = [

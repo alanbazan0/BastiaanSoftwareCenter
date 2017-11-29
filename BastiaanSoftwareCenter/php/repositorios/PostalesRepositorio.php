@@ -17,6 +17,7 @@ class PostalesRepositorio implements IPostalesRepositorio
     public function __construct($conexion)
     {
         $this->conexion = $conexion;
+        
     }
     
     public function calcularId()
