@@ -205,7 +205,7 @@ class MovimientosVista
 		 // funciona para los dos navegadores 
 		
 		$("#btnExcel").click(function(e) {
-			var i = '<table><head><thead><th>ID</th><th>Nombre Agente</th><th>Nombre Pila</th><th>Descripcion</th><th>F. Inicial</th><th>F. Final</th><th>Hora Inicial</th><th>Hora final</th><th>Duracion</th><th>Duracion en segundos</th><th> </th></thead></head><tbody></tbody></table>';
+			var i = '<table><thead><th>ID</th><th>Nombre Agente</th><th>Nombre Pila</th><th>Descripcion</th><th>F. Inicial</th><th>F. Final</th><th>Hora Inicial</th><th>Hora final</th><th>Duracion</th><th>Duracion en segundos</th><th> </th></thead><tbody></tbody></table>';
 			
 	        window.open('data:application/vnd.ms-excel,'+ i + encodeURIComponent($('#grid').html()));
 	        e.preventDefault();
