@@ -156,6 +156,8 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 				<span id="txtTitulo" style="float:left;margin-top: 20px;margin-left: 15px;color: #FFFFFF;float: left;font-family: Verdana;font-size: 11px;font-weight: bold;">movimientos de personal</span>
 				<img style="padding: 2px;" class='imgTipoBoton' id='btnGuardarFormulario' src='assets/botones/imgGuardar.png' onclick='vista.btnGuardarFormulario_onClick();' title='Guardar' />
 				<img style="padding: 2px;" class='imgTipoBoton' id='btnSalirFormulario' src='assets/botones/btnSalir.png' onClick="vista.btnSalirFormulario_onClick();" title='Salir'  />
+	
+	            	   		<p><input type="button" onclick="restarHoras();" value="Restar horas"></p>
 			</div>
 <!--
   barra de men�...fin
@@ -262,15 +264,19 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								    		<label style="position: relative; left: 3px; ">Hora Inicial</label>
 								   		</td>
 								   		<td>		
-								   			<input class="time" type="text" value="14:30" id="hInicialFormularioInput"   style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
+								   			<input  type="text" value=" " id="hInicialFormularioInput"   onblur="myFunction()"   style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
 								   		</td>
 								   		<td>						    
 								    		<label  style="position: relative; left: 3px;">Hora Final</label>
 								   		</td>
 								 
+								 
+							
 								   		<td>						    
-								    		<input class="time" type="text" value="14:30" id="hFinalFormularioInput"    style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
+								    		<input type="text" value=" " id="hFinalFormularioInput"  style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
 								   		</td>
+								   		
+							
 								   	
 								   		<td>						    
 								    		<label  style="position: relative; left: 3px;">Duracion</label>
@@ -292,6 +298,8 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 						</div>
 				</div>
 		</div>
+	
+		
 		
 		<div class='ventana' id='PromptUsuario' style='display: none;'></div>
 		
@@ -303,6 +311,19 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 		<div class='ventana' id='PromptSentencia' style='display:none; z-index:9001;'></div>
 		<div class='ventana' id='PromptCriterioSeleccion' style='display:none; z-index:9001;'></div>    
 </div>
+
+
+<script>
+
+function myFunction() {
+
+	inicio = document.getElementById("hInicialFormularioInput").value;
+ //   alert(this.inicio);
+   var inicio = this.inicio;
+	//document.getElementById("dPersonalFormularioInput").value = inicio;
+    
+}
+</script>
 
 </form>
 </body>

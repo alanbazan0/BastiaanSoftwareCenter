@@ -25,8 +25,8 @@ class MovimientosVista
 	{
 		this.grid._columnas = [
 	
-			{longitud:100, 	titulo:"Id",   	alias:"id", alineacion:"I" }, 
-			{longitud:220, 	titulo:"Nombre Agente",   alias:"agenteId", alineacion:"I" }, 
+			{longitud:90, 	titulo:"Id",   	alias:"id", alineacion:"I" }, 
+			{longitud:240, 	titulo:"Nombre Agente",   alias:"agenteId", alineacion:"I" }, 
 			{longitud:100, 	titulo:"Nombre Pila",   alias:"recesoId", alineacion:"I" }, 
 			{longitud:200, 	titulo:"Descripcion",   alias:"recesoC", alineacion:"I" }, 
 			{longitud:100, 	titulo:"F.Incial",   alias:"fInicial", alineacion:"C" },
@@ -173,8 +173,9 @@ class MovimientosVista
 	}	
 
 	
-	
-	
+	 myFunction() {
+	    alert("Input field lost focus.");
+	}
 	
 	btnconsultaPrompt_onClick()
 	{

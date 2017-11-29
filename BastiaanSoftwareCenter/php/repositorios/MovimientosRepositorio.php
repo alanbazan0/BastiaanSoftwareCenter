@@ -17,8 +17,39 @@ include "../clases/Resultado.php";
         $this->conexion = $conexion;
     }
     
-    
+  
     public function calcularId()
+    {
+        $resultado = new Resultado();
+        $consulta =  "SELECT MAX(IFNULL(BTMPERSONALIDN,0))+1 AS id FROM BSTNTRN.BTMPERSONAL";
+        
+   
+        if($sentencia = $this->conexion->prepare($consulta))
+        {
+            if($sentencia->execute())
+            {
+                if ($sentencia->bind_result($id))
+                {
+                    if($sentencia->fetch())
+                    {
+                        $resultado->valor = $id;
+                    }
+                    else
+                        $resultado->mensajeError = "No se encontró ningún resultado";
+                }
+                else
+                    $resultado->mensajeError = "Falló el enlace del resultado";
+            }
+            else
+                $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;
+        }
+        else
+            $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
+            return $resultado;
+    }
+   
+    /*
+    public function Segundos()
     {
         $resultado = new Resultado();
         $consulta =  "SELECT MAX(IFNULL(BTMPERSONALIDN,0))+1 AS id FROM BSTNTRN.BTMPERSONAL";
@@ -45,7 +76,8 @@ include "../clases/Resultado.php";
             $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
             return $resultado;
     }
-   
+    
+    */
     public function insertar(Movimiento $movimiento)
     {
         $resultado =  $this->calcularId();

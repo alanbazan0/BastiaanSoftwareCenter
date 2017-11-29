@@ -9,6 +9,8 @@ class MovimientosRepositorio
 		this.contexto = contexto;
 		this.functionRetorno = functionRetorno;
 		
+	
+		
 		var parametros;
 		parametros = "accion=insertar";
 		parametros += "&movimiento=" + encodeURIComponent(JSON.stringify(movimiento));	
