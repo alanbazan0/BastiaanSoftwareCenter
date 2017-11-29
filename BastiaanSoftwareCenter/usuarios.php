@@ -84,7 +84,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 						<div id="botones" style="width:auto;overflow:auto;">
 							<table class="tablaBotonesIEC">
 								<tr>
-									<td><img id="btnExcel" class="botonMenuIEC" title="Excel" src="assets/botones/btnExcel.png" onClick="vista.btnExcel_onClick();"></td>
+									<td><img id="btnExcel" class="botonMenuIEC" title="Excel" src="assets/botones/btnExcel.png" onClick="tableToExcel('testTable', 'W3C Example Table')"></td>
 									<td><img id="btnAlta" class="botonMenuIEC" title="Alta" src="assets/botones/imgAlta.png" onClick="vista.btnAlta_onClick();"></td>
 									<td><img id="btnBaja" class="botonMenuIEC" title="Baja" src="assets/botones/imgBaja.png" onClick="vista.btnBaja_onClick();"></td>
 									<td><img id="btnCambio" class="botonMenuIEC" title="Cambio" src="assets/botones/imgCambio.png" onClick="vista.btnCambio_onClick();"></td>
@@ -134,7 +134,9 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								</div>
 								<div id="panelesArea0panel0componentes" style="width:99%;height:99%;overflow:hidden;position:relative;">
                                 	<div id="panelesArea0panel0componente0" style='overflow: auto; position:static;height:98%; width:100%; top:10px;left:3px;'>
+                                	<table id="testTable">
                                 	 		<div id="grid" style="float:left; overflow: auto; position:static; height:95%; width:100%; display: block; top:5px;left:3px;"></div>                						
+                            		</table>
                             		</div>
                            		</div>                                
 							</div>

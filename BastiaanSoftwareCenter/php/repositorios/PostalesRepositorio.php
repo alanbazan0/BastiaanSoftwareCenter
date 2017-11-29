@@ -17,13 +17,10 @@ class PostalesRepositorio implements IPostalesRepositorio
     public function __construct($conexion)
     {
         $this->conexion = $conexion;
-        
     }
     
     public function calcularId()
     {   
-       
-        
         $resultado = new Resultado();
         $consulta =  "SELECT MAX(IFNULL(BTCPOSTALIDN,0))+1 AS id FROM BSTNTRN.BTCPOSTAL";
         if($sentencia = $this->conexion->prepare($consulta))

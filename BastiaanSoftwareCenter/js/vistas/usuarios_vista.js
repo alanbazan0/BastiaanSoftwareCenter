@@ -121,8 +121,7 @@ class UsuariosVista
 	
 	//	this.presentador.consultar();
 		
-		  function descargarExcel(){
-		        //Creamos un Elemento Temporal en forma de enlace
+		       //Creamos un Elemento Temporal en forma de enlace
 		        var tmpElemento = document.createElement('a');
 		        // obtenemos la información desde el div que lo contiene en el html
 		        // Obtenemos la información de la tabla
@@ -131,12 +130,52 @@ class UsuariosVista
 		        var tabla_html = tabla_div.outerHTML.replace(/ /g, '%20');
 		        tmpElemento.href = data_type + ', ' + tabla_html;
 		        //Asignamos el nombre a nuestro EXCEL
-		        tmpElemento.download = 'MovimientosPersonal.xls';
+		        tmpElemento.download = 'ReporteUsuarios.xls';
 		        tmpElemento.click();
-		    }
-		    descargarExcel();
-	
+		
 	}
+	/*var datos = document.GetElementById('TablaDatos);
+	Exporter.export(datos, 'cursos.xls', 'Cursos')
+	$(document).ready(function() {
+	     $("#btnExport").click(function(e) {
+	        var es_firefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+
+	        if (es_firefox ) {
+	          window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('#table_wrapper').html()));
+	          e.preventDefault();
+	        }else{
+	         var a = document.createElement('a');  
+
+	         // calculamos la fecha actual 
+	          var hoy = new Date();
+	          dia = hoy.getDate(); 
+	          mes = hoy.getMonth() + 1 ;
+	          anio= hoy.getFullYear();
+	          fecha_actual = String(dia + "_" + mes + "_" + anio);
+
+	         // Pagina que hizo el llamado 
+	        var pagina = document.getElementById('pagina').value;
+
+	         //Obtenemos los valores de la tabla 
+	         var data_type = 'data:application/vnd.ms-excel';
+	         var table_div = document.getElementById('table_wrapper');
+	         var table_html = table_div.outerHTML.replace(/ /g, '%20');
+
+
+	         a.href = data_type + ', ' + table_html;
+	         a.download = 'Reporte ' + pagina + ' '+ fecha_actual + '.xls';
+	         a.click();
+
+	         e.preventDefault();  
+	        }
+
+	     });
+	});
+
+	* $("#btnExport").click(function(e) {
+	        window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('#dvData').html()));
+	        e.preventDefault();
+	    });*/	  
 	btnGuardarFormulario_onClick()
 	{		
 		 var campoObligatorioVacio = this.campoObligatorioVacio();
