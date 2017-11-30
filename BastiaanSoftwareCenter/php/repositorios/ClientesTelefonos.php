@@ -1,6 +1,7 @@
 <?php
 use php\clases\AdministradorConexion;
 use php\clases\JsonMapper;
+use php\modelos\Resultado;
 use php\modelos\ClienteTelefono;
 use php\repositorios\ClientesTelefonosRepositorio;
 
@@ -22,7 +23,7 @@ header('Content-Type: application/json; charset=UTF-8');
 
 
 $administrador_conexion = new AdministradorConexion();
-
+$resultado = new Resultado();
 $conexion;
 try
 {
@@ -47,7 +48,7 @@ try
                 $mapper = new JsonMapper();
                 $clientetelefono = $mapper->map($json, new ClienteTelefono());
                 
-                $resultado = $repositorio->actualizar($telefono) ;
+                $resultado = $repositorio->actualizar($clientetelefono) ;
                 if($resultado!=null)
                     echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
                     break;

@@ -73,10 +73,10 @@ class ClientesTelefonosRepositorio implements IClientesTelefonosRepositorio
                                                    $id,                                                   
                                                    $clientetelefono->nir,
                                                    $clientetelefono->serie,
-                                                   $clientetelefono->numeracion,
+                                                   $clientetelefono->telefonoCliente,
                                                    $clientetelefono->compania,
                                                    $clientetelefono->tipoTelefono,
-                                                   $clientetelefono->telefonoCliente))
+                                                   $clientetelefono->numeracion))
                 {
                     if(!$sentencia->execute())                
                         $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;                       
@@ -225,11 +225,11 @@ class ClientesTelefonosRepositorio implements IClientesTelefonosRepositorio
                     . " WHERE BTCLIENTETELNOCTEID = ? ";  
         if($sentencia = $this->conexion->prepare($consulta))
         {
-            if($sentencia->bind_param("i",$llaves->id))
+            if($sentencia->bind_param("i",$llaves))
             {
                 if($sentencia->execute())
                 {                    
-                    if ($sentencia->bind_result($id, $detalle ))
+                    if ($sentencia->bind_result($id, $nir, $serie, $telefonoCliente, $compania, $tipoTelefono, $numeracion))
                     {                        
                         if($sentencia->fetch())
                         {
@@ -239,9 +239,9 @@ class ClientesTelefonosRepositorio implements IClientesTelefonosRepositorio
                             $clientetelefono->telefonoCliente = utf8_encode($telefonoCliente);
                             $clientetelefono->nir = utf8_encode($nir);
                             $clientetelefono->serie = utf8_encode($serie);
-                            $clientetelefono->numeracion = utf8_encode($numeracion);
                             $clientetelefono->compania = utf8_encode($compania);
-                            $clientetelefono->tipoTelefono = utf8_encode($tipoTelefono);   
+                            $clientetelefono->tipoTelefono = utf8_encode($tipoTelefono);
+                            $clientetelefono->numeracion = utf8_encode($numeracion);
                             $resultado->valor = $clientetelefono;
                         }
                         else
