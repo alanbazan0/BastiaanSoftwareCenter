@@ -12,8 +12,16 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 <html> 
 <title>Movimientos de personal</title>
 <head>	
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<script  src='js/librerias/jQueryExcel/src/jquery.table2excel.js'></script>
+
+
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-	<script language="JavaScript" type="text/javascript" src="js/librerias/jquery-1.6.2.min.js"></script>
+	<!-- <script language="JavaScript" type="text/javascript" src="js/librerias/jquery-1.6.2.min.js"></script>  -->
+	
+	
 	<script language="JavaScript" type="text/javascript" src="js/librerias/jquery-ui-1.8.16.custom.min.js"></script>
 	<script language="JavaScript" type="text/JavaScript" src="js/librerias/json2.js"></script>
 	<script language="JavaScript" type="text/JavaScript" src="js/librerias/AjaxContextHandler.js"></script>
@@ -28,14 +36,21 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 
 	<script language="JavaScript" type="text/JavaScript" src="js/librerias/cargador.js"></script>
 <!-- 	<script language="JavaScript" type="text/JavaScript" src="js/librerias/jquery.min.js"></script> -->
+<!-- 
  	<script language="JavaScript" type="text/JavaScript" src='js/librerias/Datapickerjs/ui.core.js'></script>
 	<script language="JavaScript" type="text/JavaScript" src='js/librerias/Datapickerjs/ui.datepicker.js'></script>
 	<script language="JavaScript" type="text/JavaScript" src='js/librerias/Datapickerjs/ui.datepicker-es.js'></script> 
-	
+ -->	
 	<script language="JavaScript" type="text/JavaScript" src="js/componentes/GridReg.js"></script>
 	<script language="JavaScript" type="text/JavaScript" src="js/componentes/Combo.js"></script>
 	
 	<script language="JavaScript" type="text/javascript" src="prompts/PromptUsuarios.js"></script>
+	
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	
+	
+
+	
 	<!-- Llamado de prompts
 	<script language="JavaScript" type="text/javascript" src="../GV/prompts/PromptConcepto.js">  </script>
 	<script language="JavaScript" type="text/javascript" src="../GV/prompts/PromptVerficador.js"></script> 
@@ -57,6 +72,8 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
     <script language="JavaScript" type="text/JavaScript" src="js/repositorios/movimientos_repositorio.js"></script>
     <script language="JavaScript" type="text/JavaScript" src="js/presentadores/movimientos_presentador.js"></script>
 	<script language="JavaScript" type="text/JavaScript" src="js/vistas/movimientos_vista.js"></script>
+	
+
 	
 
 </head>
@@ -134,7 +151,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								</div>
 								<div id="panelesArea0panel0componentes" style=" width:99%;height:99%;overflow:hidden;position:relative;">
                                 	<div id="panelesArea0panel0componente0" style='overflow: auto; position:static;height:98%; width:100%; top:10px;left:3px;'>
-                                	 		<div id="grid" bordercolor="red" style="float:left; overflow: auto; position:static; height:95%; width:100%; display: block; top:5px;left:3px;">	</div>                						
+                                	 		<div id="grid"  style="float:left; overflow: auto; position:static; height:95%; width:100%; display: block; top:5px;left:3px;">	</div>                						
                             		</div>
                            		</div>                                
 							</div>

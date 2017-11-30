@@ -231,43 +231,16 @@ class MovimientosVista
 	btnExcel_onClick()
 	{
 		 // funciona para los dos navegadores 
-		
+
 		$("#btnExcel").click(function(e) {
-			var i = '<table><thead><th>ID</th><th>Nombre Agente</th><th>Nombre Pila</th><th>Descripcion</th><th>F. Inicial</th><th>F. Final</th><th>Hora Inicial</th><th>Hora final</th><th>Duracion</th><th>Duracion en segundos</th><th> </th></thead><tbody></tbody></table>';
-			
-	        window.open('data:application/vnd.ms-excel,'+ i + encodeURIComponent($('#grid').html()));
-	        e.preventDefault();
+			var i = '<table ><thead><th>ID</th><th>Nombre Agente</th><th>Nombre Pila</th><th>Descripcion</th><th>F. Inicial</th><th>F. Final</th><th>Hora Inicial</th><th>Hora final</th><th>Duracion</th><th>Duracion en segundos</th><th> </th></thead><tbody></tbody></table>';
+			//header('Content-Type: application/vnd.ms-excel');
+			window.open('data:application/vnd.ms-excel,'+ i + encodeURIComponent($('#grid').html()));
 	    });
-		
-		
-		/*
-		$('#btnExcel').on('click',function(){
-	  		// get the table id
-	  		$("#principalDiv").table2excel();
-	  	});
-		*/
-		
-/*		
-		  function descargarExcel(){
-		        //Creamos un Elemento Temporal en forma de enlace
-		        var tmpElemento = document.createElement('a');
-		        // obtenemos la información desde el div que lo contiene en el html
-		        // Obtenemos la información de la tabla
-		        var data_type = 'data:application/vnd.ms-excel';
-		        var tabla_div = document.getElementById('principalDiv');
-		        var tabla_html = tabla_div.outerHTML.replace(/ /g, '%20');
-		        tmpElemento.href = data_type + ', ' + tabla_html;
-		        //Asignamos el nombre a nuestro EXCEL
-		        tmpElemento.download = 'MovimientosPersonal.xls';
-		        tmpElemento.click();
-		    }
-		    descargarExcel();
-*/    
-		
 	
+		
 	}
-	
-	
+
 	
 	//funcion de calculo en segundos
 	 myFunction() {
