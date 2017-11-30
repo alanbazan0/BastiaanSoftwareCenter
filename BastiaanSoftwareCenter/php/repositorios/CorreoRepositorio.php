@@ -64,7 +64,7 @@ class CorreoRepositorio implements ICorreoRepositorio
         $resultado = new Resultado();
         $correos = array();
         $consulta = "SELECT EMENTFEC fecha, EMENTRNOM nombre, EMENTRCORREO correo, EMENTRASUN asunto, "
-                     ." EMENTRCUER contenido, CNUSERID id, EMENTRTO acorreo FROM BSTNTRN.EMENTR where CNUSERID= ? ";
+                     ." TO_BASE64(EMENTRCUER) contenido, CNUSERID id, EMENTRTO acorreo FROM BSTNTRN.EMENTR where CNUSERID= ? ";
             if($sentencia = $this->conexion->prepare($consulta))
             {
                 if($sentencia->bind_param("s",$NombreUsuario))
