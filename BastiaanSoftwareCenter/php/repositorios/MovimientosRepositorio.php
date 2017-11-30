@@ -196,7 +196,7 @@ include "../clases/Resultado.php";
         $resultado = new Resultado();
         $movimientos = array();     
        
-            $consulta = " SELECT BTMPERSONALIDN id, SIOUSUARIONCOMPLETO agenteId, B.SIOUSUARIOID agente ,  BTCRECESONOMC recesoC, BTMPERSONALRECID recesoId,  DATE_FORMAT(BTMPERSONALFINI,'%d/%m/%Y') fInicial ,BTMPERSONALHINI hInicial, BTMPERSONALHFIN hFinal, DATE_FORMAT(BTMPERSONALFFIN,'%d/%m/%Y') fFinal, BTMPERSONALDUR dPersonal, FORMAT(BTMPERSONALDURS, 3) dsPersonal,  BTMPERSONALFECHA fPersonal".
+            $consulta = " SELECT BTMPERSONALIDN id, SIOUSUARIONCOMPLETO agenteId, B.SIOUSUARIOID agente ,  BTCRECESONOMC recesoC, BTMPERSONALRECID recesoId,  DATE_FORMAT(BTMPERSONALFINI,'%d/%m/%Y') fInicial ,BTMPERSONALHINI hInicial, BTMPERSONALHFIN hFinal, DATE_FORMAT(BTMPERSONALFFIN,'%d/%m/%Y') fFinal, BTMPERSONALDUR dPersonal, FORMAT(BTMPERSONALDURS, 0) dsPersonal,  BTMPERSONALFECHA fPersonal".
                         " FROM BSTNTRN.BTMPERSONAL A".
                         " INNER JOIN BSTNTRN.SIOUSUARIO B ON A.SIOUSUARIOID = B.SIOUSUARIOID " .
                         " WHERE BTMPERSONALIDN  like CONCAT('%',?,'%') ".

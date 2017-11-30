@@ -269,7 +269,64 @@ class MovimientosVista
 	
 	
 	
-	
+	//funcion de calculo en segundos
+	 myFunction() {
+
+		var inicio = document.getElementById("hInicialFormularioInput").value;
+		var fin = document.getElementById("hFinalFormularioInput").value;
+	 
+		var inicioHoras = parseInt(inicio.substr(0,2));
+		var inicioMinutos = parseInt(inicio.substr(3,2));
+		var inicioSegundos = parseInt(inicio.substr(6,2));
+		  
+		var  finHoras = parseInt(fin.substr(0,2));
+		var  finMinutos = parseInt(fin.substr(3,2));
+		var  finSegundos = parseInt(fin.substr(6,2));
+
+	    var transcurridoMinutos = finMinutos - inicioMinutos;
+		var transcurridoHoras = finHoras - inicioHoras;
+		var transcurridoSegundos = finSegundos - inicioSegundos;
+		
+		var calculoMinutosPorHora = transcurridoHoras * 60;
+		var calculoSegundosPorHora = calculoMinutosPorHora * 60;
+		var calculoSegundosPorMinuto = transcurridoMinutos * 60;
+		var calculoSegundosHorasMin = calculoSegundosPorHora + calculoSegundosPorMinuto;
+		var calculoSumaSegundos = calculoSegundosHorasMin + transcurridoSegundos; 
+		  
+		  if (transcurridoMinutos < 0) {
+		    transcurridoHoras--;
+		    transcurridoMinutos = 60 + transcurridoMinutos;
+		  }
+		  
+		  if (transcurridoSegundos < 0) {
+			    transcurridoMinutos--;
+			    transcurridoSegundos = 60 + transcurridoSegundos;
+			  }
+		  
+		  var horas = transcurridoHoras.toString();
+		  var minutos = transcurridoMinutos.toString();
+		  var segundos = transcurridoSegundos.toString();
+		  
+		  if (horas.length < 2) {
+		    horas = "0"+horas;
+		  }
+		  
+		  if (minutos.length < 2) {
+		    minutos = "0"+minutos;
+		  }
+		  
+		  if (segundos.length < 2) {
+			    segundos = "0"+segundos;
+			  }
+	 
+		var confirmacion = confirm("Verifique que los datos ingresados sean correctos.");
+
+		if (confirmacion)
+	   	{
+			document.getElementById("dPersonalFormularioInput").value = horas+":"+minutos+":"+segundos;
+			document.getElementById("dsPersonalFormularioInput").value = calculoSumaSegundos;
+	   	}
+	}
 	
 	
 	

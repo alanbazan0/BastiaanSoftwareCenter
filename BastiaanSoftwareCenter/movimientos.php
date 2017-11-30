@@ -242,7 +242,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								    		<label  style="position: relative; left: 3px;">Duracion en Segundos</label>
 								   		</td>
 								   		<td>						    
-								    		<input class="input"   id="dsPersonalFormularioInput"   style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
+								    		<input class="input"   id="dsPersonalFormularioInput"   style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;" disabled/>
 								   		</td>
 								   
 								   		
@@ -262,7 +262,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								    		<label style="position: relative; left: 3px; ">Hora Inicial</label>
 								   		</td>
 								   		<td>		
-								   			<input  type="text" value=" " id="hInicialFormularioInput"   onblur="myFunction()"   style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
+								   			<input  type="time" value="" id="hInicialFormularioInput"  step="000001"style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
 								   		</td>
 								   		<td>						    
 								    		<label  style="position: relative; left: 3px;">Hora Final</label>
@@ -271,7 +271,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								 
 							
 								   		<td>						    
-								    		<input type="text" value=" " id="hFinalFormularioInput"  style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
+								    		<input type="time" value=" " id="hFinalFormularioInput" onblur="vista.myFunction()" step="000001" style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
 								   		</td>
 								   		
 							
@@ -280,7 +280,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								    		<label  style="position: relative; left: 3px;">Duracion</label>
 								   		</td>
 								   		<td>						    
-								    		<input  type='time' class="input" id="dPersonalFormularioInput"    style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;"/>
+								    		<input type="text" step="000001" class="input" id="dPersonalFormularioInput"    style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;" disabled/>
 								   		</td>
 								   
 								   
@@ -296,9 +296,6 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 						</div>
 				</div>
 		</div>
-	
-		
-		
 		<div class='ventana' id='PromptUsuario' style='display: none;'></div>
 		
 		<div class='ventana' id='_promptRelacionReporte' style='display: none;'></div>
