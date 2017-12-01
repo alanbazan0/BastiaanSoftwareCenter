@@ -164,6 +164,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 							</div>
 						</div>
 					</div>					
+					
 				</div>								
 			</div>	
     </div>
