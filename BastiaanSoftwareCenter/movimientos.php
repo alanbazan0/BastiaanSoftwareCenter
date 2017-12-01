@@ -72,9 +72,11 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
     <script language="JavaScript" type="text/JavaScript" src="js/repositorios/movimientos_repositorio.js"></script>
     <script language="JavaScript" type="text/JavaScript" src="js/presentadores/movimientos_presentador.js"></script>
 	<script language="JavaScript" type="text/JavaScript" src="js/vistas/movimientos_vista.js"></script>
-	
 
-	
+	<script language="JavaScript" type="text/JavaScript" src="js/librerias/tableToExcel/src/jquery.table2excel.js"></script>
+  	
+  	<script language="JavaScript" type="text/JavaScript" src="js/vistas/tableToExcel.js"></script>
+
 
 </head>
 <body  bgcolor="#e8e8e8" onLoad="vista.onLoad()" style="overflow: auto;height: 89%;">
@@ -101,7 +103,11 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 						<div id="botones" style="width:auto;overflow:auto;">
 							<table class="tablaBotonesIEC">
 								<tr>
-									<td><img id="btnExcel" class="botonMenuIEC" title="Exportar" src="assets/botones/btnExcel.png" onClick="vista.btnExcel_onClick();"></td>
+								
+                                          
+                                          
+                                    <button id="btnExcel" onclick="tableToExcel('grid', 'datos')"></button>
+	 	             
 									<td><img id="btnAlta" class="botonMenuIEC" title="Alta" src="assets/botones/imgAlta.png" onClick="vista.btnAlta_onClick();"></td>
 									<td><img id="btnBaja" class="botonMenuIEC" title="Baja" src="assets/botones/imgBaja.png" onClick="vista.btnBaja_onClick();"></td>
 									<td><img id="btnCambio" class="botonMenuIEC" title="Cambio" src="assets/botones/imgCambio.png" onClick="vista.btnCambio_onClick();"></td>
@@ -130,7 +136,6 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 									<td style="padding:6px 0px 4px 10px;">		<input  id='fFinalCriterioInput' type='date'  descripcion="Fecha"  style='height: 20px; width:200px;'/></input></td>
 								
 								
-								
 								</tr>
 							</table>
 						</div>
@@ -151,7 +156,9 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								</div>
 								<div id="panelesArea0panel0componentes" style=" width:99%;height:99%;overflow:hidden;position:relative;">
                                 	<div id="panelesArea0panel0componente0" style='overflow: auto; position:static;height:98%; width:100%; top:10px;left:3px;'>
-                                	 		<div id="grid"  style="float:left; overflow: auto; position:static; height:95%; width:100%; display: block; top:5px;left:3px;">	</div>                						
+
+                                         <table id="grid"></table>
+                                             	
                             		</div>
                            		</div>                                
 							</div>
@@ -300,7 +307,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								    		<input type="text" step="000001" class="input" id="dPersonalFormularioInput"    style="width:130px; font-family:Verdana; font-size:9px;text-align:left; color:#006699;position: relative; left: 6px; box-shadow: 2px 2px 5px #999;" disabled/>
 								   		</td>
 								   
-								   
+					
 								      
 								   </tr>		
 		   					
