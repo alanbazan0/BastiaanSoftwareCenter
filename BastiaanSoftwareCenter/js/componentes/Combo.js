@@ -4,14 +4,14 @@
 Combo = function(id) {
 	this._id = id;
 	this._viewport = id;
-	this._dataField = "recesoId";
-	this._labelField = "rCorto";
+	this._dataField = "id";
+	this._labelField = "dsc";
 	this._dataProvider = [];
 	this._selectedItem = null;
 	this._selectedIndex = null;
 	this._seleccionMultiple = false;
 	this._subscriptoresEventos = [];
-	
+	this._function=null;
 	/*
 	* Esta funcion dibuja el objeto
 	*/
@@ -69,10 +69,21 @@ Combo = function(id) {
 		datosEvent.event = event;
 		datosEvent.target = this;
 		datosEvent.datos = this._selectedItem;
-		var evento = new Evento("eventComboChange", datosEvent);
-		manejadorEventos.disparaEvento(evento);
+		var evento = new Evento("eventComboChange", datosEvent);		
+		//vista.manejadorEventos.disparaEvento(evento);		
+		//this.subscribirAEvento(this, "eventComboChange", this._function);	
 		this.disparaEvento(evento);
 	}
+	
+	/*
+	* Metodo para suscribir a evento
+	*/
+	/*this.subscribirAEvento =  function (vista , tipoEvento, nombreFuncion){			
+		this.subscribirAEvento(vista, tipoEvento, nombreFuncion);			
+	}*/
+	/*
+	* suscribe una funcion de un objetoa  un evento
+	*/
 	
 	/*
 	* establece el elemento seleccionado
