@@ -88,7 +88,7 @@ Combo = function(id) {
 	/*
 	* establece el elemento seleccionado
 	*/
-	this.setSeleccionado =  function (campo, valor){
+	this.setSeleccionado =  function (campo, valor){ 
 		var tmp = document.getElementById(this._viewport);
 		for( var i= tmp.options.length-1; i > -1  ;i--){
 			if(this._dataProvider[i][campo] == valor){
