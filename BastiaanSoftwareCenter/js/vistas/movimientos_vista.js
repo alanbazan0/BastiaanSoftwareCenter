@@ -173,37 +173,6 @@ class MovimientosVista
 	}	
 
 	
-/*
-	 myFunction() {
-	    alert("Input field lost focus.");
-
-	     
-	    function myFunction() {
-
-	    	inicio = document.getElementById("hInicialFormularioInput").value;
-	     //   alert(this.inicio);
-	       var inicio = this.inicio;
-	    	//document.getElementById("dPersonalFormularioInput").value = inicio;   
-	    }
-	       
-
-	    var x = document.getElementById("exito"); 
-
-	    x.addEventListener("focusout", myBlurFunction);
-
-	    function calcularDiasAusencia(hInicialFormularioInput, hFinalFormularioInput ) {
-
-	    function myFocusFunction() {
-	        document.getElementById("hInicialFormularioInput").style.backgroundColor = "yellow";
-
-	    	inicio = document.getElementById("hInicialFormularioInput").value;
-	    	fin = document.getElementById("hFinalFormularioInput").value;
-	    }
-	    
-	}
-	    
-	*/
-	
 	btnconsultaPrompt_onClick()
 	{
 
@@ -225,54 +194,95 @@ class MovimientosVista
 			this.mostrarMensaje('Error','El campo "' + campoObligatorioVacio.attr("descripcion") + '" es obligatorio.');
 		 }	
 	}
+
+
+	
+	btnExito_onClick(){
+
+		 var tab_text="<table border='2px'><tr bgcolor='#87AFC6'>";
+		    var textRange; var j=0;
+		  //var tab = document.getElementById("grid").value; // id of table
+		    
+		    var tab =this.grid._dataProvider;
+
+		    for(j = 0 ; j < tab.length; j++) 
+		    {     
+		        tab_text=tab_text+tab[j].innerHTML+"</tr>";
+		        //tab_text=tab_text+"</tr>";
+		    }
+
+		   var  tab_text=tab_text+"</table>";
+		   var  tab_text= tab_text.replace(/<A[^>]*>|<\/A>/g, "");//remove if u want links in your table
+		   var  tab_text= tab_text.replace(/<img[^>]*>/gi,""); // remove if u want images in your table
+		    tab_text= tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params
+
+		    var ua = window.navigator.userAgent;
+		    var msie = ua.indexOf("MSIE "); 
+
+		    if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))      // If Internet Explorer
+		    {
+		        txtArea1.document.open("txt/html","replace");
+		        txtArea1.document.write(tab_text);
+		        txtArea1.document.close();
+		        txtArea1.focus(); 
+		        sa=txtArea1.document.execCommand("SaveAs",true,"Say Thanks to Sumit.xls");
+		    }  
+		    else                 //other browser not tested on IE 11
+		        sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));  
+
+		    return (sa);
+
+		 }
+	
+
 	
 	
 	
-
-	btnExcel_onClick()
-	{
-		 // funciona para los dos navegadores 
-		
-		$('#btnExcel').on('click',requestbtnExcel);
-		
-		
-		function requestbtnExcel(){
-			tableToExcel('grid','datos');
-		}
-		
-		var tableToExcel = (function() {
-
-			  var uri = 'data:application/vnd.ms-excel;base64,'
-
-			    , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'
-
-			    , base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s))) }
-
-			    , format = function(s, c) { return s.replace(/{(\w+)}/g, function(m, p) { return c[p]; }) }
-
-			  return function(table, name) {
-
-			    if (!table.nodeType) table = document.getElementById(table)
-
-			    var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
-
-			    window.location.href = uri + base64(format(template, ctx))
-
-			  }  
-		})()
-/*
-		$("#btnExcel").click(function(e) {
-			var i = '<table ><thead><br>ID</br><br>Nombre Agente</br><th>Nombre Pila</th><th>Descripcion</th><th>F. Inicial</th><th>F. Final</th><th>Hora Inicial</th><th>Hora final</th><th>Duracion</th><th>Duracion en segundos</th><th> </th></thead><tbody></tbody></table>';
-			//header('Content-Type: application/vnd.ms-excel');
-			window.open('data:application/vnd.ms-excel,'+ + encodeURIComponent($('#grid').html()));
-	    });
-	*/
 	
+	
+	
+	
+	
+	
+		/*
+		 var tab_text="<table border='2px'><tr bgcolor='#87AFC6'>";
+		    var textRange; var j=0;
+		    tab = document.getElementById('headerTable'); // id of table
+
+		    for(j = 0 ; j < tab.rows.length ; j++) 
+		    {     
+		        tab_text=tab_text+tab.rows[j].innerHTML+"</tr>";
+		        //tab_text=tab_text+"</tr>";
+		    }
+
+		    tab_text=tab_text+"</table>";
+		    tab_text= tab_text.replace(/<A[^>]*>|<\/A>/g, "");//remove if u want links in your table
+		    tab_text= tab_text.replace(/<img[^>]*>/gi,""); // remove if u want images in your table
+		    tab_text= tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params
+
+		    var ua = window.navigator.userAgent;
+		    var msie = ua.indexOf("MSIE "); 
+
+		    if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))      // If Internet Explorer
+		    {
+		        txtArea1.document.open("txt/html","replace");
+		        txtArea1.document.write(tab_text);
+		        txtArea1.document.close();
+		        txtArea1.focus(); 
+		        sa=txtArea1.document.execCommand("SaveAs",true,"Say Thanks to Sumit.xls");
+		    }  
+		    else                 //other browser not tested on IE 11
+		        sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));  
+
+		    return (sa);
+		    
+		 */
 		
-	}
+	
 
 	
 	//funcion de calculo en segundos
+	
 	 myFunction() {
 
 		var inicio = document.getElementById("hInicialFormularioInput").value;
@@ -332,8 +342,8 @@ class MovimientosVista
 	}
 	
 	
-	
-	
+
+
 	
 	
 	btnSalir_onClick()
@@ -678,6 +688,9 @@ verDatosAsis()
 	this.presentador.consultarPorUsuario();   
 	
 }
+
+
+
 
 
 }

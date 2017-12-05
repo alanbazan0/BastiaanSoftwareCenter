@@ -14,15 +14,14 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 <head>	
 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-	<script  src='js/librerias/jQueryExcel/src/jquery.table2excel.js'></script>
+
 
 
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<!-- <script language="JavaScript" type="text/javascript" src="js/librerias/jquery-1.6.2.min.js"></script>  -->
 	
 	
-	<script language="JavaScript" type="text/javascript" src="js/librerias/jquery-ui-1.8.16.custom.min.js"></script>
+	<!-- <script language="JavaScript" type="text/javascript" src="js/librerias/jquery-ui-1.8.16.custom.min.js"></script> -->
 	<script language="JavaScript" type="text/JavaScript" src="js/librerias/json2.js"></script>
 	<script language="JavaScript" type="text/JavaScript" src="js/librerias/AjaxContextHandler.js"></script>
 	<script language="JavaScript" type="text/JavaScript" src="js/librerias/Ajaxv2.js"></script>
@@ -35,6 +34,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 	<script language="JavaScript" type="text/JavaScript" src="js/librerias/Base.js"></script> 
 
 	<script language="JavaScript" type="text/JavaScript" src="js/librerias/cargador.js"></script>
+	<script language="JavaScript" type="text/JavaScript" src="js/librerias/exporter.js-master/export.min.js"></script>
 <!-- 	<script language="JavaScript" type="text/JavaScript" src="js/librerias/jquery.min.js"></script> -->
 <!-- 
  	<script language="JavaScript" type="text/JavaScript" src='js/librerias/Datapickerjs/ui.core.js'></script>
@@ -73,9 +73,6 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
     <script language="JavaScript" type="text/JavaScript" src="js/presentadores/movimientos_presentador.js"></script>
 	<script language="JavaScript" type="text/JavaScript" src="js/vistas/movimientos_vista.js"></script>
 
-	<script language="JavaScript" type="text/JavaScript" src="js/librerias/tableToExcel/src/jquery.table2excel.js"></script>
-  	
-  	<script language="JavaScript" type="text/JavaScript" src="js/vistas/tableToExcel.js"></script>
 
 
 </head>
@@ -104,11 +101,8 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 							<table class="tablaBotonesIEC">
 								<tr>
 								
-                                          
-                                          
-                                    <button id="btnExcel" onclick="tableToExcel('grid', 'datos')"></button>
-	 	             
-									<td><img id="btnAlta" class="botonMenuIEC" title="Alta" src="assets/botones/imgAlta.png" onClick="vista.btnAlta_onClick();"></td>
+                                  <td><img id="btnExcel" class="botonMenuIEC" title="Excel" src="assets/botones/btnExcel.png" onClick="vista.btnExito_onClick();"></td>
+                     				<td><img id="btnAlta" class="botonMenuIEC" title="Alta" src="assets/botones/imgAlta.png" onClick="vista.btnAlta_onClick();"></td>
 									<td><img id="btnBaja" class="botonMenuIEC" title="Baja" src="assets/botones/imgBaja.png" onClick="vista.btnBaja_onClick();"></td>
 									<td><img id="btnCambio" class="botonMenuIEC" title="Cambio" src="assets/botones/imgCambio.png" onClick="vista.btnCambio_onClick();"></td>
 									<td><img id="btnConsulta" class="botonMenuIEC" title="Consulta" src="assets/botones/imgConsulta.png" onClick="vista.btnConsulta_onClick();"></td>
@@ -157,8 +151,9 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 								<div id="panelesArea0panel0componentes" style=" width:99%;height:99%;overflow:hidden;position:relative;">
                                 	<div id="panelesArea0panel0componente0" style='overflow: auto; position:static;height:98%; width:100%; top:10px;left:3px;'>
 
-                                         <table id="grid"></table>
-                                             	
+                                <!--          <table id="grid"></table> -->
+                                         <table id="grid" ></table>
+	
                             		</div>
                            		</div>                                
 							</div>
@@ -332,7 +327,11 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
 		<div class='ventana' id='PromptCriterioSeleccion' style='display:none; z-index:9001;'></div>    
 </div>
 
-</script>
+
+
+
+
+
 
 </form>
 </body>
