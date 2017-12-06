@@ -194,11 +194,32 @@ class MovimientosVista
 			this.mostrarMensaje('Error','El campo "' + campoObligatorioVacio.attr("descripcion") + '" es obligatorio.');
 		 }	
 	}
-
-
-	
-	btnExito_onClick(){
-
+	 btnExito_onClick()
+	 {
+	   // funciona para los dos navegadores 
+	   this.grid._dataProvider
+	   this.grid._colorRenglon1 = "#FFFFFF"; 
+	    this.grid._colorRenglon2 = "#FFFFFF";
+	    this.grid._colorEncabezado1 = "#FF6600";
+	    this.grid._colorLetraEncabezado = "#000000";
+	    this.grid._colorLetraCuerpo = "#000000";
+	    this.grid.render(); 
+	    
+	   window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('#grid').html()));
+	   
+	   this.grid._colorRenglon1 = "#FFFFFF"; 
+	   this.grid._colorRenglon2 = "#f8f2de";
+	   this.grid._colorEncabezado1 = "#FF6600";
+	   this.grid._colorEncabezado2 = "#FF6600";
+	   this.grid._colorLetraEncabezado = "#FFFFFF";
+	   this.grid._colorLetraCuerpo = "#000000";
+	   this.grid._regExtra=20;
+	   this.grid.render();
+	  
+	 
+	 }
+		
+/*
 		 var tab_text="<table border='2px'><tr bgcolor='#87AFC6'>";
 		    var textRange; var j=0;
 		  //var tab = document.getElementById("grid").value; // id of table
@@ -231,8 +252,7 @@ class MovimientosVista
 		        sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));  
 
 		    return (sa);
-
-		 }
+*/
 	
 
 	

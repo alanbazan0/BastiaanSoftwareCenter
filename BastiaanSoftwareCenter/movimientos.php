@@ -152,7 +152,7 @@ $CNUSERDESC = REQUEST('CNUSERDESC');
                                 	<div id="panelesArea0panel0componente0" style='overflow: auto; position:static;height:98%; width:100%; top:10px;left:3px;'>
 
                                 <!--          <table id="grid"></table> -->
-                                         <table id="grid" ></table>
+                                         <div id="grid" ></div>
 	
                             		</div>
                            		</div>                                
