@@ -1,5 +1,5 @@
 <?php
-use php\clases\AdministradorConexion;
+use php\clases\AdministradorConexionMarcador;
 use php\clases\JsonMapper;
 use php\modelos\Resultado;
 use php\repositorios\AsteriskRepositorio;
@@ -10,7 +10,7 @@ ini_set('display_errors', 1);
 
 include '../clases/JsonMapper.php';
 include '../clases/Utilidades.php';
-include '../clases/AdministradorConexion.php';
+include '../clases/AdministradorConexionMarcador.php';
 include '../repositorios/AsteriskRepositorio.php';
 
 
@@ -18,7 +18,7 @@ include '../repositorios/AsteriskRepositorio.php';
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json; charset=UTF-8');
 
-$administrador_conexion = new AdministradorConexion();
+$administrador_conexion = new AdministradorConexionMarcador();
 
 $conexion;
 $resultado = new Resultado();
@@ -32,11 +32,10 @@ try
         switch ($accion)
         {
             case 'consultar':
-                $extension = REQUEST('extension');
-                if($resultado->mensajeError=='')
-                {
-                    $resultado = $repositorio->consultarIdLlamada($extension);
-                }
+                $extension = json_decode(REQUEST('extension'));
+                $resultado = $repositorio->consultarIdLlamada($extension);
+                if($resultado!=null)
+                    echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
            break;
         }
     }
@@ -48,8 +47,7 @@ catch(Exception $e)
 }
 finally
 {
-    if($resultado!=null)
-        echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
+    
     $administrador_conexion->cerrar($conexion);
 }
 

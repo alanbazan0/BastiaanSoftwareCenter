@@ -22,6 +22,7 @@ class AsteriskRepositorio implements IAsteriskRepositorio
     public function calcularId()
     {   
         $resultado = new Resultado();
+
         $consulta =  "SELECT MAX(IFNULL(BTCPOSTALIDN,0))+1 AS id FROM BSTNTRN.BTCPOSTAL";
         if($sentencia = $this->conexion->prepare($consulta))
         {        
@@ -43,7 +44,8 @@ class AsteriskRepositorio implements IAsteriskRepositorio
                 $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;                       
         }
         else
-            $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error; 
+            $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
+
         return $resultado;
     }
     
@@ -52,19 +54,21 @@ class AsteriskRepositorio implements IAsteriskRepositorio
     {     
         $resultado = new Resultado();
 
-        $consulta =   "select llamadasEntrantesNum 'TELEFONO', llamadasEntrantesId 'IDLLAMADA' " 
-        . " from asteriskcdrdb.llamadasEntrantes " 
-        . " where cast( llamadasEntrantesfecha as date) = curdate() and llamadasEntrantesExt = ? " 
-        . " order by llamadasEntrantesIdn desc limit 1";
+        $consulta =   "select llamadasEntrantesId id  from asteriskcdrdb.llamadasentrantes " 
+        . " where cast( llamadasEntrantefecha as date) = curdate() and llamadasEntrantesExt = ? " 
+        . " order by llamadasEntrantefecha desc limit 1";
         if($sentencia = $this->conexion->prepare($consulta))
         {
             if($sentencia->bind_param("s",$extension))
             {
                 if($sentencia->execute())
                 {                
-                    if ($sentencia->bind_result($IDLLAMADA)  )
+                    if ($sentencia->bind_result($id))
                     {  
-                        $resultado->valor = $IDLLAMADA; 
+                        if($sentencia->fetch())
+                        {
+                            $resultado->valor = utf8_encode($id); 
+                        }
                     }           
                     else
                         $resultado->mensajeError = "Falló el enlace del resultado.";       
