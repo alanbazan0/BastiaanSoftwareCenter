@@ -515,7 +515,7 @@ $resultado->mensajeError = "Fallï¿½ la preparaciï¿½n: (" . $this->conexion->errn
                                 'nombre' => utf8_encode($nombre),
                                 'extension' => utf8_encode($extension)
                             ];
-                            $resultado->valor = $usuario;
+                            $resultado->valor = $usuario;                            
                         }
                         else
                             $resultado->mensajeError = "La combinaciÃ³n de usuario y contraseÃ±a es incorrecta.";
@@ -533,7 +533,60 @@ $resultado->mensajeError = "Fallï¿½ la preparaciï¿½n: (" . $this->conexion->errn
             $resultado->mensajeError = "FallÃ³ la preparaciÃ³n: (" . $this->conexion->errno . ") " . $this->conexion->error;
         return $resultado;
     }   
-    
+    public function insertarMovimientos($NombreUsuario)
+    {
+        $resultado = new Resultado();
+        $resultado2 = new Resultado();
+        $resultado2 =  $this->calcularIdBTMPERSONAL();
+        if($resultado2->mensajeError=="")
+        {
+            $consulta = "INSERT INTO BTMPERSONAL (BTMPERSONALIDN, SIOUSUARIOID, BTMPERSONALRECID, BTMPERSONALFINI,BTMPERSONALHINI,BTCRECESONOMC) "
+                ." VALUES (?,?,'SBSC', CURDATE(),current_time(),'SESION BASTIAAN SC')";
+                if($sentencia = $this->conexion->prepare($consulta))
+                {
+                    if($sentencia->bind_param("is",$resultado2->valor,$NombreUsuario))
+                    {
+                        if($sentencia->execute())
+                        {
+                            $resultado->valor=$resultado2->valor;
+                        }
+                        else
+                            $resultado->mensajeError = "FallÃ³ la ejecuciÃ³n (" . $this->conexion->errno . ") " . $this->conexion->error;
+                    }
+                    else  $resultado->mensajeError = "FallÃ³ el enlace de parÃ¡metros";
+                }
+                else
+                    $resultado->mensajeError = "FallÃ³ la preparaciÃ³n: (" . $this->conexion->errno . ") " . $this->conexion->error;
+        }
+       
+    }
+    public function calcularIdBTMPERSONAL()
+    {
+        $resultado = new Resultado();
+        $consulta =  "SELECT COALESCE(MAX(BTMPERSONALIDN)+1,1) AS id FROM BTMPERSONAL";
+        if($sentencia = $this->conexion->prepare($consulta))
+        {
+            if($sentencia->execute())
+            {
+                if ($sentencia->bind_result($id))
+                {
+                    if($sentencia->fetch())
+                    {
+                        $resultado->valor = $id;
+                    }
+                    else
+                        $resultado->mensajeError = "No se encontró ningún resultado";
+                }
+                else
+                    $resultado->mensajeError = "Falló el enlace del resultado";
+            }
+            else
+                $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;
+        }
+        else
+            $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
+            return $resultado;
+    }
     
     
 }

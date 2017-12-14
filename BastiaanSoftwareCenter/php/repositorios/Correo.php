@@ -37,6 +37,48 @@ try
                 if($resultado!=null)
                     echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
                     break;
+            case 'consultarCorreoEntradaDia':
+                $NombreUsuario = REQUEST('idNombre');
+                $resultado = $repositorio->consultarCorreoEntradaDia($NombreUsuario);
+                if($resultado!=null)
+                    echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
+                    break;
+            case 'consultarCorreoEntradaMes':
+                $NombreUsuario = REQUEST('idNombre');
+                $resultado = $repositorio->consultarCorreoEntradaMes($NombreUsuario);
+                if($resultado!=null)
+                    echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
+                    break;
+            case 'consultarCorreoEntradaSemana':
+                $NombreUsuario = REQUEST('idNombre');
+                $resultado = $repositorio->consultarCorreoEntradaSemana($NombreUsuario);
+                if($resultado!=null)
+                    echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
+                    break;
+            case 'consultarCorreoEntradaInfo':
+                $NombreUsuario = REQUEST('idNombre');
+                $resultado = $repositorio->consultarCorreoEntradaInfo($NombreUsuario);
+                if($resultado!=null)
+                    echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
+                    break;
+            case 'consultarCorreoEntradaDiaInfo':
+                $NombreUsuario = REQUEST('idNombre');
+                $resultado = $repositorio->consultarCorreoEntradaDiaInfo($NombreUsuario);
+                if($resultado!=null)
+                    echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
+                    break;
+            case 'consultarCorreoEntradaMesInfo':
+                $NombreUsuario = REQUEST('idNombre');
+                $resultado = $repositorio->consultarCorreoEntradaMesInfo($NombreUsuario);
+                if($resultado!=null)
+                    echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
+                    break;
+            case 'consultarCorreoEntradaSemanaInfo':
+                $NombreUsuario = REQUEST('idNombre');
+                $resultado = $repositorio->consultarCorreoEntradaSemanaInfo($NombreUsuario);
+                if($resultado!=null)
+                    echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
+                    break;
         }
     }
     

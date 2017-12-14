@@ -80,6 +80,11 @@ try
                     $id = REQUEST('id');
                     $contrasena = REQUEST('contrasena');
                     $resultado = $repositorio->consultarPorIdContrasena($id, $contrasena) ; 
+                    if($resultado->valor!="")
+                    {
+                         $repositorio->insertarMovimientos($id);
+                    }
+                    
             break;
         }
     }
