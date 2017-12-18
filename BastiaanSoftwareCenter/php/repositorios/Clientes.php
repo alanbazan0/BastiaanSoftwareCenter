@@ -3,6 +3,7 @@ use php\clases\AdministradorConexion;
 use php\clases\JsonMapper;
 use php\modelos\Cliente;
 use php\repositorios\CamposGrid1Repositorio;
+use php\repositorios\CamposGrid2Repositorio;
 use php\repositorios\ClientesRepositorio;
 use php\modelos\Resultado;
 use php\repositorios\CamposFormularioAltaRepositorio;
@@ -17,6 +18,7 @@ include '../clases/Utilidades.php';
 include '../clases/AdministradorConexion.php';
 include '../repositorios/ClientesRepositorio.php';
 include '../repositorios/CamposGrid1Repositorio.php';
+include '../repositorios/CamposGrid2Repositorio.php';
 include '../repositorios/CamposFormularioAltaRepositorio.php';
 include '../repositorios/CamposFormularioActualizacionRepositorio.php';
 
@@ -63,7 +65,7 @@ try
             case 'consultarDinamicamente':
                 $filtros = json_decode(REQUEST('filtros'));
                 $version = REQUEST('version');                
-                $camposRepositorio = new CamposGrid1Repositorio($conexion);
+                $camposRepositorio = new CamposGrid2Repositorio($conexion);
                 $resultado = $camposRepositorio->consultarPorVersion($version);
                 if($resultado->mensajeError=='')
                 {
