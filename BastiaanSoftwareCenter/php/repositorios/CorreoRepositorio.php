@@ -63,19 +63,22 @@ class CorreoRepositorio implements ICorreoRepositorio
     {
         $resultado = new Resultado();
         $correos = array();
-        $consulta = "SELECT EMENTFEC fecha, EMENTRNOM nombre, EMENTRCORREO correo, EMENTRASUN asunto, "
-                     ." TO_BASE64(EMENTRCUER) contenido, CNUSERID id, EMENTRTO acorreo FROM BSTNTRN.EMENTR where CNUSERID= ? ORDER BY EMENTFEC DESC ";
+        $consulta = "SELECT IFNULL(idnum.BTCLIENTECORREONOCTEID,'')  NomCLinete ,DATE_FORMAT(EMENTFEC, '%d-%m-%Y %h:%m:%s') fecha, EMENTRNOM nombre, EMENTRCORREO correo, EMENTRASUN asunto,"
+                    ." TO_BASE64(EMENTRCUER) contenido, CNUSERID id, EMENTRTO acorreo FROM BSTNTRN.EMENTR "
+                    ." left join bstntrn.btclientecorreo  as idnum on BTCLIENTECORREO = EMENTRCORREOS "
+                    ." where CNUSERID= ? ORDER BY EMENTFEC DESC ";
             if($sentencia = $this->conexion->prepare($consulta))
             {
                 if($sentencia->bind_param("s",$NombreUsuario))
                 {
                     if($sentencia->execute())
                     {
-                        if ($sentencia->bind_result($fecha,$nombre,$correo,$asunto,$contenido,$id,$acorreo))
+                        if ($sentencia->bind_result($NomCLinete,$fecha,$nombre,$correo,$asunto,$contenido,$id,$acorreo))
                         {
                             while($row = $sentencia->fetch())
                             {
                                 $correor = (object) [
+                                    'NomCLinete'=>utf8_encode($NomCLinete),
                                     'fecha' => utf8_encode($fecha) ,
                                     'nombre' => utf8_encode($nombre),
                                     'correo' => utf8_encode($correo),
@@ -83,7 +86,8 @@ class CorreoRepositorio implements ICorreoRepositorio
                                     'contenido' => utf8_encode($contenido),
                                     'id' => utf8_encode($id),
                                     'aCorreo' => utf8_encode($acorreo),
-                                    'titulo' => utf8_encode($correo)." ".utf8_encode($asunto)
+                                    'titulo' => utf8_encode($correo)."\n No. Cliente: ".utf8_encode($NomCLinete)
+                                    
                                 ];
                                 array_push($correos,$correor);
                             }
@@ -394,6 +398,133 @@ class CorreoRepositorio implements ICorreoRepositorio
                 
                 
                 return $resultado;
+    }
+    public function insertarAltaClienteCorreo($nombre,$nombre2,$paterno,$materno,$rfc,$curp)
+    {
+        $resultado = new Resultado();
+        $resultado2 = new Resultado();
+        $resultado2 =  $this->calcularIdbtcliente();
+        $correos = array();
+        $nombreCompleto =$nombre." ".$nombre2." ".$paterno." ".$materno ;
+        $resultado->valor=0;
+        $consulta = "INSERT INTO bstntrn.btcliente"
+                   ." (BTCLIENTENUMERO,"
+                   ." BTCLIENTEPNOMBRE,"
+                    ."BTCLIENTESNOMBRE,"
+                    ."BTCLIENTEAPATERNO,"
+                   ." BTCLIENTEAMATERNO,"
+                   ." BTCLIENTENCOMPLETO,"
+                   ." BTCLIENTERFC,"
+                    ."BTCLIENTECURP)"
+                    ."VALUES"
+                    ."(?,?,?,?,?,?,TRIM(?),?)";
+        if($sentencia = $this->conexion->prepare($consulta))
+        {
+            if($sentencia->bind_param("isssssss",$resultado2->valor,$nombre,$nombre2,$paterno,$materno, $nombreCompleto , $rfc,$curp))
+            {
+                if($sentencia->execute())
+                {                      
+                    $resultado->valor=$resultado2->valor;
+                    
+                }
+                else
+                    $resultado->mensajeError = "FallÃ³ la ejecuciÃ³n (" . $this->conexion->errno . ") " . $this->conexion->error;
+            }
+            else
+                $resultado->mensajeError = "FallÃ³ el enlace de parÃ¡metros";
+        }
+        else
+            $resultado->mensajeError = "FallÃ³ la preparaciÃ³n: (" . $this->conexion->errno . ") " . $this->conexion->error;
+            
+            
+            return $resultado;
+    }
+    public function calcularIdbtcliente()
+    {
+        $resultado = new Resultado();
+        $consulta =  "SELECT COALESCE(MAX(BTCLIENTENUMERO)+1,1) AS id FROM BSTNTRN.btcliente";
+        if($sentencia = $this->conexion->prepare($consulta))
+        {
+            if($sentencia->execute())
+            {
+                if ($sentencia->bind_result($id))
+                {
+                    if($sentencia->fetch())
+                    {
+                        $resultado->valor = $id;
+                    }
+                    else
+                        $resultado->mensajeError = "No se encontró ningún resultado";
+                }
+                else
+                    $resultado->mensajeError = "Falló el enlace del resultado";
+            }
+            else
+                $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;
+        }
+        else
+            $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
+            return $resultado;
+    }
+    public function insertarAltaCorreo($correo,$id)
+    {
+        $resultado = new Resultado();
+        $resultado2 = new Resultado();
+        $resultado2 =  $this->calcularIdbtclienteCorreo();
+        $correos = array();
+        $resultado->valor=0;
+        $consulta = "INSERT INTO bstntrn.btclientecorreo"
+                    ."(BTCLIENTECORREONOCTEID,"
+                    ."BTCLIENTECORREOID,"
+                    ."BTCLIENTECORREO)"
+                    ."VALUES"
+                    ."(?,?,?);";
+        if($sentencia = $this->conexion->prepare($consulta))
+        {
+            if($sentencia->bind_param("iss",$id,$resultado2->valor,$correo))
+            {
+                if($sentencia->execute())
+                {
+                    $resultado->valor=true;
+                    
+                }
+                else
+                    $resultado->mensajeError = "FallÃ³ la ejecuciÃ³n (" . $this->conexion->errno . ") " . $this->conexion->error;
+            }
+            else
+                $resultado->mensajeError = "FallÃ³ el enlace de parÃ¡metros";
+        }
+        else
+            $resultado->mensajeError = "FallÃ³ la preparaciÃ³n: (" . $this->conexion->errno . ") " . $this->conexion->error;  
+        return $resultado;
+          
+    }
+    public function calcularIdbtclienteCorreo()
+    {
+        $resultado = new Resultado();
+        $consulta =  "SELECT COALESCE(MAX(BTCLIENTECORREOID)+1,1) AS id FROM BSTNTRN.btclientecorreo";
+        if($sentencia = $this->conexion->prepare($consulta))
+        {
+            if($sentencia->execute())
+            {
+                if ($sentencia->bind_result($id))
+                {
+                    if($sentencia->fetch())
+                    {
+                        $resultado->valor = $id;
+                    }
+                    else
+                        $resultado->mensajeError = "No se encontró ningún resultado";
+                }
+                else
+                    $resultado->mensajeError = "Falló el enlace del resultado";
+            }
+            else
+                $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;
+        }
+        else
+            $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
+            return $resultado;
     }
 }
 

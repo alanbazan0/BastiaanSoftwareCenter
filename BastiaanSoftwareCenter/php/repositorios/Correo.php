@@ -79,6 +79,20 @@ try
                 if($resultado!=null)
                     echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
                     break;
+            case 'insertarAltaClienteCorreo':
+                $nombre = REQUEST('nombre');
+                $nombre2 = REQUEST('nombre2');
+                $paterno = REQUEST('paterno');
+                $materno = REQUEST('materno');
+                $correo = REQUEST('correo');
+                $rfc = REQUEST('rfc');
+                $curp = REQUEST('curp');
+                $resultado = $repositorio->insertarAltaClienteCorreo($nombre,$nombre2,$paterno,$paterno,$materno,$rfc,$curp);
+                if($resultado->valor!="")
+                    $resultado= $repositorio->insertarAltaCorreo($correo,$resultado->valor);
+                if($resultado!=null)
+                    echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
+                    break;
         }
     }
     
