@@ -69,6 +69,12 @@ try
                 $resultado = $repositorio->consultar($criteriosSeleccion);
                 if($resultado!=null)
                     echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
+                    break;                   
+            case 'consultarPorNumero':
+                $numeroEntrante= REQUEST('NumeroEntrante');
+                $resultado = $repositorio->consultarPorNumero($numeroEntrante);
+                if($resultado!=null)
+                    echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
                     break;
         }
     }

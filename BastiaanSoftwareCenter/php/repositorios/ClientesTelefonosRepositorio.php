@@ -206,7 +206,64 @@ class ClientesTelefonosRepositorio implements IClientesTelefonosRepositorio
         
        
         return $resultado;     
-    }    
+    }   
+    
+    
+    public function consultarPorNumero($NumeroEntrante)
+    {
+        $resultado = new Resultado();
+        $clientestelefonos = array();
+        
+        $consulta =   " SELECT "
+            . " BTCLIENTETELNOCTEID id, "
+                //. " BTCLIENTETELCONSID consecutivo, "
+        . " BTCLIENTETELNIR nir, "
+            . " BTCLIENTETELSERIE serie, "
+                . " BTCLIENTETELNUM telefonoCliente,"
+                    . " BTCLIENTETELNO numeracion,  "
+                        . " BTCLIENTETELCIA compania, "
+                            . " BTCLIENTETELTTELEFONOID tipoTelefono "
+                                . " FROM BSTNTRN.BTCLIENTETEL "
+                                    . " WHERE BTCLIENTETELNUM like CONCAT('%',?,'%') ";
+                                    if($sentencia = $this->conexion->prepare($consulta))
+                                    {
+                                        if($sentencia->bind_param("s",$NumeroEntrante))
+                                        {
+                                            if($sentencia->execute())
+                                            {
+                                                if ($sentencia->bind_result($id, /*$consecutivo*/  $nir, $serie, $telefonoCliente, $numeracion, $compania, $tipoTelefono)  )
+                                                {
+                                                    while($row = $sentencia->fetch())
+                                                    {
+                                                        $clientetelefono = (object) [
+                                                            'id' =>  utf8_encode($id),
+                                                            //'consecutivo' => utf8_encode($consecutivo),
+                                                            'nir' => utf8_encode($nir),
+                                                            'serie' => utf8_encode($serie),
+                                                            'telefonoCliente' => utf8_encode($telefonoCliente),
+                                                            'numeracion' => utf8_encode($numeracion),
+                                                            'campania' => utf8_encode($compania),
+                                                            'tipoTelefono' => utf8_encode($tipoTelefono)
+                                                        ];
+                                                        array_push($clientestelefonos,$clientetelefono);
+                                                    }
+                                                    $resultado->valor = $clientestelefonos;
+                                                }
+                                                else
+                                                    $resultado->mensajeError = "Falló el enlace del resultado.";
+                                            }
+                                            else
+                                                $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;
+                                        }
+                                        else
+                                            $resultado->mensajeError = "Falló el enlace de parámetros";
+                                    }
+                                    else
+                                        $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
+                                        
+                                        
+                                        return $resultado;
+    }   
 
     public function consultarPorLlaves($llaves)
     {

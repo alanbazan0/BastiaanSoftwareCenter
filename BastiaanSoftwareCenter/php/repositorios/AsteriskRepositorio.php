@@ -54,7 +54,7 @@ class AsteriskRepositorio implements IAsteriskRepositorio
     {     
         $resultado = new Resultado();
 
-        $consulta =   "select llamadasEntrantesId id  from asteriskcdrdb.llamadasentrantes " 
+        $consulta =   "select llamadasEntrantesId id  from asteriskcdrdb.llamadasEntrantes " 
         . " where cast( llamadasEntrantefecha as date) = curdate() and llamadasEntrantesExt = ? " 
         . " order by llamadasEntrantefecha desc limit 1";
         if($sentencia = $this->conexion->prepare($consulta))

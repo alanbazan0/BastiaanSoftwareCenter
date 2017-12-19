@@ -3,7 +3,7 @@ use php\clases\AdministradorConexion;
 use php\clases\JsonMapper;
 use php\modelos\Cliente;
 use php\repositorios\CamposGrid1Repositorio;
-use php\repositorios\CamposGrid2Repositorio;
+//use php\repositorios\CamposGrid2Repositorio;
 use php\repositorios\ClientesRepositorio;
 use php\modelos\Resultado;
 use php\repositorios\CamposFormularioAltaRepositorio;
@@ -62,17 +62,17 @@ try
                 $criteriosSeleccion = json_decode(REQUEST('criteriosSeleccion'));
                 $resultado = $repositorio->consultar($criteriosSeleccion);               
             break;
-            case 'consultarDinamicamente':
-                $filtros = json_decode(REQUEST('filtros'));
-                $version = REQUEST('version');                
-                $camposRepositorio = new CamposGrid2Repositorio($conexion);
-                $resultado = $camposRepositorio->consultarPorVersion($version);
-                if($resultado->mensajeError=='')
-                {
-                    $campos = $resultado->valor; 
-                    $resultado = $repositorio->consultarDinamicamente($filtros,$campos); 
-                }
-            break;
+//             case 'consultarDinamicamente':
+//                 $filtros = json_decode(REQUEST('filtros'));
+//                 $version = REQUEST('version');                
+//                 $camposRepositorio = new CamposGrid2Repositorio($conexion);
+//                 $resultado = $camposRepositorio->consultarPorVersion($version);
+//                 if($resultado->mensajeError=='')
+//                 {
+//                     $campos = $resultado->valor; 
+//                     $resultado = $repositorio->consultarDinamicamente($filtros,$campos); 
+//                 }
+//             break;
             case 'insertarDinamicamente':
                 $filtros = json_decode(REQUEST('campos'));
                 $version = REQUEST('version');
