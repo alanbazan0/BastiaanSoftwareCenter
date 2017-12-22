@@ -105,7 +105,7 @@ try
             case 'CerrarSesion':
                     $idUsuario = REQUEST('idNombre');
                     $resultado=$repositorio->CerrarSesion($idUsuario);   
-                    $repositorio->updateMovimientosUsuario($idUsuario);  
+                    $repositorio->updateMovimientosUsuario($idUsuario);   
                     break;
         }
     }

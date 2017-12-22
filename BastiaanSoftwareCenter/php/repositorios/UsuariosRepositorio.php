@@ -730,7 +730,7 @@ $resultado->mensajeError = "Fall� la preparaci�n: (" . $this->conexion->errn
                 }
                 else
                     $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
-                    return $resultado;
+                    return $resultado; 
     } 
     
 }
