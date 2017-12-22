@@ -86,6 +86,27 @@ try
                     }
                     
             break;
+            case 'InsertarSesionTrabajo':
+                $idHardware = REQUEST('idHardware');
+                $ip = REQUEST('ip');
+                $idUsuario = REQUEST('nombre');
+                $resultado = $repositorio->consultarSesionTrabajo($idUsuario) ;
+                if($resultado->valor=="")
+                {
+                    $resultado=$repositorio->InsertarSesionTrabajo($idUsuario,$ip,$idHardware);
+                }
+                else 
+                {
+                    $resultado->valor=false;
+                }
+                
+                break;
+                
+            case 'CerrarSesion':
+                    $idUsuario = REQUEST('idNombre');
+                    $resultado=$repositorio->CerrarSesion($idUsuario);   
+                    $repositorio->updateMovimientosUsuario($idUsuario);  
+                    break;
         }
     }
     

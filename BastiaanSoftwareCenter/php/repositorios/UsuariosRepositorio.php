@@ -560,10 +560,107 @@ $resultado->mensajeError = "Fallï¿½ la preparaciï¿½n: (" . $this->conexion->errn
         }
        
     }
+    
+    
+    public function consultarSesionTrabajo($idUsuario)
+    {
+        $resultado = new Resultado();
+        $consulta =  "SELECT MONACID as id FROM bstntrn.monac where MONACID=?;";
+        if($sentencia = $this->conexion->prepare($consulta))
+        {
+            if($sentencia->bind_param("s",$idUsuario))
+            {
+                if($sentencia->execute())
+                {
+                    
+                        if ($sentencia->bind_result($id))
+                        {
+                            if($sentencia->fetch())
+                            {
+                                $resultado->valor = $id;
+                            }
+                            else
+                                $resultado->mensajeError = "No se encontró ningún resultado";
+                        }
+                        else
+                            $resultado->mensajeError = "Falló el enlace del resultado";
+                 }
+                else
+                    $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;
+            }
+            else  $resultado->mensajeError = "FallÃ³ el enlace de parÃ¡metros";
+        }
+        else
+            $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
+            return $resultado;
+    }
+    public function InsertarSesionTrabajo($idUsuario,$ip,$idHardware)
+    {
+        $resultado = new Resultado();
+        $resultado2 = new Resultado();
+        $resultado2=$this->calcularIdMONAC();
+        $consulta =  "INSERT INTO bstntrn.monac"
+                      ."   (MONACID,"
+                      ."  MONACAP,"
+                      ."   MONACF,"
+                      ."  MONACH,"
+                      ."  MONACUA,"
+                      ."  MONACIP,"
+                      ."  MONACEST,"
+                      ."  MONACOD,"
+                      ."  MONACRAN,"
+                      ."  MONACIDEQUIPO)"
+                       ."  VALUES"
+                        ." (?,'Agente',CURDATE(),current_time(),'Programa del agente',?,'4','',?,?)";
+        if($sentencia = $this->conexion->prepare($consulta))
+        {
+            if($sentencia->bind_param("ssss",$idUsuario,$ip,$resultado2->valor,$idHardware))
+            {
+               if($sentencia->execute())
+               {
+                      $resultado->valor=true;
+                }
+                else
+                    $resultado->mensajeError = "FallÃ³ la ejecuciÃ³n (" . $this->conexion->errno . ") " . $this->conexion->error;
+             
+            }
+            else  $resultado->mensajeError = "FallÃ³ el enlace de parÃ¡metros";
+        }
+        else
+            $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
+            return $resultado;
+    }
     public function calcularIdBTMPERSONAL()
     {
         $resultado = new Resultado();
-        $consulta =  "SELECT COALESCE(MAX(BTMPERSONALIDN)+1,1) AS id FROM BTMPERSONAL";
+        $consulta =  "SELECT COALESCE(MAX(BTMPERSONALIDN)+1,1) AS id FROM btmpersonal";
+        if($sentencia = $this->conexion->prepare($consulta))
+        {
+            if($sentencia->execute())
+            {
+                if ($sentencia->bind_result($id))
+                {
+                    if($sentencia->fetch())
+                    {
+                        $resultado->valor = $id;
+                    }
+                    else
+                        $resultado->mensajeError = "No se encontró ningún resultado";
+                }
+                else
+                    $resultado->mensajeError = "Falló el enlace del resultado";
+            }
+            else
+                $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;
+        }
+        else
+            $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
+            return $resultado;
+    }
+    public function calcularIdMONAC()
+    {
+        $resultado = new Resultado();
+        $consulta =  "SELECT COALESCE(MAX(MONACRAN)+1,1) AS id FROM monac";
         if($sentencia = $this->conexion->prepare($consulta))
         {
             if($sentencia->execute())
@@ -588,6 +685,53 @@ $resultado->mensajeError = "Fallï¿½ la preparaciï¿½n: (" . $this->conexion->errn
             return $resultado;
     }
     
+    public function CerrarSesion($idUsuario)
+    {
+        $resultado = new Resultado();
+        $consulta =  "DELETE FROM bstntrn.monac WHERE MONACID=?";
+        if($sentencia = $this->conexion->prepare($consulta))
+        {
+            if($sentencia->bind_param("s",$idUsuario))
+            {
+                if($sentencia->execute())
+                {
+                    $resultado->valor=true;
+                }
+                else
+                    $resultado->mensajeError = "FallÃ³ la ejecuciÃ³n (" . $this->conexion->errno . ") " . $this->conexion->error;
+                    
+             }
+            
+            else  $resultado->mensajeError = "FallÃ³ el enlace de parÃ¡metros";
+        }
+        else
+            $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
+            return $resultado;
+    }
+    public function updateMovimientosUsuario($NombreUsuario)
+    {
+        $resultado = new Resultado();
+        $consulta = "UPDATE  BSTNTRN.BTMPERSONAL "
+            ." SET BTMPERSONALFFIN = CURDATE() ,BTMPERSONALHFIN= current_time(),BTMPERSONALDUR= '0',BTMPERSONALDURS= '0' "
+                ." WHERE SIOUSUARIOID= ? and BTMPERSONALRECID= 'SBSC' AND  BTMPERSONALFFIN IS NULL  AND BTMPERSONALHFIN IS NULL ";
+                if($sentencia = $this->conexion->prepare($consulta))
+                {
+                    if($sentencia->bind_param("s",$NombreUsuario
+                        ))
+                    {
+                        if($sentencia->execute())
+                        {
+                            $resultado->valor=true;
+                        }
+                        else
+                            $resultado->mensajeError = "FallÃ³ la ejecuciÃ³n (" . $this->conexion->errno . ") " . $this->conexion->error;
+                    }
+                    else  $resultado->mensajeError = "FallÃ³ el enlace de parÃ¡metros";
+                }
+                else
+                    $resultado->mensajeError = "FallÃ³ la preparaciÃ³n: (" . $this->conexion->errno . ") " . $this->conexion->error;
+                    return $resultado;
+    } 
     
 }
 
