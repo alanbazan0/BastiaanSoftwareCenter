@@ -24,8 +24,8 @@ class CamposGrid1Repositorio implements ICamposGrid1Repositorio
         $registros = array();     
        
         $consulta =   " SELECT BTGRID1ID id, CR.BTCAMPOID campoId, BTGRID1ORDEN orden, BTGRID1PRESENTACION presentacion, BTGRID1TITULO titulo, BTTABLAID tablaId, BTCAMPOTIPO tipoDato, BTCAMPOTAMANO tamano " .
-                        "FROM BSTNTRN.BTGRID1 CR ".
-                        "   INNER JOIN BSTNTRN.BTCAMPO C ON CR.BTCAMPOID = C.BTCAMPOID " .
+                        "FROM bstntrn.BTGRID1 CR ".
+                        "   INNER JOIN bstntrn.BTCAMPO C ON CR.BTCAMPOID = C.BTCAMPOID " .
                         "WHERE BTVERSIONID = ? ".
                         "ORDER BY BTGRID1ORDEN";
      

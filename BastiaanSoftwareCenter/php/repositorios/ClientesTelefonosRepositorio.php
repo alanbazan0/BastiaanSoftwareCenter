@@ -26,7 +26,7 @@ class ClientesTelefonosRepositorio implements IClientesTelefonosRepositorio
     {   
        
         $resultado = new Resultado();
-        $consulta =  "SELECT MAX(IFNULL(BTCLIENTETELCONSID,0))+1 AS id FROM BSTNTRN.BTCLIENTETEL";
+        $consulta =  "SELECT MAX(IFNULL(BTCLIENTETELCONSID,0))+1 AS id FROM bstntrn.BTCLIENTETEL";
         if($sentencia = $this->conexion->prepare($consulta))
         {        
             if($sentencia->execute())
@@ -57,7 +57,7 @@ class ClientesTelefonosRepositorio implements IClientesTelefonosRepositorio
         if($resultado->mensajeError=="")
         {
             $id = $resultado->valor;
-            $consulta = " INSERT INTO BSTNTRN.BTCLIENTETEL "
+            $consulta = " INSERT INTO bstntrn.BTCLIENTETEL "
                         . " (BTCLIENTETELNOCTEID, "
                         . " BTCLIENTETELCONSID, "
                         . " BTCLIENTETELNIR, "
@@ -93,7 +93,7 @@ class ClientesTelefonosRepositorio implements IClientesTelefonosRepositorio
     public function eliminar($llaves)
     {
         $resultado = new Resultado();
-        $consulta = " DELETE FROM BSTNTRN.BTCLIENTETEL "
+        $consulta = " DELETE FROM bstntrn.BTCLIENTETEL "
                     . "  WHERE BTCLIENTETELNOCTEID = ? ";
          if($sentencia = $this->conexion->prepare($consulta))
          {
@@ -118,7 +118,7 @@ class ClientesTelefonosRepositorio implements IClientesTelefonosRepositorio
     public function actualizar(ClienteTelefono $clientetelefono)
     {     
         $resultado = new Resultado();
-        $consulta = " UPDATE BSTNTRN.BTCLIENTETEL SET"
+        $consulta = " UPDATE bstntrn.BTCLIENTETEL SET"
                     //. " BTCLIENTETELCONSID = ? , "
                     . " BTCLIENTETELNIR = ? , "
                     . " BTCLIENTETELSERIE = ? , "
@@ -166,7 +166,7 @@ class ClientesTelefonosRepositorio implements IClientesTelefonosRepositorio
                       . " BTCLIENTETELNO numeracion,  "
                       . " BTCLIENTETELCIA compania, "
                       . " BTCLIENTETELTTELEFONOID tipoTelefono "
-                      . " FROM BSTNTRN.BTCLIENTETEL "
+                      . " FROM bstntrn.BTCLIENTETEL "
                       . " WHERE BTCLIENTETELNOCTEID like CONCAT('%',?,'%') ";
         if($sentencia = $this->conexion->prepare($consulta))
         {
@@ -223,7 +223,7 @@ class ClientesTelefonosRepositorio implements IClientesTelefonosRepositorio
                     . " BTCLIENTETELNO numeracion,  "
                         . " BTCLIENTETELCIA compania, "
                             . " BTCLIENTETELTTELEFONOID tipoTelefono "
-                                . " FROM BSTNTRN.BTCLIENTETEL "
+                                . " FROM bstntrn.BTCLIENTETEL "
                                     . " WHERE BTCLIENTETELNUM like CONCAT('%',?,'%') ";
                                     if($sentencia = $this->conexion->prepare($consulta))
                                     {
@@ -278,7 +278,7 @@ class ClientesTelefonosRepositorio implements IClientesTelefonosRepositorio
                     . " BTCLIENTETELCIA compania, "
                     . " BTCLIENTETELTTELEFONOID tipoTelefono, "
                     . " BTCLIENTETELNO numeracion "
-                    . " FROM BSTNTRN.BTCLIENTETEL "
+                    . " FROM bstntrn.BTCLIENTETEL "
                     . " WHERE BTCLIENTETELNOCTEID = ? ";  
         if($sentencia = $this->conexion->prepare($consulta))
         {

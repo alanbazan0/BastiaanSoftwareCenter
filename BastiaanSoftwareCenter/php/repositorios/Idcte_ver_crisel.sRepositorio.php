@@ -22,7 +22,7 @@ class VersionesRepositorio implements IVersionesRepositorio
     public function calcularId()
     {   
         $resultado = new Resultado();
-        $consulta =  "SELECT MAX(IFNULL(BTVERSIONID,0))+1 AS id FROM BSTNTRN.BTVERSION";
+        $consulta =  "SELECT MAX(IFNULL(BTVERSIONID,0))+1 AS id FROM bstntrn.BTVERSION";
         if($sentencia = $this->conexion->prepare($consulta))
         {        
             if($sentencia->execute())
@@ -53,7 +53,7 @@ class VersionesRepositorio implements IVersionesRepositorio
         if($resultado->mensajeError=="")
         {
             $id = $resultado->valor;
-            $consulta = " INSERT INTO BSTNTRN.BTVERSION"
+            $consulta = " INSERT INTO bstntrn.BTVERSION"
                         . " (BTVERSIONID, "
                         . " BTVERSIONDSCC, "
                         . " BTVERSIONDSCL, "
@@ -86,7 +86,7 @@ class VersionesRepositorio implements IVersionesRepositorio
     Public function insertarGrid2(Version $datos)
     {
    
-            $consulta = " INSERT INTO BSTNTRN.BTCRITERIO"
+            $consulta = " INSERT INTO bstntrn.BTCRITERIO"
                 . "(BTVERSIONID, "
                 . "  BTCAMPOID, "
                 . "  BTCRITERIOPRESENTACION, "
@@ -116,7 +116,7 @@ class VersionesRepositorio implements IVersionesRepositorio
     public function eliminar($llaves)
     {
         $resultado = new Resultado();
-        $consulta = " DELETE FROM BSTNTRN.BTCRITERIO"
+        $consulta = " DELETE FROM bstntrn.BTCRITERIO"
                     . "  WHERE BTVERSIONID = ? ";
          if($sentencia = $this->conexion->prepare($consulta))
          {
@@ -141,7 +141,7 @@ class VersionesRepositorio implements IVersionesRepositorio
     public function actualizar(Version $version)
     {     
         $resultado = new Resultado();
-        $consulta = " UPDATE BSTNTRN.BTVERSION SET"
+        $consulta = " UPDATE bstntrn.BTVERSION SET"
                     . " BTVERSIONDSCC= ?, "
                     . " BTVERSIONDSCL= ?, "
                     . " BTVERSIONNOMP= ?, "
@@ -186,7 +186,7 @@ class VersionesRepositorio implements IVersionesRepositorio
             ." BTCAMPOTIPO tipoCampo, "
             ." BTCAMPOTAMANO tamanoCampo, "
             ." BTCAMPOTITULO tituloCampo " 
-            ." FROM BSTNTRN.BTCAMPO ";
+            ." FROM bstntrn.BTCAMPO ";
        if($sentencia = $this->conexion->prepare($consulta))
                      {
                         if(true)
@@ -236,7 +236,7 @@ class VersionesRepositorio implements IVersionesRepositorio
                      . " BTVERSIONNOMP nombrePila, "    
                      . " BTVERSIONFECHA fecha, "
                      . " BTVERSIONHORA hora "
-                     . " FROM BSTNTRN.BTVERSION  "
+                     . " FROM bstntrn.BTVERSION  "
                      . " WHERE BTVERSIONID like  CONCAT('%',?,'%') ";
                      
         if($sentencia = $this->conexion->prepare($consulta))
@@ -286,8 +286,8 @@ class VersionesRepositorio implements IVersionesRepositorio
         $registros = array();
         
         $consulta =   " SELECT BTCRITERIOID id,CR.BTCAMPOID campoId, BTCRITERIOORDEN orden, BTCRITERIOPRESENTACION presentacion, BTCRITERIOTITULO titulo, BTTABLAID tablaId, BTCAMPOTIPO tipoDato, BTCAMPOTAMANO tamano " .
-                        "FROM BSTNTRN.BTCRITERIO CR ".
-                        "   INNER JOIN BSTNTRN.BTCAMPO C ON CR.BTCAMPOID = C.BTCAMPOID " .
+                        "FROM bstntrn.BTCRITERIO CR ".
+                        "   INNER JOIN bstntrn.BTCAMPO C ON CR.BTCAMPOID = C.BTCAMPOID " .
                         "WHERE BTVERSIONID = ? ".
                         "ORDER BY BTCRITERIOORDEN";
         

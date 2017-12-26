@@ -82,7 +82,7 @@ try
                     $resultado = $repositorio->consultarPorIdContrasena($id, $contrasena) ; 
                     if($resultado->valor!="")
                     {
-                         $repositorio->insertarMovimientos($id);
+                        // $repositorio->insertarMovimientos($id);
                     }
                     
             break;
@@ -94,6 +94,8 @@ try
                 if($resultado->valor=="")
                 {
                     $resultado=$repositorio->InsertarSesionTrabajo($idUsuario,$ip,$idHardware);
+                    $repositorio->insertarMovimientos($idUsuario);
+                    $resultado= $repositorio->InsertarSesionTrabajoHistorial($idUsuario,$ip,'4',$idHardware);
                 }
                 else 
                 {
@@ -104,8 +106,11 @@ try
                 
             case 'CerrarSesion':
                     $idUsuario = REQUEST('idNombre');
+                    $idHardware = REQUEST('idHardware');
+                    $ip = REQUEST('ip');
                     $resultado=$repositorio->CerrarSesion($idUsuario);   
-                    $repositorio->updateMovimientosUsuario($idUsuario);   
+                    $repositorio->updateMovimientosUsuario($idUsuario);  
+                    $repositorio->InsertarSesionTrabajoHistorial($idUsuario,$ip,'2',$idHardware);
                     break;
         }
     }
