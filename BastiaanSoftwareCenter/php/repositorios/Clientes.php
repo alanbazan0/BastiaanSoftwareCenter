@@ -8,6 +8,7 @@ use php\repositorios\ClientesRepositorio;
 use php\modelos\Resultado;
 use php\repositorios\CamposFormularioAltaRepositorio;
 use php\repositorios\CamposFormularioActualizacionRepositorio;
+use php\repositorios\CamposGrid2Repositorio;
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -62,17 +63,17 @@ try
                 $criteriosSeleccion = json_decode(REQUEST('criteriosSeleccion'));
                 $resultado = $repositorio->consultar($criteriosSeleccion);               
             break;
-//             case 'consultarDinamicamente':
-//                 $filtros = json_decode(REQUEST('filtros'));
-//                 $version = REQUEST('version');                
-//                 $camposRepositorio = new CamposGrid2Repositorio($conexion);
-//                 $resultado = $camposRepositorio->consultarPorVersion($version);
-//                 if($resultado->mensajeError=='')
-//                 {
-//                     $campos = $resultado->valor; 
-//                     $resultado = $repositorio->consultarDinamicamente($filtros,$campos); 
-//                 }
-//             break;
+             case 'consultarDinamicamente':
+                 $filtros = json_decode(REQUEST('filtros'));
+                $version = REQUEST('version');                
+                 $camposRepositorio = new CamposGrid2Repositorio($conexion);
+                 $resultado = $camposRepositorio->consultarPorVersion($version);
+                 if($resultado->mensajeError=='')
+                {
+                    $campos = $resultado->valor; 
+                    $resultado = $repositorio->consultarDinamicamente($filtros,$campos); 
+                }
+             break;
             case 'insertarDinamicamente':
                 $filtros = json_decode(REQUEST('campos'));
                 $version = REQUEST('version');
