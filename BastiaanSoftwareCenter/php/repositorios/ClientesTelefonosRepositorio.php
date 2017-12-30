@@ -6,6 +6,7 @@ use Exception;
 use php\interfaces\IClientesTelefonosRepositorio;
 use php\modelos\ClienteTelefono;
 use php\modelos\Resultado;
+use php\modelos\Correos;
 
 
 include "../interfaces/IClientesTelefonosRepositorio.php";
@@ -317,8 +318,67 @@ class ClientesTelefonosRepositorio implements IClientesTelefonosRepositorio
             $resultado->mensajeError = "FallÃ³ la preparaciÃ³n: (" . $this->conexion->errno . ") " . $this->conexion->error;     
        return $resultado;
     }
-
-
+   
+    public function insertarAltaCorreo(ClienteTelefono $correo)
+    {
+        $resultado = new Resultado();
+        $resultado2 = new Resultado();
+        $resultado2 =  $this->calcularIdbtclienteCorreo();
+        $correos = array();
+        $resultado->valor=0;
+        $consulta = "INSERT INTO bstntrn.btclientecorreo"
+            ."(BTCLIENTECORREONOCTEID,"
+                ."BTCLIENTECORREOID,"
+                    ."BTCLIENTECORREO,BTCLIENTECORREOORIGEN)"
+                        ."VALUES"
+                            ."(?,?,?,?);";
+                            if($sentencia = $this->conexion->prepare($consulta))
+                            {
+                                if($sentencia->bind_param("isss",$correo->id,$resultado2->valor,$correo->Correo,$correo->Origen))
+                                {
+                                    if($sentencia->execute())
+                                    {
+                                        $resultado->valor=true;
+                                        
+                                    }
+                                    else
+                                        $resultado->mensajeError = "FallÃ³ la ejecuciÃ³n (" . $this->conexion->errno . ") " . $this->conexion->error;
+                                }
+                                else
+                                    $resultado->mensajeError = "FallÃ³ el enlace de parÃ¡metros";
+                            }
+                            else
+                                $resultado->mensajeError = "FallÃ³ la preparaciÃ³n: (" . $this->conexion->errno . ") " . $this->conexion->error;
+                                return $resultado;
+                                
+    }
+    public function calcularIdbtclienteCorreo()
+    {
+        $resultado = new Resultado();
+        $consulta =  "SELECT COALESCE(MAX(BTCLIENTECORREOID)+1,1) AS id FROM BSTNTRN.btclientecorreo";
+        if($sentencia = $this->conexion->prepare($consulta))
+        {
+            if($sentencia->execute())
+            {
+                if ($sentencia->bind_result($id))
+                {
+                    if($sentencia->fetch())
+                    {
+                        $resultado->valor = $id;
+                    }
+                    else
+                        $resultado->mensajeError = "No se encontró ningún resultado";
+                }
+                else
+                    $resultado->mensajeError = "Falló el enlace del resultado";
+            }
+            else
+                $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;
+        }
+        else
+            $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
+            return $resultado;
+    }
     
 }
 

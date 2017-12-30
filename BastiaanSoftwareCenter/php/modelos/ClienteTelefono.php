@@ -11,5 +11,9 @@ class ClienteTelefono
     public $numeracion;
     public $compania;
     public $tipoTelefono;
+    
+    
+    public $Correo;
+    public $Origen;
 }
 

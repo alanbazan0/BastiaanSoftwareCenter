@@ -9,5 +9,8 @@ class Receso
     public $rLargo;
     public $rTiempo;
     public $rRecesos;
+    
+    public $Correo;
+    public $Origen;
 
 }
