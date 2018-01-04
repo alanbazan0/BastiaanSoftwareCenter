@@ -309,6 +309,65 @@ class PortablesRepositorio implements IPortablesRepositorio
                     
                     return $resultado;
     }
+    public function consultarPortabilidadVacio($criteriosSeleccion)
+    {
+        $resultado = new Resultado();
+        $portables = array();
+        
+        $consulta = "SELECT "
+             ." BTCPORTABILIDADNIRID idMunicipio, "
+             ." BTCPORTABILIDADSERIEID idConsecutivo, "
+             ." BTCPORTABILIDADNUM numeroPortabilidad, "
+             ." BTCPORTABILIDADCIA descripcionPortabilidad, "
+             ." BTCPORTABILIDADPOB ciudadPortabilidad, "
+             ." BTCPORTABILIDADMPIO municipioPortabilidad, "
+             ." BTCPORTABILIDADEDO estadoPortabilidad, "
+             ." BTCPORTABILIDADTRED redPortabilidad,"
+             ." (CASE WHEN SUBSTRING(?, 1, 2) = 55 THEN 'LOCAL' ELSE 'FORANEO' END) tipoLlamadaPortabilidad "
+             ." FROM BSTNTRN.BTCPORTABILIDAD "
+             ." WHERE BTCPORTABILIDADID =  0 ";
+                                                        
+                                                        
+                                                        if($sentencia = $this->conexion->prepare($consulta))
+                                                        {
+                                                            if($sentencia->bind_param("s",$criteriosSeleccion))
+                                                            {
+                                                                if($sentencia->execute())
+                                                                {
+                                                                    if ($sentencia->bind_result($idMunicipio, $idConsecutivo, $numeroPortabilidad, $descripcionPortabilidad, $ciudadPortabilidad, $municipioPortabilidad, $estadoPortabilidad, $redPortabilidad, $tipoLlamadaPortabilidad )  )
+                                                                    {
+                                                                        while($row = $sentencia->fetch())
+                                                                        {
+                                                                            $portable = (object) [
+                                                                                'idMunicipio' =>  utf8_encode($idMunicipio),
+                                                                                'idConsecutivo' =>  utf8_encode($idConsecutivo),
+                                                                                'numeroPortabilidad' => utf8_encode($numeroPortabilidad),
+                                                                                'descripcionPortabilidad' =>  utf8_encode($descripcionPortabilidad),
+                                                                                'ciudadPortabilidad' =>  utf8_encode($ciudadPortabilidad),
+                                                                                'municipioPortabilidad' => utf8_encode($municipioPortabilidad),
+                                                                                'estadoPortabilidad' => utf8_encode($estadoPortabilidad),
+                                                                                'redPortabilidad' => utf8_encode($redPortabilidad),
+                                                                                'tipoLlamadaPortabilidad' => utf8_encode($tipoLlamadaPortabilidad)
+                                                                            ];
+                                                                            array_push($portables,$portable);
+                                                                        }
+                                                                        $resultado->valor = $portables;
+                                                                    }
+                                                                    else
+                                                                        $resultado->mensajeError = "Falló el enlace del resultado.";
+                                                                }
+                                                                else
+                                                                    $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;
+                                                            }
+                                                            else
+                                                                $resultado->mensajeError = "Falló el enlace de parámetros";
+                                                        }
+                                                        else
+                                                            $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
+                                                            
+                                                            
+                                                            return $resultado;
+    }
     
     
 }

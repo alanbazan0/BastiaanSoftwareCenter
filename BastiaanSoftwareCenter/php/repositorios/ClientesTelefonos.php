@@ -55,9 +55,6 @@ try
                 
                 if (isset($arrayData2))
                 {
-                    
-                    //print_r("'".$campoID."'");
-                    //echo json_encode($arrayData2[0]['id'], JSON_UNESCAPED_UNICODE);
                     for($i=0; $i< count($arrayData2); $i++)
                     {                       
                         $object= new ClienteTelefono();
@@ -71,21 +68,42 @@ try
                         $object->numeracion=     $arrayData2[$i]['Numeracion'];
                         
                         $resultado = $repositorio->insertar($object);
-                       
-                    }
+                    }                    
                     if($resultado!=null)
                         echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
                 }
                 break;
             case 'actualizar':
-                $json = json_decode(REQUEST('clientetelefono'));
+                $json = REQUEST('clientetelefono');
+                $idCliente = REQUEST('idCliente');
+                $arrayData = json_decode($json, true);
                 $mapper = new JsonMapper();
-                $clientetelefono = $mapper->map($json, new ClienteTelefono());
                 
-                $resultado = $repositorio->actualizar($clientetelefono) ;
-                if($resultado!=null)
-                    echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
-                    break;
+                $arr=json_encode($arrayData, JSON_UNESCAPED_UNICODE);
+                $arrayData2= (array)json_decode($arr, true);
+                
+                if (isset($arrayData2))
+                {
+                    for($i=0; $i< count($arrayData2); $i++)
+                    {
+                        if($arrayData2[$i]['Id']=="")
+                        {
+                            $object= new ClienteTelefono();
+                            
+                            $object->id=             $idCliente;
+                            $object->nir=            $arrayData2[$i]['Nir'];
+                            $object->serie=          $arrayData2[$i]['Serie'];
+                            $object->telefonoCliente=$arrayData2[$i]['TelefonoCliente'];
+                            $object->compania=       $arrayData2[$i]['Compania'];
+                            $object->tipoTelefono=   $arrayData2[$i]['TipoTelefono'];
+                            $object->numeracion=     $arrayData2[$i]['Numeracion'];
+                            
+                            $resultado = $repositorio->insertar($object);
+                        }
+                       }
+                    }
+                    if($resultado!=null)
+                        echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
             case 'eliminar':
                 $llaves = json_decode(REQUEST('llaves'));
                 $resultado = $repositorio->eliminar($llaves);
@@ -134,6 +152,19 @@ try
                         echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
                 }
                 break;
+            case 'ConsultarCorreos':
+                $idCliente = REQUEST('llaves');
+                $resultado = $repositorio->ConsultarCorreos($idCliente);
+                if($resultado!=null)
+                    echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
+                    break;
+            case 'BorrarTelefonoCliente':
+                $idCliente = REQUEST('idCliente');
+                $numero = REQUEST('numero');
+                $resultado=$repositorio->BorrarTelefonoCliente($idCliente,$numero);
+                if($resultado!=null)
+                    echo json_encode($resultado, JSON_UNESCAPED_UNICODE);
+                    break;
         }
     }
     

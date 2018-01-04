@@ -92,7 +92,7 @@ class RepositorioBase
             for($i = 0; $i < count($campos); $i++)
             {
                 $campo = $campos[$i];
-                $texto .= trim($campo->tablaId) . "." . trim($campo->campoId) . " AS C" . $campo->id ;
+                $texto .= trim($campo->tablaId) . "." . trim($campo->campoId) . " AS C" . $campo->orden ;
                 if($i < count($campos) - 1)
                     $texto .= ", ";
             }

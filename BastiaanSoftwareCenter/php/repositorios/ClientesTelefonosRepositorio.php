@@ -268,7 +268,7 @@ class ClientesTelefonosRepositorio implements IClientesTelefonosRepositorio
 
     public function consultarPorLlaves($llaves)
     {
-        
+        $clientestelefonos = array();
         $resultado = new Resultado();       
         $consulta =   " SELECT "
                     . " BTCLIENTETELNOCTEID id, "
@@ -278,32 +278,35 @@ class ClientesTelefonosRepositorio implements IClientesTelefonosRepositorio
                     . " BTCLIENTETELNUM telefonoCliente,"
                     . " BTCLIENTETELCIA compania, "
                     . " BTCLIENTETELTTELEFONOID tipoTelefono, "
-                    . " BTCLIENTETELNO numeracion "
+                    . " BTCLIENTETELNO numeracion, "
+                    . " telefono.BTTTELEFONODESC tipoTelefonoDes "
                     . " FROM bstntrn.BTCLIENTETEL "
-                    . " WHERE BTCLIENTETELNOCTEID = ? ";  
+                    ." join bstntrn.btttelefono  telefono on telefono.BTTTELEFONOID = BTCLIENTETELTTELEFONOID "
+                    . " WHERE BTCLIENTETELNOCTEID = ? order by  BTCLIENTETELCONSID";  
         if($sentencia = $this->conexion->prepare($consulta))
         {
             if($sentencia->bind_param("i",$llaves))
             {
                 if($sentencia->execute())
                 {                    
-                    if ($sentencia->bind_result($id, $nir, $serie, $telefonoCliente, $compania, $tipoTelefono, $numeracion))
-                    {                        
-                        if($sentencia->fetch())
+                    if ($sentencia->bind_result($id, $nir, $serie, $telefonoCliente, $compania, $tipoTelefono, $numeracion,$tipoTelefonoDes))
+                    {       
+                        while($row = $sentencia->fetch())
                         {
-                            $clientetelefono = new ClienteTelefono();
-                            $clientetelefono->id = utf8_encode($id);
-                           // $clientetelefono->consecutivo = utf8_encode($consecutivo);
-                            $clientetelefono->telefonoCliente = utf8_encode($telefonoCliente);
-                            $clientetelefono->nir = utf8_encode($nir);
-                            $clientetelefono->serie = utf8_encode($serie);
-                            $clientetelefono->compania = utf8_encode($compania);
-                            $clientetelefono->tipoTelefono = utf8_encode($tipoTelefono);
-                            $clientetelefono->numeracion = utf8_encode($numeracion);
-                            $resultado->valor = $clientetelefono;
-                        }
-                        else
-                            $resultado->mensajeError = "No se encontró ningún resultado.";
+                            $clientetelefono = (object) [
+                                'id' =>  utf8_encode($id),
+                                //'consecutivo' => utf8_encode($consecutivo),
+                                'nir' => utf8_encode($nir),
+                                'serie' => utf8_encode($serie),
+                                'telefonoCliente' => utf8_encode($telefonoCliente),
+                                'numeracion' => utf8_encode($numeracion),
+                                'compania' => utf8_encode($compania),
+                                'tipoTelefono' => utf8_encode($tipoTelefono),
+                                'tipoTelefonoDes' => utf8_encode($tipoTelefonoDes)
+                            ];
+                            array_push($clientestelefonos,$clientetelefono);
+                         }
+                         $resultado->valor = $clientestelefonos;
                     }
                     else
                         $resultado->mensajeError = "Falló el enlace del resultado";
@@ -378,6 +381,73 @@ class ClientesTelefonosRepositorio implements IClientesTelefonosRepositorio
         else
             $resultado->mensajeError = "Fall� la preparaci�n: (" . $this->conexion->errno . ") " . $this->conexion->error;
             return $resultado;
+    }
+    
+    public function ConsultarCorreos($idCliente)
+    {
+        $clientestelefonos = array();
+        $resultado = new Resultado();
+        $consulta =   "SELECT BTCLIENTECORREO correo, telefono.BTTTELEFONODESC origenDsc "
+                      ."  FROM bstntrn.btclientecorreo "
+                      ."  join bstntrn.btttelefono  telefono on telefono.BTTTELEFONOID = BTCLIENTECORREOORIGEN "
+                      ."  where BTCLIENTECORREONOCTEID = ?";
+                                            if($sentencia = $this->conexion->prepare($consulta))
+                                            {
+                                                if($sentencia->bind_param("i",$idCliente))
+                                                {
+                                                    if($sentencia->execute())
+                                                    {
+                                                        if ($sentencia->bind_result($correo, $origenDsc))
+                                                        {
+                                                            while($row = $sentencia->fetch())
+                                                            {
+                                                                $clientetelefono = (object) [
+                                                                    'correo' =>  utf8_encode($correo),
+                                                                    //'consecutivo' => utf8_encode($consecutivo),
+                                                                    'origenDsc' => utf8_encode($origenDsc)
+                                                                ];
+                                                                array_push($clientestelefonos,$clientetelefono);
+                                                            }
+                                                            $resultado->valor = $clientestelefonos;
+                                                        }
+                                                        else
+                                                            $resultado->mensajeError = "Falló el enlace del resultado";
+                                                    }
+                                                    else
+                                                        $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;
+                                                }
+                                                else
+                                                    $resultado->mensajeError = "Falló el enlace de parámetros";
+                                            }
+                                            else
+                                                $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
+                                                return $resultado;
+    }
+    
+    public function BorrarTelefonoCliente($idCliente,$numero)
+    {
+        $resultado = new Resultado();
+        $resultado->valor=0;
+        $consulta = " DELETE FROM bstntrn.btclientetel WHERE BTCLIENTETELNOCTEID= ? and BTCLIENTETELNO = ?";
+                            if($sentencia = $this->conexion->prepare($consulta))
+                            {
+                                if($sentencia->bind_param("ii",$idCliente,$numero))
+                                {
+                                    if($sentencia->execute())
+                                    {
+                                        $resultado->valor=true;
+                                        
+                                    }
+                                    else
+                                        $resultado->mensajeError = "Falló la ejecución (" . $this->conexion->errno . ") " . $this->conexion->error;
+                                }
+                                else
+                                    $resultado->mensajeError = "Falló el enlace de parámetros";
+                            }
+                            else
+                                $resultado->mensajeError = "Falló la preparación: (" . $this->conexion->errno . ") " . $this->conexion->error;
+                                return $resultado;
+                                
     }
     
 }
